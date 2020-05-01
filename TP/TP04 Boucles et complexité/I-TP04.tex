@@ -1,0 +1,522 @@
+\input{intro}
+\input{../../Header_Willie}
+%\input{macro}
+
+\begin{document}
+
+\begin{center}
+{\Large\bf {\type} \no {\num} -- \descrip}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+\section{Initialisation des variables}
+% Wack page 106
+
+\begin{algorithm}[H]
+\KwData{$n$ un entier naturel}
+\KwResult{?}
+
+\For{$i$ \KwFrom $1$ \KwTo $n$}{
+\eIf{$i$ est pair}{
+$\text{carre} \leftarrow i^2$
+}{
+$\text{carre} \leftarrow 0$
+}
+$\text{total} \leftarrow \text{total} + \text{carre}$}
+\caption{Exemple d'algorithme ne fonctionnant pas.}
+\label{algo:1}
+\end{algorithm}
+
+\begin{enumerate}
+ \item À votre avis, quel est le résultat attendu par le concepteur de l'algorithme~\ref{algo:1} ?
+ 
+ \item Pourquoi ne fonctionne-t-il pas ?
+ 
+ \item Proposer une modification permettant à l'algorithme de répondre à  l'attente de son concepteur.
+ 
+ \item Ouvrir un fichier de script dans Spyder. L'enregistrer sous un nom adéquat dans le sous-répertoire adéquat de « Dossiers personnels ». À l'aide de votre cours et des TP précédents, essayer d'implémenter l'algorithme correct en langage Python puis lancer le script pour vérifier qu'il fait ce qui est attendu.
+ 
+\end{enumerate}
+
+\section{Choix du type de boucle}
+% Wack page 108
+
+On rappelle les règles suivantes :
+\begin{itemize}
+ \item Si on connaît à l'avance le nombre de répétitions à effectuer ou, plus généralement, si on veut parcourir une valeur itérable\footnote{Par exemple, l'ensemble des entiers générés en Python par la fonction \texttt{range()}.}, on choisit une boucle \textit{inconditionnelle}, c'est-à-dire en langage Python une boucle \texttt{for}.
+ 
+ \item À l'inverse, si la décision d'arrêter la boucle ne peut s'exprimer que par un test, on choisit une boucle \textit{conditionnelle}, c'est-à-dire en langage Python une boucle \texttt{while}.
+
+\end{itemize}
+
+Quel type de boucle est adapté à la conception d'algorithmes traitant les problèmes suivants :
+\begin{itemize}
+ \item Calculer la valeur absolue d'un nombre donné.
+ \item Calculer la norme d'un vecteur donné.
+ \item Déterminer tous les diviseurs d'un nombre entier donné.
+ \item Déterminer le plus petit diviseur (différent de 1) d'un nombre entier donné.
+ \item Déterminer la date du prochain vendredi 13 connaissant la date d'aujourd'hui.
+\end{itemize}
+
+\section{Factorielle}
+%Wack page 105 invariant de factorielle
+
+On définit la factorielle d'un entier $n$ par les relations : $0!=1 \quad \text{et}\quad (n+1)!=(n+1)n!$
+
+On propose le programme de calcul de $n!$ suivant où $n$ est un entier strictement positif :
+
+\begin{listing}[!h]
+\begin{minted}[linenos,frame=lines]{python}
+p = 1
+c = 0
+for c in range(1,n+1):
+  p= c * p
+\end{minted}
+\caption{Programme de calcul de la fonction factorielle.}
+\label{prog:factorielle}
+\end{listing}
+
+Démontrer à l'aide de l'\textit{invariant de boucle} « $p =c!$ » que le programme est bien \textit{correct}.
+
+\section{Terminaison}
+
+\begin{listing}[!h]
+\begin{minted}[linenos,frame=lines]{python}
+a = 17
+b = 7
+while a >= b:
+  a = a - b
+\end{minted}
+\caption{Reprise de l'exercice 5 du TP \no 3.}
+\label{prog:programmeresteeuclidien}
+\end{listing}
+
+\begin{enumerate}
+
+\item Notez à chaque étape la valeur de \texttt{a} et de \texttt{b}. Quelle est la valeur finale de \texttt{a} ? En général, que vaut \verb?a? à la fin du programme ?
+
+\item Prouver que la boucle \textit{termine} en identifiant un \textit{variant de boucle}.
+
+\end{enumerate}
+
+\section{Complexités}
+%Cours et TP Lycée du Parc
+
+On suppose que $n$ a été affecté (et vaut un entier strictement positif). Combien d’\textit{opérations élémentaires} les programmes suivant vont-ils exécuter ?
+
+\begin{boxedminipage}{\textwidth}
+\begin{minted}[]{python}
+s = 0
+for i in range(n):
+  s = s + i**2
+\end{minted}
+\end{boxedminipage}
+
+
+\begin{boxedminipage}{\textwidth}
+\begin{minted}[]{python}
+s = 0
+for i in range(n):
+  for j in range(i,n):
+    s = s + j**2
+\end{minted}
+\end{boxedminipage}
+
+\begin{boxedminipage}{\textwidth}
+\begin{minted}[]{python}
+while n < 10**10:
+  n = n * 2
+\end{minted}
+\end{boxedminipage}
+
+% \begin{boxedminipage}{\textwidth}
+% \begin{minted}[]{python}
+% while n>0:
+%   n = n // 2
+% \end{minted}
+% \end{boxedminipage}
+
+
+\section{Comparaison entre deux méthodes d'exponentiation}
+\label{sec:ComparaisonExponentiation}
+%wack page 104 + cours Renaud C05
+
+On propose deux programmes différents pour l'exponentiation d'un réel positif $k$ par un entier strictement positif $n$ (c'est-à-dire le calcul de $k^n$). On suppose que $k$ est affecté d'une valeur réelle positive.
+
+\begin{listing}[!h]
+\begin{minted}[linenos,frame=lines]{python}
+p = 1
+c = n
+while c > 0:
+  p = p * k
+  c = c - 1
+\end{minted}
+\caption{Première méthode d'exponentiation.}
+\label{prog:exponentiationnaive}
+\end{listing}
+
+\begin{listing}[!h]
+\begin{minted}[linenos,frame=lines]{python}
+p = 1
+c = n
+while c > 0:
+  if c%2 == 1:
+    p = p * k
+  k = k**2  
+  c = c//2
+\end{minted}
+\caption{Deuxième méthode d'exponentiation.}
+\label{prog:exponentiationrapide}
+\end{listing}
+
+\begin{enumerate}
+
+\item On prend $n=13$. Pour chacun des deux programmes~\ref{prog:exponentiationnaive} et \ref{prog:exponentiationrapide}, déterminer et noter les valeurs ou expressions successives de $p$, $c$ et $k$ ainsi que le nombre d'itérations de la boucle Tant que.  
+
+\item Compter le nombre d'opérations élémentaires dans chacune des boucles. En déduire lequel des deux programmes réalise une « exponentiation rapide ». 
+
+\item On peut montrer que la \textit{complexité temps} du programme d'exponentiation rapide est $O(\log(n))$. Quelle est la \textit{complexité temps} de l'autre programme ?
+
+\item Si vous avez avancé assez rapidement dans le TP et qu'il vous reste du temps, vous pouvez créer grâce à Spyder un script python vous donnant une évaluation du temps d'exécution des deux programmes pour différentes valeurs de $n$ et $k$ grâce au code fourni en Annexe.
+
+\end{enumerate}
+
+\section{Recherche par dichotomie}
+%Poly de Yannick Le Bras page 10 + Cours Renaud C06
+
+\begin{algorithm}[H]
+\KwData{L[1...n] une liste triée de $n$ éléments numérotés de 1 à $n$ inclus et $a$ un élément}
+\KwResult{Un booléen}
+$g \leftarrow 1$ \;
+$d \leftarrow n$ \;
+%read current\;
+\While{$d-g > 0$}{
+$m \leftarrow \lfloor \frac{d+g}{2} \rfloor$ \tcc*[r]{partie entière de (d+g)/2} \nllabel{lignealgo:m}
+\eIf{$L[m] < a$}{
+$g \leftarrow m+1$
+}{
+$d \leftarrow m$}
+}
+\eIf{$L[g]==a$}{
+\KwRet{Vrai}}{
+\KwRet{Faux}
+}
+\caption{Recherche par dichotomie.}
+\label{algo:recherchetantquedicho}
+\end{algorithm}
+
+On rappelle la définition de la partie entière :\\
+pour tout réel $x$, c'est l'entier $\lfloor x \rfloor$ tel que $ x-1 < \lfloor x \rfloor \leq x$. 
+
+Ainsi, à la ligne~\ref{lignealgo:m}, on a : $$ \frac{d+g}{2} - 1 < m \leq \frac{d+g}{2}$$
+
+Prouver que l'algorithme \textit{termine}.
+
+\section{Recherche du minimum d'une liste de valeurs numériques}
+\label{sec:RechercheMinimum}
+%Poly de Yannick Le Bras
+
+\begin{algorithm}[H]
+\KwData{Une liste $L$ contenant $n$ éléments numérotés de 1 à $n$ inclus ($L[1...n]$)}
+\KwResult{Le plus petit élément de la liste}
+$mini \leftarrow 0$ \;
+
+\For{$i$ \KwFrom $1$ \KwTo $n$}{
+%read current\;
+\If{L[i] < mini}{
+$mini \leftarrow L[i]$
+}
+}
+\KwRet{mini}
+\caption{Fonction minimum(L).}
+\label{algo:recherche1}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\KwData{Une liste $L$ contenant $n$ éléments numérotés de 1 à $n$ inclus ($L[1...n]$)}
+\KwResult{Le plus petit élément de la liste}
+$mini \leftarrow L[1]$ \;
+\For{$i$ \KwFrom $1$ \KwTo $n$}{
+%read current\;
+\If{L[i] < mini}{
+$mini \leftarrow L[i]$
+}
+}
+\KwRet{mini}
+\caption{Fonction minimum(L).}
+\label{algo:recherche2}
+\end{algorithm}
+
+\begin{enumerate}
+
+\item Identifier la différence entre les algorithmes \ref{algo:recherche1} et \ref{algo:recherche2} et expliquer pourquoi le premier n'est pas toujours \textit{correct} (dans certains cas, il ne donne pas le minimum de la liste).
+
+\item Comment peut-on améliorer très légèrement l'algorithme qui est toujours correct en évitant une étape de la boucle Pour ?
+
+\item Réécrire l'algorithme en utilisant une boucle Tant que et prouver qu'il \textit{termine} en déterminant son \textit{variant de boucle}. Si vous ne trouvez pas rapidement comment réécrire l'algorithme vous pouvez consulter la réponse en Annexe à l'algorithme~\ref{algo:recherchetantque}.
+
+\item Soit la proposition suivante : « mini est le minimum de toutes les valeurs de la liste numérotées de 1 à $i-1$ inclus » ou encore « $\{mini = minimum(L[1...i-1])\}$ ». Vérifier que l'algorithme est \textit{correct} en prouvant que la proposition précédente est bien un \textit{invariant de boucle}.
+
+\end{enumerate}
+
+\newpage
+\section*{Annexe}
+
+\subsection*{Annexe de l'exercice~\ref{sec:ComparaisonExponentiation}}
+
+\begin{boxedminipage}{\textwidth}
+\begin{minted}[]{python}
+import time
+def expo_un(n,k):
+    a=time.clock()
+    p = 1
+    c = n
+    while c > 0:
+        p = p * k
+        c = c - 1
+    b=time.clock()-a
+    return b
+def expo_deux(n,k):
+    a=time.clock()
+    p = 1
+    c = n
+    while c > 0:
+        if c%2 == 1:
+            p = p * k
+        k = k**2
+        c = c//2
+    b=time.clock()-a
+    return b
+n=6000
+k=4
+print(expo_un(n,k))
+print(expo_deux(n,k))
+\end{minted}
+\end{boxedminipage}
+
+\subsection*{Annexe de l'exercice~\ref{sec:RechercheMinimum}}
+\begin{algorithm}[H]
+\KwData{Une liste $L$ contenant $n$ éléments numérotés de 1 à $n$ ($L[1...n]$)}
+\KwResult{Le plus petit élément de la liste}
+$mini \leftarrow L[1]$ \;
+$i \leftarrow 2$ \;
+\While{$i \leq n$}{
+\If{L[i] < mini}{
+$mini \leftarrow L[i]$
+}
+$i \leftarrow i+1$}
+\KwRet{mini}
+\caption{Fonction minimum(L).}
+\label{algo:recherchetantque}
+\end{algorithm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifdef{\public}{\end{document}}{}
+\cleardoublepage
+\renewcommand{\type}{Correction TP}
+\setcounter{section}{0}
+\begin{center}
+{\Large\bf {\type} \no {\num} -- \descrip}
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Initialisation des variables}
+% Wack page 106
+
+\begin{enumerate}
+ \item Somme des carrés des entiers pairs compris entre 1 et $n$ inclus.
+ 
+ \item Parce que la variable \texttt{total} n'a pas été initialisée et que la ligne 7 ne peut donc pas être effectuée.
+ 
+ \item On ajoute une ligne d'initialisation avant la ligne 1 :\\
+ $\text{total} \leftarrow 0$.
+ 
+ \item Implémentation de l'algorithme :
+ 
+\begin{minted}[linenos]{python}
+n = int(input(n))
+total = 0
+for i in range(1,n+1):
+  if i%2 == 0:
+    carre = i**2
+  else:
+    carre = 0
+  total = total + carre
+\end{minted}
+ 
+\end{enumerate}
+
+\section{Choix du type de boucle}
+% Wack page 108
+
+\begin{itemize}
+ \item Pas besoin de boucle !
+ \item Boucle \texttt{for} : il suffit de parcourir les composantes du vecteur qui sont en nombre bien déterminé.
+ \item Boucle \texttt{for} : tous les diviseurs d'un nombre entier $n$ donné sont compris entre 1 et $n$ ; le nombre d'étapes de calcul est donc facile à déterminer.
+ \item Boucle \texttt{while} : il n'est pas nécessaire de parcourir la totalité des diviseurs de $n$, il suffit de déterminer le premier des diviseurs et on peut arrêter la boucle dès qu'il est rencontré, ce qu'on traduit dans la condition de la boucle. 
+ \item Boucle \texttt{while} : sauf à entreprendre un très lourd travail préparatoire, il n'est pas possible d'anticiper combien d'étape de calcul il faudra mettre en œuvre pour déterminer cette date.
+\end{itemize}
+
+\section{Factorielle}
+%Wack page 105 invariant de factorielle
+
+\begin{itemize}
+\item L'invariant de boucle est la proposition « p=c! ».
+
+\item À l'initialisation, on a : $p=1$, $c=0$ et $1=0!$, la proposition est donc vraie.
+
+\item À la première itération dans la boucle : $c=1$, $p=c*p=1*1=1$ et $1=1!$, la proposition est donc vraie.
+
+\item On suppose donc $p_i=c_i!$ vraie. À la (i+1)\up{e} itération : $c_{i+1}=c_i+1$, $p_{i+1} = c_{i+1}*p_i=(c_i+1)*c_i!=c_{i+1}!$. La proposition est donc toujours vraie dans la boucle.
+
+\item À la terminaison de la boucle, on a $c=n$ et donc finalement $p=n!$ ce qui prouve la correction de l'algorithme.
+\end{itemize}
+
+\section{Terminaison}
+
+\begin{enumerate}
+
+\item $(a=17,b=7)$ ; $(a=10,b=7)$ ; $(a=3,b=7)$. La valeur finale de $a$ est 3. Le programme renvoie le reste de la division euclidienne de $a$ par $b$ (\texttt{a \% b} en python).
+
+\item 
+\begin{itemize}
+\item Un variant de boucle est $a-b$. Initialement $a=17$ et $b=7$ donc $a\geq b$ et la boucle commence.
+
+\item On a comme condition de boucle $a \geq b$ donc on a toujours $a-b \geq0$ dans la boucle.
+
+\item D'autre part, si on note $(a-b)_+$ la valeur de $(a-b)$ à la fin d'une itération et $(a-b)_0$ sa valeur au début d'une itération, on a $(a-b)_+ = (a-b)_0 - b < (a-b)_0$ car $b>0$.\\($a-b$) est donc une variable strictement décroissante dans la boucle.
+
+\item ($a-b$) est donc positif et strictement décroissant dans la boucle : la boucle termine.
+
+\end{itemize}
+
+\end{enumerate}
+
+\section{Complexités}
+%Wack page 148 ?
+%Cours et TP Lycée du Parc
+
+Premier programme : 
+\begin{itemize}
+  \item une affectation avant la boucle ;
+  \item $n$ itérations de la boucle puisque $i$ parcourt par incrément de 1 l'intervalle $\llbracket 0, (n-1) \rrbracket$ ; 
+      \begin{itemize}
+      \item trois opérations par itération de la boucle : une affectation, une somme, une mise au carré ;                                                                                                                                                                         \end{itemize}
+  \item on a donc le nombre total d'opérations : $N_{op} = 1 + 3\,n$ ;
+  \item complexité linéaire $O(n)$.
+\end{itemize}
+
+Deuxième programme : 
+\begin{itemize}
+  \item une affectation avant la boucle ;
+  \item $n$ itérations de $i=0$ jusqu'à $i=n-1$ de la première boucle ; 
+      \begin{itemize}
+	  \item ($n-i$) itérations de la deuxième boucle ;
+	      \begin{itemize}
+	      	\item trois opérations par itération de la deuxième boucle : une affectation, une somme, une mise au carré ;
+	      \end{itemize}
+      \end{itemize}
+  \item on a donc le nombre total d'opérations : $\displaystyle N_{op} = 1 + \sum_{i=0}^{n-1} \left( 3\,(n-i)\right) = 1 + \frac{3}{2}\,n + \frac{3}{2}\,n^2$ car $\displaystyle\sum_{i=0}^{n-1} \left( 3\,(n-i)\right) = 3\,n\times n - 3\,\frac{(n-1)n}{2}$.
+  \item complexité quadratique $O(n^2)$.
+\end{itemize}
+
+Troisième programme : 
+\begin{itemize}
+  \item trois opérations par itération de la boucle : un test, une affectation, une multiplication ;
+  \item on cherche le nombre $k$ d'itérations telles que le critère de la boucle \texttt{while} soit rempli : à la k\up{e} itération le test est $2^{(k-1)}\,n < 10^{10}$. On a donc $k < 1+\log_2(10^{10}) + \log_2(\frac{1}{n})$ ; dans le pire des cas, $n=1$ donc $\log_2(\frac{1}{n})= 0$ et on a $1+\lfloor \log_2(10^{10}) \rfloor = 34$ itérations ;
+  \item au total, on a dans le pire des cas 102 opérations. 
+\end{itemize}
+
+% \begin{boxedminipage}{\textwidth}
+% \begin{minted}[]{python}
+% while n>0:
+%   n = n // 2
+% \end{minted}
+% \end{boxedminipage}
+
+\section{Comparaison entre deux méthodes d'exponentiation}
+%wack page 104 + cours Renaud C05
+
+\begin{enumerate}
+
+\item Premier programme (à gauche) : 13 itérations de boucle.\\
+Deuxième programme (à droite) : 4 itérations de boucle.
+\begin{center}
+\begin{tabular}{|c|c|c|c||c|c|c|}\hline
+               & p        & c  & $k$ &  p        & c  & $k$\\\hline
+Initialisation & 1        & 13 & $k$ &  1        & 13 & $k$ \\\hline
+Itération 1    & $k$      & 12 & $k$ & $k$       &  6 & $k^2$\\\hline
+Itération 2    & $k^2$    & 11 & $k$ & $k$       &  3 & $k^4$\\\hline
+Itération 3    & $k^3$    & 10 & $k$ & $k^5$     &  1 & $k^8$\\\hline
+Itération 4    & $k^4$    & 9  & $k$ & $k^{13}$  &  0 & $k^{16}$\\\hline
+Itération 5    & $k^5$    & 8  & $k$ &&& \\\hline
+Itération 6    & $k^6$    & 7  & $k$ &&& \\\hline
+Itération 7    & $k^7$    & 6  & $k$ &&& \\\hline
+Itération 8    & $k^8$    & 5  & $k$ &&& \\\hline
+Itération 9    & $k^9$    & 4  & $k$ &&& \\\hline
+Itération 10   & $k^{10}$ & 3  & $k$ &&& \\\hline
+Itération 11   & $k^{11}$ & 2  & $k$ &&& \\\hline
+Itération 12   & $k^{12}$ & 1  & $k$ &&& \\\hline
+Itération 13   & $k^{13}$ & 0  & $k$ &&&\\\hline
+\end{tabular}
+\end{center}
+
+\item Premier programme : 2+5x13=67 opérations. Deuxième programme : au maximum 9 opérations par itération et seulement 7 si le critère de l'instruction \texttt{if} n'est pas respecté ; d'où 2+9x3+7=36 opérations, puisque l'opération p=p*k n'est faite qu'à la première, la troisième et la quatrième itérations. Le deuxième programme semble donc plus rapide.
+
+\item On trouve pour le premier programme $C_t= 2\,C_e +5\,n\,C_e$. Complexité temps linéaire $O(n)$.
+
+\end{enumerate}
+\newpage
+\section{Recherche par dichotomie}
+%Poly de Yannick Le Bras page 10 + Cours Renaud C06
+
+Un variant de boucle est $d-g$. 
+
+Initialement : $d=n>1$, $g=1$ et donc $d-g>0$. La boucle commence.
+
+On note $(d-g)_+$ la valeur de $(d-g)$ à la fin d'une itération. On a, d'après la définition d'un partie entière, $\frac{d+g}{2} - 1 < m \leq \frac{d+g}{2}$ et deux cas se présentent :
+\begin{itemize}
+ \item Si $L[m]<a$ alors $g=m+1$ et $(d-g)_+ = d - (m+1)$ donc $\frac{d-g}{2} - 1 < (d-g)_+ = d - (m+1) < \frac{d-g}{2}$.
+ 
+ \item Si $L[m] \geq a$ alors $d=m$ et $(d-g)_+ = m - g$ donc  $\frac{d-g}{2} - 1 < (d-g)_+ = m - g \leq \frac{d-g}{2}$.
+\end{itemize}
+
+Dans les deux cas : $(d-g)_+ < \frac{d-g}{2}$. Étant donné que dans la boucle on a toujours $d-g>0$ et on en conclut que $(d-g)_+ < d-g$ et donc que ($d-g$) est strictement décroissante ce qui prouve la terminaison. 
+
+\section{Recherche du minimum d'une liste de valeurs numériques}
+
+\begin{enumerate}
+
+\item Les initialisations aux lignes 1 des algorithmes sont différentes. Le premier algorithme n'est pas correct car si la liste ne contient que des éléments strictement positif, l'algorithme renvoie comme minimum la valeur 0, ce qui est faux. Le premier algorithme n'est correct que si la liste contient au moins une valeur négative ou nulle.
+
+\item À la ligne 1, on définit le minimum comme étant \textit{a priori} le terme $L[1]$. Il est donc inutile de le tester dans la boucle. On peut donc commencer la boucle par la valeur $i=2$. 
+
+\item Donné en Annexe de l'énoncé.
+
+\item À l'initialisation $i=2$, $mini=L[1]$ et $L[1...i-1]=L[1...1]$ ne contient que la valeur $L[1]$ qui en est donc \textit{de facto} le minimum. La proposition est donc vérifiée avant la première itération.
+
+Au début de la première itération, $i=2$ et $mini=L[1]$. Deux cas se présentent :
+\begin{itemize}
+\item Si $L[2]<mini=L[1]$ alors $mini=L[2]$, puis on a $i=2+1=3$ et $mini$ est bien le minimum de $L[1...i-1]=L[1...2]$ car $mini=L[2] < L[1]$. La proposition est donc vérifiée en fin d'itération.
+\item Si $L[2] \geq mini=L[1]$ alors $mini=L[1]$, puis on a $i=2+1=3$ et $mini$ est bien le minimum de $L[1...i-1]=L[1...2]$ car $mini = L[1] \leq L[2]$. La proposition est donc vérifiée en fin d'itération.
+\end{itemize}
+
+On suppose donc la proposition vérifiée au début de la i\up{e} itération : $mini = minimum(L[1...i-1])$. Deux cas se présentent :
+\begin{itemize}
+\item Si $L[i]<mini=minimum(L[1...i-1])$ alors $mini=L[i]$ et, à la fin de la i\up{e} itération, $mini$ est bien le minimum de $L[1...(i+1)-1]$ car $mini=L[i]<minimum(L[1...i-1])$. La proposition est donc vérifiée donc au début de la (i+1)\up{e} itération.
+\item Si $L[i]\geq mini=minimum(L[1...i-1])$ alors $mini=minimum(L[1...i-1])$ et, à la fin de la i\up{e} itération, $mini$ est bien le minimum de $L[1...(i+1)-1]$ car $L[i]\geq mini=minimum(L[1...i-1])$. La proposition est donc vérifiée au début de la (i+1)\up{e} itération.
+\end{itemize}
+
+La proposition est donc tout le temps vérifiée dans la boucle. 
+
+À la terminaison de la boucle (qui existe car $n-i$ est un variant de boucle évident), $i$ vaut $n+1$ et on a donc bien $mini=minimum(L[1...n])$, ce qui prouve la correction de l'algorithme.
+
+Remarque : plus rigoureusement l'invariant de boucle est « $\{mini = minimum(L[1...i-1])\}\ \text{et}\ \{i-1 \leq n\}$ » pour s'assurer qu'on ne dépasse pas la taille de la liste en cherchant à accéder à l'élément $L[n+1]$ qui n'existe pas puisque l'index de la liste va de 1 à $n$.
+
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,134 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.9.22)  30 MAR 2017 08:46
+entering extended mode
+**\def\prive{}\input{I-TD06.tex}
+(I-TD06.tex ("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\size12.clo"
+File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\fontenc.sty"
+Package: fontenc 2016/06/19 v1.99m Standard LaTeX package
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1enc.def"
+File: t1enc.def 2016/06/19 v1.99m Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
+))
+("C:\Program Files\MiKTeX 2.9\tex\generic\babel\babel.sty"
+Package: babel 2016/04/23 3.9r The Babel package
+
+*************************************
+* Local config file bblopts.cfg used
+*
+("C:\Program Files\MiKTeX 2.9\tex\latex\arabi\bblopts.cfg"
+File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
+ babel
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\babel-french\frenchb.ldf"
+Language: frenchb 2016/05/14 v3.2c French support from the babel system
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\babel\babel.def"
+File: babel.def 2016/04/23 3.9r Babel common definitions
+\babel@savecnt=\count87
+\U@D=\dimen103
+)
+\l@acadian = a dialect from \language\l@french 
+\l@canadien = a dialect from \language\l@french 
+\FB@nonchar=\count88
+\FBcolonskip=\skip43
+\FBthinskip=\skip44
+Package babel Info: Making : an active character on input line 365.
+Package babel Info: Making ; an active character on input line 366.
+Package babel Info: Making ! an active character on input line 367.
+Package babel Info: Making ? an active character on input line 368.
+\FBguillskip=\skip45
+\FBguill@level=\count89
+\FB@everypar=\toks14
+\FB@Mht=\dimen104
+\std@mcc=\count90
+\dec@mcc=\count91
+\listindentFB=\skip46
+\labelwidthFB=\skip47
+\leftmarginFB=\skip48
+\parindentFFN=\dimen105
+\FBfnindent=\skip49
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\carlisle\scalefnt.sty")
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks15
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\eurosym\eurosym.sty"
+Package: eurosym 1998/08/06 v1.1 European currency symbol ``Euro''
+\@eurobox=\box26
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\tools\verbatim.sty"
+Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks16
+\verbatim@line=\toks17
+\verbatim@in@stream=\read1
+) (I-TD06_prive.aux)
+\openout1 = `I-TD06_prive.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Info: Redefining \degres on input line 12.
+LaTeX Info: Redefining \dots on input line 12.
+LaTeX Info: Redefining \up on input line 12.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 17.
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
+File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+File: Code/Nom_Prenom_cor_erreur.py  (verbatim)
+ [1
+
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
+File: Code/pivotdeGaussErreur.py  (verbatim)
+
+Overfull \hbox (6.7059pt too wide) in paragraph at lines 24--24
+[]\T1/cmtt/m/n/12 # on e l im i n e l e s termes au d e s s u s e t en d e s s 
+o u s du p i v o t[] 
+ []
+
+[3
+
+] [4] (I-TD06_prive.aux) ) 
+Here is how much of TeX's memory you used:
+ 1656 strings out of 493334
+ 21938 string characters out of 3139252
+ 87293 words of memory out of 3000000
+ 5223 multiletter control sequences out of 15000+200000
+ 5791 words of font info for 18 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 29i,4n,30p,221b,439s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/cm-super
+/cm-super-t1.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfbx1
+200.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1200.pfb><
+C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sftt1200.pfb>
+Output written on I-TD06_prive.pdf (4 pages, 67187 bytes).
+PDF statistics:
+ 28 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

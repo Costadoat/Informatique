@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{som\PYGZus{}prod}\PYG{p}{(}\PYG{n}{X}\PYG{p}{,}\PYG{n}{Y}\PYG{p}{):}
+    \PYG{n}{som\PYGZus{}prod}\PYG{o}{=}\PYG{l+m+mi}{0}
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{X}\PYG{p}{)):}
+        \PYG{n}{som\PYGZus{}prod}\PYG{o}{=}\PYG{n}{som\PYGZus{}prod}\PYG{o}{+}\PYG{n}{X}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{*}\PYG{n}{Y}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}
+    \PYG{k}{return}\PYG{p}{(}\PYG{n+nb}{float}\PYG{p}{(}\PYG{n}{som\PYGZus{}prod}\PYG{p}{))}
+\end{Verbatim}

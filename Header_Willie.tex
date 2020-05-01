@@ -1,0 +1,65 @@
+\documentclass[10pt,a4paper]{article}
+  \usepackage[french]{babel}
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{xcolor}
+  \usepackage[]{graphicx}
+  \usepackage{makeidx}
+  \usepackage{textcomp}
+  \usepackage{amsmath}
+  \usepackage{amssymb}
+  \usepackage{stmaryrd}
+  \usepackage{fancyhdr}
+  \usepackage{lettrine}
+  \usepackage{calc}
+  \usepackage{boxedminipage}
+  \usepackage[french,onelanguage, boxruled,linesnumbered]{algorithm2e}
+  \usepackage[colorlinks=false,pdftex]{hyperref}
+  \usepackage{minted}
+  \usepackage{url}
+  \usepackage[locale=FR]{siunitx}
+  \usepackage{multicol}
+  \makeindex
+
+  %\graphicspath{{../Images/}}
+
+%  \renewcommand\listingscaption{Programme}
+
+  %\renewcommand{\thechapter}{\Alph{chapter}}
+  \renewcommand{\thesection}{\Roman{section}}
+  %\newcommand{\inter}{\vspace{0.5cm}%
+  %\noindent }
+  %\newcommand{\unite}{\ \textrm}
+  \newcommand{\ud}{\mathrm{d}}
+  \newcommand{\vect}{\overrightarrow}
+  %\newcommand{\ch}{\mathrm{ch}} % cosinus hyperbolique
+  %\newcommand{\sh}{\mathrm{sh}} % sinus hyperbolique
+
+  \textwidth 160mm
+  \textheight 250mm
+  \hoffset=-1.70cm
+  \voffset=-1.5cm
+  \parindent=0cm
+
+  \pagestyle{fancy}
+  \fancyhead[L]{\bfseries {\large PTSI -- Dorian}}
+  \fancyhead[C]{\bfseries{{\type} \no \numero}}
+  \fancyhead[R]{\bfseries{\large Informatique}}
+  \fancyfoot[C]{\thepage}
+  \fancyfoot[L]{\footnotesize R. Costadoat, J. Genzmer, W. Robert}
+  \fancyfoot[R]{\small \today}
+  
+  \definecolor{bg}{rgb}{0.9,0.9,0.9}
+  
+  
+  % macro Juliette
+  
+\usepackage{comment}   
+\usepackage{amsthm}  
+\theoremstyle{definition}
+\newtheorem{exercice}{Exercice}
+\newtheorem*{rappel}{Rappel}
+\newtheorem*{remark}{Remarque}
+\newtheorem*{defn}{Définition}
+\newtheorem*{ppe}{Propriété}
+\newtheorem{solution}{Solution}

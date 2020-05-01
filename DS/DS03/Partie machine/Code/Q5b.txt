@@ -1,0 +1,13 @@
+#Question 5.b
+
+fmax=0.02
+liste_mat=[('médium',2.2),('contreplaqué',12.4),('verre',69)]
+liste_ep=np.arange(0.001,0.1,0.001)
+
+print('Pour respecter le cahier des charges:')
+for (nom,E) in liste_mat:
+    i=0
+    while abs(calcul_fleche(E*10**9,liste_ep[i]))>fmax:
+        i+=1
+    print(" - il faudrait une étagère en %s de %imm d'épaisseur" % (nom,1000*liste_ep[i]))
+        

@@ -1,0 +1,133 @@
+\usepackage[a4paper]{geometry}
+\geometry{margin={1cm,1.2cm}}
+\usepackage[francais]{babel}
+
+
+\usepackage{multicol}
+%\usepackage{nopageno} %pas de numérotation de page
+\pagestyle{plain} %numérotation en bas de page, pas d'entête
+\usepackage{hyperref}
+%\usepackage[latin1]{inputenc}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[utf8]{inputenc} 
+\usepackage{amssymb,amsmath}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{amscd}
+%\usepackage{mathrsfs}
+%\usepackage{amsfonts}
+%\usepackage[T1]{fontenc}
+%\usepackage{theorem}
+\usepackage{lscape}
+\usepackage{variations}  % pour faire des tableaux de variations
+\usepackage{dsfont}
+\usepackage{fancyvrb} % pour mettre Verbatim dans une box
+\usepackage{moreverb} % pour mettre Verbatim dans une box 
+\usepackage{comment} % pour afficher ou non les commentaires, solutions
+%\usepackage{slashbox} % pour dans un tabular, couper une case en deux
+\usepackage{boxedminipage} % pour cadrer du texte
+\usepackage{listings}
+
+% Pour les figures
+\usepackage{subfig}
+\usepackage{calc} % Pour pouvoir donner des formules dans les d�finitions de longueur
+\usepackage{graphicx} % Pour inclure des graphiques 
+% Attention : pour inclure des .jpg comme dans l'exemple (ou des .png ou .pdf)
+% il faut compiler directement en pdf (commande pdflatex).
+% Pour inclure des .eps, il faut compiler avec latex + dvips + ps2pdf.
+\usepackage{psfrag}
+\usepackage{color}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{thm}{Théorème}
+%\theorembodyfont{\rmfamily}
+\newtheorem*{defn}{Définition}
+\newtheorem{exercice}{Exercice}
+\newtheorem*{problem}{Problème}
+\newtheorem{prop}{Proposition}
+\newtheorem{corollaire}{Corollaire}
+\newtheorem*{lemme}{Lemme}
+\newtheorem*{remark}{Remarque}
+\newtheorem*{notation}{Notation}
+\newtheorem*{ex}{Exemple}
+\newtheorem*{ppe}{Propriété}
+\newtheorem*{meth}{Méthode}
+\newtheorem*{rappel}{Rappel}
+\newtheorem*{voca}{Vocabulaire}
+\newtheorem*{solution}{Solution}   
+
+\setlength{\columnseprule}{0.5pt}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\bi}{\bigskip}
+\newcommand{\dsp}{\displaystyle}
+\newcommand{\noi}{\noindent}
+\newcommand{\ov}{\overline}
+\newcommand{\dsum}{\displaystyle \sum}
+\newcommand{\dprod}{\displaystyle \prod}
+\newcommand{\dint}{\displaystyle \int}
+\newcommand{\dlim}{\displaystyle \lim}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\newcommand{\pgcd}{\mathrm{pgcd}} % pgcd
+%\providecommand{\norm}[1]{\lVert#1\rVert} % norme
+%\DeclareMathOperator{\Tan}{Tan}  % espace tangent
+
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\U}{\mathbb{U}}
+\newcommand{\Tr}{\text{Tr}\,}
+\newcommand{\pg}{\geqslant}
+\newcommand{\pp}{\leqslant}
+\newcommand{\bul}{\item[$\bullet$]}
+\newcommand{\card}{\text{Card}}
+\newcommand{\re}{\text{Re}\;}
+\newcommand{\im}{\text{Im}\;}
+\newcommand{\Ker}{\text{Ker}\;}
+\newcommand{\Vect}{\text{Vect}\;}
+\newcommand{\rg}{\text{rg}\;}
+\newcommand{\TT}{{}^t\!}
+\newcommand{\sh}{\text{sh}}
+\newcommand{\ch}{\text{ch}}
+\newcommand{\Mat}{\text{Mat}}
+\usepackage{textcomp}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frenchspacing
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pour une numerotation I, II des sections.
+% Pour une numerotation des subsubsections
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\renewcommand{\thesection}{\Roman{section})}
+\renewcommand{\thesubsection}{\Roman{section}-\arabic{subsection})}
+\renewcommand{\thesubsubsection}{\Roman{section}-\arabic{subsection}-\alph{subsubsection}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pour avoir une enumerate 1) 2)
+\frenchbsetup{StandardLists=true}
+\usepackage{enumitem}
+\setenumerate[1]{label=\arabic*)}
+

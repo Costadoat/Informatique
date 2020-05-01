@@ -1,0 +1,5 @@
+#Question 2
+
+def Mfz(x):
+    return x*q*L/2-q*x**2/2
+print(Mfz(1.2))

@@ -1,0 +1,396 @@
+\newcommand{\nom}{DS01 Informatique}
+\newcommand{\sequence}{01}
+\newcommand{\num}{01}
+\newcommand{\type}{DS}
+\newcommand{\descrip}{Fait le 07/10/2017}
+\newcommand{\competences}{Alg-C6 : Justifier qu'une itération (ou boucle) produit l'effet attendu au moyen d'un invariant \\ & Alg-C7 : démontrer qu'une boucle se termine effectivement \\ & Déc-C1: Manipuler en mode utilisateur les principales fonctions d'un système d'exploitation et d'un environnement de développement \\ & Déc-C2: Appréhender les limitations intrinsèques à la manipulation informatique des nombres \\ & Déc-C3: Initier un sens critique au sujet de la qualité et de la précision des résultats de calculs numériques sur ordinateur}
+
+\input{../../headers/dsinfoheaders.tex}
+
+\begin{center}
+ \Large Les 3 parties sont à rendre sur des copies séparées.
+\end{center}
+
+\section{Introduction}
+
+\paragraph{Question 1:} Écrire sur le diagramme de Contexte donné en document réponse le nom des composants de l'unité centrale.
+
+\paragraph{Question 2:} Écrire sous la forme d'un mot de 32 bits respectant la norme IEEE 754 (signe, exposant, mantisse), le float $\dfrac{14}{9}=1,5555...$.
+
+\paragraph{Question 3:} Traduire en float le mot de 32 bits suivant.
+
+\setlength{\tabcolsep}{0.1cm}
+\begin{center}
+\begin{tabular}{|*{32}{l|}}
+\hline
+S & \multicolumn{8}{c|}{Exposant} & \multicolumn{23}{c|}{Mantisse} \\
+\hline
+0 & 1 & 0 & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Emploi du temps}
+
+Une classe est organisée comme suit:
+\begin{itemize}
+ \item un groupe de TD a cours une semaine sur 2:
+ \begin{itemize}
+  \item Semaine N: groupe 'G1',
+  \item Semaine N+1: groupe 'G2',
+  \item Semaine N+2: groupe 'G1',...
+ \end{itemize}
+ \item un groupe de TP a cours une semaine sur 3:
+ \begin{itemize}
+  \item Semaine N: groupe 'GA',
+  \item Semaine N+1: groupe 'GB',
+  \item Semaine N+2: groupe 'GC',
+  \item Semaine N+3: groupe 'GA',...
+ \end{itemize}
+\end{itemize}
+
+~\
+
+Le programme python permet d'afficher un tableau pour lequel chaque ligne correspond à une semaine, la première colonne le numéro de la semaine, la seconde le groupe de TD et la troisième le groupe de TP.
+
+\begin{GrayBox}[0.85\textwidth]
+\renewcommand{\verbatimtabsize}{3}
+\begin{listing}[1]{1}
+semaine=1
+while semaine < 45: #Tant que semaine<45, exécuter la suite
+	#Groupe TD
+	if semaine%2==0:
+        groupe_td='G1'
+	else:
+        groupe_td='G2'
+
+	#Groupe TP
+	if semaine%3==2:
+        groupe_tp='GA'
+	elif semaine%3==1:
+        groupe_tp='GB'
+	else:
+        groupe_tp='GC'
+	print semaine,groupe_td,groupe_tp
+	semaine=semaine+1
+\end{listing}
+\end{GrayBox}
+
+\paragraph{Question 4:} D'après le code présenté quelle sera la première ligne affichée ? Quelle sera la dernière ?
+
+~\
+
+Un problème d'organisation fait que lorsque le groupe de TD 'G1' et le groupe de TP 'GC' ont cours la même semaine, il faut que les TPs aient lieu le lundi.
+
+\paragraph{Question 5:} Proposer une modification pour que programme affiche au bout de la ligne correspondante le texte 'TP le lundi'. L'affichage devra correspondre à l'exemple suivant:
+
+\begin{GrayBox}[0.75\textwidth]
+\renewcommand{\verbatimtabsize}{3}
+35 G2 GA \\
+36 G1 GC TP le lundi
+\end{GrayBox}
+
+\paragraph{Question 6:} On souhaite ajouter un quatrième groupe de TP, proposer une modification du code pour que cela soit possible. La seule contrainte concernant l'alternance des groupes est que la combinaison qui impose les TP le lundi n'intervienne jamais.
+
+\section{Calcul de 2\textsuperscript{n}}
+
+L'objectif du code suivant est de calculer 2\textsuperscript{n}.
+
+\begin{GrayBox}[0.9\textwidth]
+\renewcommand{\verbatimtabsize}{3}
+\begin{listing}[1]{1}
+def puissance_deux(n):
+    y, n_loc = 1,n
+    while n_loc > 0:
+        y = y*2
+        n_loc = n_loc-1
+    return y
+\end{listing}
+\end{GrayBox}
+
+\paragraph{Question 7:} Écrire pour chaque itération de la boucle les valeurs de \verb?y? et de \verb?n_loc? pour le
+calcul de \verb?puissance_deux(4)?.
+
+\begin{itemize}
+ \item \verb?y?\textsubscript{0}=... et \verb?n_loc?\textsubscript{0}=...,
+ \item \verb?y?\textsubscript{1}=... et \verb?n_loc?\textsubscript{1}=...,
+ \item \verb?y?\textsubscript{2}=... et \verb?n_loc?\textsubscript{2}=...,
+ \item ...,
+\end{itemize}
+
+\paragraph{Question 8:} Que se passe-t-il si \verb?n? est négatif ?
+
+\paragraph{Question 9:} Proposer une modification pour calculer $2^n$ avec ($n<0$) ?
+
+\iffalse
+\section{Message codé}
+
+Le programme suivant permet de coder un message en décalant chaque lettre du message vers le haut, ainsi \verb?a? devient \verb?b?, \verb?b? devient \verb?c?, etc...
+
+\begin{GrayBox}[0.9\textwidth]
+\renewcommand{\verbatimtabsize}{3}
+\begin{listing}[1]{1}
+def codage(mot):
+    motcode=""
+    li = ['a','b','c','d','e','f','g','h','i','j','k','l','m',
+    'n','o','p','q','r','s','t','u','v','w','x','y','z','&']
+    # la liste fait correspondre à une lettre un chiffre (a=1,...)
+    for i in range(0,len(mot)): # lecture de tous les caractères
+        if mot[i] == ' ': # si c'est un espace ne rien faire
+            newlettre = mot[i]
+        else: 
+            p=li.index(mot[i]) # p: chiffre correspondant à la lettre
+            newlettre =  li[p+1]
+        motcode = motcode[:i] + newlettre
+    return motcode
+\end{listing}
+\end{GrayBox}
+
+Il doit être utilisé de la manière suivante.
+
+\begin{GrayBox}[0.75\textwidth]
+\renewcommand{\verbatimtabsize}{3}
+\begin{listing}[1]{1}
+message="bonjour les ptsi de dorian"
+messagecode=codage(message)
+\end{listing}
+\end{GrayBox}
+
+Manipulation d'une liste ou d'une chaîne de caractères:
+\begin{itemize}
+ \item \verb?mot[i]? ou \verb?li[i]? permet d'obtenir le i\up{ème} élément de la chaîne de  caractères \verb?mot? ou de la liste \verb?li? (commence à 0),
+ \item \verb?li.index('a')? revoie la numérotation des positions commençant à 0. Exemple: \verb?['c','h','a','t'].index('h')=1?.
+\end{itemize}
+
+\paragraph{Question 7:} Prédire le résultat de l'instruction suivante \verb?print messagecode? qui serait effectuée à la suite des instructions précédentes.
+
+\paragraph{Question 8:} Proposer une modification de cet algorithme afin de décoder ce message. Vous proposerez un nouveau code en python pour répondre à ce besoin.
+
+\paragraph{Question 9:} Prédire le résultat de l'instruction suivante \verb?print messagecode? lorsque le message d'entrée serait \verb?message="venez tous a dorian"?.
+\fi
+
+\newpage
+
+~\
+
+\newpage
+\cleardoublepage
+
+\section{Document réponse}
+
+Nom:.....................\\
+Prénom:......................
+
+
+\begin{center}
+ \includegraphics[width=0.9\linewidth]{img/unite_centrale_vierge}
+\end{center}
+
+\ifdef{\public}{\end{document}}{}
+
+\newpage
+\cleardoublepage
+
+\pagestyle{correction}\setcounter{section}{0}
+
+\section{Correction}
+
+\paragraph{Question 1:}
+
+\begin{center}
+ \includegraphics[width=0.9\linewidth]{img/unite_centrale_corrige}
+\end{center}
+
+\paragraph{Question 2:}
+
+Le nombre à traduire est $\dfrac{14}{9}=1,5555$.
+
+\begin{tabular}{c c c c c c c c c c}
+0,555.. & x & 2 & = & 1,11.. & = &  1 & + & 0,11.. \\
+0,111.. & x & 2 & = & 0,22.. & = &  0 & + & 0,22.. \\
+0,222.. & x & 2 & = & 0,44.. & = &  0 & + & 0,44.. \\
+0,444.. & x & 2 & = & 0,88.. & = &  0 & + & 0,88.. \\
+0,888.. & x & 2 & = & 1,77.. & = &  1 & + & 0,77.. \\
+0,777.. & x & 2 & = & 1,55.. & = &  1 & + & 0,55.. \\
+0,555.. & x & 2 & = & 1,11.. & = &  1 & + & 0,11.. \\
+0,111.. & x & 2 & = & 0,22.. & = &  0 & + & 0,22.. \\
+...
+\end{tabular}
+
+On remarque un récurrence dans l'écriture du $1,555_{10}$ en binaire: $1,555.._{10}=1,10001110.._2$
+
+$1,\underbrace{10001...01}_{23 bits}*2^{0}$
+
+\begin{itemize}
+ \item Signe = $0$,
+ \item Mantisse:$\underbrace{10001...01}_{23 bits}$,
+ \item Exposant:$127+0=127_{10}=01111111_2$
+\end{itemize}
+
+\setlength{\tabcolsep}{0.1cm}
+\begin{center}
+\begin{scriptsize}
+\begin{tabular}{|*{32}{l|}}
+\hline
+S & \multicolumn{8}{c|}{Exposant} & \multicolumn{23}{c|}{Mantisse} \\
+\hline
+0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 & 1 \\
+\hline
+\end{tabular}
+\end{scriptsize}
+\end{center}
+
+\paragraph{Question 3:} 
+
+Exposant: $10001110=2+4+8+128=142$ \\
+Exposant simple: $142-127=15$\\
+Mantisse: $1,00010100011000000000000_2*2^{15}$ \\
+Nombre $100010100011_2*2^{4}=(2048_{10}+128_{10}+32_{10}+2_{10}+1_{10})*16=35376_{10}$.
+
+\paragraph{Question 4:} L'affichage de la première ligne sera \verb?1 G2 GB?, la dernière \verb?44 G1 GA?.
+
+\paragraph{Question 5:} 
+
+\begin{GrayBox}[0.75\textwidth]
+\begin{verbatim}
+semaine=1
+
+while semaine < 45:
+    #Groupe TD
+    if semaine%2==0:
+        groupe_td='G1'
+    else:
+        groupe_td='G2'
+
+    #Groupe TP
+    if semaine%3==2:
+        groupe_tp='GA'
+    elif semaine%3==1:
+        groupe_tp='GB'
+    else:
+        groupe_tp='GC'
+        
+    if groupe_td=='G1' and groupe_tp=='GC':
+        print semaine,groupe_td,groupe_tp,'TP le lundi'
+    else:
+        print semaine,groupe_td,groupe_tp
+
+    semaine=semaine+1
+\end{verbatim}
+\end{GrayBox}
+
+\paragraph{Question 6:} 
+
+Pour que la combinaison n'intervienne pas, une possibilité est de contraindre le groupe 'G1' sur des semaines paires et le groupe 'GC' sur des semaines impaires.
+
+\begin{GrayBox}[0.75\textwidth]
+\begin{verbatim}
+semaine=1
+
+while semaine < 45:
+    #Groupe TD
+    if semaine%2==0:
+        groupe_td='G1'
+    else:
+        groupe_td='G2'
+
+    #Groupe TP
+    if semaine%4==0:
+        groupe_tp='GA'
+    elif semaine%4==1:
+        groupe_tp='GB'
+    elif semaine%4==3:
+        groupe_tp='GC'
+    else:
+        groupe_tp='GD'
+    print semaine,groupe_td,groupe_tp
+
+    semaine=semaine+1
+\end{verbatim}
+\end{GrayBox}
+
+
+\paragraph{Question 7:} Écrire pour chaque itération de la boucle les valeurs de \verb?y? et de \verb?n_loc?, pour le calcul de \verb?puissance_deux(4)?.
+
+\begin{itemize}
+ \item \verb?y?\textsubscript{0}=1 et \verb?n_loc?\textsubscript{0}=4,
+ \item \verb?y?\textsubscript{1}=2 et \verb?n_loc?\textsubscript{1}=3,
+ \item \verb?y?\textsubscript{2}=4 et \verb?n_loc?\textsubscript{2}=2,
+ \item \verb?y?\textsubscript{3}=8 et \verb?n_loc?\textsubscript{3}=1,
+ \item \verb?y?\textsubscript{4}=16 et \verb?n_loc?\textsubscript{4}=0.
+\end{itemize}
+
+\paragraph{Question 8:} Si \verb?n? est négatif, \verb?n_loc? est négatif et \verb?y=1?. L'étape \verb?while n_loc > 0? rejette ce cas de figure : on n'entre pas dans la boucle \verb?while?. Donc \verb?y? n'est pas modifié. Le programme retourne 1.
+
+\paragraph{Question 9:} 
+
+\begin{GrayBox}[0.75\textwidth]
+\begin{verbatim}
+def puissance_deux(n):
+    y, n_loc = 1, n
+    if n>0:
+        while n_loc > 0:
+            y=y*2
+            n_loc = n_loc-1
+    else:
+        while n_loc < 0:
+            y=y/2.
+            n_loc = n_loc+1
+    return y
+\end{verbatim}
+\end{GrayBox}
+
+\end{document}
+
+\paragraph{Question 8:} Montrer que la fonction se termine en utilisant un variant de boucle.
+
+Le variant de boucle est \verb?n_loc?, car:
+\begin{itemize}
+ \item il est strictement décroissant (il décroit de 1 à chaque étape),
+ \item il est strictement positif, il démarre à n (positif) décroit et s'arrête dès qu'il est négatif ou nul.
+\end{itemize}
+
+\paragraph{Question 9:}
+
+A l'étape initiale,
+\verb?y?\textsubscript{0}=\verb?2**(n-n_loc?\textsubscript{0}\verb?)?=\verb?2**(n-n)?=\verb?2**(0)?=\verb?1?, la condition est vraie.
+
+Soit,
+\verb?y?\textsubscript{i}=\verb?2**(n-n_loc?\textsubscript{i}\verb?)?,
+
+\verb?y?\textsubscript{i+1}=\verb?2*2**(n-n_loc?\textsubscript{i}\verb?)?=\verb?2**(n-n_loc?\textsubscript{i}\verb?+1)?,
+
+\verb?y?\textsubscript{i+1}=\verb?2**(n-(n_loc?\textsubscript{i}\verb?-1))?=\verb?2**(n-(n_loc?\textsubscript{i+1})\verb?)?.
+
+~\
+
+Donc $y_i=2^{n-n_{loc,i}}$ est bien un invariant de boucle. La valeur finale de $n_{loc}$ est $0$, ainsi la valeur finale de $y$ est $2^n$. C'est bien la valeur attendue, l'algorithme de calcul de $2^n$ grâce à la
+fonction \verb?puissance_deux(n)? est donc correct.
+
+
+\paragraph{Question 7:} Le message codé est alors \verb?cpokpvs mft qutj ef epsjbo?.
+
+\paragraph{Question 8:} 
+
+Le programme de décodage est le suivant.
+
+\begin{GrayBox}[0.8\textwidth]
+\begin{verbatim}
+def decodage(mot):
+    motdecode=""
+    li = ['a','b','c','d','e','f','g','h','i','j','k','l','m',
+    'n','o','p','q','r','s','t','u','v','w','x','y','z','&']
+    for i in range(0,len(mot)):
+        if mot[i] == ' ':       
+            newlettre = mot[i]
+        else: 
+            p=li.index(mot[i])
+            newlettre =  li[p-1]
+        motdecode = motdecode[:i] + newlettre
+    return motdecode
+\end{verbatim}
+\end{GrayBox}
+
+\paragraph{Question 9:} Le message codé est alors \verb?wfof& upvt b epsjbo?.
+
+\end{document}

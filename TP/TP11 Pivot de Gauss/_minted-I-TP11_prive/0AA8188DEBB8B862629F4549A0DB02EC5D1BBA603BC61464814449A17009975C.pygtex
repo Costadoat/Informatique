@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{transvection}\PYG{p}{(}\PYG{n}{A}\PYG{p}{,}\PYG{n}{i}\PYG{p}{,}\PYG{n}{k}\PYG{p}{,}\PYG{n}{alpha}\PYG{p}{):}
+    \PYG{n}{A}\PYG{p}{[}\PYG{n}{k}\PYG{p}{]}\PYG{o}{=}\PYG{n}{A}\PYG{p}{[}\PYG{n}{k}\PYG{p}{]}\PYG{o}{\PYGZhy{}}\PYG{n}{alpha}\PYG{o}{*}\PYG{n}{A}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}
+\end{Verbatim}

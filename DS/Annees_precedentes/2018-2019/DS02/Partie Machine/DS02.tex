@@ -1,0 +1,165 @@
+\documentclass[a4paper,12pt]{article}
+
+\input{../../../macro_Juliette}
+
+\excludecomment{solution}
+
+\begin{document}
+\noindent {PTSI \hfill 2018-2019}
+
+ \begin{center}
+  \begin{large}
+  \fbox{DS Informatique n°2 -- Partie machine. Durée : 1 heure 30}
+  \end{large}
+ \end{center}
+
+\begin{boxedminipage}{.9\textwidth} 
+\begin{itemize}
+ \item Faire tous les exercices dans un même fichier NomPrenom.py que vous sauvegarderez,
+ \item Mettez en commentaire l'exercice que vous traitez,
+ \item N'oubliez pas de commentez votre code,
+ \item Il est possible de demander un déblocage pour une question, mais celle-ci sera notée 0.
+\end{itemize}
+\end{boxedminipage}
+
+\section*{Réponse temporelle théorique}
+\noi On considère la tension au bornes d'un condensateur lors de la charge : $u(t)=E\cdot(1-e^{\frac{-t}{\tau}})$, avec $E=10V$ et $\tau=0,06s$.
+
+\begin{enumerate}
+\item \begin{enumerate}
+\item Définir une fonction \verb?f(t)? qui retourne $u(t)$ pour une entrée $t$ (vous utiliserez la bibliothèque numpy de calcul numérique).
+\begin{solution}~\ \\
+\begin{verbatim}
+import numpy as np
+
+E=10
+tau=0.06
+def f(t):
+    return E*(1-np.exp(-t/tau))
+\end{verbatim}
+\end{solution}
+\item En utilisant la bibliothèque \verb?matplotlib?, tracer cette fonction pour $t\in[0,1]$ avec des incréments de $0,01s$.
+\begin{solution}~\ \\
+\begin{verbatim}
+import matplotlib.pyplot as plt
+
+t=np.arange(0,1,0.01)
+plt.plot(t,f(t))
+\end{verbatim}
+\end{solution}
+\end{enumerate}
+\item \begin{enumerate}
+\item On notera par la suite : $\displaystyle \lim_{t\to +\infty}u(t)=u(+\infty)$ et on fera l'hypothèse que la valeur peut être assimilée à \verb?f(1)?. Afficher la valeur $0,95\cdot u(+\infty)$.
+\begin{solution}~\ \\
+\begin{verbatim}
+print 0.95*f(1)
+\end{verbatim}
+\end{solution}
+\item Définir une fonction \verb?g(t)? qui retourne $u(t)-0,95\cdot u(+\infty)$ pour une entrée $t$.
+\begin{solution}~\ \\
+\begin{verbatim}
+def g(t):
+    return f(t)-0.95*f(1)
+\end{verbatim}
+\end{solution}
+\item Définir une fonction \verb?dichotomie(h,p)? qui permet grâce à la méthode de la dichotomie de trouver une racine d'une fonction $h$.
+\begin{solution}~\ \\
+\begin{verbatim}
+p=10**(-6)
+
+def dichotomie(h,p):
+    a=-10
+    i=1
+    b=10
+    while (b-a)>p :
+        if h(a)*h((a+b)/2)<=0:
+            a, b=a, (a+b)/2.
+        else:
+            a, b=(a+b)/2., b
+        i=i+1
+        e=b-a
+    return "Resultat {} (Erreur:{})".format(a, e)
+\end{verbatim}
+\end{solution}
+\item Utiliser cette fonction \verb?dichotomie? afin de déterminer le temps de réponse à 5\%.
+\begin{solution}~\ \\
+\begin{verbatim}
+print dichotomie(g,p)
+\end{verbatim}
+\end{solution}
+\item Exécuter la commande $3*tau$ pour vérifier que le résultat de la question précédente est juste.
+\begin{solution}~\ \\
+\begin{verbatim}
+print 3*tau
+\end{verbatim}
+\end{solution}
+\end{enumerate}
+\end{enumerate}
+
+\section*{Réponse temporelle expérimentale}
+
+Le fichier \verb?trace.csv? donné correspond à une mesure du déplacement du Control'X. Les colonnes sont séparées par des \verb?;? et les lignes par des retours à la ligne \verb?\n?:
+\begin{itemize}
+ \item la première colonne est à mettre dans une liste \verb?temps?,
+ \item la seconde colonne est à mettre dans une liste \verb?consigne?,
+ \item la troisième colonne est à mettre dans une liste \verb?sortie?.
+\end{itemize}
+
+Le code suivant permet d'ouvrir le fichier \verb?trace.csv? et de remplir les listes \verb?temps?, \verb?consigne? et \verb?sortie? à partir des données du fichier csv.
+
+\begin{verbatim}
+fichier=open("trace.csv",'r')
+contenu=fichier.read()
+fichier.close
+lignes=contenu.split("\n")
+temps=[]
+consigne=[]
+sortie=[]
+for ligne in lignes[0:-1]:
+    temps.append(float(ligne.split(';')[0]))
+    consigne.append(float(ligne.split(';')[1]))
+    sortie.append(float(ligne.split(';')[2]))
+\end{verbatim}
+
+\begin{enumerate}
+\item \begin{enumerate}
+\item Tracer une figure avec en ordonnée les données de la liste \verb?sortie? et en abscisse celles de la liste \verb?temps?.
+ \begin{solution}~\ \\
+\begin{verbatim}
+plt.plot(temps,sortie,'g')
+\end{verbatim}
+%plt.plot(temps,consigne,'b')
+\end{solution}
+\item Tracer en rouge sur la figure les limites de +5\% et -5\% de la valeur finale.
+ \begin{solution}~\ \\
+\begin{verbatim}
+smoins=0.95*sortie[np.shape(temps)[0]-1]
+splus=1.05*sortie[np.shape(temps)[0]-1]
+plt.plot(temps,splus*np.ones(np.shape(temps)[0]),'r')
+plt.plot(temps,smoins*np.ones(np.shape(temps)[0]),'r')
+\end{verbatim}
+\end{solution}
+\item En déduire graphiquement le temps de réponse à 5\%.
+ \begin{solution}~\ \\
+\begin{verbatim}
+smoins=0.95*sortie[np.shape(temps)[0]-1]
+splus=1.05*sortie[np.shape(temps)[0]-1]
+plt.plot(temps,splus*np.ones(np.shape(temps)[0]),'r')
+plt.plot(temps,smoins*np.ones(np.shape(temps)[0]),'r')
+\end{verbatim}
+\end{solution}
+\end{enumerate}
+ \item Écrire un script permettant de déterminer ce temps de réponse à 5\%.
+  \begin{solution}~\ \\
+\begin{verbatim}
+tr=0
+for i in range(len(sortie)):
+    if sortie[i] < splus and sortie[i] > smoins and (sortie[i-1] > splus or
+                                                    sortie[i-1] < smoins) :
+        tr=temps[i]
+        
+print tr
+\end{verbatim}
+\end{solution}
+\end{enumerate}
+\end{document}

@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{liste\PYGZus{}triee\PYGZus{}occurrences}\PYG{p}{,} \PYG{n}{liste\PYGZus{}stat}\PYG{o}{=}\PYG{n}{analyse\PYGZus{}texte}\PYG{p}{(}\PYG{n}{message\PYGZus{}code}\PYG{p}{)}
+\PYG{k}{print}\PYG{p}{(}\PYG{n}{liste\PYGZus{}triee\PYGZus{}occurrences}\PYG{p}{[:}\PYG{l+m+mi}{15}\PYG{p}{],} \PYG{n}{liste\PYGZus{}stat}\PYG{p}{[:}\PYG{l+m+mi}{15}\PYG{p}{])}
+\end{Verbatim}

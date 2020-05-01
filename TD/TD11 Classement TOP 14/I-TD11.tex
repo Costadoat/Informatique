@@ -1,0 +1,55 @@
+\input{intro.tex}
+
+\input{../../headers/infoheaders.tex}
+
+\begin{document}
+ 
+On donne en annexe le tableau des résultats actuels des clubs de TOP 14, la première division de rugby.
+
+\paragraph{Objectif}
+
+L'objectif de ce TD est de coder un script qui permettra de :
+\begin{itemize}
+ \item Calculer le nombre de points de chaque équipe,
+ \item Calculer le nombre de matchs joués par chaque équipe,
+ \item Classer les équipes en suivant les deux premières règles de la FFR
+\end{itemize}
+
+On rappelle quelques points du règlement:
+
+\begin{itemize}
+ \item Compte des points :
+	\begin{itemize}
+ 		\item La victoire = 4 points,
+ 		\item Le match nul = 2 points,
+ 		\item La défaite = 0 point,
+ 		\item Le bonus = 1 point.
+\end{itemize} 
+ \item Bonus offensif (bo): Un point bonus est attribué à une équipe inscrivant 3 essais de plus que l'adversaire,
+ \item Bonus défensif (bd): Un point bonus est attribué à une équipe perdant de 5 points ou moins,
+ \item Si deux ou plusieurs équipes se trouvent à égalité à l'issue de la phase régulière, leur classement sera établi en tenant compte des facteurs ci-après.
+ \item Chaque facteur n'est à prendre en compte que si celui qui le précède n'a pas permis de départager les équipes concernées et d'établir ce classement :
+\begin{itemize}
+ \item Nombre de points terrain obtenus sur l'ensemble des rencontres ayant opposé entre elles les équipes concernées (y compris le cas échéant points de bonus et points de pénalisation),
+ \item Goal-average sur l'ensemble des rencontres de la compétition,
+ \item Goal-average sur l'ensemble des rencontres ayant opposé entre elles les équipes restant concernées,
+ \item Plus grande différence entre le nombre d'essais marqués et concédés sur l'ensemble des rencontres ayant opposé entre elles les équipes restant concernées,
+ \item Plus grande différence entre le nombre d'essais marqués et concédés dans toutes les rencontres de la compétition,
+ \item Plus grand nombre de points marqués dans toutes les rencontres de la compétition,
+ \item Plus grand nombre d'essais marqués dans toutes les rencontres de la compétition,
+ \item Nombre de forfaits n'ayant pas entraîné de forfait général de la compétition,
+ \item Place obtenue la saison précédente dans le Championnat de France.
+\end{itemize} 
+\end{itemize} 
+ 
+
+\clearpage
+
+
+\ifdef{\public}{\end{document}}{}
+
+\inputminted{python}{Code/I-TD11.py}
+
+
+\end{document} 
+ 

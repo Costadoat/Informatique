@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+	\PYG{n}{nbi} \PYG{o}{=} \PYG{n}{nbx} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}
+	\PYG{n}{dfleche} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{linspace}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{nbx}\PYG{p}{)}
+	\PYG{n}{dfleche}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{=}\PYG{l+m+mi}{0}
+	\PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{nbi}\PYG{p}{):}
+    	\PYG{n}{dfleche}\PYG{p}{[}\PYG{n}{i}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{=} \PYG{n}{dfleche}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{+} \PYG{n}{ddfleche}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{*}\PYG{p}{(}\PYG{n}{x}\PYG{p}{[}\PYG{n}{i}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{\PYGZhy{}}\PYG{n}{x}\PYG{p}{[}\PYG{n}{i}\PYG{p}{])}
+	\PYG{k}{print}\PYG{p}{(}\PYG{n}{dfleche}\PYG{p}{[}\PYG{l+m+mi}{500}\PYG{p}{])}
+	\PYG{n}{plt}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{x}\PYG{p}{[:}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{dfleche}\PYG{p}{)],}\PYG{n}{dfleche}\PYG{p}{)}
+\end{Verbatim}

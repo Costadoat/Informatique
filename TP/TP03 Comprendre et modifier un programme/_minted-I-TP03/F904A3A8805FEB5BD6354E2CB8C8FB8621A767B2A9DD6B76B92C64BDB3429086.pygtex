@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{a}\PYG{o}{=}\PYG{n}{b}
+\PYG{n}{b}\PYG{o}{=}\PYG{n}{a}
+\end{Verbatim}

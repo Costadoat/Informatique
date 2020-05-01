@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{s}\PYG{o}{=}\PYG{l+m+mi}{0}               \PYG{c+c1}{\PYGZsh{} on initialise la somme a zero}
+\PYG{k}{while} \PYG{n}{n}\PYG{o}{\PYGZgt{}}\PYG{l+m+mi}{0}\PYG{p}{:}
+    \PYG{n}{r}\PYG{o}{=}\PYG{n}{n}\PYG{o}{\PYGZpc{}}\PYG{l+m+mi}{10}        \PYG{c+c1}{\PYGZsh{} r est le dernier chiffre de n}
+    \PYG{n}{s}\PYG{o}{=}\PYG{n}{s}\PYG{o}{+}\PYG{n}{r}         \PYG{c+c1}{\PYGZsh{} on ajoute r a la somme}
+    \PYG{n}{n}\PYG{o}{=}\PYG{n}{n}\PYG{o}{//}\PYG{l+m+mi}{10}       \PYG{c+c1}{\PYGZsh{} on recommence avec n auquel on a retiré le dernier chiffre}
+\end{Verbatim}

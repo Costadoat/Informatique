@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{echangeLignes}\PYG{p}{(}\PYG{n}{A}\PYG{p}{,}\PYG{n}{i}\PYG{p}{,}\PYG{n}{k}\PYG{p}{):}
+    \PYG{n}{n}\PYG{o}{=}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{A}\PYG{p}{)}
+    \PYG{k}{for} \PYG{n}{j} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{n}\PYG{p}{):}
+        \PYG{n}{x} \PYG{o}{=} \PYG{n}{A}\PYG{p}{[}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{]}
+        \PYG{n}{A}\PYG{p}{[}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{]} \PYG{o}{=} \PYG{n}{A}\PYG{p}{[}\PYG{n}{k}\PYG{p}{,}\PYG{n}{j}\PYG{p}{]}
+        \PYG{n}{A}\PYG{p}{[}\PYG{n}{k}\PYG{p}{,}\PYG{n}{j}\PYG{p}{]} \PYG{o}{=} \PYG{n}{x}
+\end{Verbatim}

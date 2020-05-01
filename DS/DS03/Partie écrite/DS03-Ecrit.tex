@@ -1,0 +1,195 @@
+\input{intro}
+\input{Header_Willie}
+
+\excludecomment{solution}
+%\excludecomment{exercice}
+
+\begin{document}
+
+\begin{center}
+{\Large\bf {\type} \no {\num} -- \descrip}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+\fbox{Les codes en python doivent être commentés et les indentations dans le code doivent être visibles.}
+
+\section{Exercice -- Traduction et compréhension d'un algorithme}
+
+\begin{enumerate}
+ \item À l'aide des opérateurs \verb|//| et \verb|%| écrire en Python :
+ \begin{itemize}
+ \item une fonction \texttt{ent(x)} renvoyant la partie entière d'un nombre réel $x$ positif ;
+  
+ \item une fonction \texttt{par(n)} renvoyant 0 si un entier naturel $n$ est pair et 1 sinon.
+ \end{itemize}
+ 
+ \item On considère l’algorithme suivant, qui s'applique à deux entiers naturels $i$ et $j$ et utilise une variable auxiliaire $t$ qui porte le résultat final :
+
+
+\begin{algorithm}[H]
+\KwData{$i$ et $j$ deux entiers naturels}
+\KwResult{$t$}
+$t \leftarrow 0$\\
+\While{$i \geq 1$}{
+\eIf{$\mathbf{par}(i)=1$}{
+$t \leftarrow t+j$
+}{Ne rien faire}
+$j \leftarrow j\times 2$\\
+$i \leftarrow \mathbf{ent}(i/2)$
+}
+\caption{Algorithme à implanter en Python.}
+\label{algo:1}
+\end{algorithm}
+
+Écrire en Python une fonction \texttt{mystere(i,j)} traduisant l'algorithme. On considérera les fonctions \texttt{ent(n)} et \texttt{par(n)} connues et on pourra les utiliser directement dans le code proposé.
+
+    \item On exécute \texttt{mystere(8,9)}. Proposer sous forme de tableau à trois colonnes les valeurs prises pas à pas par les trois entiers ($i,j,t$) \textit{à la fin} de chacune des itérations, chaque ligne représentant une itération de la boucle itérative utilisée dans le code.
+
+    \item Même question pour \texttt{mystere(9,8)}.
+
+    \item Dans le cas général, quel est le résultat final retourné par l'algorithme ?
+
+    \item On se propose de prouver le résultat précédent en étudiant le terme $i\times j+t$. Pour cela : 
+\begin{enumerate}
+    \item prouver que ce terme est égal à $i\times j$ au début de la première itération ;
+    
+    \item prouver que la propriété précédente reste vraie à la fin d'une itération quelconque (invariance) ;
+    
+    \item prouver que le résultat final de l'algorithme est bien le résultat attendu.
+\end{enumerate}
+
+
+\end{enumerate}
+
+\section{Question de cours -- Méthode des rectangles}
+
+On calcule l'intégrale numérique en réalisant une somme de surfaces de rectangles. Le domaine d'intégration est découpé en intervalles et on fait comme si la fonction restait constante sur chaque intervalle avec comme valeur sa valeur au premier point de l'intervalle.
+
+On souhaite approximer la valeur de $\displaystyle \int_0^\frac{3\pi}{2} \cos(x)\mathtt{d}x$, grâce à la méthode précédente, en utilisant 2000 valeurs de la fonction pour des valeurs d'angle régulièrement espacées.
+
+Proposer un code en Python calculant la valeur approchée recherchée et l'affichant à l'écran.
+
+\newpage 
+
+\section{Exercice -- Travaux pratiques}
+
+\begin{enumerate}
+\item  On considère la suite définie par récurrence comme suit :
+$\left\lbrace\begin{array}{l}
+u_0=0\\
+u_{n+1}=2u_n+3
+\end{array}\right.$
+
+Écrire en Python un programme qui calcule les dix premiers termes de la suite et les affiche tous à l'écran.
+
+\item On considère maintenant la suite de Fibonacci définie par :
+\[\left\lbrace\begin{array}{l}
+F_0=0\\
+F_1=1\\
+\forall n\in\mathbb{N}, \quad F_{n+2}=F_{n+1}+F_n
+\end{array}\right.\]
+
+Écrire un programme qui permet de calculer les dix premiers termes de la suite $(F_n)_{n\in\mathbb{N}}$.
+\end{enumerate}
+
+\ifdef{\public}{\end{document}}{}
+
+\newpage 
+
+\begin{center}
+{\Large\bf Correction DS \no {\num} -- \descrip}
+\end{center}
+
+\setcounter{section}{0}
+\section{Exercice -- Traduction et compréhension d'un algorithme}
+
+
+\begin{enumerate}
+\item Utilisation des opérateurs de la division euclidienne.
+
+\paragraph{Fonction par}
+\begin{minted}{python}
+def par(n):
+    return n%2!=0 # renvoie la réponse booléenne à la question:
+                  # "n n'est-il pas pair" ?
+\end{minted}
+
+Cette fonction renvoie \texttt{True} ou \texttt{False} qui, dans des comparaisons, sont interprétés respectivement comme 1 ou 0. On peut préférer répondre plus explicitement à la question, avec cette fonction : 
+
+\begin{minted}{python}
+def par(n):
+    if n%2==0:   # si n est pair
+        return 0 # Équivalent à False
+    else:        # sinon
+        return 1 # Équivalent à True
+\end{minted}
+
+\paragraph{Fonction ent}
+    
+\begin{minted}{python}
+def ent(x):
+    return x//1 # renvoie le quotient de la division 
+                # euclidienne de x par 1
+                # c'est-à-dire sa partie entière
+\end{minted}
+
+\item 
+\begin{minted}{python}
+def mystere(i,j):
+    t=0             # initialisation de t
+    while i >=1:    # sortie de la boucle pour i < 1
+        if par(i)==1:   # si i est impair
+            t=t+j          # on ajoute j à t
+                        # pour toutes les itérations :
+        j=j*2           # on multiplie j par 2
+        i=ent(i/2)      # on met à jour i avec la partie 
+                        # entière de sa moitié
+#       print(i,j,t)    # à décommenter pour afficher les valeurs 
+    return t        # on retourne le résultat final
+
+print(mystere(9,8))
+\end{minted}
+
+\item Pour $i=8$ et $j=9$, valeurs \textit{à la fin} de chaque itération :
+\begin{center}
+\begin{tabular}{|c|c|c|c|}\hline
+itération $k$ & $i_k$ & $j_k$ & $t_k$ \\\hline
+0 & 4 & 18  & 0\\\hline
+1 & 2 & 36  & 0\\\hline
+2 & 1 & 72  & 0\\\hline
+3 & 0 & 144 & 72\\\hline
+\end{tabular}
+\end{center}
+
+\item Pour $i=9$ et $j=8$, valeurs \textit{à la fin} de chaque itération :
+\begin{center}
+\begin{tabular}{|c|c|c|c|}\hline
+itération $k$ & $i_k$ & $j_k$ & $t_k$ \\\hline
+0 & 4 & 16  & 8\\\hline
+1 & 2 & 32  & 8\\\hline
+2 & 1 & 64  & 8\\\hline
+3 & 0 & 128 & 72\\\hline
+\end{tabular}
+\end{center}
+
+\newpage 
+
+\item Dans un cas général, le résultat final retourné par l'algorithme est le produit de deux entiers : $i \times j$.
+\item 
+\begin{enumerate}
+\item Au début de la première itération, $i_0=i$, $j_0=j$ et $t_0=0$, donc $i_0 \times j_0 + t_0 = i \times j$.
+
+\item Supposons la propriété précédente vraie au début de la k\ieme itération : $i_k \times j_k + t_k = i \times j$. Il y a alors deux possibilités :
+
+\begin{itemize}                                                                                                                                                      \item si $i_k$ est pair, alors $t_{k+1}=t_k$, $j_{k+1}=2 j_k$, et $i_{k+1}=\frac{i_k}{2}$, d'où : $$i_{k+1} \times j_{k+1} + t_{k+1} = \frac{i_k}{2} \times 2j_k + t_k = i_k \times j_k + t_k = i \times j$$ 
+
+\item si $i$ est impair, alors $t_{k+1}=t_k+j_k$, $j_{k+1}=2 j_k$ et $i_{k+1} = \frac{i_k-1}{2}$, d'où : $$i_{k+1} \times j_{k+1} + t_{k+1} = \frac{i_k-1}{2} \times 2j_k + t_k+j_k = i_k \times j_k + t_k = i \times j$$
+\end{enumerate}
+
+\item Le résultat final est la dernière valeur de $t$, c'est-à-dire la valeur de $t$ quand la boucle « tant que » est terminée. Cette boucle est terminée à l'itération $f$ telle que lorsque $i_f <1$ donc telle que $i_f=0$ puisque $i_f$ est un entier naturel. On a donc alors $i \times j = i_f \times j_f + t_f = t_f$. Le résultat final est donc bien le produit de $i$ par $j$.
+\end{itemize}
+
+\end{enumerate}
+
+\end{document}

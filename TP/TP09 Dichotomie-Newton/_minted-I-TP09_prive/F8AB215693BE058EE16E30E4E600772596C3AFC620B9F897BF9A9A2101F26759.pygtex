@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{Newton1}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,}\PYG{n}{fprime}\PYG{p}{,}\PYG{n}{x0}\PYG{p}{,}\PYG{n}{nb\PYGZus{}iteration}\PYG{p}{):}
+    \PYG{n}{x}\PYG{o}{=}\PYG{n+nb}{float}\PYG{p}{(}\PYG{n}{x0}\PYG{p}{)}
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{nb\PYGZus{}iteration}\PYG{p}{):}
+        \PYG{n}{x}\PYG{o}{=}\PYG{n}{x}\PYG{o}{\PYGZhy{}}\PYG{n}{f}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}\PYG{o}{/}\PYG{n}{fprime}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}
+    \PYG{k}{return}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}
+\end{Verbatim}

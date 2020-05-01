@@ -1,0 +1,23 @@
+\frametitle{Etude 3: Code Python}
+
+\textbf{Résolution du système:}
+
+\begin{GrayBox}[0.85\textwidth]
+\begin{semiverbatim}\small
+\ifdef{\public}{\uncover<2->{
+def resolution_systeme(A,b):
+    n = len(A)
+
+    for i in range(n-1):
+        i0 = recherche_pivot(A,i)
+        permutation(A,i,i0)
+        permutation(b,i,i0)
+
+        for k in range(i+1,n):
+            x = A[k][i]/A[i][i]
+            transvection(A,k,i,-x)
+            transvection(b,k,i,-x)
+
+    return triangle(A,b)}}{\vspace{5cm}}
+   \end{semiverbatim}
+\end{GrayBox}

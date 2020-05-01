@@ -1,0 +1,11 @@
+#Question 4.d
+
+nbi = nbx - 1
+fleche = np.linspace(1, 1, nbx)
+fleche[0]=0
+for i in range(nbi):
+    fleche[i+1] = fleche[i] + dfleche[i]*(x[i+1]-x[i])
+plt.plot(x[:len(fleche)],fleche)
+print(fleche[500])
+print("%f > 2cm, le cahier des charges n'est pas respecté." % (abs(fleche[500])*100))
+

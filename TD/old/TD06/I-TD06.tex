@@ -1,0 +1,58 @@
+\newcommand{\competences}{Alt-C3: Concevoir un algorithme répondant à un problème précisément posé}
+
+\input{intro.tex}
+\input{../../headers/infoheaders.tex}
+
+\section{Présentation de la problématique}
+
+\begin{minipage}{0.45\linewidth}
+L'objectif est d'usiner une pièce dont les caractéristiques sont représentées sur la géométrie ci-jointe. Pour cela il est nécessaire de déterminer une trajectoire d'usinage qui convient.
+\end{minipage}\hfill
+\begin{minipage}{0.45\linewidth}
+\begin{center}
+ \includegraphics[width=0.8\linewidth]{img/fig1.png}
+\end{center}
+\end{minipage}
+
+~\
+
+La trajectoire sera réprésentée sous la forme de deux listes de coordonnées \verb? x,y ?.
+
+\section{Programmation de la trajectoire}
+
+\paragraph{Question 1:} Proposer une fonction \verb? ligne_droite(x,y,Lx,Ly,n)? dont les données d'entrée sont:
+\begin{itemize}
+ \item \verb? x,y ?: les listes de coordonnées ,
+ \item \verb? Lx,Ly ?: les longueurs des déplacements sur $x$ et $y$,
+ \item \verb? n ?: le nombre d'étapes du déplacement.
+\end{itemize}
+
+\paragraph{Question 2:} Proposer une fonction \verb? tourner()? ou deux fonctions \verb? tourner_a_gauche()? et \verb? tourner_a_droite()? qui permettent à l'outil d'effectuer les trajectoires circulaires nécessaires pour compléter la trajectoire. Il faudra utiliser le minimum de fonction possible.
+
+\paragraph{Question 3:} Proposer un code utilisant les fonctions précédentes permettant d'effectuer la trajectoire suivante. Le code permettant de tracer le rectangle image de la pièce est donnée.
+
+\begin{minipage}{0.55\linewidth}
+\begin{GrayBox}[0.85\textwidth]
+\small\begin{verbatimtab}[3]
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+someX, someY = 0, 0
+plt.figure()
+currentAxis = plt.gca()
+currentAxis.add_patch(Rectangle((
+	someX - .1, someY - .1), 90, 
+	200,alpha=1, facecolor='grey'))
+plt.plot(x, y)
+plt.axis([-20, 120, -40, 240])
+plt.show()
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}\hfill
+\begin{minipage}{0.4\linewidth}
+\begin{center}
+ \includegraphics[width=0.8\linewidth]{img/fig2.png}
+\end{center}
+\end{minipage}
+
+\end{document}

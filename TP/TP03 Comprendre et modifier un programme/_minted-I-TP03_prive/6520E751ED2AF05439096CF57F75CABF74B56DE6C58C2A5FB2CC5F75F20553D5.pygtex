@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{while} \PYG{n}{a}\PYG{o}{\PYGZgt{}=}\PYG{n}{b}\PYG{p}{:}
+   \PYG{n}{a}\PYG{o}{=}\PYG{n}{a}\PYG{o}{\PYGZhy{}}\PYG{n}{b}
+\end{Verbatim}

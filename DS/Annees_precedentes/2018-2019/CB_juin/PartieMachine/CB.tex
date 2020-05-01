@@ -1,0 +1,79 @@
+\input{intro}
+\input{../../../Header_Willie}
+
+\excludecomment{solution}
+%\excludecomment{exercice}
+
+\begin{document}
+
+\begin{center}
+{\Large\bf {\nom} \no {\num}}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+
+
+
+\section*{Exercice 0}
+Afficher votre nom.
+
+\section*{Exercice 1}
+Dans cet exercice, on se limite au cas des matrices carrées $A=(a_{ij})_{(i,j)\in\llbracket 1,n\rrbracket^2}$. L'objectif est de calculer le rang de $A$.
+\begin{enumerate}
+\item Ecrire une fonction \verb?permutation? qui prend comme entrée une matrice $A$ et deux entiers $i$ et $k$ et qui échange les lignes $i$ et $k$ de $A$.
+\item Ecrire une fonction \verb?transvection? qui prend comme entrée une matrice $A$ et deux entiers $i$, $k$ et un réel $\alpha$ et effectue sur $A$ l'opération élémentaire : $L_i \longleftarrow L_i+\alpha L_k$.
+\item De la même fa\c con que dans la méthode du pivot de Gauss, dans la $i$-ème colonne de $A$, le pivot est la valeur la plus grande entre $|a_{ii}|,\cdots,|a_{ni}|$.\\
+Ecrire une fonction \verb?recherche_pivot? qui renvoie le numéro de la ligne qui contient le pivot \textbf{ainsi} que la valeur de ce pivot.
+\item Ecrire une fonction \verb?rang? qui prend comme entrée une matrice carrée et qui renvoie le rang de cette matrice. 
+\item Afficher le résultat de la fonction \verb?rang? pour les matrices suivantes :
+\[A=\begin{pmatrix}
+1&1&1\\0&1&1\\0&0&1
+\end{pmatrix}  \qquad B=\begin{pmatrix}
+1&1&1\\1&1&1\\1&1&1
+\end{pmatrix}\]
+\end{enumerate}
+
+\section*{Exercice 2}
+\begin{enumerate}
+\item Ecrire un programme \verb?facto? qui à $n$ renvoie la valeur de $n!$.
+\item Afficher la valeur de $0!$, $1!$ et $4!$.
+\item (Répondre à cette question dans votre programme en commentaire).\\ 
+Soit \verb?n=9876?. Quel est le quotient, noté \verb?q? dans la division euclidienne de \verb?n? par 10 ? Quel est le reste ? On recommence la division par 10 à partir de \verb?q?. Donner le quotient et le reste. Que peut-on constater ?
+\item Afficher la somme des factorielles des chiffres de l'entier 9876 : $9!+8!+7!+6!$.
+\item Ecrire une fonction \verb?somfacto?, d'argument \verb?n?, renvoyant la somme des factorielles des chiffres du nombre entier \verb?n?.
+\item Il n'y a que 4 entiers qui sont égaux à la somme des factorielles de leurs chiffres : $1!=1$, $2!=2$, $145=1!+4!+5!$. Trouver le dernier.
+\end{enumerate}
+
+\section*{Exercice 3}
+\begin{enumerate}
+\item Ecrire une fonction \verb?sp? d'argument une liste \verb?L? et qui renvoie une liste de même longueur composée du dernier élément de \verb?L?, puis du premier, puis de l'avant-dernier, puis du deuxième, etc...\\
+Par exemple, \verb?[1,2,3,4,5,6]? devient \verb?[6,1,5,2,4,3]?. (on parle de retournement en spirale).
+\item Affichez le résultat de \verb?sp? pour les listes \verb?[1,2,3,4,5,6]? et \verb?[1,2,3,4,5,6,7]?.
+\item Appliquez 6 fois la fonction \verb?sp? à la liste \verb?[1,2,3,4,5,6]?. Affichez le résultat. Que constatez-vous ?\footnote{Réponse en commentaire}\\
+Même question pour \verb?[0,1,2,3,4,5]? puis pour \verb?[1,2,3,4,5,6,7]?.
+\item Ecrire une fonction \verb?p? d'argument un entier \verb?n? qui renvoie le nombre de retournements en spirale nécessaires pour retrouver la liste initiale, pour une liste de longueur \verb?n?. On parle de période.
+\item Tracer la fonction $n\mapsto \dfrac{p(n)}{n}$ pour $n$ entier allant de 1 à 99.
+\item Quelle valeur de $n$ comprise entre 1 et 99 minimise $\dfrac{p(n)}{n}$ ? Afficher la valeur de cet $n$.
+\end{enumerate}
+
+
+\end{document}
+
+\section*{Exercice GNA}
+Dans cet exercice, on pourra utiliser la fonction \verb?array? de la bibliothèque \verb?numpy?.
+\begin{enumerate}
+\item Créer deux matrices $R=\begin{pmatrix}
+1&2&3\\4&5&6
+\end{pmatrix}$ et $S=\begin{pmatrix}
+1&2&3\\4&5&6\\7&8&9
+\end{pmatrix}$.
+\item Afficher ces deux matrices.
+\item Créer une fonction \verb?test?, d'argument une matrice $M$ renvoyant \verb?True? si $M$ est une matrice carrée de taille $3$ et \verb?False? dans les autres cas.
+\item Afficher le résultat de la fonction \verb?test? appliquée à $R$ et $S$.
+\item GNA importer une matrice M ?
+\item Créer une fonction \verb?det?, d'argument une matrice carrée de taille 3 qui renvoie le déterminant de la matrice.
+\item GNA det(AB)=det(A)det(B)
+\end{enumerate}
+
+

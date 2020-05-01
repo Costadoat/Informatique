@@ -1,0 +1,131 @@
+\input{intro}
+\input{Header_Willie}
+
+\begin{document}
+
+\begin{center}
+{\Large\bf {\type} {\num} -- \descrip}
+\end{center}
+  
+\begin{boxedminipage}{\textwidth} 
+Lorsqu'on écrit un code Python, on fait attention à ce que les indentations soient visibles sur la copie.
+\end{boxedminipage}
+
+\section{Chiffrement de Vigenère}
+\vspace{-0.25cm}
+\begin{footnotesize}
+\textit{La plupart des questions sont indépendantes.}
+\end{footnotesize}
+
+
+On considère un texte initial sans aucune majuscule, ni accent ni signes diacritiques (accents, tildes, etc.). Les mots sont exclusivement séparés par des espaces (pas d'apostrophes, de tirets, de guillemets, etc.) et les phrases se terminent par un point. Il n'y a aucun autre signe de ponctuation (ni virgule, ni point-virgule, par exemple) et le texte est écrit en un seul bloc (pas de saut de ligne, etc.). 
+
+On souhaite coder ce texte grâce au chiffrement de Vigenère. Pour cela :
+
+\begin{description}
+\item[A] On prépare le texte à chiffrer en éliminant toutes les espaces et tous les points.
+
+\item[B] On associe à chaque lettre un entier, selon le principe suivant : la lettre a est associée à l'entier 0, la lettre b est associée à l'entier 1, etc., la lettre z est associée à l'entier 25.
+
+\item[C] On chiffre le contenu, c'est-à-dire qu'on le code grâce à une clé de chiffrement. Le principe est le suivant :
+\begin{itemize}
+ \item On choisit un mot-clé qui sera la clé de chiffrement.
+ \item On détermine les entiers qui correspondent aux lettres de ce mot-clé, selon le même principe  que pour le texte à chiffrer.
+ \item On décale le premier entier de la liste qui correspond au texte à chiffrer d'une valeur qui est égale à l'entier qui correspond à la première lettre du mot-clé.
+ \item On décale le deuxième entier de la liste qui correspond au texte à chiffrer d'une valeur qui est égale à l'entier qui correspond à la deuxième lettre du mot-clé.
+ \item Etc. 
+ \item Quand on a utilisé tous les entiers qui correspondent au mot-clé, on recommence au début du mot-clé.
+\end{itemize}
+
+\item[D] On forme le texte chiffré par l'opération inverse de l'étape \textbf{B} : l'entier 0 est associé à la lettre a. Etc. Pour tenir compte du décalage des entiers, on associe évidemment 26 à la lettre a, 27 à la lettre b, etc.  
+\end{description}
+
+Exemple : texte à chiffrer : \verb|lycee dorian.| et mot-clé : \verb|ptsi|
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}\hline
+texte initial & l & y & c & e & e & & d & o & r & i & a & n & .\\\hline
+texte à chiffrer & l & y & c & e & e & d & o & r & i & a & n &&\\\hline
+entiers associés au texte à chiffrer & 11 & 24 & 2 & 4 & 4 & 3 & 14 & 17 & 8 & 0 & 13 &&\\\hline
+mot-clé & p & t & s & i & p & t & s & i & p & t & s &&\\\hline
+chiffres associés au mot-clé & 15 & 19 & 18 & 8 & 15 & 19 & 18 & 8 & 15 & 19 & 18 &&\\\hline
+entiers décalés du texte à chiffrer & 26 & 43 & 20 & 12 & 19 & 22 & 32 & 25 & 23 & 19 & 31 &&\\\hline
+texte chiffré & a & r & u & m & t & w & g & z & x & t & f &&\\\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+\setcounter{enumi}{-1}
+ \item Donner le texte chiffré correspondant au texte \verb|jaimebeaucoup| chiffré à l'aide du mot-clé \verb|linfo|
+\end{enumerate}
+
+On considère que l'environnement python connaît déjà une variable de type \verb|list|, nommée \verb|alphabet| et contenant la liste de toutes les lettres de l'alphabet, sous forme de caractères de type \verb|str| :
+
+\verb|alphabet=['a','b','c','d','e','f','g','h','i',[...],'r','s','t','u','v','w','x','y','z']|
+
+\begin{enumerate}
+\item Proposer le code python d'une fonction \verb|nettoyage| prenant en entrée un texte sous la forme d'une variable de type \verb|str| et renvoyant une variable de type \verb|list| contenant une liste des lettres, et uniquement les lettres, qui composent le texte. 
+
+\item Donner le code d'une fonction \verb|lettres_vers_entiers| prenant en entrée une liste de lettres et retournant une liste des entiers associés à ces lettres.
+
+\item Écrire une fonction \verb|chiffrement_vigenere(L,C)| qui prend en entrée une liste d'entiers (L) associés à un texte à chiffrer et une liste d'entiers (C) associés au mot-clé et qui retourne une liste des entiers décalés du texte à chiffrer.
+
+\item Donner le code d'une fonction \verb|entiers_vers_lettres| prenant en entrée une liste d'entiers et retournant la liste des lettres associées à ces entiers.
+
+\item Proposer le script écrit en python qui, en utilisant chacune des fonctions précédentes (qu'on supposera connues), permet d'afficher à l'écran le texte chiffré correspondant à un texte contenu initialement dans la variable \verb|texte_initial| de type \verb|str|.
+\end{enumerate}
+
+\section{Bases de données -- Questions de cours}
+
+On dispose dans une base de données d'une table qui contient des informations datées de 2010 sur les communes de France nommée \verb|ville_france| et dont le schéma relationnel est le suivant :
+
+(ville\_id:int, ville\_departement:int, ville\_region:int, ville\_nom\_reel:char, ville\_code\_postal:int,\\
+ville\_population\_2010:int)
+
+\begin{enumerate}
+ \item Donner le code de la requête SQL permettant d'afficher la totalité du contenu de la table.
+ \item Donner le code de la requête SQL permettant d'afficher le nombre de lignes de la table.
+ \item Donner le code de la requête SQL permettant d'afficher le nom et la population de toutes les villes dont le code postal est 40990.
+\end{enumerate}
+
+Le résultat de la requête précédente est :
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{ville\_nom\_reel} & \textbf{ville\_population\_2010} \\
+\hline
+Saint-Vincent-de-Paul & 2997 \\
+\hline
+Téthieu & 656 \\
+\hline
+Gourbera & 356 \\
+\hline
+Herm & 1044 \\
+\hline
+Mées & 1736 \\
+\hline
+Saint-Paul-lès-Dax & 12409 \\
+\hline
+Angoumé & 288 \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+\setcounter{enumi}{3}
+ \item Donner le code de la requête SQL permettant d'afficher la population totale cumulée des villes dont le code postal est 40990.
+\end{enumerate}
+
+On dispose, dans la même base de données, de deux tables supplémentaires, contenant les noms des départements et des régions.
+\begin{itemize}
+ \item La table \verb|departement|, de schéma relationnel (departement\_id:int, nom\_departement:char)
+ \item La table \verb|region|, de schéma relationnel (region\_id:int, nom\_region:char)
+\end{itemize}
+
+\begin{enumerate}
+\setcounter{enumi}{4}
+ \item Donner le code de la requête SQL permettant d'afficher le nom de toutes les villes, avec leur population, le nom de leur département et le nom de leur région.
+\end{enumerate}
+
+\end{document}

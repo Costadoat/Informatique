@@ -1,0 +1,92 @@
+\documentclass[a4paper,10pt]{article}
+
+\input{../../macro_Juliette}
+
+
+\excludecomment{solution}
+
+\begin{document}
+\noindent {PTSI \hfill 2016-2017}
+
+\begin{center}
+\Large \textbf{Concours blanc n°2} \\
+Epreuve sur machine \\
+\rule{16.5cm}{0.05cm}
+\end{center}
+
+\begin{boxedminipage}{\textwidth} 
+\begin{itemize}
+\item Créer un nouveau fichier python
+\item Enregistrer-le dans le dossier "DS" du répertoire "Dossier personnel" sous le nom : NomPrenom
+\item En commentaire, préciser l'exercice et le numéro de la question traitée.
+\item Si vous bloquez sur une question, passez à la suivante. Aucune réponse ne sera donnée, sauf Exercice 2, question 1.
+\end{itemize}
+\end{boxedminipage}
+
+\section*{Exercice 0}
+Afficher votre nom.
+
+\section*{Exercice 1}
+\begin{enumerate}
+\item (Répondre à cette question dans votre programme en commentaire).\\ 
+Soit \verb?n=9876?. Quel est le quotient, noté \verb?q? dans la division euclidienne de \verb?n? par 10 ? Quel est le reste ? On recommence la division par 10 à partir de \verb?q?. Donner le quotient et le reste. Que peut-on constater ?
+\item Afficher la somme des cubes des chiffres de l'entier 9876.
+\item Ecrire une fonction \verb?somcube?, d'argument \verb?n?, renvoyant la somme des cubes des chiffres du nombre entier \verb?n?.
+\item Trouver et afficher tous les nombres entiers inférieurs à 1000 qui sont égaux à la somme des cubes de leurs chiffres.
+\item En modifiant les instructions de la fonction \verb?somcube?, écrire une fonction \verb?somcube2? qui convertit l'entier \verb?n? en une chaine de caractères permettant ainsi la récupération de ses chiffres sous forme de caractères. Cette nouvelle fonction renvoie toujours la somme des cubes des chiffres de l'entier \verb?n?.
+\end{enumerate}
+
+
+\section*{Exercice 2}
+
+On cherche à calculer une valeur approchée de l'intégrale d'une fonction donnée par des points dont les coordonnées sont situées dans un fichier.\\
+Le fichier "\verb?exercice2.csv?", situé dans le sous-répertoire "PTSI/CB2" du répertoire "Ressources", contient une quinzaine de lignes selon le modèle suivant :
+\begin{center}
+\verb? 0.0 ; 1.00982533829?\\
+\verb? 0.1 ; 1.06243693283?
+\end{center}
+Chaque ligne contient deux valeurs flottantes séparées par un point-virgule, représentant respectivement l'abscisse et l'ordonnée d'un point. Les points sont ordonnés par abscisses croissantes.
+\begin{enumerate}
+\item Ouvrir le fichier en lecture, le lire et construire les deux listes \verb?LX? et \verb?LY?. Ces deux listes seront constituées de flottants, \verb?LX? contiendra les abscisses et \verb?LY? les ordonnées.
+\item Représenter les points sur une figure.
+\item Les points précédents sont situés sur la courbe représentative d'une fonction $f$. On souhaite déterminer une valeur approchée de l'intégrale $I$ de cette fonction sur le segment où elle est définie. On va utiliser pour ça la méthode des trapèzes.\\
+Ecrire une fonction \verb?trapeze?, d'arguments deux listes de flottants de longueurs $n$ : $\verb?x?=(\verb?x?_i)_{0\pp i\pp n-1}$ et $\verb?y?=(\verb?y?_i)_{0\pp i\pp n-1}$ et qui renvoie :
+\[\dsum_{i=1}^{n-1}(\verb?x?_i-\verb?x?_{i-1})\dfrac{\verb?y?_i+\verb?y?_{i-1}}{2}\]
+\item Afficher la valeur approchée de l'intégrale de $f$ par la méthode des trapèzes.
+\end{enumerate}
+
+\vfill \textbf{T.S.V.P.} $\hookrightarrow$
+
+\section*{Exercice 3}
+On considère la fonction $g$ définie sur $[0,2[$ par :
+\[g(x)=\left\lbrace\begin{array}{lllll}
+x&\text{si }0\pp x<1\\
+1&\text{si }1\pp x<2
+\end{array}\right.\]
+\begin{enumerate}
+\item Définir la fonction $g$.
+\item Tracer sa courbe représentative sur $[0,2[$, c'est-à-dire la ligne brisée reliant les points $(x,g(x))$ pour $x$ variant de 0 à 1.99 avec un pas de 0.01.
+\item Définir une fonction $f$ donnée de manière récursive sur $[0,+\infty[$ par :
+\[f(x)=\left\lbrace\begin{array}{lllll}
+g(x)&\text{si }0\pp x<2\\
+\sqrt{x}f(x-2)&\text{si }x\pg 2
+\end{array}\right.\]
+On pourra suivre le speudo-code suivant:
+\begin{center}
+\begin{minipage}{9cm}
+\verb?def f(x):?\\
+\hspace*{0.5cm} si $0\pp x<2$ alors\\
+\hspace*{1cm} retourner $g(x)$\\
+\hspace*{0.5cm} sinon\\
+\hspace*{1cm} retourner $\sqrt{x}f(x-2)$
+\end{minipage}
+\end{center}
+\item Tracer la courbe représentative de $f$ sur $[0,6]$.
+\item On cherche la plus petite valeur $\alpha>0$ telle que : $f(\alpha)>4$. A la lecture du graphe obtenu \` a la question précédente, donner un intervalle de longueur 1 qui contient $\alpha$. (réponse donnée en commentaire)
+\item Ecrire les instructions permettant de calculer, à $10^{-2}$ près la valeur de $\alpha$.
+\end{enumerate}
+
+
+\end{document}
+
+

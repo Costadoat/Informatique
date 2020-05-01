@@ -1,0 +1,26 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{inverse}\PYG{p}{(}\PYG{n}{A}\PYG{p}{):}
+    \PYG{n}{n}\PYG{o}{=}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{A}\PYG{p}{)}
+    \PYG{c+c1}{\PYGZsh{}I est la matrice identite de taille n}
+    \PYG{c+c1}{\PYGZsh{} toutes les operations effectuees sur A sont faites sur I}
+    \PYG{n}{I}\PYG{o}{=}\PYG{n}{np}\PYG{o}{.}\PYG{n}{eye}\PYG{p}{(}\PYG{n}{n}\PYG{p}{)}
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{n}\PYG{p}{):}
+        \PYG{n}{kmax} \PYG{o}{=} \PYG{n}{ligneRef}\PYG{p}{(}\PYG{n}{A}\PYG{p}{,}\PYG{n}{i}\PYG{p}{)}
+        \PYG{n}{pivot}\PYG{o}{=}\PYG{n}{A}\PYG{p}{[}\PYG{n}{kmax}\PYG{p}{,}\PYG{n}{i}\PYG{p}{]}
+        \PYG{k}{if} \PYG{n}{pivot}\PYG{o}{==}\PYG{l+m+mi}{0}\PYG{p}{:}
+            \PYG{k}{return}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}erreur\PYGZsq{}}\PYG{p}{)}
+        \PYG{c+c1}{\PYGZsh{} echange lignes i et kmax dans A et dans B}
+        \PYG{n}{echangeLignes}\PYG{p}{(}\PYG{n}{A}\PYG{p}{,}\PYG{n}{i}\PYG{p}{,}\PYG{n}{kmax}\PYG{p}{)}
+        \PYG{n}{echangeLignes}\PYG{p}{(}\PYG{n}{I}\PYG{p}{,}\PYG{n}{i}\PYG{p}{,}\PYG{n}{kmax}\PYG{p}{)}
+        \PYG{c+c1}{\PYGZsh{} normalisation de la ligne du pivot}
+        \PYG{k}{for} \PYG{n}{j} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{n}\PYG{p}{):}
+            \PYG{n}{A}\PYG{p}{[}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{]} \PYG{o}{=} \PYG{n}{A}\PYG{p}{[}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{]}\PYG{o}{/}\PYG{n}{pivot}
+            \PYG{n}{I}\PYG{p}{[}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{]} \PYG{o}{=} \PYG{n}{I}\PYG{p}{[}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{]}\PYG{o}{/}\PYG{n}{pivot}
+        \PYG{c+c1}{\PYGZsh{} on elimine les termes au dessus et en dessous du pivot}
+        \PYG{k}{for} \PYG{n}{k} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{n}\PYG{p}{):}
+            \PYG{k}{if} \PYG{n}{k} \PYG{o}{!=} \PYG{n}{i}\PYG{p}{:}
+                \PYG{n}{alpha}\PYG{o}{=}\PYG{n}{A}\PYG{p}{[}\PYG{n}{k}\PYG{p}{,}\PYG{n}{i}\PYG{p}{]}
+                \PYG{n}{transvection}\PYG{p}{(}\PYG{n}{A}\PYG{p}{,}\PYG{n}{i}\PYG{p}{,}\PYG{n}{k}\PYG{p}{,}\PYG{n}{alpha}\PYG{p}{)}
+                \PYG{n}{transvection}\PYG{p}{(}\PYG{n}{I}\PYG{p}{,}\PYG{n}{i}\PYG{p}{,}\PYG{n}{k}\PYG{p}{,}\PYG{n}{alpha}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{I}
+\end{Verbatim}

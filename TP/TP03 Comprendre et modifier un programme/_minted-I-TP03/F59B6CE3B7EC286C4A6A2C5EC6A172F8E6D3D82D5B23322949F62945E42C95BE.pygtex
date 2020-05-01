@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{p}\PYG{o}{=}\PYG{l+m+mi}{0}
+\PYG{n}{k}\PYG{o}{=}\PYG{l+m+mi}{1}                          \PYG{c+c1}{\PYGZsh{} k va parcourir tous les entiers de 1 a n}
+\PYG{k}{while} \PYG{n}{k}\PYG{o}{\PYGZlt{}=}\PYG{n}{n} \PYG{p}{:}                 \PYG{c+c1}{\PYGZsh{} pour k \PYGZlt{}=n}
+   \PYG{k}{if} \PYG{n}{n}\PYG{o}{\PYGZpc{}}\PYG{n}{k} \PYG{o}{==} \PYG{l+m+mi}{0} \PYG{p}{:}             \PYG{c+c1}{\PYGZsh{} si k divise n,}
+      \PYG{n}{p} \PYG{o}{=} \PYG{n}{p}\PYG{o}{+}\PYG{l+m+mi}{1}                \PYG{c+c1}{\PYGZsh{} on ajoute 1 aux nombres de diviseurs de k}
+   \PYG{n}{k} \PYG{o}{=} \PYG{n}{k}\PYG{o}{+}\PYG{l+m+mi}{1}                   \PYG{c+c1}{\PYGZsh{} on passe a l\PYGZsq{}entier suivant}
+\end{Verbatim}

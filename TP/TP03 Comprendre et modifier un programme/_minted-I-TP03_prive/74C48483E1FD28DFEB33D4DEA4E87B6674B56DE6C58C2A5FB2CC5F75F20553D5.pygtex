@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{random}
+
+\PYG{n}{nombre}\PYG{o}{=}\PYG{n}{random}\PYG{o}{.}\PYG{n}{randrange}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{)}                     \PYG{c+c1}{\PYGZsh{} la variable \PYGZsq{}nombre\PYGZsq{} est un entier}
+                                                \PYG{c+c1}{\PYGZsh{} pris au hasard entre 0 et 9}
+\PYG{n}{compteur}\PYG{o}{=}\PYG{l+m+mi}{1}                                      \PYG{c+c1}{\PYGZsh{} on initialise le compteur a 1}
+\PYG{n}{essai}\PYG{o}{=}\PYG{n+nb}{input}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}entrer une valeur entre 0 et 9 \PYGZsq{}}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} la variable \PYGZsq{}essai\PYGZsq{} est un nombre}
+                                                \PYG{c+c1}{\PYGZsh{} entré par l\PYGZsq{}utilisateur}
+\PYG{k}{while} \PYG{n}{essai}\PYG{o}{!=}\PYG{n}{nombre}\PYG{p}{:}
+   \PYG{n}{essai}\PYG{o}{=}\PYG{n+nb}{input}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}entrer une nouvelle valeur \PYGZsq{}}\PYG{p}{)}
+   \PYG{n}{compteur}\PYG{o}{=}\PYG{n}{compteur}\PYG{o}{+}\PYG{l+m+mi}{1}                          \PYG{c+c1}{\PYGZsh{} a chaque coups, compteur augmente de 1}
+\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Vous avez gagné en \PYGZsq{}}\PYG{p}{,}\PYG{n}{compteur}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{} coups\PYGZsq{}}\PYG{p}{)}
+\end{Verbatim}

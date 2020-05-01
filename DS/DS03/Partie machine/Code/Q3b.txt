@@ -1,0 +1,5 @@
+#Question 3.b
+
+def ddf(x):
+    return (Mfz(x))/(E*Ix(0.018,0.3))
+print(ddf(1.2))

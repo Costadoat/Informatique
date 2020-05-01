@@ -1,0 +1,10 @@
+#Question 1
+
+rho=500
+g=9.81
+p=0.1
+h=0.2
+L=2
+E=2.2*10**9
+q=rho*g*p*h
+print(q)

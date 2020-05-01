@@ -1,0 +1,5 @@
+\babel@toc {french}{}
+\beamer@sectionintoc {1}{Introduction}{2}{0}{1}
+\beamer@sectionintoc {2}{Tableaux et matrices}{3}{0}{2}
+\beamer@sectionintoc {3}{Espace lin\IeC {\'e}aire, fonctions matricielles et trac\IeC {\'e}s}{9}{0}{3}
+\beamer@sectionintoc {4}{Solveurs matriciels}{11}{0}{4}

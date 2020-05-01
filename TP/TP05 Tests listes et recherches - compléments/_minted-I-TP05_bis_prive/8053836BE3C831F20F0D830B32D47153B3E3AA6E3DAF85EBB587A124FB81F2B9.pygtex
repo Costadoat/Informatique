@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{jours} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}lundi\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}mardi\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}mercredi\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}jeudi\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}vendredi\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}samedi\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}dimanche\PYGZdq{}}\PYG{p}{]}
+
+\PYG{k}{print}\PYG{p}{(}\PYG{n}{jours}\PYG{p}{[}
+\PYG{p}{(} \PYG{n}{nombre\PYGZus{}de\PYGZus{}jours\PYGZus{}toutes\PYGZus{}annees}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{l+m+mi}{2040}\PYG{p}{)}
+\PYG{o}{\PYGZhy{}} \PYG{n}{nombre\PYGZus{}de\PYGZus{}jours\PYGZus{}toutes\PYGZus{}annees}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{2001}\PYG{p}{)} \PYG{p}{)} \PYG{o}{\PYGZpc{}} \PYG{l+m+mi}{7}
+\PYG{p}{])}
+
+\PYG{k}{print}\PYG{p}{(}\PYG{n}{jours}\PYG{p}{[}
+\PYG{p}{(} \PYG{n}{nombre\PYGZus{}de\PYGZus{}jours\PYGZus{}toutes\PYGZus{}annees}\PYG{p}{(}\PYG{l+m+mi}{14}\PYG{p}{,}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{l+m+mi}{1789}\PYG{p}{)}
+\PYG{o}{\PYGZhy{}} \PYG{n}{nombre\PYGZus{}de\PYGZus{}jours\PYGZus{}toutes\PYGZus{}annees}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{2001}\PYG{p}{)} \PYG{p}{)} \PYG{o}{\PYGZpc{}} \PYG{l+m+mi}{7}
+\PYG{p}{])}
+\end{Verbatim}

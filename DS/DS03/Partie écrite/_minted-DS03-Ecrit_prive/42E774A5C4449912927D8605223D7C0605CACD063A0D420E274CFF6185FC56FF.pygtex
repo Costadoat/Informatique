@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{mystere}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{):}
+    \PYG{n}{t}\PYG{o}{=}\PYG{l+m+mi}{0}             \PYG{c+c1}{\PYGZsh{} initialisation de t}
+    \PYG{k}{while} \PYG{n}{i} \PYG{o}{\PYGZgt{}=}\PYG{l+m+mi}{1}\PYG{p}{:}    \PYG{c+c1}{\PYGZsh{} sortie de la boucle pour i \PYGZlt{} 1}
+        \PYG{k}{if} \PYG{n}{par}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)}\PYG{o}{==}\PYG{l+m+mi}{1}\PYG{p}{:}   \PYG{c+c1}{\PYGZsh{} si i est impair}
+            \PYG{n}{t}\PYG{o}{=}\PYG{n}{t}\PYG{o}{+}\PYG{n}{j}          \PYG{c+c1}{\PYGZsh{} on ajoute j à t}
+                        \PYG{c+c1}{\PYGZsh{} pour toutes les itérations :}
+        \PYG{n}{j}\PYG{o}{=}\PYG{n}{j}\PYG{o}{*}\PYG{l+m+mi}{2}           \PYG{c+c1}{\PYGZsh{} on multiplie j par 2}
+        \PYG{n}{i}\PYG{o}{=}\PYG{n}{ent}\PYG{p}{(}\PYG{n}{i}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{p}{)}      \PYG{c+c1}{\PYGZsh{} on met à jour i avec la partie}
+                        \PYG{c+c1}{\PYGZsh{} entière de sa moitié}
+\PYG{c+c1}{\PYGZsh{}       print(i,j,t)    \PYGZsh{} à décommenter pour afficher les valeurs}
+    \PYG{k}{return} \PYG{n}{t}        \PYG{c+c1}{\PYGZsh{} on retourne le résultat final}
+
+\PYG{k}{print}\PYG{p}{(}\PYG{n}{mystere}\PYG{p}{(}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{l+m+mi}{8}\PYG{p}{))}
+\end{Verbatim}

@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{alphabet} \PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}ABCDEFGHIJKLMNOPQRSTUVWXYZ \PYGZsq{}}
+\PYG{n}{message\PYGZus{}code}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}H JXY ZS GTS IJGZY\PYGZsq{}}
+\PYG{n}{n}\PYG{o}{=\PYGZhy{}}\PYG{l+m+mi}{5}
+
+\PYG{n}{message\PYGZus{}decode}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}\PYGZsq{}}
+\PYG{k}{for} \PYG{n}{lettre} \PYG{o+ow}{in} \PYG{n}{message\PYGZus{}code}\PYG{p}{:}
+    \PYG{k}{if} \PYG{n}{lettre}\PYG{o}{!=}\PYG{l+s+s1}{\PYGZsq{} \PYGZsq{}}\PYG{p}{:}
+        \PYG{n}{i}\PYG{o}{=}\PYG{n}{alphabet}\PYG{o}{.}\PYG{n}{index}\PYG{p}{(}\PYG{n}{lettre}\PYG{p}{)}
+        \PYG{n}{message\PYGZus{}decode}\PYG{o}{+=}\PYG{n}{alphabet}\PYG{p}{[(}\PYG{n}{i}\PYG{o}{+}\PYG{n}{n}\PYG{p}{)}\PYG{o}{\PYGZpc{}}\PYG{l+m+mi}{26}\PYG{p}{]}
+    \PYG{k}{else}\PYG{p}{:}
+        \PYG{n}{message\PYGZus{}decode}\PYG{o}{+=}\PYG{l+s+s1}{\PYGZsq{} \PYGZsq{}}
+\end{Verbatim}

@@ -1,0 +1,17 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{positionMax}\PYG{p}{(}\PYG{n}{liste}\PYG{p}{):}
+    \PYG{n}{n} \PYG{o}{=} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{liste}\PYG{p}{)}
+    \PYG{c+c1}{\PYGZsh{} la liste des positions des maxima est initilis\PYGZbs{}\PYGZsq{} ee \PYGZbs{}` a 0}
+    \PYG{n}{indexMax} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
+    \PYG{n+nb}{max} \PYG{o}{=} \PYG{n}{liste}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{n}\PYG{p}{):}
+     \PYG{c+c1}{\PYGZsh{} si le i\PYGZbs{}` eme terme de la liste est sup\PYGZbs{}\PYGZsq{} erieur au maximum, il devient la nouvelle valeur du maximum}
+        \PYG{k}{if} \PYG{n}{liste}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{\PYGZgt{}} \PYG{n+nb}{max} \PYG{p}{:}
+            \PYG{n+nb}{max} \PYG{o}{=} \PYG{n}{liste}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}
+            \PYG{c+c1}{\PYGZsh{} la liste des positions est r\PYGZbs{}\PYGZsq{} einitialis\PYGZbs{}\PYGZsq{} ee \PYGZbs{}` a [i]}
+            \PYG{n}{indexMax} \PYG{o}{=} \PYG{p}{[}\PYG{n}{i}\PYG{p}{]}
+        \PYG{c+c1}{\PYGZsh{} si on retombe sur le maximum, on ajoute l\PYGZsq{}index \PYGZbs{}` a la liste des positions}
+        \PYG{k}{elif} \PYG{n}{liste}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{==}\PYG{n+nb}{max}\PYG{p}{:}
+            \PYG{n}{indexMax}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{indexMax}
+\end{Verbatim}

@@ -1,0 +1,59 @@
+\documentclass[10pt,a4paper]{article}
+  \usepackage[frenchb]{babel}
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{color}
+  \usepackage[]{graphicx}
+  \usepackage{makeidx}
+  \usepackage{textcomp}
+  \usepackage{amsmath}
+  \usepackage{amssymb}
+  \usepackage{stmaryrd}
+  \usepackage{fancyhdr}
+  \usepackage{lettrine}
+  \usepackage{calc}
+  \usepackage{boxedminipage}
+  \usepackage[french,onelanguage, boxruled,linesnumbered]{algorithm2e}
+  %\usepackage[colorlinks=false,pdftex]{hyperref}
+  \usepackage{minted}
+  \usepackage{url}
+  \usepackage[locale=FR]{siunitx}
+  \usepackage{multicol}
+  \makeindex
+
+\graphicspath{{../Images/}}
+
+  \renewcommand\listingscaption{Programme}
+
+  %\renewcommand{\thechapter}{\Alph{chapter}}
+  \renewcommand{\thesection}{\Roman{section}}
+  \newcommand{\inter}{\vspace{0.5cm}%
+  \noindent }
+  \newcommand{\unite}{\ \textrm}
+  \newcommand{\ud}{\mathrm{d}}
+  \newcommand{\vect}{\overrightarrow}
+  \newcommand{\ch}{\mathrm{ch}} % cosinus hyperbolique
+  \newcommand{\sh}{\mathrm{sh}} % sinus hyperbolique
+
+  \textwidth 160mm
+  \textheight 250mm
+  \hoffset=-1.70cm
+  \voffset=-1.5cm
+  \parindent=0cm
+
+  \pagestyle{fancy}
+  \fancyfoot[C]{\thepage}
+  \fancyfoot[L]{\footnotesize J. Genzmer, R. Costadoat, W. Robert}
+  \fancyfoot[R]{\small \today}
+  
+  % \linespread{1.5}
+  % \addtolength{\hoffset}{-1in}
+  % \topmargin=0pt
+  % \evensidemargin=3cm
+  % \oddsidemargin=3cm
+  % \marginparwidth=0cm
+  % \marginparsep=0cm
+  % \textwidth=15cm
+  % \headheight=28pt
+  % \addtolength{\textheight}{1.5cm}
+  % \addtolength{\footskip}{.5cm}

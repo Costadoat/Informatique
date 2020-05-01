@@ -1,0 +1,104 @@
+\input{intro}
+\input{../../../Header_Willie}
+
+\excludecomment{solution}
+%\excludecomment{exercice}
+
+\begin{document}
+
+\begin{center}
+{\Large\bf {\type} \no {\num} -- \descrip}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+\section{Exercice de cours -- Classement d'une liste}
+
+On considère une liste de valeurs flottantes non classées. La liste des valeurs est déjà définie dans le programme et est stockée dans une variable appelée \texttt{tab}.
+
+Écrire en langage Python un algorithme qui permet d'obtenir à la fin une nouvelle liste des valeurs classées par ordre croissant, stockée dans une variable appelée \texttt{tab2}.
+
+Le programme suivant qui permet de classer une liste.
+\begin{minted}{python}
+tab2=[]
+for i in range(1,len(tab)-1):
+    min=i
+    for j in range(i+1,len(tab)):
+        if tab[j] < tab[min]:
+            min=j
+    tmp=tab[i]
+    tab[i]=tab[min]
+    tab[min]=tmp
+    tab2.append(tab[min])
+\end{minted}
+
+
+\section{Exercice de TP -- Recherche d'un mot dans une cha\^ ine de caract\` eres}
+\begin{enumerate}
+\item \begin{minted}[frame=lines]{python}
+def estIci(motif,texte,i):
+    k = 0
+    p = len(motif)
+    # on parcourt le texte à partir de l'index i 
+    # tant que on ne dépasse pas la longueur de motif 
+    # et que texte et motif sont identiques
+    while k<p and motif[k] == texte[k+i]:
+        k = k+1
+    # si on a parcouru p termes, alors, motif est dans texte à l'index i
+    if k==p:
+        resultat=True
+    else:
+        resultat=False    	
+    return resultat                
+\end{minted}
+\item Le pire des cas s'obtient avec un texte type : \verb?texte='aaaaa...aaaaa'? et un motif du type : \verb?'aa..aab'?. On note $n$ la longueur du texte et $p$ celle du motif.\\
+Compté grossièrement : dans \verb?estIci(motif,texte,i)?, on effectue $p$ tests. On répète $n-p$ fois cette opération dans \verb?recherche(motif,texte)?. Donc on s'attend à une complexité en : \fbox{$O((n-p)p)$.} \\
+On obtient $O(np)$ si $n>>p$\bigskip \\
+Plus précisément, avec le pire des cas :\\
+dans \verb?estIci(motif,texte,i)?, on a :
+\begin{itemize}
+\item 2 affectations avant la boucle
+\item on répète $p$ fois :
+\begin{itemize}
+\item 2 tests
+\item 1 affectation
+\item 1 addition
+\end{itemize}
+\item 1 test
+\item 1 affectation
+\end{itemize}
+\fbox{Au total, on a comme nombres d'opérations : $2+4p+2=4p+4=O(p)$.}\\
+ \verb?recherche(motif,texte)?, on a :
+ \begin{itemize}
+ \item 2 affectations
+ \item dans la boucle else : 2 affectations
+ \item on répète $n-p$ fois :
+ \begin{itemize}
+ \item 2 tests
+ \item 1 affectation
+ \item 1 calcul de \verb?estIci?
+ \item 1 afffectation
+ \item 1 addition
+ \end{itemize}
+ \end{itemize}
+Au total, on a comme nombres d'opérations : \\
+ \fbox{$2+2+(n-p)\times (5+4p+4)=4+(n-p)(4p+9)=O((n-p)p)$.}
+\end{enumerate}
+
+
+\section{Exercice -- Croissance d'une suite}
+\begin{minted}[frame=lines]{python}
+n=len(u)
+
+i=0
+while i<=n-2 and u[i]<u[i+1]:
+    i=i+1
+
+if i==len(u)-1:
+    print 'u est strictement croissante'
+else:
+    print 'a partir du rang',i,'la suite n est plus strictement croissante'
+\end{minted}
+
+
+\end{document}

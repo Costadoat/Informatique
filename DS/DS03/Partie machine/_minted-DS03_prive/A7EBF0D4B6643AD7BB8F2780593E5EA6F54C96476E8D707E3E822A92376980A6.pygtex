@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+	\PYG{k}{def} \PYG{n+nf}{ddf}\PYG{p}{(}\PYG{n}{x}\PYG{p}{):}
+    	\PYG{k}{return} \PYG{p}{(}\PYG{n}{Mfz}\PYG{p}{(}\PYG{n}{x}\PYG{p}{))}\PYG{o}{/}\PYG{p}{(}\PYG{n}{E}\PYG{o}{*}\PYG{n}{Ix}\PYG{p}{(}\PYG{l+m+mf}{0.018}\PYG{p}{,}\PYG{l+m+mf}{0.3}\PYG{p}{))}
+	\PYG{k}{print}\PYG{p}{(}\PYG{n}{ddf}\PYG{p}{(}\PYG{l+m+mf}{1.2}\PYG{p}{))}
+\end{Verbatim}

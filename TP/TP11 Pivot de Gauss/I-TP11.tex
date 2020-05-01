@@ -1,0 +1,278 @@
+\input{intro}
+\input{../../Header_Willie}
+
+
+
+\begin{document}
+
+\begin{center}
+{\Large\bf TP \no {\num} -- \descrip}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+\section{Rappels}
+\noindent L'objectif de l'algorithme du pivot de Gauss est de r\' esoudre un syst\` eme lin\' eaire. Dans ce TP, nous nous contenterons de r\' esoudre des syst\` emes de Cramer, autrement dit des syst\` emes \` a $n$ \' equations, $n$ inconnues qui ont une solution unique.\\
+\[\left\lbrace \begin{array}{ccc}
+a_{11}x_1+\cdots +a_{1n}x_n & =&b_1\\
+&\vdots&\\
+a_{n1}x_1+\cdots +a_{nn}x_n & =&b_n
+\end{array}\right.\]
+Matriciellement, on cherche \` a r\' esoudre $AX=B$ avec $A$ un tableau numpy $(n\times n)$, et $B$ de taille $(n\times 1)$.\\
+Les grandes \' etapes de l'algorithme sont les suivantes (les \' etapes sont diff\' erentes de celles pr\' esent\' ees en cours de maths)
+\begin{enumerate}
+\item choix d'une ligne de r\' ef\' erence $L_i$ (on choisira celle avec le pivot maximal)
+\item normalisation de la ligne de r\' ef\' erence (on met la valeur du pivot \` a 1)
+\item \' elimination des termes en dessous \underline{et au dessus} du pivot
+\item it\' erer ces \' etapes pour obtenir une matrice \' echelonn\' ee r\' eduite.
+\end{enumerate}
+
+
+\noindent On va programmer des fonctions qui vont modifier les matrices $A$ et $B$ et renvoyer l'unique solution du syst\` eme $AX=B$. 
+ 
+\section{Pseudo-code}
+\noindent Pour r\' esoudre le syst\` eme $AX=B$, on r\' eduit la matrice augment\' ee $(A|B)$ du syst\` eme avec le pseudocode suivant :\medskip \\
+\begin{tabular}{ll}
+$\quad$\textbf{pour} $i$ allant de 1 \` a $n$ : & $\sharp$ on parcourt toutes les lignes de $A$\\
+$\quad\quad$ parmi les lignes $L_i,L_{i+1},\cdots ,L_{n}$, choix de la ligne de r\' ef\' erence : $L_{kmax}$\\
+$\quad\quad$ \' echange des lignes $L_i$ et $L_{kmax}$  & $\sharp$  on place la ligne de r\' ef\' erence \\
+ & $\sharp$ en haut \\
+$\quad\quad$ $L_i\leftarrow \dfrac{1}{a_{i,i}}L_i$ & $\sharp$ on \' egalise le pivot \` a 1 \\
+$\quad\quad$ \textbf{pour} $k\neq i$ : & $\sharp$ pour toutes les autres lignes \\
+$\quad\quad\quad$ $L_k \leftarrow L_k-a_{k,i}L_i$ & $\sharp$  on \' elimine les termes \\
+ & $\sharp$ au dessus et en dessous du pivot
+\end{tabular}
+
+\begin{remark}
+Les modifications sur les lignes doivent \^ etre faites sur $A$ \underline{et} $B$. \\
+A la fin de l'algorithme, le syst\` eme \' etant de Cramer, $A$ est la matrice identit\' e et la matrice $B$ contient la solution du syst\` eme.
+\end{remark}
+
+
+\section{Choix de la ligne de r\' ef\' erence}
+\noindent Quand on fait la r\' esolution \` a la main, on choisit la ligne de r\' ef\' erence qui permet les calculs les plus simples. Ici, on ne peut \' evidemment pas appliquer cette strat\' egie. \\
+Dans la r\' esolution, on est amen\' e \` a diviser par le pivot (autrement dit, le premier terme de la ligne). Pour \' eviter les erreurs d'arrondi, le meilleur pivot est celui qui est le plus grand en valeur absolue. \bigskip
+
+On a besoin d'une fonction \verb?ligneRef? qui d\' etermine la ligne de r\' ef\' erence parmi les lignes $L_i,L_{i+1},\cdots,L_{n}$. On compare les pivots $a_{ii},a_{i+1,i},\cdots,a_{n,i}$ et la fonction renvoie le num\' ero de la ligne du meilleur pivot.\\
+Par exemple, pour \verb?A=np.array([[1,12,13],[-7,8,10],[0,9,7]])?\\
+\verb?ligneRef(A,0)? renvoie 1\\
+\verb?ligneRef(A,1)? renvoie 2.
+
+\begin{exercice}
+\begin{enumerate}
+\item Que va renvoyer \verb?ligneRef(A,2)? ?
+\item Coder la fonction \verb?ligneRef?. Elle prend comme entrée la matrice $A$ et le numéro $i$ et renvoie $k_{max}$, le numéro de la ligne de référence.
+\end{enumerate}
+\end{exercice}
+
+
+\section{Algorithme du pivot de Gauss}
+
+\begin{exercice}
+Ecrire une fonction \verb?echangeLignes? qui \' echange les lignes $L_i$ et $L_k$ d'une matrice $A$.\\
+La fonction prend comme entr\' ee la matrice $A$ et le num\' ero des lignes $i$ et $k$. On fera une fonction qui ne retourne rien, mais qui modifie $A$.
+\begin{verbatim}
+>>>A=np.array([[1,2,3],[-3,-3,1],[0,2,7]])
+>>>echangeLignes(A,1,2)
+>>>A
+[[1,2,3],[0,2,7],[-3,-3,1]]
+\end{verbatim}
+\end{exercice}
+
+
+\begin{exercice}
+Ecrire une fonction de transvection : $L_k \leftarrow L_k-\alpha L_i$. La fonction \verb?transvection? prend comme entr\' ee la matrice $A$, les num\' eros des lignes $i$, $k$ et le coefficient $\alpha$. Elle modifie la matrice $A$ mais ne renvoie rien.
+\end{exercice}
+
+
+\begin{exercice}
+Ecrire une fonction \verb?Gauss? qui r\' esout par la m\' ethode du pivot de Gauss le syst\` eme (suppos\' e de Cramer) $AX=B$ : la fonction prend comme entr\' ee les deux matrices $A$ et $B$ et renvoie la solution $X$.
+\end{exercice}
+
+
+\begin{exercice}
+Testez votre programme avec les matrices suivantes :\\
+$A=\begin{pmatrix}
+2.1&3\\1&1
+\end{pmatrix}$ et $B=\begin{pmatrix}
+5.1\\2
+\end{pmatrix}$.\\
+\verb?Gauss(A,B)? renvoie \verb?[1.0,1.0]?.
+\end{exercice}
+
+
+
+
+\begin{exercice}
+Il existe une fonction impl\' ement\' ee dans Python qui permet de r\' esoudre des syst\` emes lin\' eaires : la fonction \verb?linalg.solve? de la biblioth\` eque \verb?scipy?. Testez-la sur des exemples. Obtient-on toujours le m\^ eme r\' esultat ?
+\end{exercice}
+
+
+
+
+
+
+\begin{exercice}
+Résolvez \textbf{à la main} le syst\` eme suivant :
+\[\left\lbrace \begin{array}{rrrrrrrrrrrrrrrrrr}
+-\frac{1}{2}x&+&y&+&z&=&1\medskip\\
+\frac{1}{3}x&+&2y&-&2z&=&0\medskip\\
+\frac{1}{6}x&-&3y&+&z&=&-1\\
+\end{array}\right.\]
+%\textit{Indication : Faites la somme des lignes.}\\
+Appliquez la fonction \verb?Gauss? pour r\' esoudre ce syst\` eme. Que se passe-t-il ? Pourquoi ?
+\end{exercice}
+
+
+
+
+\begin{exercice}
+Résolvez \textbf{à la main} le syst\` eme suivant :
+\[\left\lbrace \begin{array}{rrrrrrrrrrrrrrrrrr}
+x&+&(1+10^{-30})y&+&z&=&1\\
+x&+&y&+&z&=&1\\
+&&y&+&z&=&1\\
+\end{array}\right.\]
+Appliquez la fonction \verb?Gauss? pour r\' esoudre ce syst\` eme. Que se passe-t-il ? Pourquoi ?
+\end{exercice}
+
+
+
+
+
+
+\begin{exercice}
+Pour inverser une matrice $A$, on lui applique les op\' erations \' el\' ementaires jusqu'\` a obtenir la matrice identit\' e. Si on applique ces op\' erations \` a $I_n$, la matrice finale est $A^{-1}$.\\
+Ecrire une fonction qui renvoie l'inverse d'une matrice $A$.\\
+On pourra comparer les r\' esultats avec ceux obtenus avec la fonction \verb?linalg.matrix_power(A,-1)? de la biblioth\` eque numpy.
+\end{exercice}
+
+
+
+\ifdef{\public}{\end{document}}{}
+
+\newpage 
+
+\begin{center}
+{\Large\bf Correction TP \no {\num} -- \descrip}
+\end{center}
+
+\begin{solution}~\\
+\vspace*{-0.7cm}
+\begin{minted}[frame=lines]{python}
+def ligneRef(A,i):
+    n=len(A)
+    maxi = abs(A[i,i])
+    kmax = i
+    for k in range(i+1,n):
+        if abs(A[k,i]) > maxi:
+            maxi = abs(A[k,i])
+            kmax = k
+    return kmax
+\end{minted}
+\end{solution}
+
+
+\begin{solution}
+Méthode 1 :
+\begin{minted}[frame=lines]{python}
+import copy
+def echangeLignes(A,i,k):
+    A1=copy.deepcopy(A[i])
+    A2=copy.deepcopy(A[k])
+    A[k]=A1
+    A[i]=A2
+\end{minted}
+Méthode 2 :
+\begin{minted}[frame=lines]{python}
+def echangeLignes(A,i,k):
+    n=len(A)
+    for j in range(n):
+        x = A[i,j]
+        A[i,j] = A[k,j]
+        A[k,j] = x
+\end{minted}
+\end{solution}
+
+\begin{solution}~\\
+\vspace*{-0.7cm}
+\begin{minted}[frame=lines]{python}
+def transvection(A,i,k,alpha):
+    A[k]=A[k]-alpha*A[i] 
+\end{minted}
+\end{solution}
+
+
+\begin{solution}~\\
+\vspace*{-0.7cm}
+\begin{minted}[linenos,frame=lines]{python}
+def pivotGauss(A,B):
+    n=len(A)
+    for i in range(n):
+        kmax = ligneRef(A,i)
+        pivot=A[kmax,i]   
+        if pivot==0:
+            return('erreur')
+        # echange lignes i et kmax dans A et dans B
+        echangeLignes(A,i,kmax)
+        echangeLignes(B,i,kmax)
+        # normalisation de la ligne du pivot
+        for j in range(n):
+            A[i,j] = A[i,j]/pivot   
+        B[i] = B[i]/pivot
+        # on elimine les termes au dessus et en dessous du pivot
+        for k in range(n):
+            if k != i:
+                alpha=A[k,i]
+                transvection(A,i,k,alpha)  
+                B[k]=B[k]-alpha*B[i]       
+    return B
+\end{minted}
+\end{solution}
+
+\setcounter{solution}{5}
+
+\begin{solution}
+Aux erreurs d'arrondis pr\` es, on obtient la m\^ eme solution. Mais donc \verb?linalg.solve? ne fait pas strictement les m\^ emes calculs.
+\end{solution}
+
+\begin{solution}
+Le syt\` eme n'est pas de Cramer : $L_1+L_2+L_3=0$ : il existe une infinit\' e de solution. Mais pour Python, $-\frac{1}{2}+\frac{1}{3}+\frac{1}{6}$ n'est pas exactement 0. L'algorithme renvoie un vecteur qui n'est pas solution.
+\end{solution}
+
+\begin{solution}
+C'est bien un syst\` eme de Cramer qui admet une unique solution : $(0,0,1)$. Mais avec les erreurs d'arrondis, Python approxime $L_1\approx L_2$. Il renvoie un message d'erreur car il divise par z\' ero.
+\end{solution}
+
+
+\begin{solution}~\\
+\vspace*{-0.7cm}
+\begin{minted}[linenos,frame=lines]{python}
+def inverse(A):
+    n=len(A)
+    #I est la matrice identite de taille n
+    # toutes les operations effectuees sur A sont faites sur I
+    I=np.eye(n)
+    for i in range(n):
+        kmax = ligneRef(A,i)
+        pivot=A[kmax,i]   
+        if pivot==0:
+            return('erreur')
+        # echange lignes i et kmax dans A et dans B
+        echangeLignes(A,i,kmax)
+        echangeLignes(I,i,kmax)
+        # normalisation de la ligne du pivot
+        for j in range(n):
+            A[i,j] = A[i,j]/pivot   
+            I[i,j] = I[i,j]/pivot
+        # on elimine les termes au dessus et en dessous du pivot
+        for k in range(n):
+            if k != i:
+                alpha=A[k,i]
+                transvection(A,i,k,alpha)  
+                transvection(I,i,k,alpha)       
+    return I
+\end{minted}
+\end{solution}
+
+\end{document}

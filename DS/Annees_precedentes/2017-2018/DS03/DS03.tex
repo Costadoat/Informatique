@@ -1,0 +1,58 @@
+\newcommand{\nom}{Devoir surveillé}
+\newcommand{\sequence}{03}
+\newcommand{\num}{03}
+\newcommand{\type}{DS}
+\newcommand{\descrip}{Fait le 20/03/2018}
+\newcommand{\competences}{Alg-C3: concevoir un algorithme répondant à un problème précisément posé
+\\ & Alg-C11: traduire un algorithme dans un langage de programmation}
+
+\input{../../headers/dsinfoheaders.tex}
+
+\begin{center}
+ \Large Toutes les fonctions du script vont être étudiées.
+\end{center}
+
+Remarque : En cas de blocage, vous avez la possibilité de faire appel à un enseignant. Vous serez limité à une demande pour toute la durée de l'épreuve.
+
+~\
+
+L'objectif du script que vous allez réaliser est de résoudre le système d'équations suivants en utilisant la méthode du pivot de Gauss :
+
+~\
+
+$\left\{
+\begin{array}{r c l}
+3.x+2.y-3.z &=& 5\\
+2.x+3.y+8.z &=& 4\\
+x+2.y-7.z &=& 11
+\end{array}
+\right.$
+
+~\
+
+Votre travail consiste alors:
+
+\begin{enumerate}
+ \item À créer une fonction \verb?recherche_pivot(A, i)? qui recherche le pivot dans la matrice A à partir de la ligne i, le résultat sera un entier correspondant à la ligne de  la matrice qui correspond au pivot,
+ \item À créer une fonction \verb?permutation(A,i,j)? qui permute les lignes \verb?i? et \verb?j? de la matrice ou du vecteur A, la fonction ne renverra rien mais permutera simplement les lignes,
+ \item À créer une fonction \verb?transvection(A,i,j,x)? qui effectue une transvection de la ligne \verb?i? à partir de la ligne \verb?j? (qui contient le pivot) en utilisant le rapport \verb?x?. La résolution du pivot de Gauss s'effectuera en rendant la matrice \verb?A? \textbf{triangulaire}. La fonction ne renverra rien mais effectuera simplement la transvection,
+ \item À créer une fonction \verb?triangle(A,b)? qui résout un système d'équations à partir d'une matrice \verb?A? \textbf{triangulaire} et d'un vecteur solutions \verb?b?. Le résultat sera renvoyé sous la forme d'une liste ou d'une array numpy,
+ \item À créer une fonction \verb?resolution_systeme(A,b)? qui permet de combiner l'ensemble de ces fonctions afin de résoudre le système d'équations défini précédemment. Le résultat sera fourni sous la forme d'une liste ou d'une array numpy.
+\end{enumerate}
+
+~\
+ 
+Contraintes:
+\begin{itemize}
+ \item Le script devra être intitulé \verb?NOM_Prénom.py? en remplaçant NOM et Prénom par votre nom et votre prénom,
+ \item Un script \textbf{automatique} va tester ces fonctions une à une, ainsi, si une ou plusieurs fonctions ne sont pas abouties, le script validera celles qui fonctionnent,
+ \item La résolution du problème pourra être effectuée en utilisant la bibliothèque numpy ou pas,
+ \item L'utilisation de la fonction \verb?linalg.solve? est interdite,
+ \item Il n'est pas demandé d'afficher des \verb?print? intermédiaires.
+\end{itemize}
+
+
+%-1.742857142857143, 4.171428571428572, -0.6285714285714287
+
+
+\end{document}

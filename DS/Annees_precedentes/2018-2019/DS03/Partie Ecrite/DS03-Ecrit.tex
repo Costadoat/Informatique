@@ -1,0 +1,67 @@
+\input{intro}
+\input{../../../Header_Willie}
+
+\excludecomment{solution}
+%\excludecomment{exercice}
+
+\begin{document}
+
+\begin{center}
+{\Large\bf {\type} \no {\num}}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+Faites les deux exercices sur deux feuilles séparées.
+
+\section*{Exercice 1 --  Résolution d'équations}
+Soit $f$ une fonction donnée. On cherche à calculer une approximation d'une solution de l'équation : $f(x)=0$.
+\begin{enumerate}
+\item Avec la méthode de la dichotomie : \\
+Écrire une fonction \verb?dicho? qui prend comme entr\' ee la fonction $f$ \` a \' etudier, les bornes initiales $a$ et $b$, la pr\' ecision $\epsilon$ et qui renvoie $\dfrac{a_n+b_n}{2}$, approximation d’une solution \` a $\epsilon$ pr\` es.
+\item Avec la méthode de Newton :\\
+\' Ecrire une fonction \verb?Newton? qui prend comme entr\' ee la fonction \` a \' etudier, sa d\' eriv\' ee, une valeur initiale de la suite $x_0$, la pr\' ecision $\epsilon$ et qui renvoie $x_n$ approximation de la solution.
+\item Donner un avantage et un inconvénient de la méthode de Newton par rapport à la méthode de la dichotomie.
+\end{enumerate}
+
+
+
+\section*{Exercice 2 -- Approximation d'une intégrale}
+Soit $f$ une fonction donnée. On souhaite approximer la valeur de l'intégrale $\displaystyle \int_a^b f$ avec différentes méthodes.
+\subsection{Cas où f est connue}
+Dans cette partie, on travaille avec une fonction $f$ connue sur tout l'intervalle $[a,b]$.
+On subdivise l'intervalle $[a,b]$ en $n$ intervalles du type $[x_i,x_{i+1}]$, de même longueur avec  : $a=x_0<x_1<\cdots <x_n=b$.
+\begin{enumerate}
+\item Avec la méthode des rectangles : \\
+sur chaque intervalle $[x_i,x_{i+1}]$, on approxime $f$ par une constante. \\
+Coder un algorithme qui calcule une approximation de $\displaystyle\int_0^{\frac{3\pi}{2}}\cos(x)dx$ avec 2019 intervalles.
+\item Avec la méthode de Simpson : \\
+sur chaque intervalle $[x_i,x_{i+1}]$, on approxime $f$ par un polynôme de degré deux. Dans ce cas, l'intégrale est approximée par :
+\[    {\displaystyle   \int_a^b f(x)dx\approx\frac {b-a}{6n}\left(\sum_{i=0}^{n-1} f(x_i)+4f\left( \frac{x_i+x_{i+1}}{2}\right)+f(x_{i+1}) \right)}\]
+Ecrire un programme qui calcule une approximation de $\displaystyle   \int_a^b f$ par la méthode de Simpson.\\ 
+(On supposera que \verb?f?, \verb?n?, \verb?a? et \verb?b? sont déjà définis dans le programme.)
+\end{enumerate}
+\subsection{Avec lecture de fichiers}
+Dans cette partie, la fonction $f$ n'est connue qu'en certains points, dont les coordonn\' ees sont situ\' ees dans un fichier. Ce fichier \texttt{coordonnee.csv}, situé dans le répertoire de travail, contient une quinzaine de lignes selon le modèle suivant :
+\[0.0;1.00988282142\]
+\[0.1;1.0722126449\]
+Chaque ligne contient deux valeurs flottantes séparées par un point-virgule, représentant respectivement l'abscisse et l'ordonnée d'un point. Les points sont ordonnés par abscisses croissantes.
+\begin{enumerate}
+\item Rappeler quels sont les différents modes d'ouverture d'un fichier texte à l'aide de Python, et les différences entre ces modes.
+\item \'Ecrire une séquence d'instructions en Python permettant d'effectuer les opérations suivantes sur le fichier \texttt{coordonnee.csv} :\\
+Ouvrir le fichier en lecture, le lire et construire deux listes de flottants : la liste \verb?LX? des abscisses et la liste \verb?LY? des ordonnées contenues dans ce fichier.
+\item Avec la méthode des trapèzes : \\
+sur chaque intervalle, on approxime $f$ par un polynôme de degré 1.\\
+Ecrire une fonction \verb?trapeze? qui prend comme entrée deux listes de taille $n+1$ : $(x_0,\cdots x_n)$ et $(y_0,\cdots,y_{n})$ et qui renvoie :
+\[\displaystyle \sum_{i=0}^{n-1} (x_{i+1}-x_i)\dfrac{y_{i+1}+y_i}{2}\]
+\item Valeur moyenne et écart-type :\\
+Par définition, la valeur moyenne et l'écart-type d'une fonction $f$ sur $[x_0,x_n]$ sont donnés par :
+\begin{itemize}
+\item valeur moyenne : $M_f=\displaystyle{ \frac{1}{x_n-x_0} \int_{x_0}^{x_n} f(x)dx}$\medskip 
+\item écart-type : $\displaystyle{\sigma_f=\sqrt{\dfrac{1}{x_n-x_0}\int_{x_0}^{x_n}(f(x)-M_f)^2dx}}$
+\end{itemize}
+Ecrire un programme qui calcule une valeur approximative de $\sigma_f$. (On pourra faire appel à la fonction \verb?trapeze?)
+\end{enumerate}
+
+
+\end{document}

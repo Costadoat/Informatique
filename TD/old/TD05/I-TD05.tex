@@ -1,0 +1,49 @@
+\newcommand{\nom}{Barrière Sympact}
+\newcommand{\sequence}{03}
+\newcommand{\num}{05}
+\newcommand{\type}{TD}
+\newcommand{\descrip}{Résolution d'un problème de dynamique (second ordre) avec la méthode d'Euler}
+\newcommand{\competences}{Alt-C3: Concevoir un algorithme répondant à un problème précisément posé}
+
+\input{../../headers/infoheaders.tex}
+
+\section{Présentation du système}
+
+\begin{minipage}{0.45\linewidth}
+La barrière Sympact s'ouvre grâce à l'action d'un moteur et d'un ressort. Utilisée sur un péage et lorsque le moteur n'est pas alimenté (coupure de courant), la barrière doit s'ouvrir afin de permettre aux utilisateurs de passer.
+\end{minipage}\hfill
+\begin{minipage}{0.45\linewidth}
+\begin{center}
+ \includegraphics[width=0.8\linewidth]{img/sympact.png}
+\end{center}
+\end{minipage}
+
+~\
+
+La barrière installée en salle de TP ne pouvant pas mesure 2.5m, des masses équivalentes ont été ajoutées. La masse de la lisse sera donc assimilée à ces masses:
+\begin{itemize}
+ \item une masse $m_1=2.8kg$ située à $l_1=170mm$ de son axe de rotation,
+ \item une masse $m_2=1kg$ située à $l_2=1170mm$ de son axe de rotation.
+\end{itemize}
+
+Son inertie ramenée sur l'arbre sera donc: $J_{eq}=m_1*l_1^2+m_2*l_2^2$.
+
+\section{Étude de la dynamique de la barrière}
+
+\paragraph{Question 1:} Réaliser un schéma cinématique paramétré de la barrière.
+
+\paragraph{Question 2:} Déterminer l'action mécanique du poids de la lisse ramenée sur l'axe de rotation de la lisse.
+
+Lors de la phase d'ouverture non-alimentée, la lisse est soumise:
+\begin{itemize}
+ \item A son poids,
+ \item A l'action du ressort de raideur $K=0.45N.m/deg$ et de position à l'équilibre $\theta_0=90°$,
+ \item Des frottements visqueux de coefficient $\lambda=4N.m.s/rad$.
+\end{itemize}
+
+\paragraph{Question 3:} Après avoir isolé la lisse, écrire le Principe Fondamental de la Dynamique appliqué sur l'axe de rotation de la lisse. 
+
+\paragraph{Question 4:} Déterminer les profils de la position et de la vitesse de rotation de la lisse à chaque instant en utilisant la méthode d'Euler. La barrière sera considéré immobile et horizontale au départ de l'étude.
+
+\paragraph{Question 5:} Déterminer l'influence du coefficient de frottement sur le système. En sachant que ce coefficient n'est pas aussi important dans le système réel, que se passe-t-il si on diminue sa valeur ? Quel composant du système permet de compenser la diminution du coefficient de frottement.
+\end{document}

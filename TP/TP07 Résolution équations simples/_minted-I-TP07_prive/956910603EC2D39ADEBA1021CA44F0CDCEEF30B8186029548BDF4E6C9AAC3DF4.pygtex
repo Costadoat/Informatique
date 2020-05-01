@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{rec}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,}\PYG{n}{u}\PYG{p}{,}\PYG{n}{n}\PYG{p}{):}
+   \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{n}\PYG{p}{):}
+   \PYG{n}{u}\PYG{o}{=}\PYG{n}{f}\PYG{p}{(}\PYG{n}{u}\PYG{p}{)}
+   \PYG{k}{return}\PYG{p}{(}\PYG{n}{u}\PYG{p}{)}
+\end{Verbatim}

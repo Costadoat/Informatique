@@ -1,0 +1,306 @@
+\input{../../headers/beamercoursHeadings}
+
+\section{Cas triangulaire} 
+
+\begin{frame}[fragile]
+\frametitle{Système d'équations}
+
+Soit le système d'équations suivant :
+\begin{center}
+$\left\{\begin{array}{l}
+y_0=a_{0,0}.x_0+a_{0,1}.x_1+a_{0,2}.x_2+...+a_{0,n-1}.x_{n-1} \\
+y_1=a_{1,0}.x_1+a_{1,1}.x_2+a_{1,2}.x_3+...+a_{1,n-1}.x_{n-1} \\
+...\\
+y_{n-1}=a_{n-1,0}.x_0+a_{n-1,1}.x_1+a_{n-1,2}.x_2+...+a_{n-1,n-1}.x_{n-1}
+\end{array}\right.$
+\end{center}
+
+Ce système d'équations peut s'écrire sous la forme suivante: $Y=A.X$, avec:\\
+\begin{center}
+$X=\left(\begin{array}{c}
+x_0 \\ x_1 \\ ...\\ x_{n-1}
+\end{array}\right)$,
+$Y=\left(\begin{array}{c}
+y_0 \\ y_1 \\ ...\\ y_{n-1}
+\end{array}\right)$,
+$A=\left(\begin{array}{c c c c c}
+a_{0,0} & a_{0,1} & a_{0,2} & ... & a_{0,n-1} \\
+a_{1,0} & a_{1,1} & a_{1,2} & ... & a_{1,n-1} \\
+... & ... & ... & ... & ... \\
+a_{n-1,0} & a_{n-1,1} & a_{n-1,2} & ... & a_{n-1,n-1}
+\end{array}\right)$
+\end{center}
+
+Ces systèmes sont dit de Cramer, c'est à dire qu'ils admettent une unique solution. La matrice A est donc inversible.
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Cas triangulaire}
+
+Si la matrice A est triangulaire, la résolution du problème est simple.
+
+Ce système d'équations peut s'écrire sous la forme suivante: $Y=A.X$, avec:\\
+\begin{center}
+$A=\left(\begin{array}{c c c c c}
+a_{0,0} & a_{0,1} & a_{0,2} & ... & a_{0,n-1} \\
+0 & a_{1,1} & a_{1,2} & ... & a_{1,n-1} \\
+0 & 0 & a_{2,2} & ... & a_{2,n-1} \\
+... & ... & ... & ... & ... \\
+0 & 0 & 0 & ... & a_{n-1,n-1}
+\end{array}\right)$
+\end{center}
+
+La dernière équation devient: $y_{n-1}=a_{n-1,n-1}.x_{n-1}$, ainsi $x_{n-1}=\dfrac{y_{n-1}}{a_{n-1,n-1}}$. En remontant tout le système l'ensemble des $x_i$ peuvent être déterminés.
+
+Ainsi, $\forall i \in [0,n-2], x_i=\dfrac{y_i-\sum \limits_{j=i+1}^{n-1} a_{i,j}.x_j}{a_{i,i}}$
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Cas triangulaire}
+
+Soit la matrice triangulaire $A$ est le vecteur $Y$ suivant:
+\begin{center}
+$A=\left(\begin{array}{c c c}
+2 & 5 & 3 \\
+0 & 1 & 2 \\
+0 & 0 & 4
+\end{array}\right)$,$Y=\left(\begin{array}{c}
+6 \\
+4 \\
+9
+\end{array}\right)$
+\end{center}
+
+Cela correspond au système d'équations suivant :
+\begin{center}
+$\left\{\begin{array}{l}
+6=2.x_0+5.x_1+3.x_2 \\
+4=1.x_1+2.x_2 \\
+9=4.x_2
+\end{array}\right.$
+\end{center}
+
+Cela mène à la résolution suivante :
+\begin{center}
+$\left\{\begin{array}{l}
+x_0=\ifdef{\public}{\uncover<2->{0.875\\}}{ \\}
+x_1=\ifdef{\public}{\uncover<2->{-0.5\\}}{ \\}
+x_2=\ifdef{\public}{\uncover<2->{2.25}}{}
+\end{array}\right.$
+\end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Cas triangulaire: Code Python}
+
+\begin{GrayBox}[0.85\textwidth]
+\begin{semiverbatim}\small
+\ifdef{\public}{\uncover<2->{
+def triangle(A,b):
+    n =len(b)
+    x = [0 for i in range(n)]
+    x[n-1] = b[n-1]/A[n-1][n-1]
+    for i in range(n-2,-1,-1):
+        s = 0
+        for j in range(i+1,n):
+            s = s + A[i][j]*x[j]
+        x[i] = (b[i] - s)/ A[i][i]
+    return x}}{\vspace{5cm}}
+   \end{semiverbatim}
+\end{GrayBox}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Etape 1: Placer le pivot sur la première ligne}
+
+Soit la matrice $A=\left(\begin{array}{c c c c}
+2 & 2 & -3 & 4 \\
+-2 & -1 & -3 & 2 \\
+6 & 4 & 4 & 5 \\
+1 & 5 & 3 & 2
+\end{array}\right)$,$Y=\left(\begin{array}{c}
+2 \\
+-5 \\
+16 \\
+11
+\end{array}\right)$
+
+\begin{enumerate}
+ \item Recherche de la plus grande valeur $A[0]_max$ de la première colonne de la matrice: ici $A[2][0]=6$,
+ \item Inverser cette ligne et la première de la matrice et faire de même pour le vecteur.
+\end{enumerate}
+
+$A=\left(\begin{array}{c c c c}
+6 & 4 & 4 & 5 \\
+-2 & -1 & -3 & 2 \\
+2 & 2 & -3 & 4 \\
+1 & 5 & 3 & 2
+\end{array}\right)$,$Y=\left(\begin{array}{c}
+16 \\
+-5 \\
+2 \\
+11
+\end{array}\right)$
+
+\end{frame}
+
+\section{Mise sous forme triangulaire}
+
+\begin{frame}[fragile]
+\frametitle{Etape 2: Mettre des 0 sur le reste de la première colonne}
+
+Soit la matrice $A=\left(\begin{array}{c c c c}
+6 & 4 & 4 & 5 \\
+-2 & -1 & -3 & 2 \\
+2 & 2 & -3 & 4 \\
+1 & 5 & 3 & 2
+\end{array}\right)$,$Y=\left(\begin{array}{c}
+16 \\
+-5 \\
+2 \\
+11
+\end{array}\right)$
+
+Pour chaque ligne sauf la première
+\begin{enumerate}
+ \item Calcul du coefficient $x=A[i][0]/A[0][0]$,
+ \item Calculer les nouveaux coefficients qui permettent d'annuler le premier:  $A[i][k] = A[i][k] - x*A[j][k]$
+\end{enumerate}
+
+$A=\left(\begin{array}{c c c c}
+6 & 4 & 4 & 5 \\
+\ifdef{\public}{\uncover<2->{0 & 0.33 & -1.66 & 3.66\\}}{ \\}
+\ifdef{\public}{\uncover<2->{0 & 0.66 & -4.33 & 2.33\\}}{ \\}
+\ifdef{\public}{\uncover<2->{0 & 4.33 & 2.33 & 1.16}}{}
+\end{array}\right)$,$Y=\left(\begin{array}{c}
+16 \\
+0.33 \\
+-3.33 \\
+8.33
+\end{array}\right)$
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Etape 3: Mettre des 0 sur le reste de la première colonne}
+
+La procédure continue avec la matrice de dimension juste inférieure
+
+$A=\left(\begin{array}{c c c}
+0.33 & -1.66 & 3.66 \\
+0.66 & -4.33 & 2.33 \\
+4.33 & 2.33 & 1.16
+\end{array}\right)$,$Y=\left(\begin{array}{c}
+0.33 \\
+-3.33 \\
+8.33
+\end{array}\right)$
+
+Le résultat de l'étape de mise sous forme triangulaire est alors:
+$A=\left(\begin{array}{c c c c}
+6 & 4 & 4 & 5 \\
+\ifdef{\public}{\uncover<2->{0 & 4.33 & 2.33 & 1.16\\}}{ \\}
+\ifdef{\public}{\uncover<2->{0 & 0 & -4.69 & 2.15\\}}{ \\}
+\ifdef{\public}{\uncover<2->{0 & 0 & 0 & 2.73}}{}
+\end{array}\right)$,$Y=\left(\begin{array}{c}
+16 \\
+8.33 \\
+-4.61 \\
+1.5
+\end{array}\right)$
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+
+Il ne reste plus qu'à utiliser la méthode décrite précédemment afin de déterminer le résultat.
+
+Le résultat final pour ces valeurs est alors: $X=\left(\begin{array}{c}
+0.642642642643 \\ 1.10810810811 \\ 1.23723723724 \\ 0.552552552553\end{array}\right)$
+
+\end{frame}
+
+\section{Codage sous Python}
+
+\begin{frame}[fragile]
+\frametitle{Etude 1: Code Python}
+
+\textbf{Recherche du pivot et permutation des lignes:}
+
+\begin{GrayBox}[0.85\textwidth]
+\begin{semiverbatim}\small
+\ifdef{\public}{\uncover<2->{
+def recherche_pivot(A, j0):
+    n = len(A) 
+    imax = j0 
+    for i in range(j0+1, n):
+        if abs(A[i][j0]) > abs(A[imax][j0]):
+            imax = i
+    return imax}}{\vspace{5cm}}
+   \end{semiverbatim}
+\end{GrayBox}
+
+\begin{GrayBox}[0.85\textwidth]
+\begin{semiverbatim}\small
+\ifdef{\public}{\uncover<2->{
+def permutation(A,i,j):
+    t = A[i]
+    A[i] = A[j]
+    A[j] = t}}{\vspace{5cm}}
+   \end{semiverbatim}
+\end{GrayBox}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Etude 2: Code Python}
+
+\textbf{Transvection:}
+
+\begin{GrayBox}[0.85\textwidth]
+\begin{semiverbatim}\small
+\ifdef{\public}{\uncover<2->{
+def transvection(A,i,j,x):
+    # si vecteur
+    if type(A[0]) != list:
+        A[i] = A[i] + x*A[j]
+    else:
+        n = len(A[0])
+        for k in range(n):
+            A[i][k] = A[i][k] + x*A[j][k]}}{\vspace{5cm}}
+   \end{semiverbatim}
+\end{GrayBox}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Etude 3: Code Python}
+
+\textbf{Résolution du système:}
+
+\begin{GrayBox}[0.85\textwidth]
+\begin{semiverbatim}\small
+\ifdef{\public}{\uncover<2->{
+def resolution_systeme(A,b):
+    n = len(A)
+
+    for i in range(n-1):
+        i0 = recherche_pivot(A,i)
+        permutation(A,i,i0)
+        permutation(b,i,i0) 
+        
+        for k in range(i+1,n):
+            x = A[k][i]/A[i][i]
+            transvection(A,k,i,-x)
+            transvection(b,k,i,-x) 
+            
+    return triangle(A,b)}}{\vspace{5cm}}
+   \end{semiverbatim}
+\end{GrayBox}
+\end{frame}
+
+
+\end{document}

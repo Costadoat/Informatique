@@ -1,0 +1,5 @@
+#Question 4.c
+
+dfleche=dfleche-dfleche[500]
+plt.plot(x[:len(dfleche)],dfleche)
+

@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{solution2}\PYG{p}{(}\PYG{n}{a}\PYG{p}{,}\PYG{n}{b}\PYG{p}{,}\PYG{n}{c}\PYG{p}{):}
+	\PYG{k}{if} \PYG{n}{a} \PYG{o}{!=} \PYG{l+m+mi}{0}\PYG{p}{:}
+		\PYG{k}{return}\PYG{p}{(}\PYG{n}{solution}\PYG{p}{(}\PYG{n}{a}\PYG{p}{,}\PYG{n}{b}\PYG{p}{,}\PYG{n}{c}\PYG{p}{))}
+	\PYG{k}{else}\PYG{p}{:}
+		\PYG{k}{if} \PYG{n}{b}\PYG{o}{!=}\PYG{l+m+mi}{0}\PYG{p}{:}
+			\PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}Une solution reelle\PYGZdq{}} \PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{n}{c}\PYG{o}{/}\PYG{n+nb}{float}\PYG{p}{(}\PYG{n}{b}\PYG{p}{)}
+		\PYG{k}{else} \PYG{p}{:}
+			\PYG{k}{if} \PYG{n}{c}\PYG{o}{!=}\PYG{l+m+mi}{0}\PYG{p}{:}
+				\PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}pas de solution\PYGZdq{}}
+			\PYG{k}{else}\PYG{p}{:}
+				\PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}Une infinite de solutions : tous les reels.\PYGZdq{}}
+
+\PYG{k}{print} \PYG{n}{solution}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)}
+\end{Verbatim}

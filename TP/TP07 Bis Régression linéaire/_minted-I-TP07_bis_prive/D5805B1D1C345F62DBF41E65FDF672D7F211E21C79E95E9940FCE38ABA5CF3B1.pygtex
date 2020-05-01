@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{som\PYGZus{}carre}\PYG{p}{(}\PYG{n}{X}\PYG{p}{):}
+    \PYG{n}{som\PYGZus{}carre}\PYG{o}{=}\PYG{l+m+mi}{0}
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n}{X}\PYG{p}{:}
+        \PYG{n}{som\PYGZus{}carre}\PYG{o}{=}\PYG{n}{som\PYGZus{}carre}\PYG{o}{+}\PYG{n}{i}\PYG{o}{**}\PYG{l+m+mi}{2}
+    \PYG{k}{return}\PYG{p}{(}\PYG{n+nb}{float}\PYG{p}{(}\PYG{n}{som\PYGZus{}carre}\PYG{p}{))}
+\PYG{c+c1}{\PYGZsh{} on renvoie un flottant pour eviter ensuite de diviser par un entier}
+\end{Verbatim}

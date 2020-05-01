@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{maximum}\PYG{p}{(}\PYG{n}{liste}\PYG{p}{):}
+    \PYG{n}{n}\PYG{o}{=}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{liste}\PYG{p}{)}
+    \PYG{c+c1}{\PYGZsh{} le maximum est initialis\PYGZbs{}\PYGZsq{} e avec le premier terme de la liste}
+    \PYG{n+nb}{max}\PYG{o}{=}\PYG{n}{liste}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
+
+    \PYG{c+c1}{\PYGZsh{} on parcourt la liste}
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{n}\PYG{p}{):}
+    \PYG{c+c1}{\PYGZsh{} si le i\PYGZbs{}` eme terme de la liste est sup\PYGZbs{}\PYGZsq{} erieur au maximum, il devient la nouvelle valeur du maximum\PYGZbs{}\PYGZbs{}}
+        \PYG{k}{if} \PYG{n}{liste}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{\PYGZgt{}}\PYG{n+nb}{max}\PYG{p}{:}
+            \PYG{n+nb}{max}\PYG{o}{=}\PYG{n}{liste}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}
+    \PYG{k}{return}\PYG{p}{(}\PYG{n+nb}{max}\PYG{p}{)}
+\end{Verbatim}

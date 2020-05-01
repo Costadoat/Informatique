@@ -1,0 +1,323 @@
+\input{../../Header_Willie}
+  
+  \fancyhead[C]{\bfseries{TP \no 4}}
+  
+\begin{document}
+
+\SetKw{KwFrom}{de} 
+
+% En-tête et titre
+%      {\Large\bf TD \no 0}\\
+%      \vspace{0.5cm}
+
+\begin{center}
+{\Large\bf TP \no 4 -- Boucles et complexité}
+\end{center}
+
+\section{Initialisation des variables}
+% Wack page 106
+
+\begin{algorithm}[H]
+\KwData{$n$ un entier naturel}
+\KwResult{?}
+
+\For{$i$ \KwFrom $1$ \KwTo $n$}{
+\eIf{$i$ est pair}{
+$\text{carre} \leftarrow i^2$
+}{
+$\text{carre} \leftarrow 0$
+}
+$\text{total} \leftarrow \text{total} + \text{carre}$}
+\caption{Exemple d'algorithme ne fonctionnant pas.}
+\label{algo:1}
+\end{algorithm}
+
+\begin{enumerate}
+ \item À votre avis, quel est le résultat attendu par le concepteur de l'algorithme~\ref{algo:1} ?
+ 
+ \item Pourquoi ne fonctionne-t-il pas ?
+ 
+ \item Proposer une modification permettant à l'algorithme de répondre à  l'attente de son concepteur.
+ 
+ \item Ouvrir un fichier de script dans Spyder. L'enregistrer sous un nom adéquat dans le sous-répertoire adéquat de « Dossiers personnels ». À l'aide de votre cours et des TP précédents, essayer d'implémenter l'algorithme correct en langage Python puis lancer le script pour vérifier qu'il fait ce qui est attendu.
+ 
+\end{enumerate}
+
+\section{Choix du type de boucle}
+% Wack page 108
+
+On rappelle les règles suivantes :
+\begin{itemize}
+ \item Si on connaît à l'avance le nombre de répétitions à effectuer ou, plus généralement, si on veut parcourir une valeur itérable\footnote{Par exemple, l'ensemble des entiers générés en Python par la fonction \texttt{range()}.}, on choisit une boucle \textit{inconditionnelle}, c'est-à-dire en langage Python une boucle \texttt{for}.
+ 
+ \item À l'inverse, si la décision d'arrêter la boucle ne peut s'exprimer que par un test, on choisit une boucle \textit{conditionnelle}, c'est-à-dire en langage Python une boucle \texttt{while}.
+
+\end{itemize}
+
+Quel type de boucle est adapté à la conception d'algorithmes traitant les problèmes suivants :
+\begin{itemize}
+ \item Calculer la valeur absolue d'un nombre donné.
+ \item Calculer la norme d'un vecteur donné.
+ \item Déterminer tous les diviseurs d'un nombre entier donné.
+ \item Déterminer le plus petit diviseur (différent de 1) d'un nombre entier donné.
+ \item Déterminer la date du prochain vendredi 13 connaissant la date d'aujourd'hui.
+\end{itemize}
+
+\section{Factorielle}
+%Wack page 105 invariant de factorielle
+
+On définit la factorielle d'un entier $n$ par les relations : $0!=1 \quad \text{et}\quad (n+1)!=(n+1)n!$
+
+On propose le programme de calcul de $n!$ suivant où $n$ est un entier strictement positif :
+
+\begin{listing}
+\begin{minted}[linenos,frame=lines]{python}
+p = 1
+c = 0
+for c in range(1,n+1):
+  p= c * p
+\end{minted}
+\caption{Programme de calcul de la fonction factorielle.}
+\label{prog:factorielle}
+\end{listing}
+
+Démontrer à l'aide de l'\textit{invariant de boucle} « $p =c!$ » que le programme est bien \textit{correct}.
+
+\section{Terminaison}
+
+\begin{listing}
+\begin{minted}[linenos,frame=lines]{python}
+a = 17
+b = 7
+while a >= b:
+  a = a - b
+\end{minted}
+\caption{Reprise de l'exercice 8 du TP \no 2.}
+\label{prog:programmeresteeuclidien}
+\end{listing}
+
+\begin{enumerate}
+
+\item Notez à chaque étape la valeur de \texttt{a} et de \texttt{b}. Quelle est la valeur finale de \texttt{a} ? En général, que renvoie le programme ?
+
+\item Prouver que la boucle \textit{termine} en identifiant un \textit{variant de boucle}.
+
+\end{enumerate}
+
+\section{Complexités}
+%Cours et TP Lycée du Parc
+
+On suppose que $n$ a été affecté (et vaut un entier strictement positif). Combien d’\textit{opérations élémentaires} les programmes suivant vont-ils exécuter ?
+
+\begin{boxedminipage}{\textwidth}
+\begin{minted}[]{python}
+s = 0
+for i in range(n):
+  s = s + i**2
+\end{minted}
+\end{boxedminipage}
+
+
+\begin{boxedminipage}{\textwidth}
+\begin{minted}[]{python}
+s = 0
+for i in range(n):
+  for j in range(i,n):
+    s = s + j**2
+\end{minted}
+\end{boxedminipage}
+
+\begin{boxedminipage}{\textwidth}
+\begin{minted}[]{python}
+while n < 10**10:
+  n = n * 2
+\end{minted}
+\end{boxedminipage}
+
+% \begin{boxedminipage}{\textwidth}
+% \begin{minted}[]{python}
+% while n>0:
+%   n = n // 2
+% \end{minted}
+% \end{boxedminipage}
+
+
+\newpage
+\section{Comparaison entre deux méthodes d'exponentiation}
+\label{sec:ComparaisonExponentiation}
+%wack page 104 + cours Renaud C05
+
+On propose deux programmes différents pour l'exponentiation d'un réel positif $k$ par un entier strictement positif $n$ (c'est-à-dire le calcul de $k^n$). On suppose que $k$ est affecté d'une valeur réelle positive.
+
+\begin{listing}
+\begin{minted}[linenos,frame=lines]{python}
+p = 1
+c = n
+while c > 0:
+  p = p * k
+  c = c - 1
+\end{minted}
+\caption{Première méthode d'exponentiation.}
+\label{prog:exponentiationnaive}
+\end{listing}
+
+\begin{listing}
+\begin{minted}[linenos,frame=lines]{python}
+p = 1
+c = n
+while c > 0:
+  if c%2 == 1:
+    p = p * k
+  k = k**2  
+  c = c//2
+\end{minted}
+\caption{Deuxième méthode d'exponentiation.}
+\label{prog:exponentiationrapide}
+\end{listing}
+
+\begin{enumerate}
+
+\item On prend $n=13$. Pour chacun des deux programmes~\ref{prog:exponentiationnaive} et \ref{prog:exponentiationrapide}, déterminer et noter les valeurs ou expressions successives de $p$, $c$ et $k$ ainsi que le nombre d'itérations de la boucle Tant que.  
+
+\item Compter le nombre d'opérations élémentaires dans chacune des boucles. En déduire lequel des deux programmes réalise une « exponentiation rapide ». 
+
+\item On peut montrer que la \textit{complexité temps} du programme d'exponentiation rapide est $O(\log(n))$. Quelle est la \textit{complexité temps} de l'autre programme ?
+
+\item Si vous avez avancé assez rapidement dans le TP et qu'il vous reste du temps, vous pouvez créer grâce à Spyder un script python vous donnant une évaluation du temps d'exécution des deux programmes pour différentes valeurs de $n$ et $k$ grâce au code fourni en Annexe.
+
+\end{enumerate}
+
+\newpage
+\section{Recherche par dichotomie}
+%Poly de Yannick Le Bras page 10 + Cours Renaud C06
+
+\begin{algorithm}[H]
+\KwData{L[1...n] une liste triée de $n$ éléments numérotés de 1 à $n$ inclus et $a$ un élément}
+\KwResult{Un booléen}
+$g \leftarrow 1$ \;
+$d \leftarrow n$ \;
+%read current\;
+\While{$d-g > 0$}{
+$m \leftarrow \lfloor \frac{d+g}{2} \rfloor$ \tcc*[r]{partie entière de (d+g)/2} \nllabel{lignealgo:m}
+\eIf{$L[m] < a$}{
+$g \leftarrow m+1$
+}{
+$d \leftarrow m$}
+}
+\eIf{$L[g]==a$}{
+\KwRet{Vrai}}{
+\KwRet{Faux}
+}
+\caption{Recherche par dichotomie.}
+\label{algo:recherchetantque}
+\end{algorithm}
+
+On rappelle la définition de la partie entière :\\
+pour tout réel $x$, c'est l'entier $\lfloor x \rfloor$ tel que $ x-1 < \lfloor x \rfloor \leq x$. 
+
+Ainsi, à la ligne~\ref{lignealgo:m}, on a : $$ \frac{d+g}{2} - 1 < m \leq \frac{d+g}{2}$$
+
+Prouver que l'algorithme \textit{termine}.
+
+\newpage
+\section{Recherche du minimum d'une liste de valeurs numériques}
+\label{sec:RechercheMinimum}
+%Poly de Yannick Le Bras
+
+\begin{algorithm}[H]
+\KwData{Une liste $L$ contenant $n$ éléments numérotés de 1 à $n$ inclus ($L[1...n]$)}
+\KwResult{Le plus petit élément de la liste}
+$mini \leftarrow 0$ \;
+
+\For{$i$ \KwFrom $1$ \KwTo $n$}{
+%read current\;
+\If{L[i] < mini}{
+$mini \leftarrow L[i]$
+}
+}
+\KwRet{mini}
+\caption{Fonction minimum(L).}
+\label{algo:recherche1}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\KwData{Une liste $L$ contenant $n$ éléments numérotés de 1 à $n$ inclus ($L[1...n]$)}
+\KwResult{Le plus petit élément de la liste}
+$mini \leftarrow L[1]$ \;
+\For{$i$ \KwFrom $1$ \KwTo $n$}{
+%read current\;
+\If{L[i] < mini}{
+$mini \leftarrow L[i]$
+}
+}
+\KwRet{mini}
+\caption{Fonction minimum(L).}
+\label{algo:recherche2}
+\end{algorithm}
+
+\begin{enumerate}
+
+\item Identifier la différence entre les algorithmes \ref{algo:recherche1} et \ref{algo:recherche2} et expliquer pourquoi le premier n'est pas toujours \textit{correct} (dans certains cas, il ne donne pas le minimum de la liste).
+
+\item Comment peut-on améliorer très légèrement l'algorithme qui est toujours correct en évitant une étape de la boucle Pour ?
+
+\item Réécrire l'algorithme en utilisant une boucle Tant que et prouver qu'il \textit{termine} en déterminant son \textit{variant de boucle}. Si vous ne trouvez pas rapidement comment réécrire l'algorithme vous pouvez consulter la réponse en Annexe à l'algorithme~\ref{algo:recherchetantque}.
+
+\item Soit la proposition suivante : « mini est le minimum de toutes les valeurs de la liste numérotées de 1 à $i-1$ inclus » ou encore « $\{mini = minimum(L[1...i-1])\}$ ». Vérifier que l'algorithme est \textit{correct} en prouvant que la proposition précédente est bien un \textit{invariant de boucle}.
+
+\end{enumerate}
+
+\newpage
+\section*{Annexe}
+
+\subsection*{Annexe de l'exercice~\ref{sec:ComparaisonExponentiation}}
+
+\begin{boxedminipage}{\textwidth}
+\begin{minted}[]{python}
+import time
+def expo_un(n,k):
+    a=time.clock()
+    p = 1
+    c = n
+    while c > 0:
+        p = p * k
+        c = c - 1
+    b=time.clock()-a
+    return b
+def expo_deux(n,k):
+    a=time.clock()
+    p = 1
+    c = n
+    while c > 0:
+        if c%2 == 1:
+            p = p * k
+        k = k**2
+        c = c//2
+    b=time.clock()-a
+    return b
+n=6000
+k=4
+print(expo_un(n,k))
+print(expo_deux(n,k))
+\end{minted}
+\end{boxedminipage}
+
+\subsection*{Annexe de l'exercice~\ref{sec:RechercheMinimum}}
+\begin{algorithm}[H]
+\KwData{Une liste $L$ contenant $n$ éléments numérotés de 1 à $n$ ($L[1...n]$)}
+\KwResult{Le plus petit élément de la liste}
+$mini \leftarrow L[1]$ \;
+$i \leftarrow 2$ \;
+\While{$i \leq n$}{
+\If{L[i] < mini}{
+$mini \leftarrow L[i]$
+}
+$i \leftarrow i+1$}
+\KwRet{mini}
+\caption{Fonction minimum(L).}
+\label{algo:recherchetantque}
+\end{algorithm}
+
+\end{document}
+
+

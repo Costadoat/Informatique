@@ -1,0 +1,84 @@
+\input{../../../Header_Willie}
+\parindent= 0pt
+\textheight 250mm
+
+  \pagestyle{fancy}
+%  \fancyfoot[C]{\thepage}
+  \fancyhead[LO,LE]{\bfseries {\large PTSI -- Dorian}}
+  \fancyhead[RO,RE]{\bfseries{\large Informatique}}
+  \fancyhead[CO,CE]{Concours blanc juin 2018}
+
+\begin{document}
+
+ \begin{center}
+  \begin{large}
+  \fbox{Concours blanc -- Partie écrite. Durée : 1 heure}
+  \end{large}
+ \end{center}
+
+\begin{boxedminipage}{\textwidth} 
+Lorsqu'on écrit un code Python : faire attention à ce que les indentations soient visibles sur la copie ; commenter le code de façon à expliquer les grandes étapes de l'algorithme en ajoutant un commentaire en fin de ligne de code après le symbole $\sharp$.
+\end{boxedminipage}
+
+\section{Période d'un pendule simple -- Exercice}
+
+Le système étudié consiste en un point matériel $M$ de masse $m$ relié par une barre rigide de masse nulle et de longueur $\ell$ à un point $O$ dans le référentiel terrestre supposé galiléen. Le système est soumis à la pesanteur et la position du point matériel $M$ est repérée par l'angle $\theta$ entre la verticale et la droite $(OM)$. Le vecteur accélération de la pesanteur est noté $\vec g$.
+
+Le pendule est lâché sans vitesse initiale et avec un angle initial $0< \theta_0 < \pi$. On montre qu'en l'absence de frottements la période $T$ du mouvement $M$ est donnée par la relation : $$T = 4\sqrt{\frac{\ell}{2g}}\int\limits_0^{\theta_0} \frac{1}{\sqrt{\cos(\theta)-\cos(\theta_0)}}\ud\theta$$
+
+\begin{enumerate}
+ \item Écrire le code python d'une fonction \texttt{f(theta,theta0,g,l)} qui prend comme arguments l'angle $\theta$, la condition initiale $\theta_0$, l'accélération de la pesanteur $g$, la longueur du fil $\ell$ et qui renvoie la valeur de $4\sqrt{\tfrac{\ell}{2g}}\tfrac{1}{\sqrt{\cos(\theta)-\cos(\theta_0)}}$.
+\end{enumerate}
+
+Dans toute la suite, vous pouvez appeler dans vos codes et programmes la fonction \texttt{f} même si vous n'avez pas répondu à la première question.
+
+\begin{enumerate}
+\setcounter{enumi}{1}
+ \item Écrire le code python d'une fonction \texttt{periodRect(f,theta0,g,l,n)} qui prend comme arguments la fonction $f$, la condition initiale $\theta_0$, l'accélération de la pesanteur $g$, la longueur du fil $\ell$ et un entier $n$ et qui calcule la valeur approchée de la période du mouvement en utilisant la méthode d'intégration des rectangles grâce à $n$ rectangles. 
+\end{enumerate} 
+
+Dans toute la suite, vous pouvez appeler dans vos codes et programmes la fonction \texttt{periodRect} même si vous n'avez pas répondu à la question précédente.
+
+On sait que la période du mouvement est quasiment indépendante de l'amplitude pour les « petites amplitudes » (on parle d'isochronisme) et elle est alors approximativement égale $2\pi\sqrt{\tfrac{\ell}{g}}$ (période propre). Mais quand l'amplitude devient « grande », la période en dépend (perte d'isochronisme). Dans les conditions initiales précédentes, l'amplitude est égale $\theta_0$.
+
+\begin{enumerate}
+\setcounter{enumi}{2}
+ \item Proposer un programme permettant de tracer la courbe des valeurs de périodes calculées pour 100 valeurs d'angle initial régulièrement espacées dans l'intervalle $]0\,;\,\pi[$. La période $T$ sera évaluée grâce à la fonction \texttt{periodRect} et un nombre de rectangles $n=10000$. On prend : $g=\SI{9,81}{\meter\per\second\squared}$ et $\ell = \SI{1,00}{\meter}$.
+ 
+ \item En utilisant une méthode dichotomique, proposer un programme permettant de trouver à un dix-millième près la première valeur de $\theta_0$ pour laquelle la période est plus grande de plus de \SI{1}{\percent} de la valeur $2\pi\sqrt{\tfrac{\ell}{g}}$. L'exécution de ce programme devrait afficher à l'écran l'angle cherché.
+\end{enumerate}
+
+\newpage
+
+\section{Étude d'un algorithme -- Questions de cours}
+
+On considère la fonction \texttt{f} définie par le programme écrit en python suivant :
+
+\begin{listing}
+\begin{minted}[linenos,frame=lines]{python}
+def f(a):
+    i=1
+    n=0
+    while(i<=a):
+	if i%2 ==0:
+	    n=n+i
+	i=i+1
+	return n
+\end{minted}
+\caption{Fonction à étudier.}
+\label{prog:fonctionf}
+\end{listing}
+
+\begin{enumerate}
+ \item Que réalise l'opérateur \texttt{\%} ? 
+ \item À votre avis quel est le résultat retourné attendu par le concepteur de la fonction \texttt{f} ?
+ \item Expliquer pourquoi le programme proposé ne retourne pas le résultat attendu.
+ \item Proposer une modification du code afin que ce soit le cas.
+ \item Une fois le code corrigé, détailler ligne à ligne l'évolution des valeurs des variables \texttt{i} et \texttt{n} pour $a=5$.
+ \item Déterminer la complexité du programme.
+\end{enumerate}
+
+
+\end{document}
+
+

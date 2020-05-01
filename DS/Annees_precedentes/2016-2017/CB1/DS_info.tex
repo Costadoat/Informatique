@@ -1,0 +1,207 @@
+\documentclass[a4paper,12pt]{article}
+
+\input{/Users/G/Dropbox/PTSI/2016/macro}
+
+\excludecomment{solution}
+
+
+
+\begin{document}
+\noindent {\large PTSI\hfill 2016-2017}\\
+
+\begin{center}
+{\LARGE  \textbf{Devoir sur table n°2}  \bigskip }
+
+\rule{2.39cm}{0.05cm}
+
+\bi 
+
+{\large INFORMATIQUE }\bigskip
+
+{\large Jeudi 15 D\' ecembre}
+
+\rule{2.39cm}{0.05cm}
+\end{center}
+
+
+\noi\fbox{ \begin{minipage}{1\textwidth} 
+\begin{center}
+\textbf{Rappel des consignes}
+\end{center}
+Lorsqu'on \' ecrit un code Python, :
+\begin{itemize}
+\item faire attention \` a ce que les indentations soient visibles sur la copie;
+\item commenter le code de fa\c con \` a expliquer les grandes \' etapes de l'algorithme en ajoutant un commentaire en fin de ligne de code apr\` es le symbole $\sharp$.
+\end{itemize}
+\end{minipage}}
+
+\section*{Exercice 1}
+\noi Ecrire une fonction \verb?renverser? qui \` a une liste renvoie la liste renvers\' ee.\\
+Remarque : On n'utilisera \textbf{pas} la m\' ethode \verb?reverse? d\' ej\` a impl\' ement\' ee dans Python.
+\begin{verbatim}
+>>>L=[2,8,-1,7]
+>>>renverser(L)
+[7,-1,8,2]
+\end{verbatim}
+
+\section*{Exercice 2}
+\begin{enumerate}
+\item Ecrire une fonction \verb?maximum(liste)? qui renvoie le maximum d'une liste de nombres non tri\' ee.\\
+Remarque : On n'utilisera \textbf{pas} la fonction \verb?max? d\' ej\` a impl\' ement\' ee dans Python.
+\begin{verbatim}
+>>>L=[2,8,-7,3]
+>>>maximum(L)
+8
+\end{verbatim}
+\item Si on note $n$ la longueur de la liste, montrer que la complexit\' e de l'algorithme obtenu est $O(n)$\footnote{C'est-\` a-dire que le nombre d'op\' erations s'\' ecrit : $an+b$}. 
+\end{enumerate}
+
+
+\section*{Exercice 3}
+\noi L'objectif de cet exercice est de faire une liste des triangles qui v\' erifient les trois conditions suivantes :
+\begin{itemize}
+\item les c\^ ot\' es des triangles sont de mesure enti\` ere ;
+\item les triangles sont rectangles ;
+\item les triangles sont de p\' erim\` etre $p$ (la valeur de $p$ \' etant fix\' ee).
+\end{itemize}
+\begin{enumerate}
+\newpage
+\item Une fonction rectangle :
+\begin{enumerate}
+\item Ecrire une fonction \verb?rectangle(a,b,c)? qui prend comme entr\' ee trois entiers positifs et renvoie \verb?True? si le triangle dont les c\^ ot\' es de mesures $a$, $b$ et $c$ est un triangle rectangle et \verb?False? sinon.\\
+Exemple : 
+\begin{verbatim}
+rectangle(4,3,5)
+>>> True
+rectangle(2,7,1)
+>>> False
+\end{verbatim}
+\begin{solution}~\\
+\begin{verbatim}
+def rectangle(a,b,c):
+    A=a**2
+    B=b**2
+    C=c**2
+    if A==B+C or B==A+C or C==A+B:
+        return(True)
+    else:
+        return(False)
+\end{verbatim}
+\end{solution}
+\item On note $N_{rect}$ le nombre d'op\' erations de cet algorithme. Calculer $N_{rect}$.
+\begin{solution}
+\begin{itemize}
+\item Trois affectations, trois multiplications
+\item trois tests avec trois additions
+\item un return 
+\end{itemize}
+$N_{rect}=13$
+\end{solution}
+\end{enumerate}
+\item Une premi\` ere fonction :
+\begin{enumerate}
+\item On consid\` ere la fonction \verb?triangle? suivante. Que renvoie-t-elle ?
+\begin{verbatim}
+def triangle(p):
+   Liste=[]
+   for a in range(1,p+1):
+      for b in range(1,p+1):
+         for c in range(1,p+1):
+            if a+b+c==p:
+               Liste.append((a,b,c))
+   return(Liste)               
+\end{verbatim}
+\begin{solution}
+La fonction construit tous les triplets $(a,b,c)$ d'entiers compris entre 1 et $p$. Elle ne garde que ceux qui sont les mesures d'un triangle rectangle. Le p\' erim\` etre de ces triangles par contre n'est pas fix\' e. Il peut varier entre 3 et $3p$. 
+\end{solution}
+\item Modifier la fonction \verb?triangle? en une fonction \verb?triangle2? pour qu'elle renvoie la liste des triangles qui v\' erifient les trois conditions \' enonc\' ees au d\' ebut de l'exercice.
+\begin{solution}
+\begin{verbatim}
+def triangle2(p):
+   Liste=[]
+   for a in range(1,p+1):
+      for b in range(1,p+1):
+         for c in range(1,p+1):
+            if a+b+c==p:
+               if rectangle(a,b,c):                  
+                  Liste.append((a,b,c))
+   return(Liste)               
+\end{verbatim}
+\end{solution}
+\item D\' eterminer le nombre d'op\' erations effectu\' ees dans la fonction \verb?triangle2?. 
+\begin{solution}
+Pour la fonction \verb?triangle2? :
+\begin{itemize}
+\item une assignation
+\item $p$ it\' erations de chaque boucle, donc $p^3$ it\' erations de :
+\begin{itemize}
+\item 2 additions
+\item 1 test
+\item fonction rectangle : $N_{rect}$=13
+\item 1 test 
+\item un append
+\end{itemize}
+\item un return 
+\end{itemize}
+Le nombre d'op\' erations du premier algorithme est : \fbox{$N_{op}=2+18p^3$}
+\end{solution}
+\end{enumerate}
+\item Une deuxi\` eme fonction :
+\begin{enumerate}
+\item On introduit la fonction suivante :
+\begin{verbatim}
+def triangle3(p):
+   Liste=[]
+   for a in range(1,p//3+1):
+      for b in range(a,(p-a)//2+1):
+            if rectangle(a,b,p-a-b):
+               Liste.append((a,b,p-a-b))
+   return(Liste)                  
+\end{verbatim}
+\noi Expliquer pourquoi cette fonction renvoie aussi la liste des triangles cherch\' es.
+\begin{solution}
+La liste renvoy\' ee contient des triplets $(a,b,c)$ tels que $(a,b,c)$ v\' erifient la condition \verb?rectangle? et $c=p-a-b$. Donc ces triplets sont associ\' es \` a des triangles rectangles de p\' erim\` etre $p$. \\
+V\' erifions qu'on obtient bien tous les triangles cherch\' es avec cette fonction :\\
+\verb?a,b? et \verb?c? sont les trois longueurs des c\^ ot\' es. On choisit qu'ils seront dans l'ordre croissant : $a\pp b\pp c$.\\
+Le plus petit des c\^ ot\' es est n\' ecessairement inf\' erieur \` a $\frac{p}{3}$. En effet, si $a>\frac{p}{3}$, alors le p\' erim\` etre est : $a+b+c>3\times p/3=p$. Le p\' erim\` etre du triangle ne peut pas \^ etre $p$. \\
+Comme $a$ est un entier : $a\pp  \lfloor \frac{p}{3}\rfloor$. Donc $a$ parcourt : $1,2,\cdots \lfloor \frac{p}{3}\rfloor$.\\
+\verb?p//3? renvoie le quotient dans la division euclidienne de $p$ par 3, c'est donc $\lfloor \frac{p}{3}\rfloor$. Alors \verb?range(1,p//3+1)? est la liste $[1,2,3,\cdots, \lfloor \frac{p}{3}\rfloor]$.\\
+Maintenant que $a$ est fix\' e, les deux autres longueurs v\' erifient : $b\pg a$ et $b+c=p-a$. Encore une fois, l'une des deux longueurs est n\' ecessairement inf\' erieures \` a $\frac{p-a}{2}$ (si $b$ et $c$ sont strictement plus grand que $\frac{p-a}{2}$, alors $a+b+c>p$.) On choisit : $b\pp \frac{p-a}{2}$. Donc \verb?b in range(a,(p-a)//2+1)?.\\
+Enfin, comme la longueur du p\' erim\` etre est fix\' ee : $c=p-a-b$. \\
+On obtient donc bien la liste cherch\' ee.
+\end{solution}
+\item Montrer que le nombre d'op\' erations $N_{op}$ de la fonction \verb?triangle3? v\' erifie :
+\[N_{op}\pp 2+17\left( \dfrac{p^2}{12}+\dfrac{p}{12} \right)\]
+\begin{solution}
+Second algorithme :
+\begin{itemize}
+\item une assignation
+\item $\lfloor \frac{p}{3}\rfloor $ it\' erations de la premi\` ere boucle,
+\item $\lfloor \frac{p-a}{2}\rfloor $ it\' erations de la deuxi\` eme boucle,
+\begin{itemize}
+\item 2 soustractions
+\item fonction rectangle : $N_{rect}$=13
+\item 1 test 
+\item un append
+\end{itemize}
+\item un return
+\end{itemize}
+La complexit\' e du premier algorithme est : $N_{op}=2+\dsum_{a=1}^{\lfloor \frac{p}{3}\rfloor}\dsum_{b=a}^{\lfloor \frac{p-a}{2}\rfloor} 17$.\\
+On utilisera l'encadrement : $x-1\pp \lfloor x\rfloor \pp x$.\\
+$N_{op}=2+17\dsum_{a=1}^{\lfloor \frac{p}{3}\rfloor} (\lfloor \frac{p-a}{2}\rfloor -a+1)\pp 2+17 \dsum_{a=1}^{\lfloor \frac{p}{3}\rfloor} (\frac{p-a}{2}+1-a)$\\
+$N_{op}\pp 2+17 \dsum_{a=1}^{\lfloor \frac{p}{3}\rfloor} (\frac{p}{2}+1-\frac{3}{2}a)=2+17\left[(\frac{p}{2}+1)(\lfloor \frac{p}{3}\rfloor)-\frac{3}{2}\dfrac{\lfloor \frac{p}{3}\rfloor(\lfloor \frac{p}{3}\rfloor+1)}{2}\right]$.\\
+$N_{op}\pp 2+17 \dfrac{p}{3}\left[(\frac{p}{2}+1)-\frac{3}{2}\dfrac{(\frac{p}{3}+1)}{2}\right]=2+17(\dfrac{p^2}{12}+\dfrac{p}{12} )$.\\
+\fbox{$N_{op}\pp 2+17\left( (\dfrac{p^2}{12}+\dfrac{p}{12} \right)$}
+\end{solution}
+\item Comparer la complexit\' e des deux algorithmes. Lequel est le plus rapide pour des grandes valeurs de $p$ ?
+\begin{solution}
+Pour le premier, $N_{op}=2+18p^3$. Donc la complexit\' e est en $O(p^3)$.\\
+Pour le second, $N_{op}\pp 2+17\left( (\dfrac{p^2}{12}+\dfrac{p}{12} \right)$. Donc la complexit\' e est en $O(p^2)$.\\
+Quand $p$ est grand, le deuxi\` eme algorithme est le plus rapide.
+\end{solution}
+\end{enumerate} 
+\end{enumerate}
+
+
+
+\end{document}

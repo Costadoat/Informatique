@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{Newton2}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,}\PYG{n}{fprime}\PYG{p}{,}\PYG{n}{x0}\PYG{p}{,}\PYG{n}{epsilon}\PYG{p}{):}
+    \PYG{n}{x0}\PYG{o}{=}\PYG{n+nb}{float}\PYG{p}{(}\PYG{n}{x0}\PYG{p}{)}
+    \PYG{n}{x1}\PYG{o}{=}\PYG{n}{x0}\PYG{o}{\PYGZhy{}}\PYG{n}{f}\PYG{p}{(}\PYG{n}{x0}\PYG{p}{)}\PYG{o}{/}\PYG{n}{fprime}\PYG{p}{(}\PYG{n}{x0}\PYG{p}{)}
+    \PYG{n}{compteur}\PYG{o}{=}\PYG{l+m+mi}{0}    \PYG{c+c1}{\PYGZsh{} on compte le nb d iterations de la boucle}
+    \PYG{c+c1}{\PYGZsh{} test d arret : on itere la boucle si l ecart entre xn et x(n+1) est grand}
+    \PYG{c+c1}{\PYGZsh{} et si on a fait moins de 1000 iterations}
+    \PYG{k}{while} \PYG{n+nb}{abs}\PYG{p}{(}\PYG{n}{x1}\PYG{o}{\PYGZhy{}}\PYG{n}{x0}\PYG{p}{)}\PYG{o}{\PYGZgt{}}\PYG{n}{epsilon} \PYG{o+ow}{and} \PYG{n}{compteur}\PYG{o}{\PYGZlt{}}\PYG{l+m+mi}{1000} \PYG{p}{:}
+        \PYG{n}{x0}\PYG{o}{=}\PYG{n}{x1}
+        \PYG{n}{x1}\PYG{o}{=}\PYG{n}{x1}\PYG{o}{\PYGZhy{}}\PYG{n}{f}\PYG{p}{(}\PYG{n}{x1}\PYG{p}{)}\PYG{o}{/}\PYG{n}{fprime}\PYG{p}{(}\PYG{n}{x1}\PYG{p}{)}
+        \PYG{n}{compteur}\PYG{o}{=}\PYG{n}{compteur}\PYG{o}{+}\PYG{l+m+mi}{1}
+    \PYG{k}{return}\PYG{p}{(}\PYG{n}{x1}\PYG{p}{)}
+\end{Verbatim}

@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{ent}\PYG{p}{(}\PYG{n}{x}\PYG{p}{):}
+    \PYG{k}{return} \PYG{n}{x}\PYG{o}{//}\PYG{l+m+mi}{1} \PYG{c+c1}{\PYGZsh{} renvoie le quotient de la division}
+                \PYG{c+c1}{\PYGZsh{} euclidienne de x par 1}
+                \PYG{c+c1}{\PYGZsh{} c\PYGZsq{}est\PYGZhy{}à\PYGZhy{}dire sa partie entière}
+\end{Verbatim}

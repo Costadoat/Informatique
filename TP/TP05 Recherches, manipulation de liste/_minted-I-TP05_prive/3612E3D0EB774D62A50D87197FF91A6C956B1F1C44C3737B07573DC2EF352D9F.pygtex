@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{positionMax}\PYG{p}{(}\PYG{n}{liste}\PYG{p}{):}
+    \PYG{n}{n} \PYG{o}{=} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{liste}\PYG{p}{)}
+    \PYG{n}{indexMax} \PYG{o}{=} \PYG{l+m+mi}{0}
+    \PYG{n+nb}{max} \PYG{o}{=} \PYG{n}{liste}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{n}\PYG{p}{):}
+        \PYG{k}{if} \PYG{n}{liste}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{\PYGZgt{}} \PYG{n+nb}{max} \PYG{p}{:}
+            \PYG{n+nb}{max} \PYG{o}{=} \PYG{n}{liste}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}
+            \PYG{n}{indexMax} \PYG{o}{=} \PYG{n}{i}
+    \PYG{k}{return} \PYG{n}{indexMax}\PYG{p}{,}\PYG{n+nb}{max}
+\end{Verbatim}

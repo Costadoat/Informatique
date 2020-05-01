@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{mystere}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{):}
+    \PYG{n}{t}\PYG{o}{=}\PYG{l+m+mi}{0}
+    \PYG{k}{while} \PYG{n}{i} \PYG{o}{\PYGZgt{}=}\PYG{l+m+mi}{1}\PYG{p}{:}
+        \PYG{k}{if} \PYG{n}{par}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)}\PYG{o}{==}\PYG{l+m+mi}{1}\PYG{p}{:}
+            \PYG{n}{t}\PYG{o}{=}\PYG{n}{t}\PYG{o}{+}\PYG{n}{j}
+        \PYG{n}{j}\PYG{o}{=}\PYG{n}{j}\PYG{o}{*}\PYG{l+m+mi}{2}
+        \PYG{n}{i}\PYG{o}{=}\PYG{n}{ent}\PYG{p}{(}\PYG{n}{i}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{p}{)}
+        \PYG{k}{print}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{,}\PYG{n}{t}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{t}
+
+\PYG{k}{print}\PYG{p}{(}\PYG{n}{mystere}\PYG{p}{(}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{l+m+mi}{8}\PYG{p}{))}
+\end{Verbatim}

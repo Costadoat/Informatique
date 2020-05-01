@@ -1,0 +1,163 @@
+\documentclass[a4paper,12pt]{article}
+
+\input{../../../macro_Juliette}
+
+
+\excludecomment{solution}
+
+\begin{document}
+\noindent {PTSI \hfill 2017-2018}
+
+ \begin{center}
+  \begin{large}
+  \fbox{DS Informatique n°3 -- Partie écrite. Durée : 1 heure}
+  \end{large}
+ \end{center}
+
+\begin{boxedminipage}{\textwidth} 
+Lorsqu'on écrit un code Python : faire attention à ce que les indentations soient visibles sur la copie ; commenter le code de façon à expliquer les grandes étapes de l'algorithme en ajoutant un commentaire en fin de ligne de code après le symbole $\sharp$.
+\end{boxedminipage}
+ 
+
+
+\section*{Exercice 1}
+\noi On considère la fonction suivante :
+\begin{verbatim}
+def algorithme(f,df,x0,n):
+    x=float(x0)
+    for i in range(1,n+1):
+        x=x-f(x)/df(x)
+    return(x) 
+\end{verbatim}
+\begin{enumerate}
+\item \begin{enumerate}
+\item Déterminer en fonction de \verb?n? la complexité de l'algorithme en supposant que les appels de \verb?f? et \verb?df? valent une opération chacun.
+\begin{solution}
+\begin{itemize}
+\item 2 opérations : \verb?x=float(x0)?
+\item on répète $n$ fois 5 opérations : \verb?x=x-f(x)/df(x)?
+\item 1 opération \verb?return?
+\end{itemize}
+La complexité est : \fbox{$5n+3$ donc $O(n)$ donc linéaire.}
+\end{solution}
+\item Quel est le nom de l'algorithme que code la fonction \verb?algorithme? ? A quoi sert-il ?
+\begin{solution}
+\fbox{C'est la méthode de Newton.} Elle permet de déterminer une approximation d'une solution de l'équation $f(x)=0$.
+\end{solution}
+\item Donner un avantage et un inconvénient de cette méthode.
+\begin{solution}
+Avantages : la convergence est très rapide (convergence quadratique)
+Inconvénient : il faut connaitre $f'$ ; si $f'$ s'annule, l'algorithme peut diverger ou boucler. On n'est pas sûr que le résultat renvoyé est bien une approximation d'une solution.
+\end{solution}
+\end{enumerate}
+\item On va se servir de cette fonction pour calculer une approximation de $\sqrt{2}$. On prendra : $f(x)=x^2-2$ et $df(x)=2x$.
+\begin{enumerate}
+\item Donner en fonction de la valeur de \verb?x0? le comportement de l'algorithme.
+\begin{solution}
+\begin{itemize}
+\item si \verb?x0? $> 0$, l'algorithme va converger vers $\sqrt{2}$.
+\item si \verb?x0? $<0$, l'algorithme va converger vers $-\sqrt{2}$.
+\item si \verb?x0? $=0$, $f'(0)=0$. L'algorithme s'arrête et renvoie un message d'erreur.
+\end{itemize}
+\end{solution}
+\item Que renvoie \verb?algorithme(f,df,1,0)?, \verb?algorithme(f,df,1,1)?, \verb?algorithme(f,df,1,2)? ? On donnera les résultats sous forme d'une fraction puis sous forme d'un nombre décimal avec 4 chiffres significatifs.
+\begin{solution}
+$x_0=1=1,000$
+$x_1=\dfrac{3}{2}=1,500$\\
+$x_2=\dfrac{17}{12}=1,416666\approx 1,417$
+\end{solution}
+\end{enumerate}
+\item On veut écrire un algorithme utilisant la méthode de la dichotomie avec comme critère d'arrêt un nombre donné d'itérations.
+\begin{enumerate}
+\item Écrire en python une fonction \verb?dichotomie? qui prend comme entrée la fonction à étudier, les deux extrémités $a$ et $b$ de l'intervalle de départ et un nombre d'itérations $n$ et qui renvoie $c$ approximation de la solution.
+\begin{solution}
+\begin{verbatim}
+def dichotomie(f,a,b,n):
+	for i in range(n):
+		c=(a+b)/2.
+		if f(a)*f(c)<0:
+			b=c
+		else:
+			a=c
+	return((a+b)/2.)				
+\end{verbatim}
+\end{solution}
+\item Donner un avantage et un inconvénient à cette méthode.
+\begin{solution}
+Avantage : dès que $f(a)$ et $f(b)$ sont de signes opposés, l'algorithme converge toujours ; il n'y a pas à connaitre $f'$.
+Inconvénient : la converge est plus lente (convergence linéaire)
+\end{solution}
+\end{enumerate}
+\item On reprend $f(x)=x^2-2$.
+\begin{enumerate}
+\item Que renvoie \verb?dichotomie(f,0,2,0)?, \verb?dichotomie(f,0,2,1)?, \verb?dichotomie(f,0,2,2)? ? On donnera les résultats sous forme d'une fraction puis sous forme d'un nombre décimal avec 4 chiffres significatifs.
+\begin{solution}
+\verb?dichotomie(f,0,2,0)? renvoie $1=1,000$\\
+\verb?dichotomie(f,0,2,1)? renvoie $\dfrac{1}{2}=1,500$\\
+\verb?dichotomie(f,0,2,2)? renvoie $\dfrac{5}{4}=1,250$\\
+\end{solution}
+\item On donne comme valeur approximative de $\sqrt{2}$ à 11 chiffres significatifs :
+\[\sqrt{2}\approx 1,4142135624\]
+Pour un nombre d'itérations égal à 0 puis 1 puis 2, donnez le nombre de décimales exactes obtenues avec la fonction \verb?algorithme? et avec la fonction \verb?dichotomie?. Qu'en pensez-vous ?
+\begin{solution}
+Nombre de décimales exactes en fonction du nombre d'itérations : \\
+\begin{tabular}{c|c|c}
+Nombre d'itérations & avec \verb?algorithme? & avec \verb?dichotomie?  \\ \hline
+0 & 0 &0\\
+1&0&0\\2&2&0
+\end{tabular}\\
+\fbox{La méthode de Newton est plus rapide}
+\end{solution}
+\end{enumerate}
+\end{enumerate}
+
+
+\section*{Exercice 2 : pivot de Gauss}
+\begin{enumerate}
+\item Soit $A$ une matrice carrée de taille $n\times n$. Donner en français les étapes de l'algorithme du pivot de Gauss permettant de résoudre le système $Ab=c$. On admettra que le système est un système de Cramer.
+\begin{solution}
+Pour i allant de 1 à n(taille de A) :
+\begin{itemize}
+\item dans la colonne i, on cherche la plus grande valeur absolue parmi $a_{i,i},\cdots,a_{n,i}$ : ce sera la valeur du pivot. La ligne du pivot devient ligne de référence.
+\item  on échange la ligne de référence avec la ligne $i$
+\item on divise la ligne de référence par la valeur du pivot
+\item grâce à la ligne de référence, on élimine les termes au-dessus et en dessous du pivot par des opérations de transvections : $L_k\longleftarrow L_k-A[k,i]L_i$
+\item on obtient la matrice identité
+\item on effectue dans le même ordre toutes ces opérations sur c. Le vecteur colonne obtenu est le résultat.
+\end{itemize}
+\end{solution}
+\item On considère une matrice carrée de taille $n$ : $A=(a_{i,j})_{1\pp i,j\pp n}$. Ecrire en python une fonction \verb?ligneRef? qui prend comme entrée une matrice $A$ et un numéro de ligne $i$ et qui renvoie le numéro de la ligne où se trouve le terme le plus grand en valeur absolue entre $a_{i,i},\cdots,a_{n,i}$.
+\begin{solution}
+\begin{verbatim}
+def ligneRef(A,i):
+    n=len(A)
+    kmax = i
+    for k in range(i+1,n):
+        if abs(A[k,i]) > abs(A[kmax,i])
+            kmax = k
+    return kmax
+\end{verbatim}
+\end{solution}
+\item Le rang d'une matrice est donné par le nombre de pivots non nuls. Ecrire une fonction \verb?rang? qui prend comme entrée une matrice $C$ carrée de taille $n\times n$ et qui renvoie le rang de la matrice. (on pourra utiliser la fonction \verb?ligneRef?)
+\begin{solution}
+Voir le programme.\\
+Le principe : de la même fa\c con que dans l'algorithme du pivot de Gauss, on échelonne la matrice. Si on rencontre un pivot nul, le rang diminue.
+\end{solution}
+\item On considère la matrice suivante :
+\[C=\begin{pmatrix}
+\frac{1}{2}&1&1\\[0.2cm]
+\frac{1}{3}&1&0\\[0.2cm]
+\frac{1}{6}&0&1
+\end{pmatrix}\]
+Avec python, \verb?rang(C)? renvoie 3. Qu'en pensez-vous ?
+\begin{solution}
+Si on calcule à la main la rang de la matrice, on trouve \fbox{rg$C=2$.} On constate que $L_1=L_2+L_3$.\\
+Pourquoi python ne renvoie pas la bonne valeur : python travaille avec des valeurs approchées. Dans ce cas, $\dfrac{1}{2}-\dfrac{1}{3}-\dfrac{1}{6}$ est approximé par un nombre qui n'est pas nul. 
+\end{solution}
+\end{enumerate}
+
+
+
+
+
+\end{document}

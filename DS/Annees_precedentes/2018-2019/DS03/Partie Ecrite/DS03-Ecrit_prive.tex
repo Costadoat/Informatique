@@ -1,0 +1,169 @@
+\input{intro}
+\input{../../../Header_Willie}
+
+%\excludecomment{solution}
+%\excludecomment{exercice}
+
+\begin{document}
+
+\begin{center}
+{\Large\bf {\type} \no {\num}}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+Faites les deux exercices sur deux feuilles séparées.
+
+\section*{Exercice 1 --  Résolution d'équations}
+Soit $f$ une fonction donnée. On cherche à calculer une approximation d'une solution de l'équation : $f(x)=0$.
+\begin{enumerate}
+\item Avec la méthode de la dichotomie : \\
+Écrire une fonction \verb?dicho? qui prend comme entr\' ee la fonction $f$ \` a \' etudier, les bornes initiales $a$ et $b$, la pr\' ecision $\epsilon$ et qui renvoie $\dfrac{a_n+b_n}{2}$, approximation d’une solution \` a $\epsilon$ pr\` es.
+\begin{solution}~\\
+\vspace{-1cm}
+\begin{minted}[linenos,frame=lines]{python}
+def dicho(f,a,b,eps):               
+    while (b-a)>2*eps:
+        c=(float(a)+b)/2
+        if f(a)*f(c)<0:
+            b=c
+        else:
+            a=c    
+    return((a+b)/2.)
+\end{minted}    
+\end{solution}
+\item Avec la méthode de Newton :\\
+\' Ecrire une fonction \verb?Newton? qui prend comme entr\' ee la fonction \` a \' etudier, sa d\' eriv\' ee, une valeur initiale de la suite $x_0$, la pr\' ecision $\epsilon$ et qui renvoie $x_n$ approximation de la solution.
+\begin{solution}~\\
+\vspace{-1cm}
+\begin{minted}[frame=lines]{python}
+def Newton(f,fprime,x0,epsilon):
+    x=float(x0)
+    compteur=0
+    # l ecart entre xn et x(n+1) est f(xn)/fprime(xn)
+    while abs(f(x)/fprime(x))>epsilon and compteur<1000 : 
+        x=x-f(x)/fprime(x)
+        compteur=compteur+1
+    return(u)        
+\end{minted}    
+\end{solution}
+\item Donner un avantage et un inconvénient de la méthode de Newton par rapport à la méthode de la dichotomie.
+\begin{solution}
+La méthode de Newton converge plus rapidement que la dichotomie. Mais elle ne converge pas forcément. Alors que si $f(a)$ et $f(b)$ sont de signes opposés, la dichotomie converge nécessairement vers l'une des solutions. 
+\end{solution}
+\end{enumerate}
+
+
+
+
+
+\section*{Exercice 2 -- Approximation d'une intégrale}
+Soit $f$ une fonction donnée. On souhaite approximer la valeur de l'intégrale $\displaystyle \int_a^b f$ avec différentes méthodes.
+\subsection{Cas où f est connue}
+Dans cette partie, on travaille avec une fonction $f$ connue sur tout l'intervalle $[a,b]$.
+On subdivise l'intervalle $[a,b]$ en $n$ intervalles du type $[x_i,x_{i+1}]$, de même longueur avec : \\ $a=x_0<x_1<\cdots <x_n=b$.
+\begin{enumerate}
+\item Avec la méthode des rectangles : \\
+sur chaque intervalle $[x_i,x_{i+1}]$, on approxime $f$ par une constante. \\
+Coder un algorithme qui calcule une approximation de $\displaystyle\int_0^{\frac{3\pi}{2}}\cos(x)dx$ avec 2019 intervalles.
+\begin{solution}~\\
+\vspace{-1cm}
+\begin{minted}[frame=lines]{python}
+x=linspace(0,3*pi/2,2020)
+integrale=0
+for i in range(2019):
+   integrale=integrale+cos(x[i])*(x[i+1]-x[i])	
+print integrale	
+\end{minted}
+\end{solution}
+\item Avec la méthode de Simpson : \\
+sur chaque intervalle $[x_i,x_{i+1}]$, on approxime $f$ par un polynôme de degré deux. Dans ce cas, l'intégrale est approximée par :
+\[    {\displaystyle   \int_a^b f(x)dx\approx\frac {b-a}{6n}\left(\sum_{i=0}^{n-1} f(x_i)+4f\left( \frac{x_i+x_{i+1}}{2}\right)+f(x_{i+1}) \right)}\]
+Ecrire un programme qui calcule une approximation de $\displaystyle   \int_a^b f$ par la méthode de Simpson.\\ 
+(On supposera que \verb?f?, \verb?n?, \verb?a? et \verb?b? sont déjà définis dans le programme.)
+\begin{solution}~\\
+\vspace{-1cm}
+\begin{minted}[frame=lines]{python}
+x=linspace(a,b,n+1)
+integrale=0
+for i in range(n):
+   integrale=integrale+(b-a)*1./(6*n)*(f(x[i])+4*f((x[i+1]+x[i])/2.)+f(x[i+1]))
+print integrale	
+\end{minted}
+\end{solution}
+\end{enumerate}
+\subsection{Avec lecture de fichiers}
+Dans cette partie, la fonction $f$ n'est connue qu'en certains points, dont les coordonn\' ees sont situ\' ees dans un fichier. Ce fichier \texttt{coordonnee.csv}, situé dans le répertoire de travail, contient une quinzaine de lignes selon le modèle suivant :
+\[0.0;1.00988282142\]
+\[0.1;1.0722126449\]
+Chaque ligne contient deux valeurs flottantes séparées par un point-virgule, représentant respectivement l'abscisse et l'ordonnée d'un point. Les points sont ordonnés par abscisses croissantes.
+\begin{enumerate}
+\item Rappeler quels sont les différents modes d'ouverture d'un fichier texte à l'aide de Python, et les différences entre ces modes.
+\begin{solution}
+Il est possible d'ouvrir un fichier dans plusieurs \textit{modes} : lire (\verb|'r'|), ajouter à la fin (\verb|'a'|), écrire (\verb|'w'|). 
+\end{solution}
+\item \'Ecrire une séquence d'instructions en Python permettant d'effectuer les opérations suivantes sur le fichier \texttt{coordonnee.csv} :\\
+Ouvrir le fichier en lecture, le lire et construire deux listes de flottants : la liste \verb?LX? des abscisses et la liste \verb?LY? des ordonnées contenues dans ce fichier.
+\begin{solution}~\\
+\vspace{-1cm}
+\begin{minted}[frame=lines]{python}
+fichier=open('coordonnee.csv','r')
+
+LX=[]
+LY=[]
+
+for ligne in fichier.readlines():
+    LX.append(float(ligne.strip().split(";")[0]))
+    LY.append(float(ligne.strip().split(";")[1]))
+\end{minted}
+\end{solution}
+\item Avec la méthode des trapèzes : \\
+sur chaque intervalle, on approxime $f$ par un polynôme de degré 1.\\
+Ecrire une fonction \verb?trapeze? qui prend comme entrée deux listes de taille $n+1$ : $(x_0,\cdots x_n)$ et $(y_0,\cdots,y_{n})$ et qui renvoie :
+\[\displaystyle \sum_{i=0}^{n-1} (x_{i+1}-x_i)\dfrac{y_{i+1}+y_i}{2}\]
+\begin{solution}~\\
+\vspace{-1cm}
+\begin{minted}[frame=lines]{python}
+def trapeze(LX,LY):
+    integrale=0
+    for i in range(len(LX)-1) :
+        integrale=integrale+(LX[i+1]-LX[i])*(Y[i+1]+Y[i])*1./2
+    return integrale
+\end{minted}
+\end{solution}
+\item Valeur moyenne et écart-type :\\
+Par définition, la valeur moyenne et l'écart-type d'une fonction $f$ sur $[x_0,x_n]$ sont donnés par :
+\begin{itemize}
+\item valeur moyenne : $M_f=\displaystyle{ \frac{1}{x_n-x_0} \int_{x_0}^{x_n} f(x)dx}$\medskip 
+\item écart-type : $\displaystyle{\sigma_f=\sqrt{\dfrac{1}{x_n-x_0}\int_{x_0}^{x_n}(f(x)-M_f)^2dx}}$
+\end{itemize}
+Ecrire un programme qui calcule une valeur approximative de $\sigma_f$. (On pourra faire appel à la fonction \verb?trapeze?)
+\begin{solution}~\\
+\vspace{-1cm}
+\begin{minted}[frame=lines]{python}
+Mf=1./(LX[-1]-LX[0])*trapeze(LX,LY)
+
+LY_sigma=[]
+for y in LY:
+	LY_sigma.append((y-Mf)**2)
+
+variance=1./(LX[-1]-LX[0])*trapeze(LX,LY_sigma)		
+sigma=sqrt(variance)	
+\end{minted}
+
+Méthode 2 : 
+\begin{minted}[frame=lines]{python}
+Mf=1./(LX[-1]-LX[0])*trapeze(LX,LY)
+
+LY_sigma=(LY-Mf)**2
+
+variance=1./(LX[-1]-LX[0])*trapeze(LX,LY_sigma)		
+sigma=sqrt(variance)
+\end{minted}
+
+\end{solution}
+\end{enumerate}
+
+
+
+\end{document}

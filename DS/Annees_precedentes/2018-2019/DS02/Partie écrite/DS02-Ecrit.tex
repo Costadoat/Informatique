@@ -1,0 +1,66 @@
+\input{intro}
+\input{../../../Header_Willie}
+
+\excludecomment{solution}
+%\excludecomment{exercice}
+
+\begin{document}
+
+\begin{center}
+{\Large\bf {\type} \no {\num} -- \descrip}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+\section{Exercice de cours -- Classement d'une liste}
+
+On considère une liste de valeurs flottantes non classées. La liste des valeurs est déjà définie dans le programme et est stockée dans une variable appelée \texttt{tab}.
+
+Écrire en langage Python un algorithme qui permet d'obtenir à la fin une nouvelle liste des valeurs classées par ordre croissant, stockée dans une variable appelée \texttt{tab2}.
+
+\section{Exercice de TP -- Recherche d'un mot dans une cha\^ ine de caract\` eres}
+\begin{enumerate}
+\item Écrire une fonction \verb?estIci(motif,texte,i)? qui a comme entr\' ee deux listes (ou deux cha\^ ines de caract\` eres) \verb?motif? et \verb?texte? et un entier \verb?i? et qui renvoie \verb?True? si \verb?motif? est dans \verb?texte? \` a la position \verb?i? et \verb?False? sinon.
+\begin{minted}{python}
+>>>estIci('le','Bonjour le monde',8)
+True
+>>>estIci('le','Bonjour le monde',9)
+False
+\end{minted} 
+\end{enumerate}
+
+On propose ci-dessous le code en Python d'une fonction \verb?recherche(motif,texte)? qui a comme entr\' ee deux listes (ou deux cha\^ ines de caract\` eres) et qui renvoie \verb?True? si \verb?motif? est dans \verb?texte? et \verb?False? sinon.
+
+\begin{minted}[frame=lines]{python}
+def recherche(motif,texte):
+    n = len(texte)
+    p = len(motif)
+    # si motif est plus long que texte, on renvoie False
+    if p>n:
+        return False
+    else:
+    # par défaut, Resultat est False
+        resultat=False
+        i=0
+        # on cherche motif dans texte à toutes les positions i 
+        while i <= n-p and resultat==False:
+            resultat=estIci(motif,texte,i)
+            i = i + 1
+        return resultat           
+\end{minted}
+
+\begin{enumerate}
+\setcounter{enumi}{1}
+\item D\' eterminer la complexit\' e de l'algorithme de recherche d'un motif dans une liste.\\
+\textit{Indication :} On se placera dans le pire des cas. La complexit\' e d\' ependra de la longueur de \verb?motif? et de celle de \verb?liste?
+\end{enumerate}
+
+
+\section{Exercice -- Croissance d'une suite}
+
+On considère une suite de termes réels, représentés en langage Python par une liste de valeurs flottantes. On considère que la liste des valeurs est déjà définie dans le programme dans une variable appelée \texttt{u}.
+
+Écrire en langage Python un algorithme qui détermine si la suite est strictement croissante et si non, le premier rang pour lequel elle n'est pas croissante.
+
+
+\end{document}

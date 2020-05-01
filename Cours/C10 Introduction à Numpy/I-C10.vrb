@@ -1,0 +1,9 @@
+\frametitle{Solveurs matriciels: Exercice}
+Proposer un code utilisant la bibliothèque Numpy permettant de résoudre le système d'équations suivant.
+
+\begin{flushleft}
+$\left\{\begin{array}{l}
+x-3*y+8*z=-16 \\ 2*x+3*y-4*z=24 \\ 2*y-3*z=7 \\ 8*x-3*z=17
+\end{array}\right.$
+\end{flushleft}
+\vspace{3cm}

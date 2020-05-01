@@ -1,0 +1,81 @@
+\documentclass[a4paper,12pt]{article}
+
+\input{../../../macro_Juliette}
+
+\excludecomment{solution}
+
+
+
+\begin{document}
+\noindent {\large PTSI\hfill 2017-2018}\\
+
+\begin{center}
+{\LARGE  \textbf{Devoir machine}  \bigskip }
+
+\rule{2.39cm}{0.05cm}
+
+\bi 
+
+{\large Informatique}\bigskip
+
+{\large Samedi 29 mai}
+
+\rule{2.39cm}{0.05cm}
+\end{center}
+
+\begin{center}
+\fbox{ \begin{minipage}{1\textwidth} 
+\begin{itemize}
+\bul Faire tous les exercices dans un même fichier NomPrenom.py que vous sauvegarderez dans le dossier.
+\bul Mettez en commentaire l'exercice que vous traitez.
+\bul N'oubliez pas de commentez votre code.
+\bul Aucune aide ne sera donnée. %GNA
+\end{itemize}
+\end{minipage}}
+\end{center}
+
+
+\section*{Exercice en plus}
+\noi On cherche à écrire une fonction qui donne la liste de toutes les parties d'un ensemble d'entiers naturels $E$ : $\mathcal{P}(E)$.\\
+Pour cela, on associe une liste $L$ composée de $0$ et de $1$ à une partie, de telle sorte qu'on ne prenne que les éléments de $E$ qui ont un indice qui correspond à 1 dans la liste $L$.\\
+Par exemple, si $E=[1,7,4,11]$, la partie associée à $L=[0,1,0,1]$ est $[7,11]$.
+\begin{enumerate}
+\item Ecrire une fonction \verb?partie? qui prend en argument une liste d'entiers naturels $E$ et une liste $L$ de même longueur, composée de 0 et 1 et qui renvoie la partie de $E$ associée.
+\item En commentaire, donner l'écriture binaire de 23. 
+\item Ecrire une fonction \verb?binaire? qui prend en argument un entier $k$ et qui renvoie son nombre binaire sous forme de liste. Par exemple, \verb?binaire(2)? renvoie $[1,0]$.\\
+On n'utilisera pas la fonction \verb?bin?.%GNA ?
+\item Ecrire une fonction \verb?P? qui prend comme argument $E$ et renvoie la liste de toutes les parties de $E$.
+\end{enumerate}
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+\section*{Exercice 2}
+Soit $n$ un entier naturel non nul et une liste \verb?t? de longueur $n$ dont les termes valent 0 ou 1. Le but de cet exercice est de trouver le nombre maximal de 0 contigus dans \verb?t? (c'est-à-dire figurant dans des cases consécutives). Par exemple, le nombre maximal de zéros contigus dans la liste \verb?t1? suivante vaut 4 :
+\[\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline 
+\verb?i?  & 0&1&2&3&4&5&6&7&8&9&10&11&12&13&14\\ \hline
+ \verb?t1[i]? &0&1&1&1&0&0&0&1&0&1&1&0&0&0&0 \\ \hline
+\end{array} \]
+\begin{enumerate}
+\item Ecrire une fonction \verb?nombreZeros(t,i)?, prenant en paramètres une liste \verb?t?, de longueur $n$ et un indice $i$ compris entre $0$ et $n-1$ et renvoyant :
+\[ \left\lbrace \begin{array}{ll}
+0 \quad  \text{ si } \verb?t?[i]=1\\
+\text{le nombre de zéros consécutifs dans } \verb?t? \text{ à partir de }\verb?t?[i],\quad \text{ si } \verb?t?[i]=0
+\end{array}\right.\]
+Par exemple, les appels \verb?nombreZeros(t1,4), nombreZeros(t1,1), nombreZeros(t1,8)? renvoient respectivement les valeurs 3,0 et 1.
+\item Comment obtenir le nombre maximal de zéros contigus d'une liste \verb?t? connaissant la liste des \verb?nombreZeros(t,i)? pour $0\pp i\pp n-1$ ?\\
+En déduire une fonction \verb?nombreZerosMax(t)?, de paramètre \Verb?t?, renvoyant le nombre maximal de 0 contigus d'une liste \verb?t? non vide. On utilisera la fonction \verb?nombreZeros?.
+\item Importer ? %GNA
+\item Complexité ? %GNA
+\item Plus performant ? %GNA
+\end{enumerate}

@@ -1,0 +1,23 @@
+\frametitle{Tracé de formes}
+
+Déterminer les $k_i$, $\omega_i$, $\varphi_i$ et $c_i$ et coder le tracé du profil de vitesse $v(t)=\dot{x}(t)$ suivant:
+\begin{itemize}
+ \item $0\leq t \leq 1: \dot{x}(t)=k_1.sin(\omega_1.t+\varphi_1)+c_1$,
+ \item $1 < t \leq 3: \dot{x}(t)=v_{max}$,
+ \item $3 < t \leq 5: \dot{x}(t)=k_2.sin(\omega_2.t+\varphi_2)+c_2$.
+\end{itemize}
+
+
+\begin{minipage}{0.6\linewidth}
+\begin{GrayBox}[0.85\textwidth]
+
+\vspace{3cm}
+
+\end{GrayBox}
+\end{minipage}\hfill
+\begin{minipage}{0.36\linewidth}
+\begin{center}
+ \includegraphics[width=1\linewidth]{img/courbe6}
+\end{center}
+\end{minipage}
+

@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+	\PYG{n}{dfleche}\PYG{o}{=}\PYG{n}{dfleche}\PYG{o}{\PYGZhy{}}\PYG{n}{dfleche}\PYG{p}{[}\PYG{l+m+mi}{500}\PYG{p}{]}
+	\PYG{n}{plt}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{x}\PYG{p}{[:}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{dfleche}\PYG{p}{)],}\PYG{n}{dfleche}\PYG{p}{)}
+\end{Verbatim}

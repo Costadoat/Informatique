@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{decimal} \PYG{k+kn}{import} \PYG{n}{Decimal}
+\PYG{n}{Decimal}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{o}{/}\PYG{l+m+mf}{3.}\PYG{p}{)}
+\end{Verbatim}

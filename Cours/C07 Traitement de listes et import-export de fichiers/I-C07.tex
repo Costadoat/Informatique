@@ -1,0 +1,501 @@
+\input{../../headers/beamercoursHeadings}
+
+\section{Traitement de listes} 
+
+\begin{frame}[fragile]
+\frametitle{La manipulation de listes}
+
+Les listes (ou list / array) en python sont une variable dans laquelle on peut mettre plusieurs variables.
+
+\begin{minipage}[t]{0.38\linewidth}
+Créer une liste vide
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> liste = []
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+
+
+\begin{minipage}[t]{0.38\linewidth}
+Ajouter une valeur à une liste
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> liste = [1,2,3]
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+
+\begin{minipage}[t]{0.38\linewidth}
+Voir le contenu de la liste
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> liste
+[1, 2, 3]
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+
+\begin{minipage}[t]{0.38\linewidth}
+Ajouter du contenu à la liste
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> liste.append(4)
+>>> liste
+[1, 2, 3, 4]
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{La manipulation de listes}
+
+\begin{minipage}[t]{0.38\linewidth}
+Afficher un item d'une liste (le premier item commence toujours avec l'index 0)
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> liste = ["a","b","c","d"]
+>>> liste[0]
+'a'
+>>> liste[2]
+'c'
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+
+\begin{minipage}[t]{0.38\linewidth}
+Modifier une valeur de une liste
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> liste[1] = "c"
+>>> liste
+['a', 'c', 'c', 'd']
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+
+\begin{minipage}[t]{0.38\linewidth}
+Supprimer une entrée avec un index
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> liste = ["a","b","c","d"]
+>>> del liste[1]
+>>> liste
+['a', 'c', 'd']
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{La manipulation de listes}
+
+\begin{minipage}[t]{0.38\linewidth}
+Supprimer une entrée avec sa valeur
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> liste = ["a","b","c","c"]
+>>> liste.remove("b")
+>>> liste.remove("c")
+>>> liste
+['a', 'c']
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+
+\begin{minipage}[t]{0.38\linewidth}
+Inverser les valeurs d'une liste
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> liste = ["a", "b", "c"]
+>>> liste.reverse()
+>>> liste
+['c', 'b', 'a']
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+
+\begin{minipage}[t]{0.38\linewidth}
+Compter le nombre d'items d'une liste
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> liste = ["a", "b", "c", "d"]
+>>> len(liste)
+4
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{La manipulation de listes}
+
+\begin{minipage}[t]{0.38\linewidth}
+Compter le nombre d'occurrences d'une valeur
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> liste = ["a","c","c","d"]
+>>> liste.count("a")
+1
+>>> liste.count("c")
+2
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+
+\begin{minipage}[t]{0.38\linewidth}
+Trouver l'index d'une valeur
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> liste = ["a","c","c","d"]
+>>> liste.index("a")
+0
+>>> liste.index("c")
+1
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{La manipulation de listes}
+
+Manipuler une liste
+
+\begin{GrayBox}[0.8\textwidth]
+\begin{verbatimtab}[3]
+>>> liste = [1, 2, 3, 4, 5]
+>>> liste[-1] # Cherche la dernière occurrence
+5
+>>> liste[-4:] # Affiche les 4 dernières occurrences
+[2, 3, 4, 5]
+>>> liste[:] # Affiche toutes les occurrences
+[1, 2, 3, 4, 5]
+>>> liste[2:4] = [6, 7]
+[1, 2, 6, 7, 5]
+>>> liste[:] = [] # vide la liste
+\end{verbatimtab}
+\end{GrayBox}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Boucler une liste}
+
+\begin{minipage}[t]{0.38\linewidth}
+Afficher les valeurs d'une liste
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> liste = ["a","b","c"]
+>>> for lettre in liste:
+...     print lettre
+... 
+a
+b
+c
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+
+\begin{minipage}[t]{0.38\linewidth}
+Afficher les valeurs d'une liste et récupérer l'index
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> for lettre in enumerate(liste):
+...     print lettre
+... 
+(0, 'a')
+(1, 'b')
+(2, 'c')
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Copier une liste}
+
+\begin{minipage}[t]{0.38\linewidth}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> x = [1,2,3]
+>>> y = x
+>>> y[0] = 4
+>>> x
+[4, 2, 3]
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> x = [1,2,3]
+>>> y = x[:]
+>>> y[0] = 4
+>>> x
+[1, 2, 3]
+>>> y
+[4, 2, 3]
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+
+\begin{minipage}[t]{0.38\linewidth}
+Utilisation du module \verb?copy?.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> import copy
+>>> x = [[1,2], 2]
+>>> y = copy.deepcopy(x)
+>>> y[1] = [1,2,3]
+>>> y
+[[1, 2], [1, 2, 3]]
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Liste et string}
+
+\begin{minipage}[t]{0.38\linewidth}
+Transformer une string en liste
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> ma_chaine = "Lycee:Dorian:Paris"
+>>> ma_chaine.split(":")
+['Lycee', 'Dorian', 'Paris']
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+
+\begin{minipage}[t]{0.38\linewidth}
+Transformer une liste en string
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> liste = ["Lycee","Dorian","Paris"]
+>>> ":".join(liste)
+'Lycee:Dorian:Paris'
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+
+\begin{minipage}[t]{0.38\linewidth}
+Trouver un item dans une liste
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> liste = ["Lycee","Dorian","Paris"]
+>>> 'Paris' in liste
+True
+>>> 'Lille' in liste
+False
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Manipulation de liste}
+
+\begin{minipage}[t]{0.38\linewidth}
+La fonction range
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> range(10)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+
+\begin{minipage}[t]{0.38\linewidth}
+Combiner deux listes
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> x = [1, 2, 3]
+>>> y = [4, 5, 6]
+>>> x + y
+[1, 2, 3, 4, 5, 6]
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+
+\begin{minipage}[t]{0.38\linewidth}
+Multiplier une liste
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> x = [1, 2]
+>>> x*5
+[1, 2, 1, 2, 1, 2, 1, 2, 1, 2]
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+
+\begin{minipage}[t]{0.38\linewidth}
+Créer une liste de zéros
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> [0] * 5
+[0, 0, 0, 0, 0]
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+\end{frame}
+
+\section{Import/export de fichiers}
+
+\begin{frame}[fragile]
+\frametitle{Importer un fichier}
+
+Il peut être très intéressant de manipuler des fichiers avec python afin de récupérer (ou de pouvoir les transmettre) des données d'un autre logiciel. Cela peut être aussi très intéressant de sauvegarder ces données.
+
+\begin{minipage}[t]{0.38\linewidth}
+Changer le répertoire de travail courant
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> import os
+>>> os.chdir("C:/fichiers python")
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+
+Ouvrir un fichier, il faut indiquer le chemin et le mode d'ouverture (droits):
+\begin{itemize}
+ \item \verb?r? : ouverture en lecture (Read),
+ \item \verb?w? : ouverture en écriture (Write). Le contenu du fichier est écrasé. Si le fichier n'existe pas, il est créé,
+ \item \verb?a? : ouverture en écriture en mode ajout (Append). On écrit à la fin du fichier sans écraser l'ancien contenu du fichier. Si le fichier n'existe pas, il est créé.
+\end{itemize}
+
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> fichier = open("fichier.txt", "r")
+\end{verbatimtab}
+\end{GrayBox}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Lire et écrire dans un fichier}
+
+\begin{minipage}[t]{0.38\linewidth}
+Lire l'intégralité du fichier
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> fichier = open("fichier.txt", "r")
+>>> contenu = fichier.read()
+>>> print(contenu)
+Texte contenu dans le fichier.
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+
+\begin{minipage}[t]{0.38\linewidth}
+Fermer le fichier
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> fichier.close()
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+
+Écrire dans un fichier
+
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> fichier = open("fichier.txt", "w")
+>>> fichier.write("Texte a ecrire \n Seconde ligne")
+>>> fichier.close()
+\end{verbatimtab}
+\end{GrayBox}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Application: Comptes informatiques}
+
+Il nous ait demandé par le service informatique du lycée de créer à partir d'une liste de classe (au format csv) de générer un fichier (au format csv) intégrant les \textbf{login} et \textbf{mot de passe} des comptes informatiques.
+
+La liste est fournie au format suivant: \verb?NOM;Prenom\n?.
+
+Le résultat doit être mis sous la forme suivante: \verb?NOM;Prenom;login;passwd\n?, avec:
+\begin{itemize}
+ \item \verb?login?: première lettre du prénom et 7 premières lettres du nom en minuscule,
+ \item \verb?passwd?: trois premières lettres du prénom converties en chiffres ('a=0', 'b=1',...,'z=25')
+\end{itemize}
+
+\textbf{Question:} Proposer un script python permettant de répondre à ce cahier des charges.
+
+\end{frame}
+\end{document}

@@ -1,0 +1,25 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+ch}{\PYGZsh{}!/usr/bin/python}
+\PYG{c+c1}{\PYGZsh{}Test\PYGZus{}personalite.py}
+
+\PYG{n}{questions1} \PYG{o}{=} \PYG{p}{[(}\PYG{l+s+s2}{\PYGZdq{}Votre talent tient dans vos\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}super\PYGZhy{}pouvoirs\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}ressources\PYGZdq{}}\PYG{p}{),}
+\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Un animal est pour vous un\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}symbole\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}truc pas pratique lorsqu\PYGZsq{}on part en vacances\PYGZdq{}}\PYG{p}{)]}
+\PYG{n}{result}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}\PYGZsq{}}
+
+\PYG{k}{for} \PYG{n}{question} \PYG{o+ow}{in} \PYG{n}{questions1}\PYG{p}{:}
+    \PYG{n}{question\PYGZus{}string} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s+s2}{:}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}t}\PYG{l+s+s2}{a. }\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}t}\PYG{l+s+s2}{b. }\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{[a/b]:  \PYGZdq{}} \PYG{o}{\PYGZpc{}} \PYG{p}{(}\PYG{n}{question}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{],} \PYG{n}{question}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{],} \PYG{n}{question}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{])}
+    \PYG{n}{answer} \PYG{o}{=} \PYG{n+nb}{raw\PYGZus{}input}\PYG{p}{(}\PYG{n}{question\PYGZus{}string}\PYG{p}{)}\PYG{o}{.}\PYG{n}{lower}\PYG{p}{()}
+    \PYG{k}{while} \PYG{n}{answer} \PYG{o+ow}{not} \PYG{o+ow}{in} \PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}a\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}b\PYGZdq{}}\PYG{p}{):}
+        \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Please choose A or B\PYGZdq{}}\PYG{p}{)}
+        \PYG{n}{answer} \PYG{o}{=} \PYG{n+nb}{raw\PYGZus{}input}\PYG{p}{(}\PYG{n}{question\PYGZus{}string}\PYG{p}{)}\PYG{o}{.}\PYG{n}{lower}\PYG{p}{()}
+    \PYG{n}{result} \PYG{o}{=} \PYG{n}{result} \PYG{o}{+} \PYG{n}{answer}
+
+\PYG{k}{if} \PYG{n}{result} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}aa\PYGZsq{}}\PYG{p}{:}
+    \PYG{k}{print} \PYG{l+s+s1}{\PYGZsq{}Vous etes Spiderman !\PYGZsq{}}
+\PYG{k}{elif}  \PYG{n}{result} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}ab\PYGZsq{}}\PYG{p}{:}
+    \PYG{k}{print} \PYG{l+s+s1}{\PYGZsq{}Vous etes Superman !\PYGZsq{}}
+\PYG{k}{elif}  \PYG{n}{result} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}ba\PYGZsq{}}\PYG{p}{:}
+    \PYG{k}{print} \PYG{l+s+s1}{\PYGZsq{}Vous etes Batman !\PYGZsq{}}
+\PYG{k}{else}\PYG{p}{:}
+    \PYG{k}{print} \PYG{l+s+s1}{\PYGZsq{}Vous etes Iron man !\PYGZsq{}}
+\end{Verbatim}

@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{nombre\PYGZus{}de\PYGZus{}jours\PYGZus{}annees\PYGZus{}classiques}\PYG{p}{(}\PYG{n}{jour}\PYG{p}{,}\PYG{n}{mois}\PYG{p}{,}\PYG{n}{annee}\PYG{p}{):}
+  \PYG{n}{m} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mi}{31}\PYG{p}{,}\PYG{l+m+mi}{28}\PYG{p}{,}\PYG{l+m+mi}{31}\PYG{p}{,}\PYG{l+m+mi}{30}\PYG{p}{,}\PYG{l+m+mi}{31}\PYG{p}{,}\PYG{l+m+mi}{30}\PYG{p}{,}\PYG{l+m+mi}{31}\PYG{p}{,}\PYG{l+m+mi}{31}\PYG{p}{,}\PYG{l+m+mi}{30}\PYG{p}{,}\PYG{l+m+mi}{31}\PYG{p}{,}\PYG{l+m+mi}{30}\PYG{p}{,}\PYG{l+m+mi}{31}\PYG{p}{]}
+  \PYG{n}{nbjours} \PYG{o}{=} \PYG{p}{(}\PYG{n}{annee}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1600}\PYG{p}{)}\PYG{o}{*}\PYG{l+m+mi}{365} \PYG{c+c1}{\PYGZsh{} nombre de jours ecoules pour les annees entieres}
+  \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{mois}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{):} \PYG{c+c1}{\PYGZsh{} mois numerotes de 1 a 12 ; liste indexee de 0 a 11}
+    \PYG{n}{nbjours} \PYG{o}{=} \PYG{n}{nbjours} \PYG{o}{+} \PYG{n}{m}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}  \PYG{c+c1}{\PYGZsh{} nombre de jours ecoules pour les mois termines}
+  \PYG{n}{nbjours} \PYG{o}{=} \PYG{n}{nbjours} \PYG{o}{+} \PYG{n}{jour} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1} \PYG{c+c1}{\PYGZsh{} nombre de jours ecoules pour le mois en cours}
+  \PYG{k}{return} \PYG{n}{nbjours}
+\end{Verbatim}

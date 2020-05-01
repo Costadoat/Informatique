@@ -1,0 +1,5 @@
+#Question 3.a
+
+def Ix(e,l):
+    return e**3*l/12
+print(Ix(0.018,0.3))

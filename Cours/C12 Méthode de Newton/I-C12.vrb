@@ -1,0 +1,15 @@
+\frametitle{Comparaison des deux méthodes}
+
+Deux critères permettent de déterminer l'efficacité des deux méthodes.
+
+\begin{itemize}
+ \item \textbf{Rapidité de convergence:} Dans les hypothèses où les deux méthodes convergent, la méthode de Newton converge plus « rapidement ». Exemple dans le cas précédent \verb? (résultat, nombre d'itérations) ?:
+ \begin{GrayBox}[0.4\textwidth]
+\begin{verbatimtab}[3]
+(5.1059522149400793, 5)
+(5.105952024459839, 25)
+\end{verbatimtab}
+\end{GrayBox}
+ \item \textbf{Hypothèses et fonctions étudiées:} Sur ce critère, la méthode est moins contraignante, de plus, il n'est pas nécessaire avec la méthode de la dichotomie de déterminer la dérivée de la fonction.
+\end{itemize}
+

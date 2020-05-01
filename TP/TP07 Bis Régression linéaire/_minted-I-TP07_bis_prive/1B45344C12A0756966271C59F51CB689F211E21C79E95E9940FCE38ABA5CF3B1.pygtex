@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{coeff\PYGZus{}corr}\PYG{p}{(}\PYG{n}{X}\PYG{p}{,}\PYG{n}{Y}\PYG{p}{):}
+    \PYG{n}{n}\PYG{o}{=}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{X}\PYG{p}{)}
+    \PYG{n}{r}\PYG{o}{=}\PYG{p}{(}\PYG{n}{n}\PYG{o}{*}\PYG{n}{som\PYGZus{}prod}\PYG{p}{(}\PYG{n}{X}\PYG{p}{,}\PYG{n}{Y}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{som}\PYG{p}{(}\PYG{n}{X}\PYG{p}{)}\PYG{o}{*}\PYG{n}{som}\PYG{p}{(}\PYG{n}{Y}\PYG{p}{))}\PYG{o}{/}\PYG{n}{sqrt}\PYG{p}{(}\PYG{n}{n}\PYG{o}{*}\PYG{n}{som\PYGZus{}carre}\PYG{p}{(}\PYG{n}{X}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{p}{(}\PYG{n}{som}\PYG{p}{(}\PYG{n}{X}\PYG{p}{))}\PYG{o}{**}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{/}
+    \PYG{n}{sqrt}\PYG{p}{(}\PYG{n}{n}\PYG{o}{*}\PYG{n}{som\PYGZus{}carre}\PYG{p}{(}\PYG{n}{Y}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{p}{(}\PYG{n}{som}\PYG{p}{(}\PYG{n}{Y}\PYG{p}{))}\PYG{o}{**}\PYG{l+m+mi}{2}\PYG{p}{)}
+    \PYG{k}{return}\PYG{p}{(}\PYG{n}{r}\PYG{p}{)}
+\end{Verbatim}

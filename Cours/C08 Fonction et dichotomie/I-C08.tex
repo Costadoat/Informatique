@@ -1,0 +1,141 @@
+\input{../../headers/beamercoursHeadings}
+
+\section{Fonctions} 
+
+\begin{frame}[fragile]
+\frametitle{Exemple de fonction}
+
+Une \textit{fonction} est un algorithme qui prend des arguments en entrée, effectue une séquence d'instructions et renvoie un résultat. Elle est considérée comme un objet de type \verb?function?.
+
+Un premier exemple consiste à programmer la fonction qui retourne la norme d'un vecteur à 3 coordonnées $\overrightarrow{V}=a.\overrightarrow{x}+b.\overrightarrow{y}+c.\overrightarrow{z}$ $\sqrt{a^2+b^2+c^2}$.
+
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+def norme_3(a,b,c):
+	n = (a**2 + b**2 + c**2)**(1/2)
+	return n
+\end{verbatimtab}
+\end{GrayBox}
+
+Attention: Il faut toujours \textbf{appeler la fonction} ensuite afin de voir le résultat obtenu.
+
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> norme_3(3,4,5)
+7.0710678118645755
+>>> norme_3(4,5,6)
+8.774964387392123
+\end{verbatimtab}
+\end{GrayBox}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Forme générale}
+
+\begin{GrayBox}[0.95\textwidth]
+\begin{verbatimtab}[3]
+def <nom_de_la_fonction>(<argument_1>,<argument_2>,...,<argument_n>):
+	"Ce commentaire explique à quoi sert cette fonction"
+	<instructions>
+\end{verbatimtab}
+\end{GrayBox}
+\vspace{-0.5cm}
+
+On n'oubliera pas les \verb?:? et l'\textit{indentation} qui sont obligatoires en Python ! \\
+\vspace{0.3cm}
+
+Remarques:\vspace{-0.3cm}
+\begin{itemize}
+ \item les arguments entre parenthèses sont des paramètres formels,
+ \item Les instructions qui forment le corps de la fonction commencent sur la ligne suivante, indentée par quatre espaces (ou une tabulation),
+ \item La première instruction du corps de la fonction peut être un texte dans une chaîne de caractères, cette chaîne est la chaîne de documentation de la fonction et on peut la visualiser dans un terminal en tapant l'instruction \verb? help(nom_de_la_fonction) ?,
+ \item Le retour à la ligne signale la fin de la fonction.
+\end{itemize}
+
+Dès que l'instruction return est exécutée (si elle est présente), l'exécution de \textbf{la fonction se termine}.
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Erreur de programmation}
+
+La fonction suivante est sensée retourner la somme des nombres pairs inférieurs à un nombre donné \verb? a ?.
+
+\begin{minipage}{0.48\linewidth}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+def somme_pairs(a) :
+    i=1
+    n=0
+    while(i<=a):
+        if i%2==0:
+            n=n+i
+        i=i+1
+        return n
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}\hfill
+\begin{minipage}{0.48\linewidth}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+>>> somme_pairs(5)
+0
+>>> somme_pairs(3)
+0
+\end{verbatimtab}
+\end{GrayBox}
+
+\textbf{Question 1:} Expliquer pourquoi ce programme ne donne pas le résultat attendu.
+
+\textbf{Question 2:} Proposer une modification afin que ce soit le cas.
+
+\end{minipage}
+\end{frame}
+
+\section{Dichotomie}
+
+
+\begin{frame}[fragile]
+\frametitle{Dichotomie}
+
+Voici le processus complet :
+\begin{itemize}
+ \item Au rang 0,
+ \begin{itemize}
+  \item soient $a_0=a$, $b_0=b$. Il existe une solution $x_0$ de l'équation $(f(x)=0)$ dans l'intervalle $[a_0,b_0]$.
+ \end{itemize}
+ \item Au rang 1,
+ \begin{itemize}
+  \item si $f(a_0).f(\dfrac{a_0+b_0}{2})\leq 0$, alors on pose $a_1=a_0$, $b_1=\dfrac{a_0+b_0}{2}$,
+  \item sinon on pose $a_{1}=\dfrac{a_0+b_0}{2}$ et $b_1=b$.
+  \item dans les deux cas, il existe une solution $x_1$ de l'équation $(f(x)=0)$ dans l'intervalle $[a_1,b_1]$.
+ \end{itemize}
+ \item Au rang n, supposons construit un intervalle $[a_n,b_n]$, de longueur $\dfrac{b-a}{2^n}$,  et contenant une solution $x_n$ de l'équation $(f(x)=0)$. Alors:
+ \begin{itemize}
+  \item  si $f(a_n).f(\dfrac{a_n+b_n}{2})\leq 0$, alors on pose $a_{n+1}=a_n$, $b_{n+1}=\dfrac{a_n+b_n}{2}$,
+  \item sinon on pose $a_{n+1}=\dfrac{a_n+b_n}{2}$ et $b_{n+1}=b_{n}$,
+  \item dans les deux cas, il existe une solution $x_{n+1}$ de l'équation $(f(x)=0)$ dans l'intervalle $[a_{n+1},b_{n+1}]$.
+ \end{itemize}
+\end{itemize}
+
+A chaque étape, on a $a_n\leq x_n \leq b_n$, on arrête le processus dès que $b_n-a_n=\dfrac{b-a}{2^n}$ est inférieur à la précision souhaitée.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Exemple dichotomie}
+
+\textbf{Question 1:} Coder la fonction \verb?f(x)? qui à la valeur $x$ revoie la valeur $f(x)=x^3+2.x^2+3.x-4$.
+
+\textbf{Question 2:} Coder la fonction \verb?g(x)? qui à la valeur $x$ revoie la valeur $g(x)=x^3+2.x^2+3.x-6$.
+
+\textbf{Question 3:} Coder la fonction \verb?dichotomie(f,p)? qui à la fonction $f$ revoie la valeur de la racine du polynôme avec une précision minimale $p$. La fonction devra retourner la valeur de $a_n$ ainsi que l'erreur finale $b_n-a_n$.
+
+Précision: \\
+\begin{itemize}
+ \item Il n'existe qu'une seule racine pour les fonctions $f(x)$ et $g(x)$ et elles sont comprises entre $-10$ et $10$.
+\end{itemize}
+
+\end{frame}
+
+\end{document}

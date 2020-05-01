@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{p}\PYG{o}{=}\PYG{l+m+mi}{0}
+\PYG{n}{k}\PYG{o}{=}\PYG{l+m+mi}{1}
+\PYG{k}{if} \PYG{n}{n}\PYG{o}{\PYGZpc{}}\PYG{n}{k} \PYG{o}{==} \PYG{l+m+mi}{0} \PYG{p}{:}
+   \PYG{k}{while} \PYG{n}{k}\PYG{o}{\PYGZlt{}=}\PYG{n}{n} \PYG{p}{:}
+      \PYG{n}{k} \PYG{o}{=} \PYG{n}{k}\PYG{o}{+}\PYG{l+m+mi}{1}
+   \PYG{n}{p}\PYG{o}{=}\PYG{n}{p}\PYG{o}{+}\PYG{l+m+mi}{1}
+\end{Verbatim}

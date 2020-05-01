@@ -1,0 +1,13 @@
+Bonjour à tous je recherche un dev Python pour m'aider à coder un projet de Biologie pour mon université.
+le projet est relativement simple toutefois je n'ai absolument aucune expérience en codage.
+il consisterais au codage d'un tableau avec des événements apparaissant de manière aléatoire
+(ex: sur un tableau de 1000x1000, sur une case apparaît un "prédateur" ,
+si il se trouve à une certaine distance d'une case où apparaît une "proie",
+la proie meurt etc.. et ainsi voir l'évolution de la population.
+Je donnerais plus d'explication et de détails en privé.
+Comme je l'ai précisé c'est un projet universitaire donc je n'ai pas un gros budget..
+je peux réaliser le payement de plusieurs manières mais paypal serait préférable.
+Par ailleurs j'aimerais que le projet soit réaliser dans la semaine étant donné que
+l'ancien codeur ne donne plus de nouvelles..
+
+Merci d'avance pour vos réponses. Benjamin

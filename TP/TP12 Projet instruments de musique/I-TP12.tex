@@ -1,0 +1,274 @@
+\input{intro}
+\input{../../Header_Willie}
+%\input{macro}
+
+\begin{document}
+
+\begin{center}
+{\Large\bf TP \no {\num} -- \descrip}
+\end{center}
+ 
+\section{Principe général}
+
+On a réalisé l'analyse de soixante sons musicaux obtenus par quatre instruments différents. Pour chacun des sons, vingt caractéristiques ont été obtenues. Ces vingt caractéristiques permettent en théorie de discriminer le timbre de l'instrument utilisé, supposé différent pour chaque instrument.
+
+L'ensemble des données est réuni dans le fichier \verb|instrument_features.csv| situé dans le sous-répertoire « PTSI/TP13 » du répertoire « Ressources ». Le fichier comprend une ligne pour chaque son et vingt colonnes recensant les caractéristiques et, en vingt-et-unième et vingt-deuxième colonnes, le nom du fichier musical source et le nom de l'instrument utilisé pour produire le son. Copier ce fichier dans votre répertoire personnel.
+
+L'objectif de ce TP est de d'implanter en langage python un algorithme permettant de classer automatiquement un son dans une catégorie correspondant à un instrument. Les catégories étant connues à l'avance (piano, violon, clarinette, trompette) on parle de classification « surpervisée ».
+
+\section{Méthode}
+
+Pour réaliser la classification supervisée automatique, on part du principe suivant : \begin{enumerate}
+\item pour un son donné joué par un instrument supposé inconnu (« son-candidat »), on calcule la racine carrée de la somme des carrés des écarts de ses caractéristiques avec les caractéristiques d'un son déjà catégorisé (« son-référence » dont on suppose connu l'instrument) ; on appelle ce résultat « distance candidat-référence » ; 
+\item on fait ce calcul pour chacun des sons-références (le plus simple est de supposer que pour un son-candidat donné, les cinquante-neuf autres sons sont des sons-références) ; on dispose donc d'un ensemble de distances candidat-références ;
+\item on considère que le son-candidat doit être classé dans la catégorie du son-référence qui a la distance la plus petite.                                                                                                                                                                                                                                                                                                                                                                                                        \end{enumerate}
+
+\section{Principales étapes du projet}
+
+\begin{enumerate}
+ \item ouvrir le fichier de données ;
+ \item lire les données du fichier et les stocker dans une structure adaptée ;
+ \item séparer les données qui ont vocation à être traitées numériquement de celles qui sont purement textuelles et les stocker dans des structures distinctes ;
+ \item s'assurer que toutes les données ont un type correct ;
+ \item choisir un son-candidat (les autres sons seront les sons-références) ;
+ \item réaliser le calcul des distances pour le son-candidat tiré ;
+ \item déterminer le son-référence le plus proche et en déduire la catégorie à laquelle appartient le son-candidat 
+ \item afficher ce résultat à l'écran ;
+ \item vérifier que la réponse trouvée est correcte.
+\end{enumerate}
+
+\section{Pour aller plus loin}
+
+\begin{enumerate}
+ \item À l'aide d'une boucle réaliser de façon automatisée le projet précédent pour tous les sons-candidats possibles avec un affichage automatique de la vérification de la catégorie trouvée.
+ \item Avec la méthode du projet tel que présenté au-dessus, la catégorie attribuée au son-candidat est dite du « premier voisin ». On peut aussi déterminer les catégories du second voisin, du troisième voisin etc. en identifiant les distances candidat-référence par ordre décroissant. Réaliser cette modification du script et écrire les réponses dans un fichier réponse qui indiquera sur une même ligne le numéro du son-candidat, la catégorie vraie telle qu'indiquée dans le fichier de données et les différentes catégories correspondant aux différents voisins successifs.
+\end{enumerate}
+
+\newpage
+%\section{Annexe}
+% \subsection{Méthodes associées aux chaînes de caractères}
+% 
+% La méthode \verb|split| permet de séparer les différentes parties d'une chaîne de caractères, en spécifiant en argument le séparateur, et de les renvoyer sous forme de liste.
+% 
+% %\begin{boxedminipage}
+% Exemple, avec le séparateur « , » :
+% \begin{minted}[]{python}
+% 'mot1,mot2,mot3'.split(',')
+% \end{minted}
+% Renvoie :
+% \verb|['mot1','mot2','mot3']|
+% %\end{boxedminipage}
+% 
+% Lors de la lecture d'un fichier, on est amené à lire le fichier ligne à ligne, chacune des lignes étant terminée par un caractère dit « d'échappement », le plus souvent \verb|\n|. Pour éliminer ce caractère d'une ligne qui a été lue sous forme de chaîne de caractères, on peut utiliser la méthode \verb|strip()|, qui ne prend pas d'argument.
+% 
+% Exemple, avec le caractère d'échappement \verb|\n| :
+% \begin{minted}[]{python}
+% 'ligne\n'.strip()
+% \end{minted}
+% 
+% Renvoie :
+% \verb|'ligne'|
+% 
+% 
+% Les deux méthodes peuvent être combinées. 
+% 
+% \begin{minted}[]{python}
+% 'mot1,mot2,mot3\n'.strip().split(',')
+% \end{minted}
+% 
+% Renvoie :
+% \verb|['mot1','mot2','mot3']|
+
+\section{Annexe -- Méthodes, attributs et fonctions associées aux fichiers et chaîne de caractères}
+
+Se référer à l'énoncé du TP 6 « Manipulations de fichiers ».
+
+\section{Annexe -- Méthodes, attributs et fonctions associées aux tableaux numpy}
+
+
+\subsection{Forme et dimensions d'un tableau}
+Pour obtenir la forme d'un tableau numpy, on utilise l'attribut \verb|.shape| ou la fonction \verb|shape| qui prend comme argument un tableau numpy. Exemple pour une matrice 2 lignes 3 colonnes :
+
+\begin{minted}[bgcolor=bg]{python}
+A=np.array([[1,2,3],[4,5,6]])
+A
+A.shape
+np.shape(A)
+\end{minted}
+
+renvoie 
+
+\begin{minted}[frame=single]{python}
+array([[1, 2, 3],
+       [4, 5, 6]])
+(2,3)
+(2,3)
+\end{minted}
+
+On peut récupérer le nombre de lignes ou de colonnes, en appelant l'élément correspondant de \verb|shape|. Exemple pour une matrice 2 lignes 3 colonnes :
+
+\begin{minted}[bgcolor=bg]{python}
+A.shape[0]
+A.shape[1]
+\end{minted}
+
+renvoie 
+
+\begin{minted}[frame=single]{python}
+2
+3
+\end{minted} 
+
+\subsection{Préparation de tableaux numériques}
+
+Il est parfois utile de commencer à travailler avec un tableau numpy déjà rempli de façon automatisée. De nombreuses fonctions permettent de le faire. On en présente trois ci-dessous.
+
+\begin{minted}[bgcolor=bg]{python}
+np.zeros((2,3)) # attention au parenthesage !
+\end{minted}
+
+renvoie 
+
+\begin{minted}[frame=single]{python}
+array([[ 0.,  0.,  0.],
+       [ 0.,  0.,  0.]])
+\end{minted} 
+
+\begin{minted}[bgcolor=bg]{python}
+A=np.ones((2,3),dtype=int) # fixe le type int (au lieu de float par defaut)
+A
+\end{minted}
+
+renvoie 
+
+\begin{minted}[frame=single]{python}
+array([[1, 1, 1],
+       [1, 1, 1]])
+\end{minted} 
+
+\begin{minted}[bgcolor=bg]{python}
+np.diag([1,2,3])
+\end{minted}
+
+renvoie
+
+\begin{minted}[frame=single]{python}
+array([[1, 0, 0],
+       [0, 2, 0],
+       [0, 0, 3]])
+\end{minted} 
+
+
+\subsection{Maximum et minimum d'un tableau}
+
+On peut utiliser les méthodes \verb|.min| et \verb|.max| associées au tableau ou les fonctions \verb|min| et \verb|max| qui prennent comme argument un tableau numpy. Le code :
+
+\begin{minted}[bgcolor=bg]{python}
+A=np.array([[1, 2, 3],[4, 5, 6],[7, 8, 9],[10,11,12]])
+np.min(A)
+np.max(A)
+A.min()
+A.max()
+\end{minted}
+
+renvoie 
+
+\begin{minted}[frame=single]{python}
+1
+12
+1
+12
+\end{minted} 
+
+Pour trouver la position d'un maximum ou d'un minimum on peut utiliser la fonction \verb|where| qui prend comme argument une condition sur un tableau numpy. La fonction renvoie des tableaux numpy contenant les indices de position respectant la condition. Le code :
+
+\begin{minted}[bgcolor=bg]{python}
+A=np.array([[1, 2, 3],[4,5,6],[7,8,9],[10,11,12]])
+np.where(A==np.min(A))
+np.where(A==np.max(A))
+\end{minted}
+
+renvoie 
+
+\begin{minted}[frame=single]{python}
+(array([0]), array([0]))
+(array([3]), array([2]))  
+\end{minted} 
+
+Ce qui signifie que le minimum est en position (0,0) et le maximum en (3,2). 
+
+Si, par exemple, on veut accéder au numéro la ligne ou de la colonne sur laquelle se trouve le maximum, on fait :
+
+\begin{minted}[bgcolor=bg]{python}
+int(np.where(A==np.max(A))[0])
+int(np.where(A==np.max(A))[1])
+\end{minted}
+
+ce qui renvoie, évidemment
+
+\begin{minted}[bgcolor=bg]{python}
+3
+2
+\end{minted}
+
+\subsection{Concaténation de tableaux}
+
+Avec des tableaux numpy, l'opérateur \verb|+| réalise une addition terme à terme et non pas la concaténation comme avec des listes.
+
+Pour concaténer deux tableaux numpy à deux dimensions, on peut utiliser la fonction \verb|np.concatenate| qui prend comme arguments les deux tableaux ou parties de tableaux et \verb|axis| qui permet de préciser si les deux tableaux doivent être mis bout à bout en ajoutant le nombre de lignes sans toucher aux colonnes (\verb|axis=0|) ou le contraire (\verb|axis=1|). Le code :
+
+\begin{minted}[bgcolor=bg]{python}
+A=np.array([[1,2,3],[4,5,6]])
+B=np.array([[7,8,9],[10,11,12]])
+C=np.concatenate((A,B),axis=0)
+C
+np.shape(C)
+\end{minted}
+
+renvoie 
+
+\begin{minted}[frame=single]{python}
+array([[1, 2, 3],
+       [4, 5, 6],
+       [7, 8, 9],
+       [10,11,12]])
+(4,3)
+\end{minted} 
+
+Le code
+
+\begin{minted}[bgcolor=bg]{python}
+C=np.concatenate((A,B),axis=1)
+D
+np.shape(D)
+\end{minted}
+
+renvoie 
+
+\begin{minted}[frame=single]{python}
+array([[1, 2, 3, 7, 8, 9],
+       [4, 5, 6, 10,11,12]])
+(2,6)
+\end{minted}
+
+\subsection{Suppression d'une ligne d'un tableau}
+
+Pour supprimer une ligne d'un tableau numpy à deux dimensions, on peut concaténer deux sous-tableaux excluant la ligne à supprimer. Par exemple, pour supprimer la ligne numéro \verb|n| du tableau \verb|tab|, on peut faire :
+
+\begin{minted}[bgcolor=bg]{python}
+tab = np.concatenate((tab[0:n,:],tab[n+1:,:]),axis=0)
+\end{minted}
+
+ou encore, de façon plus explicite :
+
+\begin{minted}[bgcolor=bg]{python}
+tab = np.concatenate((tab[0:n,:],tab[n+1:np.shape(tab)[0],:]),axis=0)
+\end{minted}
+
+On peut bien entendu supprimer la colonne \verb|p|, grâce à :
+
+\begin{minted}[bgcolor=bg]{python}
+tab = np.concatenate((tab[:,0:p],tab[:,p+1:]),axis=1)
+\end{minted}
+
+\end{document}

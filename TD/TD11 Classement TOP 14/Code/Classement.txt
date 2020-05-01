@@ -1,0 +1,14 @@
+"Agen",3,1,6,2,-32
+"Bayonne",5,0,5,1,-38
+"Bordeaux-Bègles",7,1,2,4,+109
+"Brive",5,0,5,2,-38
+"Castres",4,0,6,2,-28
+"Clermont",6,0,4,0,0
+"La Rochelle",5,0,5,2,-25
+"Lyon",8,0,2,3,+140
+"Montpellier",4 ,2,4,4,+40
+"Pau",5,0,5,1,-26
+"Racing 92",3,1,6,5,+19
+"Stade Français",2,0,8,2,-154
+"Toulon",5,1,4,2,+2
+"Toulouse",5,0,5,4,+31

@@ -1,0 +1,24 @@
+#Question 5.a
+
+def calcul_fleche(E,e):
+    def ddf(x):
+        return (Mfz(x))/(E*Ix(e,0.3))
+    nbx=1000
+    x = np.linspace(0, L, nbx)
+    ddfleche=ddf(x)
+
+    nbi = nbx - 1
+    dfleche = np.linspace(1, 1, nbx)
+    dfleche[0]=0
+    for i in range(nbi):
+        dfleche[i+1] = dfleche[i] + ddfleche[i]*(x[i+1]-x[i])
+    dfleche=dfleche-dfleche[500]
+    nbi = nbx - 1
+    fleche = np.linspace(1, 1, nbx)
+    fleche[0]=0
+    for i in range(nbi):
+        fleche[i+1] = fleche[i] + dfleche[i]*(x[i+1]-x[i])
+    return fleche[500]
+
+print(calcul_fleche(2.2*10**9,0.018))
+

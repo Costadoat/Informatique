@@ -1,0 +1,267 @@
+\input{intro}
+\input{../../../Header_Willie}
+
+\ifdef{\prive}{}{\excludecomment{solution}}
+
+\begin{document}
+
+\begin{center}
+{\Large\bf {\type} \no {\numero} -- \descrip}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+\begin{boxedminipage}{.9\textwidth} 
+\begin{itemize}
+ \item Faire tous les exercices dans un même fichier {NomPrenom.py} à sauvegarder,
+ \item mettre en commentaire l'exercice traité (ex: \# Exercice 1),
+ \item ne pas oublier pas de commenter ce qui est fait dans votre code (ex: \# Je créé une fonction pour calculer la racine d'un nombre),
+ \item il est possible de demander un déblocage pour une question, mais celle-ci sera notée 0,
+ \item il faut vérifier avant de partir que le code peut s'exécuter et qu'il affiche les résultats que vous attendez.
+\end{itemize}
+\end{boxedminipage}
+
+\section*{Étude du dimensionnement d'une étagère}
+
+\begin{figure}[ht!]
+\begin{minipage}{0.5\linewidth}
+L'objectif de cette partie est d'étudier le dimensionnement d'une étagère sur laquelle sont installés des livres.
+
+L'étagère est posée sur deux équerres qui sont représentées par les deux appuis en A et en B sur la figure \ref{modele_poutre}. Le poids des livres est modélisé par une charge linéique répartie $q$ (\si{\newton\per\meter}) sur toute la largeur de l'étagère.
+
+Le cahier des charges impose une flèche (déformation) maximale de \SI{1}{\centi\meter} ($fmax$ sur la figure suivante).
+
+\end{minipage}\hfill
+\begin{minipage}{0.5\linewidth}
+  \begin{center}
+   \includegraphics[width=0.5\linewidth]{img/Etagere}
+  \end{center}
+  \caption{Étagère}
+  \label{etagere}
+\end{minipage}
+
+ \begin{center}
+  \def\svgwidth{0.8\linewidth}
+  \Large{
+  \input{img/poutre.pdf_tex}}
+ \end{center}
+ \caption{Modèle poutre de l'étagère}
+ \label{modele_poutre}
+\end{figure}
+
+Données:
+\begin{itemize}
+ \item Masse volumique d'un livre (papier) : $\rho=\SI{500}{\kilo\gram\per\meter\cubed}$,
+ \item Profondeur moyenne des livres: $p=\SI{10}{\centi\meter}$,
+ \item Hauteur moyenne des livres: $h=\SI{20}{\centi\meter}$,
+ \item Module d'Young du bois de l'étagère: $E=\SI{2,2}{\giga\pascal}=\SI{2,2e3}{\newton\per\milli\meter\squared}$,
+ \item Longueur de l'étagère: $L=\SI{2}{\meter}$,
+ \item Épaisseur de l'étagère: $e=\SI{18}{\milli\meter}$,
+ \item Profondeur de l'étagère: $b=\SI{30}{\centi\meter}$,
+ \item Accélération de pesanteur: $g=\SI{9,81}{\meter\per\second\squared}$.
+\end{itemize}
+
+\section*{Mise en équations du problème}
+
+\begin{enumerate}
+\item Déterminer l'expression de la charge linéique $q$. Rentrer les valeurs numériques de l'énoncé ainsi que l'expression de $q$ dans votre script python et afficher la valeur numérique obtenue à l'aide d'un \verb?print(q)?. 
+ \begin{solution}~\ \\
+  \begin{minted}{python}
+	rho=500.
+	g=9.81
+	p=0.1
+	h=0.2
+	L=2
+	E=2.2*10**9
+
+	q=rho*g*p*h
+
+	print(q)
+ \end{minted}
+ La valeur affichée est \verb?98.10000000000001?
+\end{solution}
+\end{enumerate}
+
+Une étude statique a permis de déterminer le moment fléchissant tout au long de la poutre. Celui-ci représente une partie des contraintes (mais ce sont celles qui nous intéressent) à l'intérieur de la poutre. Ce sont ces contraintes qui sont à l'origine de sa déformation. Le moment fléchissant suivant est exprimé au point $M\in[AB]$ tel que $\overrightarrow{AM}=x.\overrightarrow{x}$.
+\begin{center}
+$Mfz(x)=\frac{x.q.L}{2}-\frac{q.x^2}{2}$
+\end{center}
+
+On constate que si $M$ est sur le point $A$ ($x=0$) ou $B$ ($x=L$) alors le moment fléchissant est nul.
+
+\begin{enumerate}
+\setcounter{enumi}{1}
+\item Créer une fonction \verb?Mfz? qui prend en entrée x et qui retourne la valeur de $Mfz(x)$. Afficher la valeur de $Mfz(x)$  pour $x=\SI{1,2}{\meter}$.
+ \begin{solution}~\ \\
+  \begin{minted}{python}
+	def Mfz(x):
+    	return x*q*L/2-q*x**2/2
+
+	print(Mfz(1.2))
+ \end{minted}
+ La valeur affichée est \verb?47.087999999999994?
+\end{solution}
+\end{enumerate}
+
+La théorie des poutres permet de déterminer la déformée d'une poutre (représentée par la fonction $f(x)$ sur la figure \ref{modele_poutre}) à partir de ses caractéristiques géométriques (moment quadratique $Ix$), de son matériau (module d'Young $E$) et des contraintes qu'elle subit (moment fléchissant $Mfz$).
+
+Ainsi, on obtient la formule suivante:
+
+\begin{center}
+$\frac{d^2 f}{dx^2}(x)=\frac{Mfz(x)}{E.Ix}$
+\end{center}
+
+Avec $Ix=\frac{e^3.b}{12}$ pour une poutre de section rectangulaire comme celle de l'étagère modélisée sur la figure \ref{moment_quadratique}.
+
+\begin{figure}[ht!]
+ \begin{center}
+  \def\svgwidth{0.4\linewidth}
+  \Large{
+  \input{img/moment_quadratique.pdf_tex}}
+ \end{center}
+ \caption{Paramètres du moment quadratique de l'étagère}
+ \label{moment_quadratique}
+ \end{figure}
+
+\begin{enumerate}
+\setcounter{enumi}{2}
+\item \begin{enumerate}
+\item Créer une fonction \verb?Ix? qui prend en entrée le couple $(e,b)$ et qui retourne la valeur de $Ix$. Afficher la valeur de $Ix$ pour les dimensions de la planche.
+ \begin{solution}~\ \\
+  \begin{minted}{python}
+	def Ix(e,l):
+    	return e**3*b/12
+	print(Ix(0.018,0.3))
+  \end{minted}
+ La valeur affichée est\verb?1.4579999999999997e-07?
+\end{solution}
+\item Créer une fonction \verb?ddf? qui prend en entrée le $x$ et qui retourne la valeur de $\frac{d^2 f}{dx^2}(x)$. Afficher la valeur de $\frac{d^2 f}{dx^2}(x)$ pour $x=\SI{1,2}{\meter}$.
+ \begin{solution}~\ \\
+  \begin{minted}{python}
+	def ddf(x):
+    	return (Mfz(x))/(E*Ix(0.018,0.3))
+	print(ddf(1.2))
+ \end{minted}
+ La valeur affichée est \verb?0.14680134680134682?
+\end{solution}
+\end{enumerate}
+\end{enumerate}
+
+
+\section*{Intégration numérique}
+
+La variable $x$ sera modélisée à l'aide d'une fonction \verb?linspace? contenant $nbx=1000$ éléments.
+
+\begin{enumerate}
+\setcounter{enumi}{3}
+\item \begin{enumerate}
+\item Créer la variable \verb?x? dans votre code python et générer un tableau \verb?numpy? de type array \verb?ddfleche? qui contient l'image de $x$ par $\frac{d^2 f}{dx^2}(x)$. Afficher la 250\ieme valeur de \verb?ddfleche?
+ \begin{solution}~\ \\
+  \begin{minted}{python}
+	nbx=1000
+	x = np.linspace(0, L, nbx)
+	ddfleche=f2(x)
+	print(ddfleche[250])
+ \end{minted}
+ La valeur affichée est \verb?0.11476504945282369?
+\end{solution}
+\item Par une méthode d'intégration, déterminer le tableau \verb?numpy? de type array \verb?dfleche? qui contient l'image de $x$ par $\frac{d f}{dx}(x)$. Dans un premier temps, la constante d'intégration sera considérée nulle. Afficher la valeur de $\frac{d f}{dx}(\frac{L}{2})$. Tracer $\frac{d f}{dx}(x)$ en fonction de $x$.
+ \begin{solution}~\ \\
+  \begin{minted}{python}
+	nbi = nbx - 1
+	dfleche = np.linspace(1, 1, nbx)
+	dfleche[0]=0
+	for i in range(nbi):
+    	dfleche[i+1] = dfleche[i] + ddfleche[i]*(x[i+1]-x[i])
+	print(dfleche[500])
+	plt.plot(x[:len(dfleche)],dfleche)
+ \end{minted}
+ La valeur affichée est \verb?0.10194527757358089?
+\end{solution}
+\item A partir de la figure \ref{modele_poutre}, déterminer la valeur de $\frac{d f}{dx}(\frac{L}{2})$, en déduire la valeur de la constante d'intégration et modifier \verb?dfleche? en conséquence. Tracer la nouvelle forme de $\frac{d f}{dx}(x)$ en fonction de $x$.
+ \begin{solution}~\ \\
+ D'après la figure \ref{modele_poutre}, $\frac{d f}{dx}(\frac{L}{2})=0$, donc la constante d'intégration est $-\frac{d f}{dx}(\frac{L}{2})$.
+  \begin{minted}{python}
+	dfleche=dfleche-dfleche[500]
+	plt.plot(x[:len(dfleche)],dfleche)
+ \end{minted}
+\end{solution}
+\item Par une méthode d'intégration déterminer le tableau \verb?numpy? de type array \verb?fleche? qui contient l'image de $x$ par $f(x)$. Dans un premier temps, la constante d'intégration sera considérée nulle. Afficher la valeur de $f(0)$, en déduire la valeur de la constante d'intégration et corriger si nécessaire. Tracer $f(x)$ en fonction de $x$. Déterminer la valeur maximale de la flèche. Est-ce que le cahier des charges est respecté ?
+ \begin{solution}~\ \\
+  \begin{minted}{python}
+	nbi = nbx - 1
+	fleche = np.linspace(1, 1, nbx)
+	fleche[0]=0
+	for i in range(nbi):
+    	fleche[i+1] = fleche[i] + dfleche[i]*(x[i+1]-x[i])
+	plt.plot(x[:len(fleche)],fleche)
+	print(fleche[500])
+	print("%f > 2cm, le cahier des charges n'est pas respecté." % (abs(fleche[500])*100))
+ \end{minted}
+ La valeur affichée est \verb?-0.06391993143933793?, cela signifie que la poutre se déforme de \SI{6.38}{\centi\meter} vers le bas.
+\end{solution}
+\end{enumerate}
+\end{enumerate}
+
+\section*{Choix d'une solution}
+
+Cette dernière partie va permettre de choisir une solution pour cette étagère.
+
+On propose la possibilité de fabriquer cette étagère dans deux autres matériaux. On met donc la liste des matériaux sous la forme de la liste de tuples suivante :
+
+\verb?liste_mat=[('médium',2.2),('contreplaqué',12.4),('verre',69)]?
+
+Le premier élément du tuple contient le nom du matériau, le second, son module d'Young $E$ en \si{\giga\pascal}. L'objectif de cette partie est de tester pour chaque matériau l'épaisseur de la planche qui permet de respecter le cahier des charges.
+
+\begin{enumerate}
+\setcounter{enumi}{4}
+\item \begin{enumerate}
+\item Créer à partir des résultats précédents la fonction \verb?calcul_fleche(E,e)? qui affiche la flèche maximale de l'étagère pour une configuration $(E,e)$ donnée. Vérifier que cette fonction donne le même résultat que précédemment en affichant la flèche pour $E=\SI{2}{\giga\pascal}$ et $e=\SI{18}{\milli\meter}$.
+ \begin{solution}~\ \\
+  \begin{minted}{python}
+	def calcul_fleche(E,e):
+    	def ddf(x):
+	        return (Mfz(x))/(E*Ix(e,0.3))
+ 	nbx=1000
+  	x = np.linspace(0, L, nbx)
+  	ddfleche=ddf(x)
+
+	nbi = nbx - 1
+  	dfleche = np.linspace(1, 1, nbx)
+    	dfleche[0]=0
+    	for i in range(nbi):
+        	dfleche[i+1] = dfleche[i] + ddfleche[i]*(x[i+1]-x[i])
+    	dfleche=dfleche-dfleche[500]
+    	nbi = nbx - 1
+    	fleche = np.linspace(1, 1, nbx)
+    	fleche[0]=0
+    	for i in range(nbi):
+       		fleche[i+1] = fleche[i] + dfleche[i]*(x[i+1]-x[i])
+    	return fleche[500]
+    print(calcul_fleche(2.2*10**9,0.018))
+ \end{minted}
+On retrouve bien \verb?-0.06391993143933793? comme précédemment.
+\end{solution}
+\item À l'aide d'un algorithme testant des épaisseurs de planche de \SI{1}{\milli\meter} à \SI{10}{\centi\meter} avec un incrément de \SI{1}{\milli\meter}, déterminer pour chaque matériau l'épaisseur minimale de l'étagère pour respecter le cahier des charges. Afficher pour chaque matériau, le nom du matériau et l'épaisseur correspondante. 
+ \begin{solution}~\ \\
+  \begin{minted}{python}
+	fmax=0.02
+	liste_mat=[('médium',2.2),('contreplaqué',12.4),('verre',69)]
+	liste_ep=np.arange(0.001,0.1,0.001)
+	print('Pour respecter le cahier des charges:')
+	for (nom,E) in liste_mat:
+    	i=0
+    	while abs(calcul_fleche(E*10**9,liste_ep[i]))>fmax:
+        	i+=1
+    	print(" - il faudrait une étagère en %s de %i mm d'épaisseur" % (nom,1000*liste_ep[i])) 			\end{minted}
+Le programme affiche:
+\begin{verbatim}
+Pour respecter le cahier des charges:
+ - il faudrait une étagère en médium de 27 mm d'épaisseur
+ - il faudrait une étagère en contreplaqué de 15 mm d'épaisseur
+ - il faudrait une étagère en verre de 9 mm d'épaisseur
+\end{verbatim}
+\end{solution}
+\end{enumerate}
+\end{enumerate}
+\end{document}

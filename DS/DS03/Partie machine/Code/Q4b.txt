@@ -1,0 +1,10 @@
+#Question 4.b
+
+nbi = nbx - 1
+dfleche = np.linspace(1, 1, nbx)
+dfleche[0]=0
+for i in range(nbi):
+    dfleche[i+1] = dfleche[i] + ddfleche[i]*(x[i+1]-x[i])
+print(dfleche[500])
+plt.plot(x[:len(dfleche)],dfleche)
+

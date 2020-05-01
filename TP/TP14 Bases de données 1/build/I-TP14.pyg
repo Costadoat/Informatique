@@ -1,0 +1,10 @@
+import MySQLdb
+
+base = MySQLdb.connect (host = '10.175.8.201',
+                        user = 'dorian',
+                        passwd = 'dorian',
+                        db = 'triangles')
+curseur = base.cursor ()
+res = curseur.execute("""SELECT * FROM triangles WHERE ab+ac+bc=100""")
+foo = curseur.fetchall()
+base.close()

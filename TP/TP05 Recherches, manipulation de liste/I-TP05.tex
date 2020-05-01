@@ -1,0 +1,558 @@
+\input{intro}
+\input{../../Header_Willie}
+
+
+
+\begin{document}
+
+\begin{center}
+{\Large\bf TP \no {\num} -- \descrip}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+
+
+\section{Manipulations de listes}
+
+
+\begin{exercice}
+Utilisez une boucle \verb?for? pour afficher tous les termes de la liste \verb?L=[2,8,-7,3]? :
+\begin{minted}{python}
+2
+8
+-7
+3
+\end{minted}
+\end{exercice}
+
+
+\begin{exercice}
+Soit \verb?L1? la liste suivante : \verb?L1=[12,-3,8,1.2,7]?.
+\begin{enumerate}
+\item Ajouter \verb?10? \` a la fin de la liste. Afficher la nouvelle liste.
+\item Afficher l'\' el\' ement \verb?1.2? de la liste.
+\item Retirer l'\' el\' ement \verb?12? de la liste. 
+\item Afficher le dernier \' el\' ement de la liste.
+\item Modifier l'\' el\' ement en position 1 de la liste par l'\' el\' ement \verb?77?.
+\item Cr\' eer la liste \verb?L2=[-3,77,1.2,7,10,0,1,2,3,...,100]?.
+\item Cr\' eer la liste des 30 premiers termes de \verb?L2?.
+\item Cr\' eer la liste des 25 premiers termes de \verb?L2? sans les 3 premiers termes, suivis de 30 z\' eros.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}
+Ecrire une fonction \verb?renverser? qui \` a une liste renvoie la liste renvers\' ee.\\
+\textit{Remarque : }On reprogramme ainsi la m\' ethode \verb?reverse? d\' ej\` a impl\' ement\' ee dans Python.
+\begin{minted}{python}
+>>> L=[2,8,-1,7]
+>>> renverser(L)
+[7,-1,8,2]
+\end{minted}
+\end{exercice}
+
+
+
+\section{Recherches}
+
+
+\begin{exercice}Recherche dans une liste\\
+Programmer une fonction \verb?position(liste,element)? qui a comme entr\' ee une liste et un \' el\' ement et qui renvoie la position de l'\' el\' ement dans la liste et qui renvoie \verb?None? si l'\' el\' ement n'est pas dans la liste.\\
+\textit{Remarque :} On reprogramme ainsi la m\' ethode \verb?index? d\' ej\` a impl\' ement\' ee dans Python
+\end{exercice}
+
+
+\begin{exercice}Recherche du maximum dans une liste de nombres.
+\begin{enumerate}
+\item Ecrire une fonction \verb?maximum(liste)? qui renvoie le maximum d'une liste de nombres non tri\' ee.\\
+Montrer que la complexit\' e de l'algorithme obtenu est lin\' eaire. 
+\begin{minted}{python}
+>>>L=[2,8,-7,3]
+>>>maximum(L)
+8
+\end{minted}
+\item Ecrire une fonction \verb?positionMax(liste)? qui renvoie le maximum et la position de ce maximum pour une liste de nombres :
+\begin{minted}{python}
+>>>positionMax(L)
+(8,1)
+\end{minted}
+\item Que se passe-t-il si le maximum apparait plusieurs fois dans le tableau ? \\
+Modifier la fonction pour que toutes les positions apparaissent. 
+\begin{minted}{python}
+>>>L2=[1,-1,1,0,1]
+>>>positionMax2(L2)
+[0,2,4]
+\end{minted}
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}
+Pour les listes, il existe une fonction \verb?max? et une m\' ethode \verb?index?. On en rappelle les syntaxes respectives dans l'annexe.\\
+Testez \verb?max? et \verb?index? sur des exemples pour comprendre ce qu'elles renvoient.\\
+A l'aide de \verb?max? et \verb?index?, d\' eterminer la premi\` ere position du maximum de la liste \verb?L?. 
+\end{exercice}
+
+
+
+
+
+\begin{exercice}Recherche d'un mot dans une cha\^ ine de caract\` eres.
+\begin{enumerate}
+\item Ecrire une fonction \verb?estIci(motif,texte,i)? qui a comme entr\' ee deux listes (ou deux cha\^ ines de caract\` eres) \verb?motif? et \verb?texte? et un entier \verb?i? et qui renvoie \verb?True? si \verb?motif? est dans \verb?texte? \` a la position \verb?i? et \verb?False? sinon.
+\begin{minted}{python}
+>>>estIci('le','Bonjour le monde',8)
+True
+>>>estIci('le','Bonjour le monde',9)
+False
+\end{minted} 
+\item Ecrire une fonction \verb?recherche(motif,texte)? qui a comme entr\' ee deux listes (ou deux cha\^ ines de caract\` eres) et qui renvoie \verb?True? si \verb?motif? est dans \verb?texte? et \verb?False? sinon.
+\begin{minted}{python}
+>>>recherche('le','Bonjour le monde')
+True
+>>>recherche('bonjour','Bonjour le monde')
+False
+\end{minted}
+\item D\' eterminer la complexit\' e de l'algorithme de recherche d'un motif dans une liste.\\
+\textit{Indication :} On se placera dans le pire des cas. La complexit\' e d\' ependra de la longueur de \verb?motif? et de celle de \verb?liste?
+\end{enumerate}
+\end{exercice}
+
+
+%GNA  a garder ?
+\begin{remark}Liste en compr\' ehension\\
+Une liste en compr\' ehension est une liste dont le contenu est d\' efini par filtrage du contenu d'une autre liste. Sa construction se rapproche de la notation ensembliste en math\' ematiques.
+\noindent Exemples : 
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+en langage ensembliste :&$\mathcal{S}_1=\{3n+2|n\in\mathbb{N},\; n< 20\}$ &$\mathcal{S}_2=\{n|n\in\mathbb{N},\; n\leq 50, \; n^2-17n+60 <0\}$\\[0.3cm]
+en Python : &\verb?S1=[3*n+2 for n in range(20)]? & \verb?S2=[n for n in range(51) if n**2-17*n+60<0]?\\
+\hline
+\end{tabular}
+\end{center}
+\end{remark}
+
+
+
+\begin{exercice}~\\
+Utilisez une liste en compr\' ehension pour cr\' eer la liste suivante :\\
+On consid\` ere la suite $u_n=4n^2+7n-2$. Cr\' eer la liste des termes de la suite qui sont des multiples de 3 pour $n\leq 20$.
+\end{exercice}
+
+
+
+\newpage
+
+\section*{Annexe}
+
+
+\noindent En Python, il y a deux fa\c cons de faire des op\' erations sur les objets qu'on manipule : les fonctions et les m\' ethodes.\\
+La diff\' erence est, pour vous, surtout d'ordre syntaxique.\\
+\begin{center}
+\begin{minipage}{7cm}
+Syntaxe fonction :
+\begin{verbatim}
+fonction(objet ,parametres)
+\end{verbatim}
+\end{minipage}
+\begin{minipage}{7cm}
+Syntaxe m\' ethode :
+\begin{verbatim}
+objet.methode(parametres)
+\end{verbatim}
+\end{minipage}
+\bigskip 
+\end{center}
+Pour les listes, on trouve des fonctions et des m\' ethodes. Certaines modifient la liste et ne renvoient rien, d'autres renvoient un r\' esultat sans modifier la liste.\bigskip \\
+Liste non-exhaustive des m\' ethodes pour les listes. 
+\begin{itemize}
+\item \textbf{append(\' el\' ement)} : modifie la liste en ajoutant \' el\' ement \` a la fin de la liste
+\item \textbf{remove(\' el\' ement)} : modifie la liste en supprimant \' el\' ement de la liste
+\item \textbf{reverse()} : modifie la liste en inversant les valeurs de la liste
+\item \textbf{count(\' el\' ement)} : renvoie le nombre d'occurrences d'\' el\' ement dans la liste
+\item \textbf{index(\' el\' ement)} : renvoie la position de \' el\' ement dans la liste
+\bigskip 
+\end{itemize}
+Liste non-exhaustive des fonctions pour les listes :
+\begin{itemize}
+\item \textbf{del liste[index]} : modifie la liste en \' eliminant l'item en position \textbf{index}
+\item \textbf{len} : renvoie la longueur de la liste
+\item \textbf{max} : renvoie le maximum d'une liste de nombres
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\ifdef{\public}{\end{document}}{}
+
+\newpage 
+
+\begin{center}
+{\Large\bf Correction TP \no {\num} -- \descrip}
+\end{center}
+
+
+
+\begin{solution}~\\
+\vspace{-0.7cm}
+\begin{minted}[frame=lines]{python}
+for i in L:
+    print(i)
+\end{minted}
+ou 
+\begin{minted}[frame=lines]{python}
+for i in range(len(L)):
+	print(L[i])
+\end{minted}
+\end{solution}
+
+
+
+\begin{solution}
+\begin{enumerate}
+\item \verb?L1.append(10)?
+\item \verb?print L1[3]?
+\item en utilisant la position de l'\' el\' ement : \verb?del(L1[0])? \\
+en utilisant la valeur de l'\' el\' ement : \verb?L1.remove(12)?
+\item \verb?print L1[-1]?
+\item \verb?L1[1]=77?
+\item \verb?L2=L+[i for i in range(101)]?
+\item \verb?L3=L2[:30]?
+\item \verb?L4=L2[3:25]+30*[0]?
+\end{enumerate}
+\end{solution}
+
+
+
+
+\begin{solution}~\\
+\vspace{-0.7cm}
+\begin{minted}[frame=lines]{python}
+def renverser(liste):
+    n=len(liste)
+    listeRenversee=[]
+    for i in range(n):
+        listeRenversee.append(liste[n-i-1])
+    return(listeRenversee)  
+\end{minted}
+\end{solution}
+
+
+
+
+\begin{solution}~\\
+\vspace{-0.7cm}
+\begin{minted}[frame=lines]{python}
+def f(L,a):
+# on commence au début de la liste
+    i=0         
+    # tant que on n'est pas au bout de la liste et que le terme de la liste n'est pas a, on avance dans la liste
+    while i<len(L) and L[i]!=a:
+        i=i+1
+    # si on est sorti de la liste, on renvoie None    
+    if i= =len(L):
+        return(None)
+    # sinon on renvoie la position    
+    else:
+        return(i)                    
+\end{minted}
+\end{solution}
+
+
+
+\begin{solution}~\\
+\vspace{-0.7cm}
+\begin{enumerate}
+\item 
+\begin{minted}[frame=lines]{python}
+def maximum(liste):
+    n=len(liste)
+    # le maximum est initialis\' e avec le premier terme de la liste
+    max=liste[0]
+    
+    # on parcourt la liste
+    for i in range(n):
+    # si le i\` eme terme de la liste est sup\' erieur au maximum, il devient la nouvelle valeur du maximum\\
+        if liste[i]>max:
+            max=liste[i]
+    return(max)                    
+\end{minted}
+
+
+Dans cette fonction, on compte le nombre d'op\' erations :
+
+\begin{itemize}
+\item deux affectations avant la boucle
+\item $n$ it\' erations de la boucle dans laquelle on effectue :
+\begin{itemize}
+\item un test
+\item au pire des cas, une affectation.
+\end{itemize}
+\end{itemize}
+Au total, on a comme nombre d'op\' erations : $2+2n=O(n)$.\\
+\fbox{On a donc bien une complexit\' e lin\' eaire.}
+\item 
+\begin{minted}[frame=lines]{python}
+def positionMax(liste):
+    n = len(liste)
+    indexMax = 0
+    max = liste[0]
+    for i in range(1,n):
+        if liste[i] > max :
+            max = liste[i]
+            indexMax = i
+    return indexMax,max                  
+\end{minted}
+
+\item Dans le cas de la liste \verb?L2?, seule la position du premier maximum est donn\' ee.\\
+\begin{minted}[frame=lines]{python}
+def positionMax(liste):
+    n = len(liste)
+    # la liste des positions des maxima est initilis\' ee \` a 0
+    indexMax = [0]
+    max = liste[0]
+    for i in range(1,n):
+     # si le i\` eme terme de la liste est sup\' erieur au maximum, il devient la nouvelle valeur du maximum
+        if liste[i] > max :
+            max = liste[i]
+            # la liste des positions est r\' einitialis\' ee \` a [i]
+            indexMax = [i]
+        # si on retombe sur le maximum, on ajoute l'index \` a la liste des positions
+        elif liste[i]==max:
+            indexMax.append(i)	
+    return indexMax                 
+\end{minted}
+\end{enumerate}
+\end{solution}
+
+
+
+\begin{solution}~\\
+\vspace{-0.7cm}
+\begin{minted}{python}
+>>> L.index(max(L))
+1
+\end{minted}
+\end{solution}
+
+
+
+
+\begin{solution}
+\begin{enumerate}
+\item ~\\
+\vspace{-0.7cm}
+\begin{minted}[frame=lines]{python}
+def estIci(motif,texte,i):
+    k = 0
+    p = len(motif)
+    # on parcourt le texte \` a partir de l'index i tant que on ne d\' epasse pas la longueur de motif et que texte et motif sont identiques
+    while k<p and motif[k] == texte[k+i]:
+        k = k+1
+    # si on a parcouru p termes, alors, motif est dans texte \` a l'index i
+    if k==p:
+        resultat=True
+    else:
+        resultat=False    	
+    return resultat                
+\end{minted}
+
+\item ~\\
+\vspace{-0.7cm}
+\begin{minted}[frame=lines]{python}
+def recherche(motif,texte):
+    n = len(texte)
+    p = len(motif)
+    # si motif est plus long que texte, on renvoie False
+    if p>n:
+        return False
+    else:
+    # par d\' efaut, Resultat est False
+        resultat=False
+        i=0
+        # on cherche motif dans texte \` a toutes les positions i 
+        while i <= n-p and resultat==False:
+            resultat=estIci(motif,texte,i)
+            i = i + 1
+        return resultat           
+\end{minted}
+\item Le pire des cas s'obtient avec un texte type : \verb?texte='aaaaa...aaaaa'? et un motif du type : \verb?'aa..aab'?. On note $n$ la longueur du texte et $p$ celle du motif.\\
+Compt\' e grossi\` erement : dans \verb?estIci(motif,texte,i)?, on effectue $p$ tests. On r\' ep\` ete $n-p$ fois cette op\' eration dans \verb?recherche(motif,texte)?. Donc on s'attend \` a une complexit\' e en : \fbox{$O((n-p)p)$.} \\
+On obtient $O(np)$ si $n>>p$\bigskip \\
+Plus pr\' ecis\' ement, avec le pire des cas :\\
+dans \verb?estIci(motif,texte,i)?, on a :
+\begin{itemize}
+\item 2 affectations avant la boucle
+\item on r\' ep\` ete $p$ fois :
+\begin{itemize}
+\item 2 tests
+\item 1 affectation
+\item 1 addition
+\end{itemize}
+\item 1 test
+\item 1 affectation
+\end{itemize}
+\fbox{Au total, on a comme nombres d'op\' erations : $2+4p+2=4p+4=O(p)$.}\\
+ \verb?recherche(motif,texte)?, on a :
+ \begin{itemize}
+ \item 2 affectations
+ \item dans la boucle else : 2 affectations
+ \item on r\' ep\` ete $n-p$ fois :
+ \begin{itemize}
+ \item 2 tests
+ \item 1 affectation
+ \item 1 calcul de \verb?estIci?
+ \item 1 afffectation
+ \item 1 addition
+ \end{itemize}
+ \end{itemize}
+Au total, on a comme nombres d'op\' erations : \\
+ \fbox{$2+2+(n-p)\times (5+4p+4)=4+(n-p)(4p+9)=O((n-p)p)$.}
+\end{enumerate}
+\end{solution}
+
+
+\begin{solution}~\\
+\vspace{-0.7cm}
+\begin{minted}{python}
+L1=[4*n**2+7*n-2 for n in range(21) if (4*n**2+7*n-2)%3==0]
+>>>[9, 90, 243, 468, 765, 1134, 1575]
+\end{minted}
+\end{solution}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+\section{GNA : Reste}
+
+
+\begin{exercice}
+Ecrire une fonction \verb?supprime? qui prend comme entr\' ee une liste \verb?L? et un \' el\' ement \verb?a? et qui supprime de \verb?L? toutes les occurrences de \verb?a?.
+\begin{verbatim}
+>>>L=[2,3,3,2,16]
+>>>supprime(L,3)
+[2,2,16]
+\end{verbatim}
+\end{exercice}
+
+
+
+\begin{exercice}Suite de Syracuse\\
+On consid\` ere la suite $(u_n)_{n\in\N}$ d\' efinie par la relation de r\' ecurrence suivante :
+\[u_0\in\N^*\qquad \text{ et }\qquad u_{n+1}=\left\lbrace\begin{array}{lll}
+\dfrac{u_n}{2}&\text{ si } u_n \text{ est pair} \bigskip \\
+3u_n+1&\text{ si } u_n \text{ est impair}
+\end{array}\right.\]
+La suite $(u_n)_{n\in\N}$ est une suite d'entiers. 
+\begin{enumerate}
+\item Ecrire une fonction \verb?syracuse(n,u0)? qui prend \verb?n? et \verb?u0? comme entr\' ee et renvoie la liste $[u_0,u_1,\cdots,u_n]$.
+\item Tester la fonction. (\verb?syracuse(20,15)? renvoie \verb?GNA?)
+\item Tester cette fonction pour diff\' erentes valeurs de $n$ et de $u_0$. Que constatez-vous ? 
+\end{enumerate}
+\end{exercice}
+
+
+
+
+
+
+\begin{exercice}
+\begin{enumerate}
+\item Une fonction \verb?max? existe. Testez-la sur nos exemples.
+\item Pour trouver la position du maximum, on peut utiliser la fonction numpy \verb?where? :\\
+\verb?np.where? (condition) renvoie les positions du tableau o\` u la condition est v\' erifi\' ee. \\
+Dans $T$, quelles sont les valeurs sup\' erieures strictes \` a 4 ? En quelles positions sont-elles ?
+\item Testez les commandes suivantes et v\' erifiez les r\' esultats :\\
+\verb?np.where(T>4)?, \verb?np.where(T=1)? \footnote{Pourquoi cela renvoie-t-il un message d'erreur ? Corrigez}, \verb?np.where(T<-100)?
+\item Ecrire une commande qui permet d'avoir les positions du maximum de $T$.
+\end{enumerate}
+\end{exercice}
+
+
+
+
+
+\section{Manipulation de tableaux}
+\begin{defn}
+Dans la section suivante, nous travaillerons \` a l'aide de tableaux. Importez le module numpy qui permet de nombreuses manipulations.\\
+Un tableau sera vu comme une liste de listes. \\
+Exemple : $T=[[1,2,3],[-1,4,2],[0,6,5],[12,1,-4]]$.
+\end{defn}
+
+\begin{exercice}
+\begin{enumerate}
+\item Recopier le tableau T en prenant soin d'en faire un tableau numpy. V\' erifier son type.
+\item Extraire la premi\` ere ligne de $T$.
+\item Extraire le terme \verb?4? de $T$.
+\item Ecrire un programme qui affiche tous les termes de $T$ :
+\begin{verbatim}
+1
+2
+3
+-1
+4
+\end{verbatim}
+etc...
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}
+\begin{enumerate}
+\item Que renvoie \verb?T+T?, \verb?3*T? ? Qu'aurions nous obtenu si $T$ \' etait une liste ?\\
+Notez que l'addition et la multiplication externe sur des tableaux numpy sont les op\' erations matricielles vues en cours de maths.
+\item Pour concat\' ener deux tableaux numpy \` a deux dimensions, on peut utiliser la fonction numpy \verb?concatenate? qui prend comme argument, les deux tableaux ou parties de tableaux, et une option \verb?axis?.\\
+Testez la fonction sur les tableaux suivants. Que fait l'option \verb?axis? ?
+\begin{verbatim}
+A=np.array([[1,2,3],[4,5,6]])
+B=np.array([[7,8,9],[10,11,12]])
+C=np.concatenate((A,B),axis=0)
+D=np.concatenate((A,B),axis=1)
+\end{verbatim}
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}
+Ecrire une fonction \verb?taille? qui renvoie la taille d'un tableau.
+\end{exercice}
+
+
+
+\begin{exercice}GNA bof
+Ecire une fonction \verb?tri? qui \` a une liste de nombres renvoie la liste tri\' ee dans l'ordre croissant.
+\begin{verbatim}
+>>>L=[2,8,-1,7]
+>>>tri(L)
+[-1,2,7,8]
+\end{verbatim}
+
+\end{exercice}
+
+
+
+GNA ? garder ?
+\begin{exercice}~\\
+Utilisez une liste en compr\' ehension pour cr\' eer la liste \verb?['a1','a2','a3','b1','b2','b3']? \` a partir des deux cha\^ ines de caract\` eres \verb?'ab'? et \verb?'123'?.
+\end{exercice}
+

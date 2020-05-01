@@ -1,0 +1,6 @@
+#Question 4.a
+
+nbx=1000
+x = np.linspace(0, L, nbx)
+ddfleche=ddf(x)
+print(ddfleche[250])
