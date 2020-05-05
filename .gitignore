@@ -1,0 +1,83 @@
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+#Dossier des sujets en rédaction
+En_redaction
+
+
+# Folders to exclude
+headers/
+_minted*/
+Notes.ods
+Note.ods
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+.dropbox
+old
+olds
+TP_infos.ods
+Header_Willie.tex
+macro_Juliette.tex
+*.backup
+
+# Fichiers Latex
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.synctex.gz
+*.toc
+*.mp4
+*.avi
+*.flv
+Ressources
+ressources
+*_prive
+*_dev
+qrcode.svg
+qrcode.png
+Notes.txt
+
+# Windows shortcuts
+*.lnk
+
+# =========================
+# Operating System Files
+# =========================
+
+# OSX
+# =========================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
