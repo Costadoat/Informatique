@@ -63,8 +63,8 @@ def pivotGauss(A,B):
 
 # exemple
 
-A = np.array([[1,3,9],[-11,1,2.3],[7,2.,2]])
-B = np.array([7,8.0,1])
+A = np.array([[2.1,3],[1,1]])
+B = np.array([5.1,2])
 print(pivotGauss(np.copy(A),np.copy(B)))
 
 # avec SciPy
@@ -83,7 +83,7 @@ def inverse(A):
     for i in range(n):
         kmax = ligneRef(A,i)
         pivot=A[kmax,i]  
-        print pivot
+        print(pivot)
         if pivot==0:
             return('erreur')
         # echange lignes i et jmax dans A et dans B
@@ -103,10 +103,32 @@ def inverse(A):
 
 # exemple
 
-A = np.array([[10,21.],[1/3.+1/7.,1.]])
-#print inverse(np.copy(A))
+A = np.array([[10,21.],[1/3.+1/7.,1.5]])
+A = np.array([[10,2.],[4.,1.]])
+print(inverse(np.copy(A)))
 
 # avec numpy
 
-#print(np.linalg.matrix_power(A,-1))
-        
+print(np.linalg.matrix_power(A,-1))
+
+def inverse(A):
+    n=len(A)
+    I=np.eye(n)
+    for i in range(n):
+        kmax = ligneRef(A,i)
+        pivot=A[kmax,i]
+        echangeLignes(A,i,kmax)
+        echangeLignes(I,i,kmax)
+        for j in range(n):
+            A[i,j] = A[i,j]/pivot   
+            I[i,j] = I[i,j]/pivot
+        for k in range(n):
+            if k!= i:
+                alpha=A[k,i]
+                transvection(A,i,k,alpha)  
+                transvection(I,i,k,alpha)       
+    return I
+
+A = np.array([[10,2.],[4.,1.]])
+print(inverse(np.copy(A)))
+print(np.linalg.matrix_power(A,-1))
