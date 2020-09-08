@@ -29,7 +29,7 @@ print(v)
 #while essai!=nombre:
 #   essai=input('entrer une nouvelle valeur ')
 #   compteur=compteur+1
-#print 'Vous avez gagné en ',compteur,' coups'
+#print('Vous avez gagné en ',compteur,' coups')
 
 
 #==============================================================================
@@ -38,10 +38,10 @@ print(v)
 
 a=14
 b=3
-print a%b
+print(a%b)
 while a>b:
     a=a-b
-print a
+print(a)
 
 
 #==============================================================================

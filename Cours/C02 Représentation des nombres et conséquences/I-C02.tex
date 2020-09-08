@@ -115,7 +115,7 @@ Cette représentation du signe ne permet pas d'effectuer de soustraction.
 
 \begin{itemize}
  \item En informatique, le bug de l'an XXXX est un problème similaire au bug de l'an 2000 qui pourrait perturber le fonctionnement d'ordinateurs 32 bits.
- \item Le problème concerne des logiciels qui utilisent la représentation POSIX du temps, dans lequel le temps est représenté comme un nombre de secondes écoulées depuis le 1er janvier 1970 à minuit (0 heure). Sur les ordinateurs 32 bits, la plupart des systèmes d'exploitation concernés représentent ce nombre comme un nombre entier signé de 32 bits, ce qui limite le nombre de secondes.
+ \item Le problème concerne des logiciels qui utilisent la représentation POSIX du temps, dans lequel le temps est représenté comme un nombre de secondes écoulées depuis le 1er janvier 1970 à minuit (0 heure). Sur les ordinateurs 32 bits, la plupart des systèmes d'exploitation concernés représentent ce nombre comme un nombre entier \textbf{signé} de 32 bits, ce qui limite le nombre de secondes.
  \item Lorsque ce nombre sera atteint, dans la seconde suivante, la représentation du temps \og bouclera \fg et sera négative par complément à deux.
 \end{itemize}
 

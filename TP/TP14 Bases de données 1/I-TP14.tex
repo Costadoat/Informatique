@@ -5,7 +5,7 @@
 \begin{document}
 
 \begin{center}
-{\Large\bf TP \no {\num} -- \descrip}
+{\Large\bf TP \no {\numero} -- \descrip}
 \end{center}
 
 \section{Connexion aux bases}
@@ -72,7 +72,7 @@ Chaque ligne représente un triangle défini par la taille de ses trois côtés 
  
  \item En vous inspirant du modèle précédent, déterminer la liste de toutes les communes avec pour chacune son département, sa région et sa population.
  
- \item  \begin{enumerate}
+\item \begin{enumerate}
 \item Déterminer la liste des villes de plus de cent milles habitants avec leur population et leur région.                                                                                                    
 \item Trier la liste précédente par ordre décroissant de population. On pourra pour cela utiliser la commande \verb|ORDER BY| (voir Annexe).
 \end{enumerate}
@@ -114,19 +114,18 @@ Le contenu de la table \verb|cafes| vient de la liste\footnote{Récupérée sur 
 \section{Utilisation de bases de données avec Python (Optionnel)}
 
 \begin{enumerate}
-  \item Ouvrir Spyder et un nouveau fichier de script. Enregistrer votre fichier de script dans votre répertoire personnel. Taper dans le script les lignes suivantes :
+  \item Ouvrir un nouvel éditeur de script IDLE. Enregistrer votre fichier de script dans votre répertoire personnel. Taper dans le script les lignes suivantes :
 
-  \begin{minted}[]{python}
-import MySQLdb
-
-base = MySQLdb.connect (host = '10.175.8.201',
+  \begin{minted}[linenos,frame=lines]{python}
+  import MySQLdb
+  base = MySQLdb.connect (host = '10.175.8.201',
                         user = 'dorian',
                         passwd = 'dorian',
                         db = 'triangles')
-curseur = base.cursor ()
-res = curseur.execute("""SELECT * FROM triangles WHERE ab+ac+bc=100""")
-foo = curseur.fetchall()
-base.close()
+  curseur = base.cursor ()
+  res = curseur.execute("""SELECT * FROM triangles WHERE ab+ac+bc=100""")
+  foo = curseur.fetchall()
+  base.close()
   \end{minted}
 
   \item Quels types d'objets Python sont \verb|res| et \verb|foo| ? Que contient \verb|foo| ?

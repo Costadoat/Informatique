@@ -10,17 +10,17 @@ result=''
 
 for question in questions1:
     question_string = "%s:\n\ta. %s\n\tb. %s\n[a/b]:  " % (question[0], question[1], question[2])
-    answer = raw_input(question_string).lower()
+    answer = input(question_string).lower()
     while answer not in ("a", "b"):
         print("Please choose A or B")
-        answer = raw_input(question_string).lower()
+        answer = input(question_string).lower()
     result = result + answer
 
 if result == 'aa':
-    print 'Vous etes Spiderman !'
+    print('Vous etes Spiderman !')
 elif  result == 'ab':
-    print 'Vous etes Superman !'
+    print('Vous etes Superman !')
 elif  result == 'ba':
-    print 'Vous etes Batman !'
+    print('Vous etes Batman !')
 else:
-    print 'Vous etes Iron man !'
+    print('Vous etes Iron man !')

@@ -5,7 +5,7 @@
 \begin{document}
 
 \begin{center}
-{\Large\bf TP \no {\num} -- \descrip}
+{\Large\bf TP \no {\numero} -- \descrip}
 \end{center}
  
 \section{Principe général}
@@ -52,7 +52,7 @@ Pour réaliser la classification supervisée automatique, on part du principe su
 % 
 % %\begin{boxedminipage}
 % Exemple, avec le séparateur « , » :
-% \begin{minted}[]{python}
+% \begin{minted}[frame=lines]{python}
 % 'mot1,mot2,mot3'.split(',')
 % \end{minted}
 % Renvoie :
@@ -62,7 +62,7 @@ Pour réaliser la classification supervisée automatique, on part du principe su
 % Lors de la lecture d'un fichier, on est amené à lire le fichier ligne à ligne, chacune des lignes étant terminée par un caractère dit « d'échappement », le plus souvent \verb|\n|. Pour éliminer ce caractère d'une ligne qui a été lue sous forme de chaîne de caractères, on peut utiliser la méthode \verb|strip()|, qui ne prend pas d'argument.
 % 
 % Exemple, avec le caractère d'échappement \verb|\n| :
-% \begin{minted}[]{python}
+% \begin{minted}[frame=lines]{python}
 % 'ligne\n'.strip()
 % \end{minted}
 % 
@@ -72,7 +72,7 @@ Pour réaliser la classification supervisée automatique, on part du principe su
 % 
 % Les deux méthodes peuvent être combinées. 
 % 
-% \begin{minted}[]{python}
+% \begin{minted}[frame=lines]{python}
 % 'mot1,mot2,mot3\n'.strip().split(',')
 % \end{minted}
 % 
@@ -89,7 +89,7 @@ Se référer à l'énoncé du TP 6 « Manipulations de fichiers ».
 \subsection{Forme et dimensions d'un tableau}
 Pour obtenir la forme d'un tableau numpy, on utilise l'attribut \verb|.shape| ou la fonction \verb|shape| qui prend comme argument un tableau numpy. Exemple pour une matrice 2 lignes 3 colonnes :
 
-\begin{minted}[bgcolor=bg]{python}
+\begin{minted}[frame=lines]{python}
 A=np.array([[1,2,3],[4,5,6]])
 A
 A.shape
@@ -107,7 +107,7 @@ array([[1, 2, 3],
 
 On peut récupérer le nombre de lignes ou de colonnes, en appelant l'élément correspondant de \verb|shape|. Exemple pour une matrice 2 lignes 3 colonnes :
 
-\begin{minted}[bgcolor=bg]{python}
+\begin{minted}[frame=lines]{python}
 A.shape[0]
 A.shape[1]
 \end{minted}
@@ -123,7 +123,7 @@ renvoie
 
 Il est parfois utile de commencer à travailler avec un tableau numpy déjà rempli de façon automatisée. De nombreuses fonctions permettent de le faire. On en présente trois ci-dessous.
 
-\begin{minted}[bgcolor=bg]{python}
+\begin{minted}[frame=lines]{python}
 np.zeros((2,3)) # attention au parenthesage !
 \end{minted}
 
@@ -134,7 +134,7 @@ array([[ 0.,  0.,  0.],
        [ 0.,  0.,  0.]])
 \end{minted} 
 
-\begin{minted}[bgcolor=bg]{python}
+\begin{minted}[frame=lines]{python}
 A=np.ones((2,3),dtype=int) # fixe le type int (au lieu de float par defaut)
 A
 \end{minted}
@@ -146,7 +146,7 @@ array([[1, 1, 1],
        [1, 1, 1]])
 \end{minted} 
 
-\begin{minted}[bgcolor=bg]{python}
+\begin{minted}[frame=lines]{python}
 np.diag([1,2,3])
 \end{minted}
 
@@ -163,7 +163,7 @@ array([[1, 0, 0],
 
 On peut utiliser les méthodes \verb|.min| et \verb|.max| associées au tableau ou les fonctions \verb|min| et \verb|max| qui prennent comme argument un tableau numpy. Le code :
 
-\begin{minted}[bgcolor=bg]{python}
+\begin{minted}[frame=lines]{python}
 A=np.array([[1, 2, 3],[4, 5, 6],[7, 8, 9],[10,11,12]])
 np.min(A)
 np.max(A)
@@ -182,7 +182,7 @@ renvoie
 
 Pour trouver la position d'un maximum ou d'un minimum on peut utiliser la fonction \verb|where| qui prend comme argument une condition sur un tableau numpy. La fonction renvoie des tableaux numpy contenant les indices de position respectant la condition. Le code :
 
-\begin{minted}[bgcolor=bg]{python}
+\begin{minted}[frame=lines]{python}
 A=np.array([[1, 2, 3],[4,5,6],[7,8,9],[10,11,12]])
 np.where(A==np.min(A))
 np.where(A==np.max(A))
@@ -199,14 +199,14 @@ Ce qui signifie que le minimum est en position (0,0) et le maximum en (3,2).
 
 Si, par exemple, on veut accéder au numéro la ligne ou de la colonne sur laquelle se trouve le maximum, on fait :
 
-\begin{minted}[bgcolor=bg]{python}
+\begin{minted}[frame=lines]{python}
 int(np.where(A==np.max(A))[0])
 int(np.where(A==np.max(A))[1])
 \end{minted}
 
 ce qui renvoie, évidemment
 
-\begin{minted}[bgcolor=bg]{python}
+\begin{minted}[frame=lines]{python}
 3
 2
 \end{minted}
@@ -217,7 +217,7 @@ Avec des tableaux numpy, l'opérateur \verb|+| réalise une addition terme à te
 
 Pour concaténer deux tableaux numpy à deux dimensions, on peut utiliser la fonction \verb|np.concatenate| qui prend comme arguments les deux tableaux ou parties de tableaux et \verb|axis| qui permet de préciser si les deux tableaux doivent être mis bout à bout en ajoutant le nombre de lignes sans toucher aux colonnes (\verb|axis=0|) ou le contraire (\verb|axis=1|). Le code :
 
-\begin{minted}[bgcolor=bg]{python}
+\begin{minted}[frame=lines]{python}
 A=np.array([[1,2,3],[4,5,6]])
 B=np.array([[7,8,9],[10,11,12]])
 C=np.concatenate((A,B),axis=0)
@@ -237,7 +237,7 @@ array([[1, 2, 3],
 
 Le code
 
-\begin{minted}[bgcolor=bg]{python}
+\begin{minted}[frame=lines]{python}
 C=np.concatenate((A,B),axis=1)
 D
 np.shape(D)
@@ -255,19 +255,19 @@ array([[1, 2, 3, 7, 8, 9],
 
 Pour supprimer une ligne d'un tableau numpy à deux dimensions, on peut concaténer deux sous-tableaux excluant la ligne à supprimer. Par exemple, pour supprimer la ligne numéro \verb|n| du tableau \verb|tab|, on peut faire :
 
-\begin{minted}[bgcolor=bg]{python}
+\begin{minted}[frame=lines]{python}
 tab = np.concatenate((tab[0:n,:],tab[n+1:,:]),axis=0)
 \end{minted}
 
 ou encore, de façon plus explicite :
 
-\begin{minted}[bgcolor=bg]{python}
+\begin{minted}[frame=lines]{python}
 tab = np.concatenate((tab[0:n,:],tab[n+1:np.shape(tab)[0],:]),axis=0)
 \end{minted}
 
 On peut bien entendu supprimer la colonne \verb|p|, grâce à :
 
-\begin{minted}[bgcolor=bg]{python}
+\begin{minted}[frame=lines]{python}
 tab = np.concatenate((tab[:,0:p],tab[:,p+1:]),axis=1)
 \end{minted}
 

@@ -18,7 +18,7 @@ Z1 = []
 
 
 
-cr = csv.reader(open("data.csv","rb"))
+cr = csv.reader(open("data.csv"))
 
 
 

@@ -2,7 +2,7 @@
 \headcommand {\beamer@framepages {1}{1}}
 \headcommand {\beamer@sectionpages {1}{1}}
 \headcommand {\beamer@subsectionpages {1}{1}}
-\headcommand {\sectionentry {1}{Repr\IeC {\'e}sentation d'un nombre entier en m\IeC {\'e}moire}{2}{Repr\IeC {\'e}sentation d'un nombre entier en m\IeC {\'e}moire}{0}}
+\headcommand {\sectionentry {1}{Représentation d'un nombre entier en mémoire}{2}{Représentation d'un nombre entier en mémoire}{0}}
 \headcommand {\slideentry {1}{0}{1}{2/2}{}{0}}
 \headcommand {\beamer@framepages {2}{2}}
 \headcommand {\slideentry {1}{0}{2}{3/4}{}{0}}
@@ -15,7 +15,7 @@
 \headcommand {\beamer@framepages {8}{9}}
 \headcommand {\beamer@sectionpages {2}{9}}
 \headcommand {\beamer@subsectionpages {2}{9}}
-\headcommand {\sectionentry {2}{Repr\IeC {\'e}sentation d'un nombre r\IeC {\'e}el en m\IeC {\'e}moire}{10}{Repr\IeC {\'e}sentation d'un nombre r\IeC {\'e}el en m\IeC {\'e}moire}{0}}
+\headcommand {\sectionentry {2}{Représentation d'un nombre réel en mémoire}{10}{Représentation d'un nombre réel en mémoire}{0}}
 \headcommand {\slideentry {2}{0}{1}{10/10}{}{0}}
 \headcommand {\beamer@framepages {10}{10}}
 \headcommand {\slideentry {2}{0}{2}{11/11}{}{0}}
@@ -32,7 +32,7 @@
 \headcommand {\beamer@framepages {17}{18}}
 \headcommand {\beamer@sectionpages {10}{18}}
 \headcommand {\beamer@subsectionpages {10}{18}}
-\headcommand {\sectionentry {3}{Cons\IeC {\'e}quences}{19}{Cons\IeC {\'e}quences}{0}}
+\headcommand {\sectionentry {3}{Conséquences}{19}{Conséquences}{0}}
 \headcommand {\slideentry {3}{0}{1}{19/20}{}{0}}
 \headcommand {\beamer@framepages {19}{20}}
 \headcommand {\slideentry {3}{0}{2}{21/21}{}{0}}

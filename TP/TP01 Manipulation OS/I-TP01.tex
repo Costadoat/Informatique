@@ -5,10 +5,15 @@
 \begin{document}
 
 \begin{center}
-{\Large\bf TP \no {\num} -- \descrip}
+{\Large\bf TP \no {\numero} -- \descrip}
 \end{center}
 
-\section{Démarrage de l'ordinateur et identification}
+\section{Mise en route du TP}
+\subsection{Démarrage  de l'ordinateur} 
+
+Les ordinateurs de la salle B 306 sont fixés au dos de l'écran et \emph{ne} comportent \emph{pas} d'interrupteur physique. Pour les démarrer, repérer l'alimentation secteur branchée au mur, la débrancher \emph{sans la retirer complètement} et la rebrancher. Si au moment de rebrancher, la prise résiste, \emph{ne pas} forcer : il y a un détrompeur à insérer. 
+
+\subsection{Séquence de démarrage}
 
 Lorsqu'on démarre un ordinateur, un ensemble de processus sont mis en œuvre successivement et progressivement jusqu'à ce que la personne désirant utiliser l'ordinateur puisse le faire concrètement. Les principales étapes sont les suivantes :
 \begin{enumerate}
@@ -19,13 +24,14 @@ Lorsqu'on démarre un ordinateur, un ensemble de processus sont mis en œuvre su
  \item Si plusieurs systèmes d'exploitation sont présents, un autre petit programme, le \textit{boot loader} permet parfois à l'utilisateur de choisir lequel il souhaite. Par exemple, certains ordinateurs de la salle informatique peuvent être utilisés sous Ubuntu GNU/Linux et Windows : après le premier écran de démarrage, un menu de systèmes d'exploitation pourrait être proposé à l'utilisateur : il disposerait alors de quelques secondes pour effectuer son choix ; par défaut, si aucune action n'est effectuée, c'est le système Ubuntu GNU/Linux qui est utilisé. 
  
  \textbf{En TP} Cette fonctionnalité a été cachée, vous n'y avez pas accès directement.
- 
- 
- \item Écran de connexion : le système d'exploitation choisi propose ensuite un écran de connexion, permettant de s'identifier à l'aide d'un nom d'utilisateur et, parfois, d'un mot de passe. Cette étape est cruciale puisqu'à chaque utilisateur ou groupe d'utilisateurs sont associés différents \textit{droits} (lecture, écriture, exécution, possibilité de modifier certaines parties des paramètres du système d'exploitation, etc.). 
- 
- \textbf{En TP} Normalement, il n'existe que deux utilisateurs prédéfinis sur les ordinateurs de la salle d'informatique : « professeur » et « élève ». La compte « élève » s'identifie avec le mot de passe « eleve » : sélectionner ce compte, saisir le mot de passe et taper sur « Entrée ».
- 
 \end{enumerate}
+
+ \subsection{Identification} 
+ 
+ Écran de connexion : le système d'exploitation choisi propose ensuite un écran de connexion, permettant de s'identifier à l'aide d'un nom d'utilisateur et, parfois, d'un mot de passe. Cette étape est cruciale puisqu'à chaque utilisateur ou groupe d'utilisateurs sont associés différents \textit{droits} (lecture, écriture, exécution, possibilité de modifier certaines parties des paramètres du système d'exploitation, etc.). 
+ 
+ \textbf{En TP} Normalement, il n'existe que deux utilisateurs prédéfinis sur les ordinateurs de la salle d'informatique : « professeur » et « élève ». Le compte « élève » s'identifie avec le mot de passe « eleve » : sélectionner ce compte, saisir le mot de passe et taper sur « Entrée ».
+
 
 \section{Généralités sur les systèmes d'exploitation / système de fichiers}
 
@@ -132,27 +138,31 @@ Il va falloir apprendre et comprendre le cours d'Informatique pour interpréter 
 
 Avant de passer à la partie suivante, quitter python en tapant \texttt{Ctrl + D} puis fermer le fenêtre du terminal.
 
-\section{Environnement intégré de développement : Spyder}
+\section{Environnement intégré de développement : IDLE}
 
-\subsection{L'interface}
-Dans un terminal, Python est interpr\' et\' e ligne par ligne. Pour ex\' ecuter plusieurs lignes de commandes, il faut utiliser un \' editeur de fichier. Cette ann\' ee, nous travaillerons avec l'environnement Spyder qui a l'avantage d'\^ etre « userfriendly» .\\
-Ouvrez Spyder en le s\' electionnant dans la barre des t\^ aches situ\' ee \` a gauche ou en bas de votre \' ecran.\\
-L'interface est d\' ecoup\' ee est trois partie :
-\begin{enumerate}
-\item en bas \`  a droite : l'interpr\' eteur interactif ou console. Les commandes y sont interpr\' et\' ees ligne par ligne comme dans le terminal, vu \` a la section pr\' ec\' edente.
-\item \` a gauche : l'\' editeur de fichier. On y r\' edige les programmes. Les scripts en Python contiennent plusieurs lignes de commandes qui seront ensuite ex\' ecut\' ees.
-\item la derni\` ere fen\^ etre ne sera pas utilis\' ee aujourd'hui. Elle permet d'afficher diff\' erents volets qui pourront vous aider dans votre programmation comme : explorateur de variables (indique le type et le nom des variables qui sont utilis\' ees dans votre script), inspecteur d'objets (donne de la documentation sur les fonctions utilis\' ees), ...
-\end{enumerate}
+Le logiciel IDLE propose les mêmes fonctionnalités que python dans un terminal et aussi d'autres fonctionnalités, comme un éditeur de script.
 
+\subsection{Le shell}
 
-\begin{exercice}[Interpr\' eteur interactif]
+Dans la barre des tâches en haut de l'écran, chercher l'icône IDLE et cliquer dessus. Cela ouvre une fenêtre, nommée « shell », qui propose un interpréteur interactif.
 
-Reprenez l'exercice de la section \ref{Python dans un terminal} et tapez les lignes de commandes dans l'interpr\' eteur interactif. Vous devez obtenir les m\^ emes r\' esultats.
+\begin{exercice}[Shell]
+
+Reprendre l'exercice de la section \ref{Python dans un terminal} et taper quelques lignes de commandes dans la fenêtre du shell. Vous devez obtenir les m\^ emes r\' esultats qu'avec python dans un terminal.
 \end{exercice}
 
+\subsection{L'éditeur de script}
+Dans un interpréteur interactif, Python est interpr\' et\' e ligne par ligne. Pour ex\' ecuter plusieurs lignes de commandes, il faut utiliser un \' editeur de fichier. IDLE propose aussi cette fonctionnalité.\\
+Ouvrir un éditeur de script :
+\begin{itemize}
+ \item en s\' electionnant « New file » dans le menu « File » ;
+ \item ou en tapant CTRL+N.
+\end{itemize}
+
+Une nouvelle fenêtre (qui est un éditeur de script) apparaît, nommée « Untitled », ce qui indique que le fichier dans lequel le script sera enregistré n'a pas de nom ou un nom générique, ce qui n'est pas une bonne pratique.
 
 \subsection{R\` egles de sauvegarde d'un fichier}
-Avant m\^ eme de commencer \` a r\' ediger un script, il faut le sauvegarder. Quelques r\` egles indispensables :
+Avant m\^ eme de commencer \` a r\' ediger un script, il faut le sauvegarder dans un fichier. Quelques r\` egles indispensables :
 \begin{enumerate}
 \item Toujours v\' erifier \textbf{l'emplacement} de votre sauvegarde. Lors des TP d'informatique, vous devrez sauvegarder vos programmes sur votre clé USB ou \' eventuellement dans un dossier à votre nom dans « /home/eleve/Dossiers personnels » 
 
@@ -160,7 +170,6 @@ Si votre dossier personnel n'existe pas, créez-le : sur le bureau, repérez l'i
 
 \item Nommer de fa\c  con \textbf{pertinente} vos fichiers. Le nom du fichier doit contenir trois informations :
 \begin{enumerate}
-\item le nom du cr\' eateur du programme (vous) car vous \^ etes nombreux \` a sauvegarder sur la m\^ eme machine,
 \item le nom du programme,
 \item la version du programme (pour garder une trace des versions successives),
 \item l'extension du fichier, séparée du nom du fichier par un « . » : elle indique le type de fichier (par exemple fichier texte, feuille de calcul de tableur, etc.) ; pour un script python, l'extension est « .py ».
@@ -172,29 +181,14 @@ NomProgramme\_Version.py\hspace{2cm} Ex : TP1\_JoliDessin\_V1.py
 \end{center}
 \end{enumerate}
 
+Enregistrer votre fichier avec un nom pertinent.
 
-\subsection{Ex\' ecution d'un fichier}
+\subsection{Ex\' ecution d'un script}
 
-Pour naviguer dans Spyder, vous pourrez utiliser trois m\' ethodes :
-\begin{enumerate}
-\item en cliquant dans le menu, tout en haut,
-\item en cliquant sur la barre d'outils (celle qui contient les petites ic\^ ones),
-\item en utilisant les raccourcis clavier.
-\end{enumerate}
-
-\begin{exercice}[Cr\' eation d'un fichier] 
+\begin{exercice}[Ex\' ecution d'un script]
 
 \begin{enumerate}
-\item Cr\' eer un nouveau fichier en utilisant l'une des trois m\' ethodes (cliquer sur l'ic\^ one correspondante OU aller dans « fichier » OU taper « Ctrl N »)
-\item Sauvegarder ce fichier vide en respectant les r\` egles \' enonc\' ees ci-dessus.
-\end{enumerate}
-\end{exercice}
-
-
-\begin{exercice}[Ex\' ecution d'un fichier]
-
-\begin{enumerate}
-\item Dans votre programme cr\' e\' e pr\' ec\' edemment, recopier le script suivant. On sera attentif \` a la ponctuation et \` a l'indentation.
+\item Dans l'éditeur de script ouvert précédemment, recopier le script suivant. On sera attentif \` a la ponctuation et \` a l'indentation.
 
 \begin{minted}[linenos]{python}
 from mpl_toolkits.mplot3d import Axes3D
@@ -206,7 +200,7 @@ import csv
 X1 = []   
 Y1 = []   
 Z1 = []   
-cr = csv.reader(open("FICHIER","rb"))   
+cr = csv.reader(open("FICHIER"))   
 for row in cr:   
    X1.append(float(row[0]))
    Y1.append(float(row[1]))  
@@ -220,20 +214,28 @@ surf = ax.scatter(X, Y, Z)
 plt.show()
 \end{minted}
 
-\item À la ligne \textbf{10}, le programme va r\' ecup\' erer les donn\' ees pr\' esentes dans le fichier \textit{data.csv}. Il faut indiquer \` a Python l'emplacement de ce fichier. Pour obtenir le chemin d'acc\` es \` a un fichier, il faut parcourir l'arborescence du disque. Sous la plupart des syst\` emes d'exploitation, cela peut \^ etre fait en ouvrant un dossier quelconque puis en naviguant dans les diff\' erents dossiers et sous-dossiers. Sous Ubuntu, l'ic\^ one d\' edi\' ee se trouve dans la barre lat\' erale et prend l'aspect d'un petit dossier appel\' e « Dossier personnel ». Le fichier que nous utiliserons est nomm\' e \textit{data.csv} et est situ\' e dans le dossier \textit{/home/eleve/Ressources/PTSI/TP01/Code}. Se placer dans ce dossier. Faire un clic-droit sur le fichier. Choisir « propri\' et\' es » . S\' electionner et copier le chemin d'acc\` es qui appara\^ it apr\` es «~Emplacement ».
-\item Dans votre programme, \` a la place de « FICHIER », coller le chemin d'acc\` es suivi de «/data.csv ».
-\item Ex\' ecuter le programme par les trois m\' ethodes :
+\item À la ligne \textbf{10}, le programme va r\' ecup\' erer les donn\' ees pr\' esentes dans le fichier \textit{data.csv}. Il faut indiquer \` a Python l'emplacement de ce fichier. Pour obtenir le chemin d'acc\` es \` a un fichier, il faut parcourir l'arborescence du disque. Sous la plupart des syst\` emes d'exploitation, cela peut \^ etre fait en ouvrant un dossier quelconque puis en naviguant dans les diff\' erents dossiers et sous-dossiers. Sous Ubuntu, l'ic\^ one d\' edi\' ee se trouve dans la barre lat\' erale et prend l'aspect d'un petit dossier appel\' e « Dossier personnel ». Le fichier que nous utiliserons est nomm\' e \textit{data.csv} et est situ\' e dans le dossier \textit{/home/eleve/Ressources/PTSI/TP/TP01}. Se placer dans ce dossier. Faire un clic-droit sur le fichier. Choisir « Propri\' et\' es » . S\' electionner et copier le chemin d'acc\` es qui appara\^ it apr\` es «~Emplacement ».
+\item Dans votre script, \` a la place de « FICHIER », coller le chemin d'acc\` es suivi de «/data.csv ».
+\item Ex\' ecuter le script par les deux m\' ethodes suivantes :
+
 \begin{enumerate}
-\item en cliquant dans le menu sur « Ex\' ecution»  puis « Ex\' ecution » ,
-\item en trouvant dans la barre d'outil le bouton « ex\' ecuter le script » ,
-\item en trouvant le raccourci clavier.
+\item en cliquant sur « Run module » dans le menu « Run », 
+\item ou en utilisant la touche fonction F5.
 \end{enumerate}
 \end{enumerate}
 \end{exercice}
 
 \section{Analyse d'un algorithme}
 
-La suite va consister en l'analyse de l'algorithme d'un test de personnalité. Le fichier est disponible dans le dossier \textit{/home/eleve/Ressources/PTSI/TP01/Code}. Copier-le dans votre répertoire personnel et ouvrez-le avec Spyder. Il doit contenir :
+La suite va consister en l'analyse de l'algorithme d'un test de personnalité. Le fichier contenant le script est disponible dans le dossier \textit{/home/eleve/Ressources/PTSI/TP/TP01}. Copier-le dans votre répertoire personnel.
+
+Ouvrir le fichier dans un éditeur de script IDLE en :
+\begin{itemize}
+ \item sélectionnant « Open » dans le le menu « File », puis en choisissant le fichier ;
+ \item en tapant « CTRL+O », puis en choisissant le fichier.
+\end{itemize}
+
+La nouvelle fenêtre d'éditeur de script qui s'ouvre doit contenir :
 
 \begin{minted}[linenos]{python}
 #!/usr/bin/python 
@@ -245,26 +247,26 @@ result=''
  
 for question in questions1: 
     question_string = "%s:\n\ta. %s\n\tb. %s\n[a/b]:  " % (question[0], question[1], question[2]) 
-    answer = raw_input(question_string).lower() 
+    answer = input(question_string).lower() 
     while answer not in ("a", "b"): 
         print("Please choose A or B") 
-        answer = raw_input(question_string).lower() 
+        answer = input(question_string).lower() 
     result = result + answer 
  
 if result == 'aa': 
-    print 'Vous etes Spiderman !' 
+    print('Vous etes Spiderman !')
 elif  result == 'ab': 
-    print 'Vous etes Superman !' 
+    print('Vous etes Superman !')
 elif  result == 'ba': 
-    print 'Vous etes Batman !' 
+    print('Vous etes Batman !')
 else: 
-    print 'Vous etes Iron man !'
+    print('Vous etes Iron man !')
 \end{minted}
 
 \begin{exercice}[Ex\' ecution d'un fichier]
 
 \begin{enumerate}
-\item Lancer le programme plusieurs fois en modifiant vos réponses afin de déterminer comment ces réponses influent sur le résultat.
+\item Exécuter le script plusieurs fois en modifiant vos réponses afin de déterminer comment ces réponses influent sur le résultat.
 
 ~\
 

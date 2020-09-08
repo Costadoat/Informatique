@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.8.22)  30 SEP 2019 18:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.8.22)  30 AUG 2020 12:06
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1010,54 +1010,341 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 runsystem(mkdir -p _minted-I-TP09)...executed.
 
 
+(/usr/local/texlive/2017/texmf-dist/tex/latex/siunitx/siunitx.sty
+(/usr/local/texlive/2017/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2017/05/13 L3 programming layer (loader) 
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/l3kernel/expl3-code.tex
+Package: expl3 2017/05/13 L3 programming layer (code)
+\c_max_int=\count151
+\l_tmpa_int=\count152
+\l_tmpb_int=\count153
+\g_tmpa_int=\count154
+\g_tmpb_int=\count155
+\g__prg_map_int=\count156
+\c_log_iow=\count157
+\l_iow_line_count_int=\count158
+\l__iow_line_target_int=\count159
+\l__iow_one_indent_int=\count160
+\l__iow_indent_int=\count161
+\c_zero_dim=\dimen159
+\c_max_dim=\dimen160
+\l_tmpa_dim=\dimen161
+\l_tmpb_dim=\dimen162
+\g_tmpa_dim=\dimen163
+\g_tmpb_dim=\dimen164
+\c_zero_skip=\skip84
+\c_max_skip=\skip85
+\l_tmpa_skip=\skip86
+\l_tmpb_skip=\skip87
+\g_tmpa_skip=\skip88
+\g_tmpb_skip=\skip89
+\c_zero_muskip=\muskip12
+\c_max_muskip=\muskip13
+\l_tmpa_muskip=\muskip14
+\l_tmpb_muskip=\muskip15
+\g_tmpa_muskip=\muskip16
+\g_tmpb_muskip=\muskip17
+\l_keys_choice_int=\count162
+\c__fp_leading_shift_int=\count163
+\c__fp_middle_shift_int=\count164
+\c__fp_trailing_shift_int=\count165
+\c__fp_big_leading_shift_int=\count166
+\c__fp_big_middle_shift_int=\count167
+\c__fp_big_trailing_shift_int=\count168
+\c__fp_Bigg_leading_shift_int=\count169
+\c__fp_Bigg_middle_shift_int=\count170
+\c__fp_Bigg_trailing_shift_int=\count171
+\c__fp_rand_size_int=\count172
+\c__fp_rand_four_int=\count173
+\c__fp_rand_eight_int=\count174
+\l__sort_length_int=\count175
+\l__sort_min_int=\count176
+\l__sort_top_int=\count177
+\l__sort_max_int=\count178
+\l__sort_true_max_int=\count179
+\l__sort_block_int=\count180
+\l__sort_begin_int=\count181
+\l__sort_end_int=\count182
+\l__sort_A_int=\count183
+\l__sort_B_int=\count184
+\l__sort_C_int=\count185
+\c_empty_box=\box46
+\l_tmpa_box=\box47
+\l_tmpb_box=\box48
+\g_tmpa_box=\box49
+\g_tmpb_box=\box50
+\l__box_top_dim=\dimen165
+\l__box_bottom_dim=\dimen166
+\l__box_left_dim=\dimen167
+\l__box_right_dim=\dimen168
+\l__box_top_new_dim=\dimen169
+\l__box_bottom_new_dim=\dimen170
+\l__box_left_new_dim=\dimen171
+\l__box_right_new_dim=\dimen172
+\l__box_internal_box=\box51
+\l__coffin_internal_box=\box52
+\l__coffin_internal_dim=\dimen173
+\l__coffin_offset_x_dim=\dimen174
+\l__coffin_offset_y_dim=\dimen175
+\l__coffin_x_dim=\dimen176
+\l__coffin_y_dim=\dimen177
+\l__coffin_x_prime_dim=\dimen178
+\l__coffin_y_prime_dim=\dimen179
+\c_empty_coffin=\box53
+\l__coffin_aligned_coffin=\box54
+\l__coffin_aligned_internal_coffin=\box55
+\l_tmpa_coffin=\box56
+\l_tmpb_coffin=\box57
+\l__coffin_display_coffin=\box58
+\l__coffin_display_coord_coffin=\box59
+\l__coffin_display_pole_coffin=\box60
+\l__coffin_display_offset_dim=\dimen180
+\l__coffin_display_x_dim=\dimen181
+\l__coffin_display_y_dim=\dimen182
+\l__coffin_bounding_shift_dim=\dimen183
+\l__coffin_left_corner_dim=\dimen184
+\l__coffin_right_corner_dim=\dimen185
+\l__coffin_bottom_corner_dim=\dimen186
+\l__coffin_top_corner_dim=\dimen187
+\l__coffin_scaled_total_height_dim=\dimen188
+\l__coffin_scaled_width_dim=\dimen189
+)
+(/usr/local/texlive/2017/texmf-dist/tex/latex/l3kernel/l3pdfmode.def
+File: l3pdfmode.def 2017/03/18 v L3 Experimental driver: PDF mode
+\l__driver_color_stack_int=\count186
+\l__driver_tmp_box=\box61
+))
+(/usr/local/texlive/2017/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+Package: xparse 2017/05/13 L3 Experimental document command parser
+\l__xparse_current_arg_int=\count187
+\g__xparse_grabber_int=\count188
+\l__xparse_m_args_int=\count189
+\l__xparse_mandatory_args_int=\count190
+\l__xparse_v_nesting_int=\count191
+)
+Package: siunitx 2017/05/19 v2.7g A comprehensive (SI) units package
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/tools/array.sty
+Package: array 2016/10/06 v2.4d Tabular extension package (FMi)
+\col@sep=\dimen190
+\extrarowheight=\dimen191
+\NC@list=\toks30
+\extratabsurround=\skip90
+\backup@length=\skip91
+)
+(/usr/local/texlive/2017/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
+Package: l3keys2e 2017/05/13 LaTeX2e option processing using LaTeX3 keys
+)
+\l__siunitx_tmp_box=\box62
+\l__siunitx_tmp_dim=\dimen192
+\l__siunitx_tmp_int=\count192
+\l__siunitx_number_mantissa_length_int=\count193
+\l__siunitx_number_uncert_length_int=\count194
+\l__siunitx_round_int=\count195
+\l__siunitx_process_decimal_int=\count196
+\l__siunitx_process_uncertainty_int=\count197
+\l__siunitx_process_fixed_int=\count198
+\l__siunitx_process_integer_min_int=\count199
+\l__siunitx_process_precision_int=\count266
+\l__siunitx_group_min_int=\count267
+\l__siunitx_angle_marker_box=\box63
+\l__siunitx_angle_unit_box=\box64
+\l__siunitx_angle_marker_dim=\dimen193
+\l__siunitx_angle_unit_dim=\dimen194
+\l__siunitx_unit_int=\count268
+\l__siunitx_unit_denominator_int=\count269
+\l__siunitx_unit_numerator_int=\count270
+\l__siunitx_unit_prefix_int=\count271
+\l__siunitx_unit_prefix_base_int=\count272
+\l__siunitx_unit_prefix_gram_int=\count273
+\l__siunitx_number_product_int=\count274
+\c__siunitx_one_fill_skip=\skip92
+\l__siunitx_table_unit_align_skip=\skip93
+\l__siunitx_table_exponent_dim=\dimen195
+\l__siunitx_table_integer_dim=\dimen196
+\l__siunitx_table_mantissa_dim=\dimen197
+\l__siunitx_table_marker_dim=\dimen198
+\l__siunitx_table_result_dim=\dimen199
+\l__siunitx_table_uncert_dim=\dimen256
+\l__siunitx_table_fill_pre_dim=\dimen257
+\l__siunitx_table_fill_post_dim=\dimen258
+\l__siunitx_table_fill_mid_dim=\dimen259
+\l__siunitx_table_pre_box=\box65
+\l__siunitx_table_post_box=\box66
+\l__siunitx_table_mantissa_box=\box67
+\l__siunitx_table_result_box=\box68
+\l__siunitx_table_number_align_skip=\skip94
+\l__siunitx_table_text_align_skip=\skip95
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \DeclareBinaryPrefix with sig. 'mmm' on line 7251.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \DeclareSIPostPower with sig. 'mm' on line 7254.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \DeclareSIPrefix with sig. 'mmm' on line 7257.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \DeclareSIPrePower with sig. 'mm' on line 7260.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \DeclareSIQualifier with sig. 'mm' on line 7263.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \DeclareSIUnit with sig. 'O{}mm' on line 7266.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \DeclareSIUnitWithOptions with sig. 'mmm' on line 7269.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \ang with sig. 'o>{\SplitArgument {2}{;}}m' on line 7284.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \num with sig. 'om' on line 7293.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \numlist with sig. 'o>{\SplitList {;}}m' on line 7302.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \numrange with sig. 'omm' on line 7311.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \SIlist with sig. 'o>{\SplitList {;}}mm' on line 7323.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \SIrange with sig. 'ommm' on line 7335.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \SI with sig. 'omom' on line 7347.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \sisetup with sig. 'm' on line 7350.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \tablenum with sig. 'om' on line 7365.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \si with sig. 'om' on line 7377.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \numInBookmark with sig. 'om' on line 7424.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \numrangeInBookmark with sig. 'omm' on line 7426.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \SIInBookmark with sig. 'omom' on line 7428.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \SIlistInBookmark with sig. 'omm' on line 7430.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \SIrangeInBookmark with sig. 'ommm' on line 7432.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \siInBookmark with sig. 'om' on line 7433.
+.................................................
+\g__file_internal_ior=\read3
+(/usr/local/texlive/2017/texmf-dist/tex/latex/beamer/translator/translator.sty
+Package: translator 2010/06/12 ver 1.10
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/beamer/translator/translator-lang
+uage-mappings.tex)))
 (/usr/local/texlive/2017/texmf-dist/tex/latex/tools/multicol.sty
 Package: multicol 2017/04/11 v1.8q multicolumn formatting (FMi)
-\c@tracingmulticols=\count151
-\mult@box=\box46
-\multicol@leftmargin=\dimen159
-\c@unbalance=\count152
-\c@collectmore=\count153
-\doublecol@number=\count154
-\multicoltolerance=\count155
-\multicolpretolerance=\count156
-\full@width=\dimen160
-\page@free=\dimen161
-\premulticols=\dimen162
-\postmulticols=\dimen163
-\multicolsep=\skip84
-\multicolbaselineskip=\skip85
-\partial@page=\box47
-\last@line=\box48
-\maxbalancingoverflow=\dimen164
-\mult@rightbox=\box49
-\mult@grightbox=\box50
-\mult@gfirstbox=\box51
-\mult@firstbox=\box52
-\@tempa=\box53
-\@tempa=\box54
-\@tempa=\box55
-\@tempa=\box56
-\@tempa=\box57
-\@tempa=\box58
-\@tempa=\box59
-\@tempa=\box60
-\@tempa=\box61
-\@tempa=\box62
-\@tempa=\box63
-\@tempa=\box64
-\@tempa=\box65
-\@tempa=\box66
-\@tempa=\box67
-\@tempa=\box68
-\@tempa=\box69
-\c@columnbadness=\count157
-\c@finalcolumnbadness=\count158
-\last@try=\dimen165
-\multicolovershoot=\dimen166
-\multicolundershoot=\dimen167
-\mult@nat@firstbox=\box70
-\colbreak@box=\box71
-\mc@col@check@num=\count159
+\c@tracingmulticols=\count275
+\mult@box=\box69
+\multicol@leftmargin=\dimen260
+\c@unbalance=\count276
+\c@collectmore=\count277
+\doublecol@number=\count278
+\multicoltolerance=\count279
+\multicolpretolerance=\count280
+\full@width=\dimen261
+\page@free=\dimen262
+\premulticols=\dimen263
+\postmulticols=\dimen264
+\multicolsep=\skip96
+\multicolbaselineskip=\skip97
+\partial@page=\box70
+\last@line=\box71
+\maxbalancingoverflow=\dimen265
+\mult@rightbox=\box72
+\mult@grightbox=\box73
+\mult@gfirstbox=\box74
+\mult@firstbox=\box75
+\@tempa=\box76
+\@tempa=\box77
+\@tempa=\box78
+\@tempa=\box79
+\@tempa=\box80
+\@tempa=\box81
+\@tempa=\box82
+\@tempa=\box83
+\@tempa=\box84
+\@tempa=\box85
+\@tempa=\box86
+\@tempa=\box87
+\@tempa=\box88
+\@tempa=\box89
+\@tempa=\box90
+\@tempa=\box91
+\@tempa=\box92
+\c@columnbadness=\count281
+\c@finalcolumnbadness=\count282
+\last@try=\dimen266
+\multicolovershoot=\dimen267
+\multicolundershoot=\dimen268
+\mult@nat@firstbox=\box93
+\colbreak@box=\box94
+\mc@col@check@num=\count283
 )
 \@indexfile=\write6
 \openout6 = `I-TP09.idx'.
@@ -1070,36 +1357,24 @@ Writing index file I-TP09.idx
 Excluding comment 'comment')
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amscls/amsthm.sty
 Package: amsthm 2015/03/04 v2.20.2
-\thm@style=\toks30
-\thm@bodyfont=\toks31
-\thm@headfont=\toks32
-\thm@notefont=\toks33
-\thm@headpunct=\toks34
-\thm@preskip=\skip86
-\thm@postskip=\skip87
-\thm@headsep=\skip88
-\dth@everypar=\toks35
+\thm@style=\toks31
+\thm@bodyfont=\toks32
+\thm@headfont=\toks33
+\thm@notefont=\toks34
+\thm@headpunct=\toks35
+\thm@preskip=\skip98
+\thm@postskip=\skip99
+\thm@headsep=\skip100
+\dth@everypar=\toks36
 )
-\c@exercice=\count160
+\c@exercice=\count284
 )
-\c@solution=\count161
+\c@solution=\count285
 runsystem(which pygmentize && touch I-TP09.aex)...executed.
 
+runsystem(rm I-TP09.aex)...executed.
 
-
-! Package minted Error: You must have `pygmentize' installed to use this packag
-e.
-
-See the minted package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.5 \begin{document}
-                    
-Refer to the installation instructions in the minted documentation for more inf
-ormation.
-
-(./I-TP09.aux)
+ (./I-TP09.aux)
 \openout1 = `I-TP09.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
@@ -1128,17 +1403,17 @@ LaTeX Info: Redefining \up on input line 5.
 
 (/usr/local/texlive/2017/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count162
-\scratchdimen=\dimen168
-\scratchbox=\box72
-\nofMPsegments=\count163
-\nofMParguments=\count164
-\everyMPshowfont=\toks36
-\MPscratchCnt=\count165
-\MPscratchDim=\dimen169
-\MPnumerator=\count166
-\makeMPintoPDFobject=\count167
-\everyMPtoPDFconversion=\toks37
+\scratchcounter=\count286
+\scratchdimen=\dimen269
+\scratchbox=\box95
+\nofMPsegments=\count287
+\nofMParguments=\count288
+\everyMPshowfont=\toks37
+\MPscratchCnt=\count289
+\MPscratchDim=\dimen270
+\MPnumerator=\count290
+\makeMPintoPDFobject=\count291
+\everyMPtoPDFconversion=\toks38
 ) (/usr/local/texlive/2017/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -1156,7 +1431,7 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\AtBeginShipoutBox=\box73
+\AtBeginShipoutBox=\box96
 Package hyperref Info: Link coloring OFF on input line 5.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/hyperref/nameref.sty
@@ -1165,7 +1440,7 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/local/texlive/2017/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count168
+\c@section@level=\count292
 )
 LaTeX Info: Redefining \ref on input line 5.
 LaTeX Info: Redefining \pageref on input line 5.
@@ -1175,19 +1450,29 @@ LaTeX Info: Redefining \nameref on input line 5.
 \@outlinefile=\write8
 \openout8 = `I-TP09.out'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 13.
 
-(/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
+(/usr/local/texlive/2017/texmf-dist/tex/latex/beamer/translator/dicts/translato
+r-basic-dictionary/translator-basic-dictionary-English.dict
+Dictionary: translator-basic-dictionary, Language: English 
+)
+(/usr/local/texlive/2017/texmf-dist/tex/latex/siunitx/siunitx-abbreviations.cfg
+File: siunitx-abbreviations.cfg 2017/05/19 v2.7g siunitx: Abbreviated units
+)
+\c__siunitx_mathsf_int=\count293
+LaTeX Font Info:    Try loading font information for U+msa on input line 5.
+ (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 13.
+LaTeX Font Info:    Try loading font information for U+msb on input line 5.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+stmry on input line 13.
+LaTeX Font Info:    Try loading font information for U+stmry on input line 5.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/stmaryrd/Ustmry.fd)
+\c__siunitx_mathtt_int=\count294
+
 <Dessin/Newton_convexe.pdf, id=32, 355.3275pt x 357.335pt>
 File: Dessin/Newton_convexe.pdf Graphic file (type pdf)
 
@@ -1239,13 +1524,13 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 141.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 12985 strings out of 492995
- 200329 string characters out of 6132704
- 369028 words of memory out of 5000000
- 16277 multiletter control sequences out of 15000+600000
- 14307 words of font info for 37 fonts, out of 8000000 for 9000
+ 22564 strings out of 492995
+ 415691 string characters out of 6132704
+ 540218 words of memory out of 5000000
+ 25809 multiletter control sequences out of 15000+600000
+ 15716 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,12n,43p,1004b,8442s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 39i,12n,43p,10430b,13117s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/cm-super/cm
 -super-t1.enc}{/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/cm-super/cm-s
 uper-ts1.enc}</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm
@@ -1269,7 +1554,7 @@ sr/local/texlive/2017/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr
 /local/texlive/2017/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/l
 ocal/texlive/2017/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/loc
 al/texlive/2017/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on I-TP09.pdf (3 pages, 268927 bytes).
+Output written on I-TP09.pdf (3 pages, 268169 bytes).
 PDF statistics:
  218 PDF objects out of 1000 (max. 8388607)
  157 compressed objects within 2 object streams
