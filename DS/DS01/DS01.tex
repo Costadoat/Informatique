@@ -2,155 +2,164 @@
 
 \section{Introduction}
 
-\question{Ecrire sur le diagramme de Contexte donné en document réponse le nom des composants de l'unité centrale.}
+\question{Écrire sur le diagramme de Contexte donné en document réponse le nom des composants de l'unité centrale.}
 
 \section{Analyse d'une réponse temporelle}
 
-Le tracé de la figure \ref{fig01} correspond à la réponse $s(t)$ à un échelon $u(t)=1$ de la fonction de transfert $H(p)$, avec:
+Le tracé de la figure \ref{fig01} correspond à la tension $v(t)=V_{r\ max}\cdot sin(k\cdot \theta(t))\cdot cos(\theta(t))$ (avec $\theta(t)=2\cdot \pi\cdot f_r\cdot t$) induite dans l'un des enroulements fixes des deux secondaires du moteur du bras du système de pulvérisation de nacre (vu en DS de SI).
 
-\begin{center}
-$H(p)=\frac{K}{1+\frac{2.\xi}{\omega_0}.p+\frac{p^2}{\omega_0^2}}$
-\end{center}
-
-\vspace{-1cm}
+On sait que $f_r=0,6~\textrm{Hz}$, mais l'objectif va être de déterminer grâce à python les valeurs des \textbf{entiers} $V_{r\ max}$ et $k$.
 
 \begin{figure}[!ht]
 \centering\includegraphics[width=0.7\linewidth]{img/fig01}
-\caption{Tracé de la réponse temporelle s(t)}
+\caption{Tracé de la réponse temporelle v(t)}
 \label{fig01}
 \end{figure}
 
-Sont indiquées sur la figure l'asymptote à la courbe quand $t$ tend vers l'infini (en trait mixte) et les droites limites à $+/-5\%$ de cette asymptote (en pointillés).
+Cette fonction est définie comme suit dans un script python qui va être complété:
+\begin{center}
+\begin{minted}[linenos,frame=lines]{python}
+def theta(t):
+    return 2*np.pi*fr*t
 
-L'objectif de cette étude est d'écrire un script python permettant d'identifier les paramètres $\xi$, $\omega_0$ et $K$ de cette fonction de transfert.
+def v(t):
+    return Vr*np.sin(k*theta(t))*np.cos(theta(t))
 
-Afin d'effectuer ce tracé, deux listes ont été créées:
+t=np.linspace(0,2,1000)
+plt.plot(t,v(t))
+\end{minted}
+\end{center}
+
+\subsection{Recherche de $V_{r\ max}$}
+
+On propose deux scripts pour compléter le précédent afin de déterminer la valeur de $V_{r\ max}$.
+
+~\
+
+\begin{minipage}{0.45\linewidth}
+\begin{center}
+Solution A
+\begin{minted}[linenos,frame=lines]{python}
+m=v(t[i])
+while v(t[i])<=m:
+    if v(t[i])>m:
+        m=v(t[i])
+print(m)
+\end{minted}
+\end{center}
+\end{minipage}\hfill
+\begin{minipage}{0.45\linewidth}
+\begin{center}
+Solution B
+\begin{minted}[linenos,frame=lines]{python}
+m=v(0)
+for ti in t:
+    if v(ti)>m:
+        m=v(ti)        
+print(m)
+\end{minted}
+\end{center}
+\end{minipage}
+
+\question{Choisir en justifiant la solution qui permet de déterminer $V_{r\ max}$.}
+
+Le résultat affiché par le script qui convient est \verb?9.9519?.
+
+\question{En déduire en justifiant la valeur de $V_{r\ max}$.}
+
+\subsection{Identification de $k$}
+
+On montre que la courbe de la figure \ref{fig01}, coupe $2\cdot k$ fois la droite d'équation $y=1$ sur l'intervalle $\left[0,\frac{1}{f_r}\right]$. L'objectif de la suite est de déterminer le nombre d'intersections afin d'en déduire $k$.
+
+\paragraph{Recherche des intervalles $[t,t+dt]$, incluant un passage par y=1} ~\ \\
+
+On souhaite dans cette partie créer une liste \verb?bornes?, contenant l'ensemble des intervalles $[t,t+dt]$ tels qu'il existe un $t_p\in[t,t+dt]$ tel que $v(t_p)=1$.
+
+Une fois la liste créée, en tapant \verb?print(bornes[0:last])?, on obtient le résultat suivant:
+\verb?[[0.0, 0.002002002002002002], [0.050050050050050046, 0.05205205205205205],?\\
+\verb?[0.1041041041041041, 0.1061061061061061], [0.15415415415415415, 0.15615615615615616]]?
+
+Cela signifie que la courbe $v(t)$ coupe $y=1$ entre $0$ et $0.002002002002002002$, etc...
+
+\question{Quelle valeur de \verb?last? permet l'affichage précédent ?}
+
+\question{Écrire un script python permettant de détecter puis d'écrire dans la liste \verb?bornes? l'ensemble des intervalles définis précédemment.}
+
+\paragraph{Recherche des solutions par dichotomie} ~\ \\
+
+Voici le principe de la dichotomie:
 \begin{itemize}
- \item \verb?t? contenant l'ensemble des valeurs de $t$,
- \item \verb?s? contenant l'ensemble des valeurs de $s(t)$.
+ \item Au rang 0,
+ \begin{itemize}
+  \item soient $a_0=a$, $b_0=b$. Il existe une solution $x_0$ de l'équation $(f(x)=0)$ dans l'intervalle $[a_0,b_0]$.
+ \end{itemize}
+ \item Au rang 1,
+ \begin{itemize}
+  \item si $f(a_0).f(\dfrac{a_0+b_0}{2})\leq 0$, alors on pose $a_1=a_0$, $b_1=\dfrac{a_0+b_0}{2}$,
+  \item sinon on pose $a_{1}=\dfrac{a_0+b_0}{2}$ et $b_1=b$.
+  \item dans les deux cas, il existe une solution $x_1$ de l'équation $(f(x)=0)$ dans l'intervalle $[a_1,b_1]$.
+ \end{itemize}
+ \item Au rang n, supposons construit un intervalle $[a_n,b_n]$, de longueur $\dfrac{b-a}{2^n}$,  et contenant une solution $x_n$ de l'équation $(f(x)=0)$. Alors:
+ \begin{itemize}
+  \item  si $f(a_n).f(\dfrac{a_n+b_n}{2})\leq 0$, alors on pose $a_{n+1}=a_n$, $b_{n+1}=\dfrac{a_n+b_n}{2}$,
+  \item sinon on pose $a_{n+1}=\dfrac{a_n+b_n}{2}$ et $b_{n+1}=b_{n}$,
+  \item dans les deux cas, il existe une solution $x_{n+1}$ de l'équation $(f(x)=0)$ dans l'intervalle $[a_{n+1},b_{n+1}]$.
+ \end{itemize}
 \end{itemize}
 
-Rappel: \verb? L[-1]? donne la dernière valeur de la liste \verb?L?.
+~\
 
-\question{Ecrire sous python la commande permettant de déterminer $K$ à partir de \verb?s?.}
+À chaque étape, on a $a_n\leq x_n \leq b_n$, on arrête le processus dès que $|f(\frac{a_n+b_n}{2})|$ est inférieure à la précision souhaitée.
+
+\question{Écrire un script python permettant de rechercher par dichotomie la solution de l'équation \verb?f(x)=0? entre \verb?a? et \verb?b? avec une précision \verb?p?.}
+
+\question{Créer une fonction \verb?dichotomie(f,a,b,p)? à partir de ce script. (si vous n'avez pas réussi la question précédente, créer une fonction qui permet de calculer $f(a+b+p)$.}
 
 ~\
 
-On donne la fonction python \verb?recherche(s)? ci-dessous qui recherche la valeur \verb?val? dans la liste \verb?s?.
+Le script suivant utilise la fonction \verb?dichotomie(f,a,b,p)? précédente.
 
 \begin{center}
-\begin{minted}[frame=lines]{python}
-def recherche(s):
-    val=s[0]
-    for i in range(len(s)):
-        if s[i] > val:
-            val=s[i]
-    return val
+\begin{minted}[linenos,frame=lines]{python}
+def g(t):
+    return v(t)-1
+
+p=10**(-6)
+l1=[]
+l2=[]
+for borne in bornes:
+    x=dichotomie(g,borne[0],borne[1],p)
+    if x<1/fr:
+        l1.append(x)
+        l2.append(v(x))
 \end{minted}
 \end{center}
 
-\question{Préciser quelle est la particularité de cette valeur \verb?val? pour la liste \verb?s?.}
+\question{Expliquer l'intérêt de la fonction \verb?g(t)?.}
 
-\question{Justifier que le code suivant permet de calculer \verb?Tp? la valeur de la pseudo période de $s(t)$.}
-\begin{center}
-\begin{minted}[frame=lines]{python}
-i=0
-while s[i]!=recherche(s):
-    i+=1
-Tp=2*t[i]
-\end{minted}
-\end{center}
+\question{Expliquer à quels types de variables appartiennent \verb?l1? et \verb?l2? et ce qu'elles contiennent.}
 
-On rappelle que le dépassement en pourcent défini comme suit: $D_\%=100.\frac{s(max)-s(+\infty)}{s(+\infty)}$ peut être calculé en fonction de $\xi$ comme suit $D_\%=100.e^{-\frac{\xi.\pi}{\sqrt{1-\xi^2}}}$, on a donc défini la fonction \verb?D(xi)? suivante:
-
-\begin{center}
-\begin{minted}[frame=lines]{python}
-def D(xi):
-    return 100*np.exp(-xi*np.pi/np.sqrt(1-xi**2))
-\end{minted}
-\end{center}
-
-Afin de rechercher la valeur de $\xi$, on propose de suivre l'algorithme suivant:
-\begin{enumerate}
- \item On sait que $\xi<0.7$ car il y a un dépassement au dessus de la droite à $+5\%$, donc on démarre avec \verb?xi=0.7?,
- \item On regarde si \verb?D(xi)? est plus petit que $D_\%=100.\frac{s(max)-s(+\infty)}{s(+\infty)}$,
- \item Tant que c'est vrai, cela signifie que le $\xi$ est inférieur à \verb?xi?, alors on retire $0.01$ à \verb?xi?,
- \item Quand ce n'est plus vrai, cela signifie qu'on vient de trouver $\xi$.
-\end{enumerate}
-
-\question{Compléter le code python suivant afin de déterminer $\xi$ à partir des résultats précédents.}
-
-\begin{center}
-\begin{minted}[frame=lines]{python}
-xi=0.7
-while .........................................:
-    xi+=-0.01
-\end{minted}
-\end{center}
-
-On rappelle que $Tp=\frac{2.\pi}{\omega_0.\sqrt{1-\xi^2}}$
-
-\question{Ecrire le code python permettant de déterminer $\omega_0$ à partir des résultats précédents.}
+\question{Expliquer l'intérêt du test \verb?if x<1/fr? dans ce script.}
 
 ~\
 
-Afin de vérifier nos résultats, nous souhaitons calculer le temps de réponse par deux moyens.
+La fonction \verb?len(list)? renvoie le nombre d'éléments de la liste \verb?list?.
 
-Dans un premier temps, nous allons chercher à le calculer à partir de \verb?s? en cherchant, en partant de la fin, le moment à partir duquel la valeur de $s(t)$ sort de la bande de $+/-5\%$. On donne pour cela l'extrait de code suivant:
-
-\begin{center}
-\begin{minted}[frame=lines]{python}
-i=-1
-while ...............................:
-    i+=-1
-t5=t[i+1]
-\end{minted}
-\end{center}
-
-\question{Compléter le code afin d'obtenir le résultat souhaité.}
-
-~\
-
-On rappelle que $t_{R,5\%}=\frac{1}{\xi.\omega_0}.\ln(20)$, on donne donc la fonction suivante (\verb?log? correspond bien au logarithme népérien en python): 
-
-\begin{center}
-\begin{minted}[frame=lines]{python}
-def tr5(xi,w0):
-    return np.log(20)/(xi*w0)
-\end{minted}
-\end{center}
-    
-\question{Ecrire un code python qui affiche "OK" si la différence entre les deux valeurs calculées pour le temps de réponse est inférieure à 0,01s et "KO" si ce n'est pas le cas. La fonction valeur absolue s'écrit \verb?abs()? en python.}
-
-\question{Expliquer l'intérêt du code suivant.}
-
-{\scriptsize
-\begin{center}
-\begin{minted}[frame=lines]{python}
-while t5>0.025:
-    xi+=10**(-3)
-    s=K*(1-np.exp(-w0*xi*t)/np.sqrt(1-xi**2)*np.cos(w0*np.sqrt(1-xi**2)*t-np.arctan(xi/np.sqrt(1-xi**2))))
-    i=-1
-    while s[i]<1.05*s[-1] and s[i]>0.95*s[-1]:
-        i+=-1
-    t5=t[i+1]
-\end{minted}
-\end{center}}
-
+\question{Proposer une solution pour déterminer $k$.}
 
 \section{Valeur approchée de $\xi$}
 
-Il se trouve que le cahier des charges du système demande un temps de réponse à 5\% inférieur à 0,025s. Pour cela, il faut que $\xi$ soit environ égal à 0,65. Ce nombre doit alors stocké.
+On souhaite modifier la valeur de $f_r$ et choisir maintenant $f_r=0,7~\textrm{Hz}$.
 
-\question{Ecrire sous la forme d'un mot de 32 bits respectant la norme IEEE 754 (signe, exposant, mantisse) le float $0,65$.}
+\question{Écrire sous la forme d'un mot de 32 bits respectant la norme IEEE 754 (signe, exposant, mantisse) le float $0,7$.}
 
-\question{Montrer que $00110011001100110011=\frac{2^{20}-1}{5}.$}
+\question{Montrer que $001100110011001100110011_2=\frac{2^{24}-1}{5}.$}
 
 ~\
 
-On donne: $2^{-3}=0.125$, $2^{-1}=0.5$, $2^{-23}\approx 1,2.10^{-7}$.
+On donne: $\frac{2^{-24}}{5}\approx 1.2*10^{-8}$.
 
-\question{Déterminer l'erreur due au stockage de 0,65 à l'aide de la norme IEE74.}
+\question{Déterminer l'erreur due au stockage de 0,7 à l'aide de la norme IEE74.}
 
 \newpage
 
@@ -184,23 +193,25 @@ Prénom:......................
 
 \paragraph{Question 2:}
 
-\verb?K=s[-1]?.
+La solution à choisir est la B, la A ne fonctionne pas dès la première ligne car \verb?i? n'est pas défini. De plus, il faut ici parcourir toute la liste pour chercher un maximum, il faut donc une boucle \verb?for? et non \verb?while?.
 
 \paragraph{Question 3:}
 
-La valeur \verb?val? est la plus grande valeur de la liste \verb?s?.
+La valeur de $V_{\ max}$ est un entier, vu la valeur obtenue on suppose que le premier entier supérieur doit être la bonne réponse, donc $V_{\ max}=10~\textrm{V}$.
 
 \paragraph{Question 4:}
 
-Cette fonction cherche le temps qui correspond au double du temps correspondant au point le plus haut de la courbe. C'est bien $Tp$.
+Il y a 4 éléments dans la liste, ce sont donc les 0, 1, 2 et 3ème, donc \verb?last=4?.
 
 \paragraph{Question 5:}
 
 \begin{center}
 \begin{minted}[frame=lines]{python}
-xi=0.7
-while D(xi)<100*(recherche(s)-s[-1])/s[-1]:
-    xi+=-0.01
+bornes=[]
+for i in range(1,len(t)):
+#    if v(t[i-1])>1 and v(t[i])<1 or v(t[i-1])<1 and v(t[i])>1: (autre solution)
+    if (v(t[i-1])-1.)*(v(t[i])-1.) < 0:
+        bornes.append([t[i-1],t[i]])
 \end{minted}
 \end{center}
 
@@ -208,7 +219,13 @@ while D(xi)<100*(recherche(s)-s[-1])/s[-1]:
 
 \begin{center}
 \begin{minted}[frame=lines]{python}
-w0=2*np.pi/(Tp*np.sqrt(1-xi**2)
+m=(a+b)/2.
+while np.abs(v(m)) >  p:
+    m=(b+a)/2.
+    if v(a)*v(m) > 0:
+        a=m
+    else:
+        b=m
 \end{minted}
 \end{center}
 
@@ -217,63 +234,83 @@ w0=2*np.pi/(Tp*np.sqrt(1-xi**2)
 
 \begin{center}
 \begin{minted}[frame=lines]{python}
-i=-1
-while s[i]<1.05*s[-1] and s[i]>0.95*s[-1]:
-    i+=-1
-t5=t[i+1]
+def dichotomie(f,a,b,p):
+    m=(a+b)/2.
+    while np.abs(f(m)) >  p:
+        m=(b+a)/2.
+        if f(a)*f(m) > 0:
+            a=m
+        else:
+            b=m
+    return m
+\end{minted}
+\end{center}
+
+Si pas de question 6
+
+\begin{center}
+\begin{minted}[frame=lines]{python}
+def dichotomie(f,a,b,p):
+    return f(a+b+p)
 \end{minted}
 \end{center}
 
 \paragraph{Question 8:}
 
-\begin{center}
-\begin{minted}[frame=lines]{python}
-if abs(t5-tr5(xi,w0))<0.01:
-    print("OK")
-else:
-    print("KO")
-\end{minted}
-\end{center}
+La fonction $g(t)=v(t)-1$ permet de rechercher la solution $v(t)=1$ et non pas $v(t)=0$.
 
 \paragraph{Question 9:}
 
-Le code suivant chercher la valeur de $\xi$ telle que le temps de réponse soit inférieur à 0,025s.
+\verb?l1? et \verb?l2? sont des listes qui contiennent:
+\begin{itemize}
+ \item \verb?l1?: la liste des instants $t$ où $v(t)=1$ (abscisses),
+ \item \verb?l2?: la liste des $v(t)$ à ces instants là (ce sont des valeurs proches de 1) (ordonnées).
+\end{itemize}
 
 \paragraph{Question 10:}
 
-Le nombre à traduire est $0,65_2$.
+Ce test permet de ne prendre en compte que les solutions dans l'intervalle $\left[0,\frac{1}{f_r}\right]$ comme demandé dans l'énoncé.
+
+\paragraph{Question 11:}
+
+La courbe passe 2 fois par $1$ à chaque période, on a donc \verb?k=len(l1)/2.?
+
+\paragraph{Question 12:}
+
+Le nombre à traduire est $0,7_{10}$.
 
 \begin{tabular}{c c c c c c c c c c}
-0,65 & x & 2 & = & 1,3 & = &  1 & + & 0,3 \\
-0,3 & x & 2 & = & 0,6 & = &  0 & + & 0,6 \\
+0,7 & x & 2 & = & 1,4 & = &  1 & + & 0,4 \\
+0,4 & x & 2 & = & 0,8 & = &  0 & + & 0,8 \\
+0,8 & x & 2 & = & 1,6 & = &  1 & + & 0,6 \\
 0,6 & x & 2 & = & 1,2 & = &  1 & + & 0,2 \\
 0,2 & x & 2 & = & 0,4 & = &  0 & + & 0,4 \\
 0,4 & x & 2 & = & 0,8 & = &  0 & + & 0,8 \\
 0,8 & x & 2 & = & 1,6 & = &  1 & + & 0,6 \\
-0,6 & x & 2 & = & 1,2 & = &  1 & + & 0,2 \\
 ...
 \end{tabular}
 
-On remarque un récurrence dans l'écriture du $0,65_{10}$ en binaire: $0,65_{10}=0,10100110011.._2$
+On remarque un récurrence dans l'écriture du $0,7_{10}$ en binaire: $0,7_{10}=0,1011001100.._2$
 
-Le nombre stocké est alors:
-$1,\underbrace{01001100110011001100110_2}_{23 bits}*2^{-1}$
+Le nombre stocké est alors :
+$1,\underbrace{01100110011001100110011_2}_{23 bits}*2^{-1}$
 
 \begin{itemize}
  \item Signe = $0$,
- \item Mantisse:$\underbrace{01001100110011001100110_2}_{23 bits}$,
+ \item Mantisse:$\underbrace{01100110011001100110011_2}_{23 bits}$,
  \item Exposant:$127-1=126_{10}=01111110_2$
 \end{itemize}
 
-\paragraph{Question 11:}
+\paragraph{Question 13:} ~\ \\
 
-$a=00110011001100110011=11111111111111111111-11001100110011001100=
-(2^{20}-1)-4*a$, donc $a=\frac{2^{20}-1}{5}$.
+$a=\underbrace{001100110011001100110011}_{24 bits}=\underbrace{111111111111111111111111}_{24 bits}-
+\underbrace{110011001100110011001100}_{24 bits}=
+(2^{24}-1)-4*a$, donc $a=\frac{2^{24}-1}{5}$.
 
-\paragraph{Question 12:}
+\paragraph{Question 14:}
 
-Le nombre stocké est donc: $10100110011001100110011.2^{-23}=(2^{20}+2^{22}+\frac{2^{20}-1}{5}).2^{-23}=2^{-3}+2^{-1}+\frac{2^{-3}}{5}-\frac{2^{-23}}{5}=0,125+0,5+0,025-\frac{1,2.10^{-7}}{5}=0,65-24.10^{-9}$.
+Le nombre stocké est donc: $101100110011001100110011.2^{-24}=(2^{23}+\frac{2^{24}-1}{5}).2^{-24}=(\frac{1}{2}+\frac{1}{5}-\frac{2^{-24}}{5})$.
 
-L'erreur est donc de $-\frac{1,2.10^{-7}}{5}=-24.10^{-9}$
+L'erreur est donc de $-\frac{2^{-24}}{5}=-1.2*10^{-8}$
 
 \end{document}

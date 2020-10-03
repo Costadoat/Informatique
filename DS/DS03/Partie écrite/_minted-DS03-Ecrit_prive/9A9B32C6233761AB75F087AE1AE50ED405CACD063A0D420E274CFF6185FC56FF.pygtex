@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k}{def} \PYG{n+nf}{par}\PYG{p}{(}\PYG{n}{n}\PYG{p}{):}
-    \PYG{k}{if} \PYG{n}{n}\PYG{o}{\PYGZpc{}}\PYG{l+m+mi}{2}\PYG{o}{==}\PYG{l+m+mi}{0}\PYG{p}{:}   \PYG{c+c1}{\PYGZsh{} si n est pair}
-        \PYG{k}{return} \PYG{l+m+mi}{0} \PYG{c+c1}{\PYGZsh{} Équivalent à False}
-    \PYG{k}{else}\PYG{p}{:}        \PYG{c+c1}{\PYGZsh{} sinon}
-        \PYG{k}{return} \PYG{l+m+mi}{1} \PYG{c+c1}{\PYGZsh{} Équivalent à True}
-\end{Verbatim}

@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k}{while} \PYG{n}{n}\PYG{o}{!=}\PYG{n}{m} \PYG{p}{:}
-	\PYG{k}{if} \PYG{n}{n}\PYG{o}{\PYGZgt{}}\PYG{n}{m} \PYG{p}{:}
-		\PYG{n}{n}\PYG{o}{=}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{n}{m}
-	\PYG{k}{else}\PYG{p}{:}
-		\PYG{n}{m}\PYG{o}{=}\PYG{n}{m}\PYG{o}{\PYGZhy{}}\PYG{n}{n}
-\end{Verbatim}

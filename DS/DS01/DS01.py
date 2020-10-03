@@ -1,87 +1,73 @@
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
-###################Calcul et tracé de la fonction##############################
-t=np.linspace(0,0.2,1000)
-xi_d=0.2
-w0_d=204
-K_d=2
-s=K_d*(1-np.exp(-w0_d*xi_d*t)/np.sqrt(1-xi_d**2)*np.cos(w0_d*np.sqrt(1-xi_d**2)*t\
-                                                      -np.arctan(xi_d/np.sqrt(1-xi_d**2))))
-fig1=plt.figure('Réponse 1')
-plt.plot(t,s)
-plt.plot(t,s[-1]*np.ones(len(t)),'-.',c='#1f77b4')
-plt.plot(t,0.95*s[-1]*np.ones(len(t)),'--',c='#1f77b4')
-plt.plot(t,1.05*s[-1]*np.ones(len(t)),'--',c='#1f77b4')
-plt.savefig('img/fig01.png')
-###############################################################################
+Vr=10.
+fr=0.6
+k=16
 
-#Question 2:
-K=s[-1]
+def theta(t):
+    return 2*np.pi*fr*t
 
-#Question 3:
-def recherche(s):
-    val=s[0]
-    for i in range(len(s)):
-        if s[i] > val:
-            val=s[i]
-    return val
-
-#Question 4:
-i=0
-while s[i]!=recherche(s):
-    i+=1
-Tp=2*t[i]
-
-#Question 5:
-def D(xi):
-    return 100*np.exp(-xi*np.pi/np.sqrt(1-xi**2))
-
-xi=0.7
-while D(xi)<100*(recherche(s)-s[-1])/s[-1]:
-    xi+=-0.1
-
-w0=2*np.pi/(Tp*np.sqrt(1-xi**2))
-
-print("Données",K_d,xi_d,w0_d)
-print("Identifications",K,xi,w0)
-
-i=-1
-while s[i]<1.05*s[-1] and s[i]>0.95*s[-1]:
-    i+=-1
-t5=t[i]
-
-def tr5(xi,w0):
-    return np.log(20)/(xi*w0)
-
-if abs(t5-tr5(xi,w0))<0.1:
-    print("OK")
-else:
-    print("KO")
+def v(t):
+    return Vr*np.sin(k*theta(t))*np.cos(theta(t))
     
-print("Le temps de réponse est %s secondes" % format(t5))
-t5=tr5(xi,w0)
-print("Le temps de réponse est %s secondes" % format(t5))
-plt.plot([t[i],t[i]],[1.1*s[-1],0.9*s[-1]])
+t=np.linspace(0,2,1000)
+plt.plot(t,v(t))
 
+print("Recherche du Vrmax")
+m=v(0)
+for ti in t:
+    if v(ti)>m:
+        m=v(ti)
+print(m)
 
-fig2=plt.figure('Réponse 2')
+i=0
+m=v(t[i])-1
+while v(t[i])<=m :
+    if v(t[i])>m:
+        m=v(t[i])
+print(m)
 
-while t5>0.025:
-    xi+=10**(-3)
-    s=K*(1-np.exp(-w0*xi*t)/np.sqrt(1-xi**2)*np.cos(w0*np.sqrt(1-xi**2)*t-np.arctan(xi/np.sqrt(1-xi**2))))
-    i=-1
-    while s[i]<1.05*s[-1] and s[i]>0.95*s[-1]:
-        i+=-1
-    t5=t[i+1]
+yc=1
+print('Recherche des intervalles [t,t+dt], incluants un passage par v(t)=1')
+bornes=[]
+for i in range(1,len(t)):
+#    if v(t[i-1]) > 1 and v(t[i]) < 1 or v(t[i-1]) < 1 and v(t[i]) > 1:
+    if (v(t[i-1])-yc)*(v(t[i])-yc) < 0:
+        bornes.append([t[i-1],t[i]])
 
+print(bornes[0:4])
 
-print("Pour xi=%.3f, le temps de réponse est %s secondes" % ((xi),(t5)))
-plt.plot([t[i],t[i]],[1.1*s[-1],0.9*s[-1]])
-plt.plot(t,s)
-plt.plot(t,0.95*s[-1]*np.ones(len(t)))
-plt.plot(t,1.05*s[-1]*np.ones(len(t)))
+def dichotomie(f,a,b,p):
+    m=(a+b)/2.
+    while np.abs(f(m)) >  p:
+        m=(b+a)/2.
+        if f(a)*f(m) > 0:
+            a=m
+        else:
+            b=m
+    return m
 
+def g(t):
+    return v(t)-yc
 
-print((2**20-1)/5)
-print(2**(-3),2**(-1),2**(-25))
+print("Recherche par dichotomie")
+p=10**(-6)
+l1=[]
+l2=[]
+for borne in bornes:
+    x=dichotomie(g,borne[0],borne[1],p)
+    if x<1/fr:
+        l1.append(x)
+        l2.append(v(x))
+
+print(len(l1)/2)
+plt.scatter(l1, l2, c = 'red')
+plt.grid('on')
+plt.show()
+
+print((2**23+(2**24-1)/5)*2**(-24))
+
+print(2**(-24)/5)
+
+print((2**23+(2**24-1)/5)*2**(-24)+2**(-24)/5)

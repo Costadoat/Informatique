@@ -1,0 +1,171 @@
+\input{intro}
+\input{../../../Header_Willie}
+
+\ifdef{\prive}{}{\excludecomment{solution}}
+
+\begin{document}
+
+\begin{center}
+{\Large\bf {\type} \no {\numero} -- \descrip}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+\begin{boxedminipage}{.9\textwidth} 
+\begin{itemize}
+ \item Faire tous les exercices dans un même fichier {NomPrenom.py} à sauvegarder ;
+ \item mettre en commentaire l'exercice traité (ex: \# Exercice 1) ;
+% \item ne pas oublier pas de commenter ce qui est fait dans votre code (ex: \# Je créé une fonction pour calculer la racine d'un nombre) ;
+ \item il est possible de demander un déblocage pour une question \textbf{entre 8h et 14h} sur la classe virtuelle de vos enseignants. Il vous sera envoyé par mail ;
+  \item \textbf{vous avez 3h} pour faire le sujet ;
+ \item il faut vérifier avant de téléverser votre fichier que le code peut s'exécuter et qu'il affiche les résultats que vous attendez ;
+ \item téléversez votre fichier réponse .py sur le site de dépôt de fichier de la PTSI.
+\end{itemize}
+\end{boxedminipage}
+
+
+
+
+
+\section*{Exercice 1} 
+Soit la suite $(u_n)_{n\in\mathbb{N}}$  définie par :
+$$u_0=N~(\text{entier naturel non nul)~~et~~}\forall n\in \mathbb{N},~~u_{n+1}=\begin{cases} u_n/2 \text{ si }u_n\text{ est pair } \\ 3u_n+1\text{ si }u_n\text{ est impair}\end{cases}$$
+\begin{enumerate}
+\item \`A l'aide notamment des instructions \texttt{plot} et \texttt{show} de la bibliothèque \texttt{matplotlib.pyplot}, représenter graphiquement les $50$ premiers termes de la suite $(u_n)$ avec $N=7$, puis $N=18$.
+\item On conjecture que pour tout entier naturel $N$ non nul, il existe un plus petit entier $n$  tel que $u_n=1$. Que se passe-t-il si c'est le cas ?  (on mettre la réponse en commentaire).\\
+Si cet entier existe, on l'appelle ``durée de vol'' de la suite $(u_n)$ de valeur initiale $N$.
+\item \'Ecrire une fonction \texttt{vol} d'argument un entier $N$, renvoyant la durée de vol de la suite $(u_n)$ de valeur initiale $N$.
+\item Représenter la durée de vol en fonction du point de départ $N$, pour les valeurs de $N$ inférieures à $1000$.
+\item Représenter la distribution des durées de vol à l'aide d'un histogramme (on pourra utiliser la commande \texttt{hist} de \texttt{matplotlib.pyplot}).
+\end{enumerate}
+
+
+
+
+\section*{Exercice 2}
+Pour un entier naturel $n\geq 2$, on appelle \textbf{diviseurs propres de $n$} les entiers naturels strictement inférieurs à $n$ qui divisent $n$. \\
+Par exemple la liste des diviseurs propres de $100$ est $[1,2,4,5,10,20,25,50]$.\\
+On va s'intéresser à la somme de ces diviseurs propres. Pour $100$, elle vaut par exemple $117$.
+\begin{enumerate}
+\item \'Ecrire une fonction \texttt{LDP} d'argument un entier naturel $n$ qui renvoie la liste de ses diviseurs propres. La tester pour $n=100$.
+\item \'Ecrire une fonction \texttt{SDP} d'argument un entier naturel $n$ qui renvoie la somme de ses diviseurs propres. La tester pour $n=100$.
+\item On dit qu'un entier naturel est \textbf{parfait} s'il est égal à la somme de ses diviseurs propres. \'Ecrire une fonction \texttt{parfaits} d'argument un entier naturel $K$ qui renvoie la liste des entiers $p$ parfaits inférieurs ou égaux à $K$. La tester pour $K=2000$.
+\item On dit que deux entiers distincts sont \textbf{amicaux} si chacun est égal à la somme des diviseurs propres de l'autre. \'Ecrire une fonction \texttt{amicaux} d'argument un entier naturel $K$ qui renvoie la liste de tous les couples $(p,q)$ d'entiers amicaux tels que $p<q \leq K$. Tester \texttt{amicaux} pour $K=300$, $K=1300$, $K=5000$.\\
+Remarque : si le temps de calcul est trop long, il faut peut-être optimiser votre programme. %reponse : [(220, 284), (1184, 1210), (2620, 2924)]
+\end{enumerate}
+
+
+
+
+\section*{Exercice 3}
+\begin{enumerate}
+\item Télécharger le fichier \texttt{algo-pi.txt} qui est avec l'énoncé et enregistrer-le dans le dossier où vous travaillez.
+\item Le fichier \texttt{algo-pi.txt} contient les premières décimales de $\pi$, sur une seule ligne et sans espace entre les chiffres.\\
+Récupérer le contenu de ce fichier sous forme d'une chaîne de caractères que l'on nommera \texttt{decpi}.
+\item Faire afficher les $10$ premiers caractères de \texttt{decpi}, ses \texttt{10} derniers, ainsi que le nombre \texttt{nbdec} de caractères de \texttt{decpi}.
+\item Écrire une fonction \verb?estIci? de trois arguments : deux chaînes de caractères $P$ et $M$ et un entier \verb?i? et qui renvoie \verb?True? si \verb?M? est dans \verb?P? \` a la position \verb?i? et \verb?-1? sinon.\\ 
+Par exemple \texttt{estIci('le','Bonjour le monde',8)} renvoie \texttt{True}.
+\item Écrire une fonction \texttt{trouve} de deux arguments, deux chaînes de caractères $P$ et $M$, qui renvoie un entier naturel $p$ si $M$ est une sous-chaîne de $P$ commençant à la position $p$, et $-1$ si $M$ n'est pas
+une sous-chaîne de $P$. On n'utilisera pas la méthode \texttt{find} de la classe \texttt{str}.\\
+Par exemple, \texttt{trouve("BanquePT","an")} donne \texttt{1}, \texttt{trouve("BanquePT","PT")} donne \texttt{6}, alors que \texttt{trouve("BanquePT","PSI")} donne \texttt{-1}. Comparer avec \texttt{"BanquePT".find("an")}, \textit{etc}.
+\item Les nombres \texttt{"14159"}, \texttt{"123456"}, \texttt{"12345"}, et \texttt{"1789"} se trouvent-ils dans \texttt{decpi} ?
+\item Si les nombres précédents sont dans \texttt{decpi}, en combien d'exemplaires et à quelle(s) position(s) sont-ils ?
+%\item Le fichier \texttt{algo-pi-false.txt} se trouvant dans le répertoire \texttt{data}GNA contient les premières décimales de $\pi$, avec quelques chiffres erronés. Combien et en quelles positions ?
+\end{enumerate}
+
+
+
+
+
+
+
+\section*{Exercice 4}
+Pour tout ensemble non vide, identifié ici à une liste d'éléments deux à deux distincts, $E = [e_0,\dots , e_{n-1}]$ de taille $n$, chacune de ses parties $A$ peut être codée sous forme d'une liste \texttt{C} à $n$ éléments contenant des zéros et des uns :\\
+$$\text{\texttt{C[i] = 1} si $e_i\in A$, et \texttt{C[i] = 0} sinon.}$$
+Par exemple, les parties $\emptyset$, $[a]$, $[b]$ et $[a, b]$ de la liste $[a, b]$ sont respectivement codées par les listes $[0, 0]$, $[1, 0]$, $[0, 1]$ et $[1, 1]$.
+\begin{enumerate}
+\item Écrire une fonction \texttt{decoder} de deux arguments $E$ et $C$ renvoyant la partie de la liste $E$  codée par le code $C$.\\
+Ainsi, \texttt{decoder([2,3,5,7],[1,0,0,1])} donne \texttt{[2,7]} ; de même \texttt{decoder([2,3,5,7],[0,0,0,0])}
+donne \texttt{[]}.
+\item Écrire une fonction \texttt{coder} de deux arguments $E$ et $A$ renvoyant le code de la partie $A$ de la liste $E$.\\
+Ainsi \texttt{coder([2,3,5,7],[2,7])} donne \texttt{[1,0,0,1]}.
+\item Écrire une fonction \texttt{incrementer} d'argument une liste $C$ de zéros et de uns de taille $n$, représentant sur $n$ bits l'écriture en base $2$ d'un entier naturel $k$, et renvoyant la liste représentant sur $n$ bits l'écriture en base $2$ de l'entier $(k + 1)$.\\
+Par exemple, \texttt{[0,0,1,0,1,1,1]} est l'écriture en base $2$ sur $7$ bits de $23$ et \texttt{[0,0,1,1,0,0,0]}, l'écriture en base $2$ sur $7$ bits de $24$.\\
+Remarque : on considère que $k$ sera toujours pris inférieur à $2^n-1$ de sorte que le problème du nombre qui suit \texttt{[1,1,1,...,1,1]} ne se pose pas.
+\item En déduire la fonction \texttt{parties} d'argument $E$ renvoyant la liste des parties de la liste $E$.
+%\item Écrire une fonction \texttt{p\_parties} de deux arguments, un ensemble $E$ non vide de taille $n$ et un entier naturel $p\leqslant n$, qui renvoie la liste des parties de $E$ de taille $p$.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+ \end{document}
+ 
+ 
+ 
+
+
+
+
+\begin{exercice}
+Dans la liste des entiers naturels non nuls, on barre un nombre sur $2$ en commençant par barrer le deuxième :
+$$ 1~,~ \cancel{2}~,~3~,~\cancel{4}~,~5~,~\cancel{6}~,~7~,~\cancel{8}~,~9~,~\cancel{10}~,~11~,~\cancel{12}~,~13~,~\cdots$$
+Puis dans la liste restante, on barre une nombre sur $3$ en commençant par barrer le troisième :
+$$1~,~3~,~\cancel{5}~,~7~,~9~,~\cancel{11}~,~13~,~\cdots$$
+puis on barre un nombre sur $4$, un nombre sur $5$, etc.\\
+Et ceci à l'infini pour obtenir ``\textit{la liste des nombres de type $J$''}.
+\begin{enumerate}
+\item \'Ecrire une fonction \texttt{enlever} de deux arguments, une liste $L$ et un entier naturel $i$, qui renvoie une liste $S$ construite en ne gardant dans la liste $L$ que les éléments dont le rang n'est pas multiple de $i$. Par exemple, \texttt{enlever([1,3,5,7,9,11,13],3)} doit donner \texttt{[1,3,7,9,13]}.
+\item \'Ecrire une suite d'instructions donnant la liste des nombres de type $J$ inférieurs ou égaux à $100$.
+\item \'Ecrire une fonction \texttt{LJ} d'argument $n$ renvoyant la liste des nombres de type $J$ inférieurs ou égaux à $n$.
+\item \'Ecrire une fonction \texttt{U} d'argument $n$ renvoyant $u_n$, le nombre de nombres de type $J$ inférieurs ou égaux à $n$.
+\item Vers quelle limite $\ell$ semble tendre $4n/u_n^2$ quand $n$ tend vers l'infini ?
+\item Déterminer le premier $n$ pour lequel la différence en valeur absolue entre $4n/u_n^2$ et $\ell$ est inférieure à $10^{-3}$.
+\end{enumerate}
+\end{exercice} 
+ 
+ 
+\begin{exercice}
+{Dans cet exercice, un segment $[a,b]$ ($a\l b$) est représenté par une liste de taille $2$ : \texttt{[a,b]}.
+\begin{enumerate}
+\item Deux segments sont disjoints si leur intersection est vide. \'Ecrire une fonction \texttt{disjoints} de deux arguments \texttt{i1} et \texttt{i2} qui teste si les segments \texttt{i1} et \texttt{i2} sont disjoints. La fonction renvoie le booléen \texttt{True} s'ils sont disjoints, \texttt{False} sinon.
+\item Une ``\textit{liste bien formée}'' est une liste de segments qui vérifie les propriétés suivantes :
+\begin{itemize}
+\item les segments sont deux à deux disjoints ;
+\item les segments de la liste sont classés par ordre croissant, en considérant qu'un segment \texttt{i1} est strictement plus petit qu'un segment \texttt{i2} si et seulement si le maximum de \texttt{i1} est strictement inférieur au minimum de \texttt{i2}. 
+\end{itemize}
+\'Ecrire une fonction \texttt{decouper} de deux arguments, une valeur \texttt{x} et une liste de segments \texttt{L} bien formée, qui renvoie un triplet décomposé de :
+\begin{itemize}
+\item une liste bien formée contenant les segments strictement inférieurs à la valeur \texttt{x} ;
+\item une liste bien formée contenant, s'il existe, le segment contenant la valeur \texttt{x}, et sinon, une liste vide ;
+\item une liste bien formée contenant les segments strictement supérieurs à la valeur \texttt{x}.
+\end{itemize}
+\item \'Ecrire une fonction \texttt{inserer} de deux arguments, un segment \texttt{i} et une liste de segments \texttt{L} bien formée. Cette fonction renvoie une liste bien formée de segments contenant les segments de \texttt{L} qui sont disjoints de \texttt{i} et :
+\begin{itemize}
+\item soit l'intervalle \texttt{i} si tous les segments contenus dans \texttt{L} lui sont disjoints ;
+\item soit le segment union de \texttt{i} et des segments contenus dans \texttt{L} qui ne sont pas disjoints de \texttt{i}.
+\end{itemize}
+\end{enumerate}
+}
+\end{exercice}
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
