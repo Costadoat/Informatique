@@ -12,8 +12,9 @@ En_redaction
 # Folders to exclude
 headers/
 _minted*/
-Notes.ods
-Note.ods
+*.ods
+*.xls
+*.xlsx
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/

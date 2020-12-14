@@ -1,5 +1,5 @@
 \input{intro}
-\input{../../../../Header_Willie}
+\input{../../../Header_Willie}
 
 \usepackage{enumitem}
 
@@ -67,8 +67,8 @@ Les données ont été téléchargées et formatées pour faciliter le travail. 
 
 On définit les éléments suivants:
 \begin{itemize}
- \item le \textbf{taux d'incidence} correspond au nombre de tests virologiques positifs pour \num{100000} habitants sur une semaine. Il est calculé de la manière suivante : \\ \verb?taux_incidence=(100000*nb_cas_positif)/population?,
- \item le \textbf{taux de positivité} correspond au nombre de personnes testées positives sur une semaine. Il est calculé de la manière suivante : \\ \verb?taux_positivite=(100*nb_cas_positifs)/nb_tests?,
+ \item le \textbf{taux d'incidence} correspond au nombre de tests virologiques positifs pour \num{100000} habitants. Il est calculé de la manière suivante : \\ \verb?taux_incidence=(100000*nb_cas_positif)/population?,
+ \item le \textbf{taux de positivité} correspond au nombre de personnes testées positives. Il est calculé de la manière suivante : \\ \verb?taux_positivite=(100*nb_cas_positifs)/nb_tests?,
  \item la population française est d'environ \num{67000000} habitants.
 \end{itemize}
 
@@ -135,7 +135,7 @@ data=lignes[1].split(",")
  \item le taux de positivité : \verb?taux_positivite=float(data[4])?
 \end{itemize}
 
-Afficher ces valeurs pour la première semaine.
+Afficher ces valeurs pour le premier jour.
 
  \begin{solution}~\ \\
 \begin{minted}{python}
@@ -149,7 +149,7 @@ print(jour_test,taux_incidence,taux_positivite)
 L'exécution du script affiche le résultat suivant:\\
 \verb?2020-06-01 00:00:00 5.07875325643739 1.5664523487587?
 
-\item Déterminer le nombre de tests, \verb?nb_tests?, effectués durant la première semaine à partir des données précédentes et grâce aux équations présentées en introduction. Nous ne garderons que la valeur entière de ce résultat.
+\item Déterminer le nombre de tests, \verb?nb_tests?, effectués durant la première journée à partir des données précédentes et grâce aux équations présentées en introduction. Nous ne garderons que la valeur entière de ce résultat.
 
  \begin{solution}~\ \\
 $taux_{incidence}=\frac{100000*nb_{cas\ positif}}{population}$
