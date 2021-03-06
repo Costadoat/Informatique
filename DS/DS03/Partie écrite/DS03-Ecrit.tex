@@ -1,0 +1,185 @@
+\input{intro}
+\input{Header_Willie}
+
+\excludecomment{solution}
+%\excludecomment{exercice}
+
+\begin{document}
+
+\begin{center}
+{\Large\bf {\type} \no {\num}}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+\fbox{Les codes en python doivent être commentés et les indentations dans le code doivent être visibles.}
+
+\section{Question de cours -- Méthode d'Euler}
+Soit l'équation différentielle : 
+\[\forall t\in\mathbb{R},\quad y'(t)=y(t)\qquad\text{avec}\qquad y(0)=1\]
+Ecrire une fonction \verb?Euler? qui prend comme entrée une liste \verb?t? de flottants (la liste des abscisses) et renvoie une liste \verb?y? (la liste des ordonnées) qui contient les valeurs de la fonction $y$ calculée en $t_i$ à l'aide de la méthode d'Euler.
+\begin{solution}~\\
+\vspace*{-0.7cm}
+\begin{minted}[frame=lines]{python}
+def methode_euler(t):
+    y = [0]*len(t)
+    y[0] = 0
+    for i in range(len(t)-1):
+        y[i+1] = y[i]+(t[i+1]-t[i])*y[i]
+    return y
+\end{minted}    
+\end{solution}
+
+
+\section{Exercice de TP -- R\' esolution d'\' equations du second ordre}
+
+
+L'objectif est de r\' esoudre les \' equations de type $(E)\colon ax^2+bx+c=0$ o\` u $a,b$ et $c$ sont des r\' eels, (donc seront des flottants dans vos programmes).\\
+Dans cet exercice, on suppose que $a\neq 0$.
+\begin{enumerate}
+\item \' Ecrire une fonction \verb?solution(a,b,c)? qui renvoie les solutions de $(E)\colon ax^2+bx+c=0$ et pr\' ecise la nature de ses solutions. Par exemple :
+\begin{minted}[frame=lines]{python}
+>>> solution(2,-6,4)
+Deux solutions reelles  x1=1.0 et x2=2.0
+>>> solution(4,-4,1)
+Une solution double  x=0.5
+>>> solution(1,-2,2)
+Deux solutions complexes  x1=1+1j et x2=1-1j
+\end{minted}
+Rappel : le nombre complexe $i$ se code \verb?1j?.
+
+\begin{solution}~\\
+\vspace*{-0.7cm}
+\begin{minted}[frame=lines]{python}
+from math import sqrt
+def solution(a,b,c):
+	delta=b**2-4*a*c
+	if delta >0:
+		x1=(-b+sqrt(delta))/float(2*a)
+		x2=(-b-sqrt(delta))/float(2*a)
+		return "Deux solutions reelles", x1,x2
+	elif delta==0:
+		x=-b/float(2*a)
+		return "Une solution double" ,x
+	else:
+		x1=(-b+sqrt(-delta)*1j)/float(2*a)
+		x2=(-b-sqrt(-delta)*1j)/float(2*a)
+		return "Deux solutions complexes", x1,x2			
+\end{minted}
+\end{solution}
+\item Est-ce que la fonction \verb?solution? renvoie toujours la bonne réponse ? Quels problèmes peuvent se poser ?
+\begin{solution}
+Le test \verb?Delta==0? va poser problème. Si $a,b,c$ sont des flottants, $\Delta$ est aussi un flottant, donc une valeur approchée.\\
+Si $\Delta$ est non nul mais inférieur à la précision de Python, il sera évalué comme nul.\\
+Si $\Delta$ est nul mais calculé à l'aide de flottants, il peut être évalué comme non nul.
+\end{solution}
+\end{enumerate}
+
+
+
+
+
+
+\section{Exercice -- Matrices semi-magiques}
+Une matrice carrée de taille $n$, $A=(a_{i,j})_{\stackrel{\scriptstyle 0\leqslant i\leqslant  n-1}{\scriptstyle  0\leqslant  j \leqslant  n-1 }}$ dans $\mathcal{M}_n(\mathbb{R})$ est dite "semi-magique" si :\\
+\[\quad a_{0,0}+a_{0,1}+\cdots+a_{0,n-1}=a_{1,0}+a_{1,1}+\cdots+a_{1,n-1}=\cdots=a_{n-1,0}+\cdots+a_{n-1,n-1}\]
+\[=a_{0,0}+a_{1,0}+\cdots+a_{n-1,0}=a_{0,1}+a_{1,1}+\cdots+a_{n-1,1}=\cdots=a_{0,n-1}+\cdots+a_{n-1,n-1}\]
+autrement dit si la somme sur chaque colonne et la somme sur chaque ligne donne toujours la même valeur.
+On note alors $\sigma(A)$ la valeur commune de ces sommes. \\
+Dans cet exercice, les matrices seront des objets du type \verb?array? de la bibliothèque \verb?numpy?.
+\begin{enumerate}
+%\item Créer une fonction \verb?taille?, d'argument $A$, renvoyant la valeur $n$ si $A$ est une matrice carrée de taille $n$ et \verb? False? sinon.
+\item Soit $B=\begin{pmatrix}
+8&2\\-17&\sqrt{6}
+\end{pmatrix}$. Que renvoie \verb?B[0,1]? ?
+\begin{solution}
+$2$
+\end{solution}
+\item Ecrire une fonction \verb?somme_ligne?, d'argument une matrice $A$ et un entier $i$ et qui renvoie la somme des coefficients de la $i$ème ligne de $A$.\\
+Ecrire de même une fonction \verb?somme_colonne?, d'argument $A$ et $j$, qui renvoie la somme des coefficients de la $j$ème colonne de $A$.
+\begin{solution}~\\
+\vspace*{-0.7cm}
+\begin{minted}[frame=lines]{python}
+def somme_ligne(A,i):
+    n=len(A[0])
+    somme=0
+    for j in range(n):
+        somme=somme+A[i,j]
+    return(somme)
+
+def somme_colonne(A,j):
+    n=len(A[0])
+    somme=0
+    for i in range(n):
+        somme=somme+A[i,j]
+    return(somme) 
+\end{minted}
+\end{solution}
+\item Ecrire une fonction \verb?test?, d'argument $A$, renvoyant la valeur $\sigma(A)$ si $A$ est semi-magique et \verb?False? sinon.
+\begin{solution}~\\
+\vspace*{-0.7cm}
+\begin{minted}[frame=lines]{python}
+def test(A):
+    n=len(A[0])
+    sigma=somme_ligne(A,0)
+    numero_ligne=1
+    while numero_ligne<n and somme_ligne(A,numero_ligne)==sigma:
+        numero_ligne=numero_ligne+1
+    numero_colonne=0
+    while numero_colonne<n and somme_colonne(A,numero_colonne)==sigma:
+        numero_colonne=numero_colonne+1
+    if numero_colonne==numero_ligne and numero_ligne==n:
+        return(sigma)
+    else:
+        return(False)
+\end{minted}
+\end{solution}
+\item Montrer que la complexité de la fonction \verb?test? en $O(n^2)$ où $n$ est la taille de la matrice.\\
+Indication : On se placera dans le pire des cas. 
+\begin{solution}
+\end{solution}
+\end{enumerate}
+
+    
+
+
+
+
+
+\end{document}
+
+\section{Exercice -- }
+
+Pour un entier naturel $n$ non nul fixé, on appelle \textit{vecteur creux} de $\mathbb{R}^n$ un vecteur dont au moins la moitié des coefficients sont nuls. On code ces vecteurs à l'aide d'une liste de deux listes. La première est la liste des valeurs des coefficients non nuls, la seconde celle de leurs indices, rangés en ordre croissant.\\
+Par exemple, le vecteur
+$$v=\left( \begin{array}{cccccccccccc}
+1 & 3 & 0 & -4 & 0 & 0 & \sqrt{2} & 2 & 0 & 0 & 0 & 0
+\end{array}\right)$$ est codé par : $$ [[1,3,-4,\sqrt{2},2],[0,1,3,6,7]]$$
+On a en effet $v[0]=1$, $v[1]=3$, $v[3]=-4$, $v[6]=\sqrt{2}$ et $v[7]=2$. Les autres coefficients sont nuls.
+\begin{enumerate}
+\item \'Ecrire une fonction \texttt{creux} d'argument une liste simple représentant un vecteur $v$ qui renvoie un booléen indiquant si $v$ est creux ou pas.
+\item \'Ecrire une fonction : \texttt{coder} d'argument un vecteur qui renvoie son codage ``creux''.% \texttt{decoder} de deux arguments $C$ et $n$, qui restitue le vecteur de dimension $n$ à partir de son codage ``creux'' $C$.\\
+\end{enumerate}
+On construit maintenant une fonction adaptée pour le codage ``creux''.
+\begin{enumerate}
+\setcounter{enumi}{2}
+%\item \'Ecrire une fonction \texttt{smul} de deux arguments $C$ et $a$, où $C$ est le codage ``creux'' d'un vecteur $v$ et $a$ un scalaire, qui renvoie le codage creux du vecteur $av$.
+%\item \'Ecrire une fonction \texttt{pscal} de deux arguments \texttt{C1} et \texttt{C2}, codages ``creux'' de deux vecteurs $v_1$ et $v_2$, qui renvoie le produit scalaire de ces deux vecteurs. 
+\item \'Ecrire une fonction \texttt{add} de deux arguments \texttt{C1} et \texttt{C2}, codages ``creux'' de deux vecteurs $v_1$ et $v_2$, qui renvoie le codage ``creux'' du vecteur $v_1+v_2$. Cette somme est-elle toujours un vecteur creux ?
+\end{enumerate}
+
+
+\end{document}
+
+
+
+\begin{exercice}
+Un échiquier est un plateau de $8$ lignes et $8$ colonnes. Ces lignes et ces colonnes seront, dans cet exercice, numérotées de $0$ à $7$. Une position de l'échiquier est un couple $[i,j]$ d'entiers compris entre $0$ et $7$ inclus, avec $i$ le numéro de ligne et $j$ le numéro de colonne.\\
+Un cavalier placé sur l'échiquier se déplace en bougeant de $2$ cases dans une direction (verticale ou horizontale) et de $1$ case perpendiculaire. Si le cavalier est loin des bords de l'échiquier, il y a $8$ possibilités de déplacements, mais il en a moins s'il est près des bords.
+\begin{enumerate}
+\item Illustrer sur un brouillon les deux cas énoncés précédemment.
+\item \'Ecrire une fonction \texttt{valide} prenant en argument deux entiers relatifs $i$ et $j$ et vérifiant que le couple $[i,j]$ est bien une position de l'échiquier. \textbf{\texttt{valide}} doit renvoyer un booléen.
+\item \'Ecrire une fonction \texttt{coupsSuivants} prenant en argument une position $[i,j]$ et renvoyant la liste des positions que peut atteindre un cavalier placé en $[i,j]$ en un seul coup. 
+\item \'Ecrire une fonction \texttt{\textbf{cavalier}} prenant en argument une position $[a,b]$ et renvoyant un tableau $T$ carré d'ordre $8$ tel que $T[i,j]$ est le nombre minimum de coups nécessaires à un cavalier placé en position $[a,b]$ pour arriver à la position $[i,j]$.
+\end{enumerate}
+\end{exercice}
