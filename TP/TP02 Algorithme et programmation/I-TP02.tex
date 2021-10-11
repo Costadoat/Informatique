@@ -1,0 +1,686 @@
+\input{intro}
+\input{../../Header_Willie}
+
+
+
+\begin{document}
+
+\begin{center}
+{\Large\bf TP \no {\numero} -- \descrip}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+
+
+\begin{exercice}Assigner une valeur à une variable.\\
+Au départ, on a assigné à deux variables les valeurs suivantes :
+\begin{minted}[]{python}
+a=2
+b=3
+\end{minted}
+L'objectif est d'échanger les valeurs des deux variables. Pour chaque exemple, prédire la valeur finale de chaques variables et vérifier avec Python.\\
+Certains codes renvoient un message d'erreur. Il faut les lire et analyser le problème.
+\begin{center}
+\begin{tabular}{c|c|c|c|c}
+\begin{minipage}{2.5cm}
+\begin{minted}[]{python}
+a=b
+b=a 
+\end{minted}
+\end{minipage}
+&
+\begin{minipage}{2.5cm}
+\begin{minted}[]{python}
+a-1=b
+\end{minted}
+\end{minipage}
+&
+\begin{minipage}{2.5cm}
+\begin{minted}[]{python}
+a=x
+a=b
+b=x
+\end{minted}
+\end{minipage}
+&
+\begin{minipage}{2.5cm}
+\begin{minted}[]{python}
+x=a
+a=b
+b=x
+\end{minted}
+\end{minipage}
+&
+\begin{minipage}{2.5cm}
+\begin{minted}[]{python}
+(a,b)=(b,a)
+\end{minted}
+\end{minipage}
+\end{tabular}
+\end{center}
+\end{exercice}
+\bigskip
+ 
+
+
+\begin{exercice}De l'importance de l'indentation\\
+On considère les deux algorithmes suivants :
+\begin{center}
+\begin{tabular}{cc}
+\begin{minipage}{7cm}
+\begin{minted}[frame=lines]{python}
+if a>=5:
+   a=a-2
+if a<4:
+   a=a+5      
+\end{minted}
+\end{minipage} &
+\begin{minipage}{7cm}
+\begin{minted}[frame=lines]{python}
+if a>=5:
+   a=a-2
+   if a<4:
+      a=a+5
+\end{minted}        
+\end{minipage}\\
+Algorithme n°1&Algorithme n°2
+\end{tabular}
+\end{center}
+Dans les deux cas, déterminer la valeur finale de \verb?a? pour \verb?a? $= 0,\ 1,\ 2,\cdots 10$. 
+\end{exercice}
+\bigskip
+
+
+\begin{exercice}
+Quelle est la différence entre les deux fonctions suivantes ? Déterminer une valeur $a$ telle que $f(a)\neq g(a)$.
+\begin{center}
+\begin{tabular}{cc}
+\begin{minipage}{7cm}
+\begin{minted}[frame=lines]{python}
+def f(a):
+    if a<-10:
+         b=a-2
+    elif a>15:
+         b=2*a
+    else :
+         b=a  
+    return(b)    
+\end{minted}
+\end{minipage} &
+\begin{minipage}{7cm}
+\begin{minted}[frame=lines]{python}
+def g(a):
+     if a<-10:
+          b=a-2
+     if a>15:
+          b=2*a
+     else :
+          b=a  
+     return(b)
+\end{minted}        
+\end{minipage}
+\end{tabular}
+\end{center}
+\end{exercice}
+\bigskip
+
+
+
+\begin{exercice}
+Soit $f\colon\mathbb{R}\to \mathbb{R}$ la fonction définie par :
+\[\begin{array}{ccccc}
+f\colon  & x & \longmapsto & \left\lbrace\begin{array}{ll}
+      2x & \text{ si } x\leq 0\\
+      x+1 & \text{ si } 0<x\leq 1\\
+      x^5 & \text{ si } x>1\\
+      \end{array}\right.
+\end{array}\]
+\begin{enumerate}
+\item Programmer la fonction $f$ en utilisant \verb?if?, \verb?elif?, \verb?else?.
+\item Programmer à nouveau la fonction $f$ sans utiliser \verb?elif? mais en utilisant deux tests \verb?if? imbriqués. \\
+On commencera par faire l'organigramme correspondant. 
+\end{enumerate}
+\end{exercice}
+\bigskip
+
+
+\begin{exercice}
+Dans le programme ci-dessous, \verb?a? et \verb?b? sont des entiers positifs.
+\begin{minted}[frame=lines]{python}
+while a>=b:
+   a=a-b
+\end{minted}
+\begin{enumerate}
+\item Partant de \verb?a=17? et \verb?b=4?, notez à chaque étape la valeur de \verb?a? et de \verb?b?. Quelle est la valeur finale de \verb?a? ?
+\item En général, que vaut \verb?a? à la fin du programme ?
+\end{enumerate} 
+\end{exercice}
+\bigskip
+
+
+\begin{remark}
+Lorsqu'on travaille avec des entiers naturels, la fonction \verb?a//b? renvoie le quotient de la division euclidienne de \verb?a? par \verb?b? et \verb?a%b? renvoie le reste de cette division euclidienne.
+\end{remark}
+\bigskip
+
+
+
+\begin{exercice}\label{exercice boucle for} Premières boucles for.\\ 
+Recopier le programme suivant et exécuter-le.
+\begin{minted}[frame=lines]{python}
+for i in range(10):
+   print(i)
+\end{minted}
+\begin{enumerate}
+\item Modifier le programme pour qu'il affiche les nombres de 0 à 20 inclus.
+\item Modifier le programme pour qu'il affiche les nombres de 0 à 20 dans l'ordre décroissant.
+\item \label{nombres pairs} Modifier le programme pour qu'il affiche les nombres de 0 à 20 qui sont pairs. 
+\item Dans le programme, remplacer \verb?range(10)? par \verb?range(2,40,3)?. A quoi correspondent les trois paramètres de la fonction \verb?range? ?
+\item Refaites la question \ref{nombres pairs} en utilisant la fonction \verb?range? avec trois paramètres.
+\end{enumerate} 
+\end{exercice}
+\bigskip
+
+\begin{remark}
+% Sous l'environnement Spyder, vous pouvez obtenir des informations sur un objet Python. \\
+% Par exemple, taper \verb?range? dans l'éditeur ou la console. Sélectionner-le puis taper \textbf{Ctrl i}. Dans la fen\^ etre en haut \`  a droite, il apparait une documentation (en anglais) sur la fonction, ainsi que les différentes variables dont elle dépend.\\
+% Une autre méthode : l'aide appara\^ it automatiquement après la saisie d'une parenthèse gauche après un objet.
+Sous l'environnement IDLE, vous pouvez obtenir des informations sur un objet Python. \\
+Dans l'interpréteur intéractif, par exemple taper \verb?help(range)? puis Entrée. Il apparaît soit directement un texte d'aide, soit une boîte sur laquelle il est possible de double-cliquer pour dérouler un texte d'aide. La partie utile pour vous est souvent au début.\\
+Une autre méthode pour les fonctions : une info-bulle contenant aide minimale rappelant la syntaxe de la fonction appara\^ it automatiquement après la saisie de la parenthèse gauche après une fonction.
+\end{remark}
+\bigskip 
+
+
+
+\begin{exercice}Premiers termes d'une suite.\\
+On considère le programme suivant :
+\begin{minted}[frame=lines]{python}
+u=0
+for i in range(10):
+   u=2*u+3
+\end{minted}
+\begin{enumerate}
+\item Faire tourner le programme.
+\item Le programme calcule les dix premiers termes d'une suite définie par récurrence. Modifier le programme pour qu'il affiche tous les termes calculés.
+\item Compléter la définition de la suite :
+\[\left\lbrace\begin{array}{l}
+u_0=...\\
+u_{n+1}=...
+\end{array}\right.\]
+%\item Modifier le programme pour qu'il affiche $u_{20}$.
+\item On considère maintenant la suite de Fibonacci définie par :
+\[\left\lbrace\begin{array}{l}
+F_0=0\\
+F_1=1\\
+\forall n\in\mathbb{N}, \quad F_{n+2}=F_{n+1}+F_n
+\end{array}\right.\]
+Ecrire un programme qui permet de calculer les dix premiers termes de la suite $(F_n)_{n\in\mathbb{N}}$. 
+\end{enumerate}
+\end{exercice}
+\bigskip
+
+
+
+\begin{exercice}
+Dans cet exercice, \verb?n? est une variable déjà initialisée, entière.
+\begin{minted}[frame=lines]{python}
+while n>0:
+    r=n%10
+    n=n//10 
+\end{minted}
+\begin{enumerate}
+\item A chaque étape, que vaut la variable \verb?r? ?
+\item Créer une fonction \verb?somme? qui prend comme entrée un entier $n$ et renvoie la somme des chiffres de~$n$.
+\end{enumerate}
+\end{exercice}
+\bigskip
+
+
+
+
+
+\begin{exercice}
+On considère le programme suivant : 
+\begin{minted}[linenos,frame=lines]{python}
+import random
+
+nombre=random.randrange(10)                     # la variable 'nombre' est un entier 
+                                                # pris au hasard entre 0 et 9
+essai=int(input('entrer une valeur entre 0 et 9 '))  # la variable 'essai' est un nombre 
+                                                # entré par l'utilisateur
+while essai!=nombre:
+   essai=int(input('entrer une nouvelle valeur '))
+print('Vous avez gagné')	
+\end{minted}
+\begin{enumerate}
+\item Recopier le programme dans un fichier Python (sans les commentaires)
+\item Que fait le programme ?
+\item Modifier le programme pour qu'il affiche le nombre d'essais qui ont été nécessaires pour trouver le nombre.
+\end{enumerate}
+\end{exercice}
+\bigskip
+
+
+\begin{exercice}
+Un nombre $n\in\mathbb{N}$ est premier si il est supérieur à 2 et si ses seuls diviseurs sont 1 et~$n$.
+\begin{enumerate}
+\item Ecrire une fonction \verb?premier? qui prend un entier $n\in\mathbb{N}$ comme argument et renvoie le booléen \verb?True? si $n$ est un nombre premier et \verb?False? sinon.\\
+On commencera par déterminer quelle type de boucle est adaptée à ce programme.
+\item Deux nombres premiers $p$ et $q$ sont dits "jumeaux" si ils ne diffèrent que de deux. Par exemple, 3 et 5 sont des nombres premiers jumeaux. Afficher les couples de nombres premiers jumeaux inférieurs à 100.\footnote{Informatiquement, on arrive à trouver des couples de nombres jumeaux jusqu'à $10^{400\;000}$. Mais on ne sait toujours pas démontrer si il en existe une infinité ou non.}
+\end{enumerate}
+\end{exercice}
+\bigskip
+
+
+
+\begin{exercice}Facultatif : Crible d'Eratosthène.\\
+Le crible d'Eratosthène est un algorithme qui étant donné un entier $n$ renvoie les nombres premiers compris entre 2 et $n$ mais de façon plus efficace que la méthode naïve de l'exercice précédent. Il fonctionne de la manière suivante :
+\begin{itemize}
+\item on inscrit tous les entiers entre 2 et $n$.
+\item 2 est premier. On stocke cette valeur et on élimine tous les multiples de 2.
+\item on prend le premier entier qui vient après 2 qui n'a pas été éliminé : c'est 3. On stocke cette valeur et  on élimine tous les multiples de 3.
+\item on réitère l'opération jusqu' à $n$.
+\end{itemize}
+\begin{enumerate}
+\item Testez l'algorithme à la main pour déterminer les nombres premiers entre 2 et 14.
+\item En Python, l'algorithme est codé par le programme suivant. La liste \verb?premier? contient la réponse. 
+\begin{minted}[linenos,frame=lines]{python}
+premiers=[] 
+nombres = []
+for i in range(2,n+1):
+	nombres.append(True)    
+# nombres=[True,True,...] 
+#On y stockera l'information suivante : 
+#True : le nombre est premier, False : il ne l'est pas
+for i in range(2,n+1):              # i parcourt les entiers de 2 à n      
+	if nombres[i-2]==True:         
+		premiers.append(i)  
+# si i est marqué comme True,
+# c'est un nombre premier : on le stocke dans la liste 'premier'  		      
+		for j in range(2*i,n+1,i): 
+			nombres[j-2] = False   
+# les multiples de i qui sont compris entre 2i et n   
+# sont alors marqués comme False			
+\end{minted}
+\item Vérifier que l'algorithme donne les m\^ emes valeurs que celles calculées en 1) pour \verb?n?=14.
+\item Dans cet algorithme, \verb?i? parcourt tous les entiers entre 2 et $n$. Or, si $i$ n'est pas premier, alors l'un de ces facteurs est au moins inférieur à $\sqrt{n}$\footnote{On suppose que $i\leq n$ n'est pas premier. Il se décompose en $i=pq$. Si $p> \sqrt{n}$ et $q>\sqrt{n}$, alors $i>n$. On dépasse alors $n$.}. Donc, dans l'algorithme, à partir de \verb?i?$=\sqrt{n}$ (ou plut\^ ot l'entier directement supérieur à $\sqrt{n}$), les nombres non premiers sont déjà marqués \verb?False?.  \\
+Modifier le programme pour qu'il affiche encore les nombres premiers inférieurs à $n$ mais en évitant que \verb?i? parcourt les entiers supérieurs à $\sqrt{n}$.
+\end{enumerate}
+\end{exercice}
+
+
+
+\ifdef{\public}{\end{document}}{}
+
+\newpage 
+
+\begin{center}
+{\Large\bf Correction TP \no {\numero} -- \descrip}
+\end{center}
+
+
+\begin{solution}
+\begin{enumerate}
+\item \verb?a=3? et \verb?b=3?
+\item message d'erreur : ne peut pas assigner avec un opérateur
+\item message d'erreur : \verb?x? n'est pas définie
+\item \verb?a=3? et \verb?b=2?. On a échangé les valeurs.
+\item \verb?a=3? et \verb?b=2?. On a échangé les valeurs.
+\end{enumerate}
+\end{solution}
+\bigskip
+
+\begin{solution}
+Algorithme n°1 :
+\[\begin{array}{l|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\text{Valeur initiale de }a&0&1&2&3&4&5&6&7&8&9&10 \\\hline
+\text{Valeur finale de }a&5&6&7&8&4&8&4&5&6&7&8
+\end{array}\]
+Algorithme n°2 :
+\[\begin{array}{l|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\text{Valeur initiale de }a&0&1&2&3&4&5&6&7&8&9&10 \\\hline
+\text{Valeur finale de }a&0&1&2&3&4&8&4&5&6&7&8
+\end{array}\]
+\end{solution}
+\bigskip
+
+\begin{solution}
+Dans le premier cas, le test \verb?else? est vérifié pour \verb?a? qui n'est ni dans $]-\infty,-10[$, ni dans $]15,+\infty[$. Donc, \verb?a? vérifie ce test pour $a\in[-10,15]$.\\
+Dans le deuxième cas, \verb?else? est le contraire du dernier \verb?if?, donc le test est vérifié pour \verb?a? qui n'est pas dans $]15,+\infty[$. Donc, \verb?a? vérifie ce test pour $a\in]-\infty,15]$.\\
+Par exemple, $f(-11)$ renvoie -13 mais $g(-11)$ renvoie -11.
+\end{solution}
+\bigskip
+
+
+\begin{solution}
+\begin{enumerate}
+\item ~\\
+\vspace{-0.7cm}
+\begin{minted}[frame=lines]{python}
+def f(x):
+    if x <= 0 :
+        y = 2*x
+    elif  0 < x <= 1 :
+        y = x+1
+    else :     
+        y = x**5
+    return(y)   
+\end{minted}
+D'autres solutions sont possibles, comme :
+\begin{minted}[frame=lines]{python}
+def f(x):
+    if x <= 0 :
+        y = 2*x
+    elif x > 1 :
+        y = x**5
+    else :     
+        y = x+1
+    return(y)   
+\end{minted}
+\item 
+\begin{minted}[frame=lines]{python}
+def f(x):
+    if x<=0 :
+        y = 2*x
+    else :    
+        if x <= 1 :
+            y = x+1
+         else :
+            y = x**
+    return(y)   
+\end{minted}
+\end{enumerate}
+\end{solution}
+\bigskip
+
+
+\begin{solution}
+\begin{enumerate}
+\item 
+\begin{tabular}{c|c|c|c|c|c|c|c|}
+Etape &  1 &2&3 &4 &\\
+\hline
+Valeur de \verb?a?  avant  & 17 & 13 & 9 & 5 &1\\
+Le critère est-il vérifié ? & oui & oui & oui & oui & non \\
+Valeur de \verb?a? après & 13 & 9 & 5 & 1 
+\end{tabular}\\
+La valeur finale de \verb?a? est 1.
+\item \verb?a%b?
+\end{enumerate} 
+\end{solution}
+\bigskip
+
+
+\begin{solution}
+\begin{enumerate}
+\item ~\\
+\vspace{-0.7cm}
+\begin{minted}[frame=lines]{python}
+for i in range(21):
+   print(i)
+\end{minted}
+\item 
+\begin{minted}[frame=lines]{python}
+for i in range(21):
+   print(20-i)
+\end{minted}
+ \item 
+\begin{minted}[frame=lines]{python}
+for i in range(11):
+   print(2*i)
+\end{minted}
+\end{enumerate} 
+\end{solution}
+ \bigskip
+ 
+
+ \begin{solution}~\\
+ \vspace{-1cm}
+ \begin{minted}[frame=lines]{python}
+for i in range(0,21,2):
+   print(i)
+\end{minted}
+\end{solution}
+\bigskip
+
+
+\begin{solution}
+\begin{enumerate}
+\item .
+\item ~\\
+\vspace{-0.7cm} \begin{minted}[frame=lines]{python}
+u=0
+for i in range(9):
+   u=2*u+3
+\end{minted}
+\item 
+$\left\lbrace\begin{array}{l}
+u_0=0\\
+u_{n+1}=2u_n+3
+\end{array}\right.$
+%\item Modifier le programme pour qu'il affiche $u_{20}$.
+\item ~\\
+\vspace{-0.7cm}
+\begin{minted}[frame=lines]{python}
+u=0
+v=1
+for i in range(10):
+   (u,v)=(v,u+v)
+print(v)	
+\end{minted}
+\end{enumerate}
+\end{solution}
+\bigskip
+
+
+\begin{solution}
+\begin{enumerate}
+\item La variable \verb?r? vaut successivement tous les chiffres du nombre \verb?n?.
+\item ~\\
+\vspace{-0.7cm} \begin{minted}[linenos,frame=lines]{python}
+def somme(n):
+	s=0               # on initialise la somme a zero
+	while n>0:
+		r=n%10        # r est le dernier chiffre de n
+    		s=s+r         # on ajoute r a la somme        
+		n=n//10       # on recommence avec n auquel on a retiré le dernier chiffre
+	return(s)			
+\end{minted}
+\end{enumerate}
+\end{solution}
+
+
+\newpage
+
+
+\begin{solution}~\\
+\vspace{-1cm}
+\begin{minted}[linenos,frame=lines]{python}
+import random
+
+nombre=random.randrange(10)                     # la variable 'nombre' est un entier 
+                                                # pris au hasard entre 0 et 9
+compteur=1                                      # on initialise le compteur a 1              
+essai=input('entrer une valeur entre 0 et 9 ')  # la variable 'essai' est un nombre 
+                                                # entré par l'utilisateur
+while essai!=nombre:
+   essai=input('entrer une nouvelle valeur ')
+   compteur=compteur+1                          # a chaque coups, compteur augmente de 1
+print('Vous avez gagné en ',compteur,' coups')	
+\end{minted}
+\end{solution}
+\bigskip
+
+\begin{solution}
+\begin{enumerate}
+\item ~\\
+\vspace{-0.7cm} \begin{minted}[linenos,frame=lines]{python}
+def premier(n):
+    if n==0 or n==1:
+        return(False)
+    else:
+        i=2
+        while i<=n//2 and n%i!=0:
+            i=i+1
+        if i==n//2+1:
+            return(True)
+        else:
+            return(False)
+\end{minted}            
+\item ~\\
+\vspace{-0.7cm}     
+\begin{minted}[frame=lines]{python}
+for i in range(100):
+    if premier(i) and premier(i+2):
+        print(i,i+2)
+\end{minted}
+\end{enumerate}
+\end{solution}
+\bigskip
+
+
+
+\begin{solution}
+\begin{enumerate}
+\item Nombres premiers entre 2 et 14 :\\
+$2, 3, \underline{4},5,\underline{6},7,\underline{8},\underline{9},\underline{10},11,\underline{12},13,\underline{14}$. 
+\item ~\\
+\vspace{-0.7cm} \begin{minted}[linenos,frame=lines]{python}
+n=100
+premiers=[]
+nombres = []
+N=int(sqrt(n))+1                   # N est l'entier strictement superieur à racine de n
+
+for i in range(2,n+1):
+    nombres.append(True)           # nombres=[True,True,...] : on y stocke l'information 
+                                   # True : le nombre est premier ou False : il ne l'est pas
+for i in range(2,N+1):             # i parcourt les entiers de 2 à N
+    if nombres[i-2]==True:         # si i n'est pas False, 
+        premiers.append(i)         # c'est un nombre premier, on le stocke dans la liste
+        for j in range(2*i,n+1,i): # les multiples de i entre 2i et n
+            nombres[j-2] = False   # sont alors marqués comme False
+                                   
+            
+for i in range(N+1,n+1):           # on ajoute a la liste 'premiers' les nombres superieurs a 
+    if nombres[i-2]==True:         # N qui sont marqués True   
+        premiers.append(i)             
+print(premiers)
+\end{minted}
+\end{enumerate}
+\end{solution}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+\section{GNA : Reste}
+
+%\begin{exercice}Test ==\\
+%La variable \verb?a? est un entier. Selon les valeurs initiales de \verb?a?, donner les valeurs finales de \verb?a?.
+%\begin{minted}[frame=lines]{python}
+%if a==3:
+%   a=a+2
+%if a+3==4:
+%   a=a+1   
+%\end{minted}
+%\end{exercice}
+%\bigskip
+%
+%\begin{solution}
+%Si $a=3$, la valeur finale de $a$ est 5.\\
+%Si $a=1$, la valeur finale de $a$ est 2.\\
+%Sinon, la valeur de $a$ n'est pas modifié.  
+%\end{solution}
+
+
+\begin{exercice}
+La variable \verb?n? est un entier. Précisez selon les valeurs de \verb?n? la valeur finale de \verb?x? après exécution du programme :
+\begin{minted}[linenos,frame=lines]{python}
+if n==5:
+   x=2*n
+   x=x+1
+elif n>=6:
+   x=2*n
+   if n%2==0:
+      x=n//2
+   else :
+      x=(n+1)//2         
+else :
+      x=n**2
+\end{minted}
+\end{exercice}
+\bigskip
+
+\begin{solution}
+\begin{tabular}{l|l|l|l|l|l|l|l|l|l|l|l}
+valeur de \verb?n? &0&1&2&3&4&5&6&7&8&pair $\geq 6$ &impair $\geq\ 6$ \\ \hline
+valeur finale de \verb?x? & 0&1&4&9&16&11&3&4&4&n/2&(n+1)/2
+\end{tabular}
+\end{solution}
+
+
+
+
+
+\begin{exercice}Facultatif.\\
+Voici deux programmes. \verb?n? est une variable entière, déjà initialisée. L'un des deux compte le nombre de diviseurs positifs de \verb?n?. Ce nombre est stocké dans la variable \verb?p?. Que fait l'autre algorithme ?
+\begin{center}
+\begin{tabular}{cc}
+\begin{minipage}{7cm}
+\begin{minted}[linenos,frame=lines]{python}
+p=0
+k=1
+while k<=n :
+   if n%k == 0 :
+      p = p+1
+   k = k+1    
+\end{minted}
+\end{minipage}\hspace{1cm} 
+&
+\begin{minipage}{7cm}
+\begin{minted}[linenos,frame=lines]{python}
+p=0
+k=1
+if n%k == 0 :
+   while k<=n :
+      k = k+1  
+   p=p+1   
+\end{minted}
+\end{minipage}\\
+Algorithme n°1 & Algorithme n°2
+\end{tabular}
+\end{center}
+\end{exercice}
+
+\begin{solution}
+Le premier programme compte le nombre de diviseurs de $n$.
+\begin{minted}[linenos,frame=lines]{python}
+p=0
+k=1                          # k va parcourir tous les entiers de 1 a n
+while k<=n :                 # pour k <=n     
+   if n%k == 0 :             # si k divise n,
+      p = p+1                # on ajoute 1 aux nombres de diviseurs de k
+   k = k+1                   # on passe a l'entier suivant 
+\end{minted}
+Le deuxième programme renvoie 1 :
+\begin{minted}[linenos,frame=lines]{python}
+p=0
+k=1
+if n%k == 0 :       # k=1, donc k verifie la condition
+   while k<=n :     # tant que k<n
+      k = k+1       # k augmente de 1
+   p=p+1            # on sort de la boucle while. p augmente de 1, il vaut maintenant 0+1
+\end{minted}
+\end{solution}
+\bigskip
+

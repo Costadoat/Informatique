@@ -1,316 +1,170 @@
-\input{../../headers/dsinfoheaders.tex}
+\input{intro}
+\input{../../../Header_Willie}
 
-\section{Introduction}
+\usepackage{enumitem}
 
-\question{Écrire sur le diagramme de Contexte donné en document réponse le nom des composants de l'unité centrale.}
+\setenumerate[1]{align=left,label=\arabic*}
+\setenumerate[2]{before=\stepcounter{enumi},label*=.\arabic*,leftmargin=1.2em,align=left}
 
-\section{Analyse d'une réponse temporelle}
 
-Le tracé de la figure \ref{fig01} correspond à la tension $v(t)=V_{r\ max}\cdot sin(k\cdot \theta(t))\cdot cos(\theta(t))$ (avec $\theta(t)=2\cdot \pi\cdot f_r\cdot t$) induite dans l'un des enroulements fixes des deux secondaires du moteur du bras du système de pulvérisation de nacre (vu en DS de SI).
+\ifdef{\public}{\excludecomment{solution}}
 
-On sait que $f_r=0,6~\textrm{Hz}$, mais l'objectif va être de déterminer grâce à python les valeurs des \textbf{entiers} $V_{r\ max}$ et $k$.
 
-\begin{figure}[!ht]
-\centering\includegraphics[width=0.7\linewidth]{img/fig01}
-\caption{Tracé de la réponse temporelle v(t)}
-\label{fig01}
-\end{figure}
+\begin{document}
 
-Cette fonction est définie comme suit dans un script python qui va être complété:
 \begin{center}
-\begin{minted}[linenos,frame=lines]{python}
-def theta(t):
-    return 2*np.pi*fr*t
-
-def v(t):
-    return Vr*np.sin(k*theta(t))*np.cos(theta(t))
-
-t=np.linspace(0,2,1000)
-plt.plot(t,v(t))
-\end{minted}
+{\Large\bf {\type} \no {\numero} -- \descrip}
 \end{center}
 
-\subsection{Recherche de $V_{r\ max}$}
+\SetKw{KwFrom}{de} 
 
-On propose deux scripts pour compléter le précédent afin de déterminer la valeur de $V_{r\ max}$.
-
-~\
-
-\begin{minipage}{0.45\linewidth}
-\begin{center}
-Solution A
-\begin{minted}[linenos,frame=lines]{python}
-m=v(t[i])
-while v(t[i])<=m:
-    if v(t[i])>m:
-        m=v(t[i])
-print(m)
-\end{minted}
-\end{center}
-\end{minipage}\hfill
-\begin{minipage}{0.45\linewidth}
-\begin{center}
-Solution B
-\begin{minted}[linenos,frame=lines]{python}
-m=v(0)
-for ti in t:
-    if v(ti)>m:
-        m=v(ti)        
-print(m)
-\end{minted}
-\end{center}
-\end{minipage}
-
-\question{Choisir en justifiant la solution qui permet de déterminer $V_{r\ max}$.}
-
-Le résultat affiché par le script qui convient est \verb?9.9519?.
-
-\question{En déduire en justifiant la valeur de $V_{r\ max}$.}
-
-\subsection{Identification de $k$}
-
-On montre que la courbe de la figure \ref{fig01}, coupe $2\cdot k$ fois la droite d'équation $y=1$ sur l'intervalle $\left[0,\frac{1}{f_r}\right]$. L'objectif de la suite est de déterminer le nombre d'intersections afin d'en déduire $k$.
-
-\paragraph{Recherche des intervalles $[t,t+dt]$, incluant un passage par y=1} ~\ \\
-
-On souhaite dans cette partie créer une liste \verb?bornes?, contenant l'ensemble des intervalles $[t,t+dt]$ tels qu'il existe un $t_p\in[t,t+dt]$ tel que $v(t_p)=1$.
-
-Une fois la liste créée, en tapant \verb?print(bornes[0:last])?, on obtient le résultat suivant:
-\verb?[[0.0, 0.002002002002002002], [0.050050050050050046, 0.05205205205205205],?\\
-\verb?[0.1041041041041041, 0.1061061061061061], [0.15415415415415415, 0.15615615615615616]]?
-
-Cela signifie que la courbe $v(t)$ coupe $y=1$ entre $0$ et $0.002002002002002002$, etc...
-
-\question{Quelle valeur de \verb?last? permet l'affichage précédent ?}
-
-\question{Écrire un script python permettant de détecter puis d'écrire dans la liste \verb?bornes? l'ensemble des intervalles définis précédemment.}
-
-\paragraph{Recherche des solutions par dichotomie} ~\ \\
-
-Voici le principe de la dichotomie:
+\begin{boxedminipage}{.9\textwidth} 
 \begin{itemize}
- \item Au rang 0,
- \begin{itemize}
-  \item soient $a_0=a$, $b_0=b$. Il existe une solution $x_0$ de l'équation $(f(x)=0)$ dans l'intervalle $[a_0,b_0]$.
- \end{itemize}
- \item Au rang 1,
- \begin{itemize}
-  \item si $f(a_0).f(\dfrac{a_0+b_0}{2})\leq 0$, alors on pose $a_1=a_0$, $b_1=\dfrac{a_0+b_0}{2}$,
-  \item sinon on pose $a_{1}=\dfrac{a_0+b_0}{2}$ et $b_1=b$.
-  \item dans les deux cas, il existe une solution $x_1$ de l'équation $(f(x)=0)$ dans l'intervalle $[a_1,b_1]$.
- \end{itemize}
- \item Au rang n, supposons construit un intervalle $[a_n,b_n]$, de longueur $\dfrac{b-a}{2^n}$,  et contenant une solution $x_n$ de l'équation $(f(x)=0)$. Alors:
- \begin{itemize}
-  \item  si $f(a_n).f(\dfrac{a_n+b_n}{2})\leq 0$, alors on pose $a_{n+1}=a_n$, $b_{n+1}=\dfrac{a_n+b_n}{2}$,
-  \item sinon on pose $a_{n+1}=\dfrac{a_n+b_n}{2}$ et $b_{n+1}=b_{n}$,
-  \item dans les deux cas, il existe une solution $x_{n+1}$ de l'équation $(f(x)=0)$ dans l'intervalle $[a_{n+1},b_{n+1}]$.
- \end{itemize}
+ \item Faire tous les exercices dans un même fichier {NomPrenom.py} à sauvegarder,
+ \item mettre en commentaire l'exercice et la question traités (ex: \# Exercice 1),
+ \item ne pas oublier pas de commenter ce qui est fait dans votre code (ex: \# Je crée une fonction pour calculer la racine d'un nombre),
+% \item il est possible de demander un déblocage pour une question, mais celle-ci sera notée 0,
+ \item il faut vérifier avant de partir que le code peut s'exécuter et qu'il affiche les résultats que vous attendez.
+\end{itemize}
+\end{boxedminipage}
+
+\section*{Recherche des racines d'un polynôme}
+
+Soit le polynôme suivant $f(x)=x^4-79.x^2-66.x+432$, on cherche à déterminer ses racines (qui sont toutes entières et comprises dans l'intervalle $\left[-10,10\right]$.
+
+\begin{enumerate}
+\item Créer la fonction \verb?f(x)? qui reçoit en entrée la valeur $x$ et retourne en sortie la valeur de $f(x)$.
+
+On donne l'exemple suivant pour l'écriture d'une fonction:
+
+\begin{minted}{python}
+def f(x):
+    return x
+\end{minted}
+
+\begin{solution}~\ \\
+\begin{minted}{python}
+def f(x):
+    return x**4-79*x**2-66*x+432
+\end{minted}
+\end{solution}
+
+\item Afficher le résultat de $f(0)$, cette valeur attendue doit vous permettre de valider votre fonction.
+
+\begin{solution}~\ \\
+\begin{minted}{python}
+print(f(0))
+\end{minted}
+\end{solution}
+
+\item A l'aide d'une fonction \verb?range? et d'une boucle \verb?for?, tester pour $x$ toutes les valeurs de $-10$ à $10$ (incluses) la valeur de $f(x)$:
+\begin{itemize}
+ \item si $f(x)==0$, afficher la valeur de x,
+ \item si $f(x)>0$, afficher '+',
+ \item si $f(x)<0$, afficher '-'.
 \end{itemize}
 
-~\
-
-À chaque étape, on a $a_n\leq x_n \leq b_n$, on arrête le processus dès que $|f(\frac{a_n+b_n}{2})|$ est inférieure à la précision souhaitée.
-
-\question{Écrire un script python permettant de rechercher par dichotomie la solution de l'équation \verb?f(x)=0? entre \verb?a? et \verb?b? avec une précision \verb?p?.}
-
-\question{Créer une fonction \verb?dichotomie(f,a,b,p)? à partir de ce script. (si vous n'avez pas réussi la question précédente, créer une fonction qui permet de calculer $f(a+b+p)$.}
-
-~\
-
-Le script suivant utilise la fonction \verb?dichotomie(f,a,b,p)? précédente.
-
-\begin{center}
-\begin{minted}[linenos,frame=lines]{python}
-def g(t):
-    return v(t)-1
-
-p=10**(-6)
-l1=[]
-l2=[]
-for borne in bornes:
-    x=dichotomie(g,borne[0],borne[1],p)
-    if x<1/fr:
-        l1.append(x)
-        l2.append(v(x))
-\end{minted}
-\end{center}
-
-\question{Expliquer l'intérêt de la fonction \verb?g(t)?.}
-
-\question{Expliquer à quels types de variables appartiennent \verb?l1? et \verb?l2? et ce qu'elles contiennent.}
-
-\question{Expliquer l'intérêt du test \verb?if x<1/fr? dans ce script.}
-
-~\
-
-La fonction \verb?len(list)? renvoie le nombre d'éléments de la liste \verb?list?.
-
-\question{Proposer une solution pour déterminer $k$.}
-
-\section{Valeur approchée de $\xi$}
-
-On souhaite modifier la valeur de $f_r$ et choisir maintenant $f_r=0,7~\textrm{Hz}$.
-
-\question{Écrire sous la forme d'un mot de 32 bits respectant la norme IEEE 754 (signe, exposant, mantisse) le float $0,7$.}
-
-\question{Montrer que $001100110011001100110011_2=\frac{2^{24}-1}{5}.$}
-
-~\
-
-On donne: $\frac{2^{-24}}{5}\approx 1.2*10^{-8}$.
-
-\question{Déterminer l'erreur due au stockage de 0,7 à l'aide de la norme IEE74.}
-
-\newpage
-
-\section{Document réponse}
-
-Nom:.....................\\
-Prénom:......................
-
-\begin{center}
- \includegraphics[width=0.9\linewidth]{img/unite_centrale_vierge}
-\end{center}
-
-\ifdef{\public}{\end{document}}{}
-
-\newpage
-
-~\
-
-\newpage
-\cleardoublepage
-
-\pagestyle{correction}\setcounter{section}{0}
-
-\section{Correction}
-
-\paragraph{Question 1:}
-
-\begin{center}
- \includegraphics[width=0.9\linewidth]{img/unite_centrale_corrige}
-\end{center}
-
-\paragraph{Question 2:}
-
-La solution à choisir est la B, la A ne fonctionne pas dès la première ligne car \verb?i? n'est pas défini. De plus, il faut ici parcourir toute la liste pour chercher un maximum, il faut donc une boucle \verb?for? et non \verb?while?.
-
-\paragraph{Question 3:}
-
-La valeur de $V_{\ max}$ est un entier, vu la valeur obtenue on suppose que le premier entier supérieur doit être la bonne réponse, donc $V_{\ max}=10~\textrm{V}$.
-
-\paragraph{Question 4:}
-
-Il y a 4 éléments dans la liste, ce sont donc les 0, 1, 2 et 3ème, donc \verb?last=4?.
-
-\paragraph{Question 5:}
-
-\begin{center}
-\begin{minted}[frame=lines]{python}
-bornes=[]
-for i in range(1,len(t)):
-#    if v(t[i-1])>1 and v(t[i])<1 or v(t[i-1])<1 and v(t[i])>1: (autre solution)
-    if (v(t[i-1])-1.)*(v(t[i])-1.) < 0:
-        bornes.append([t[i-1],t[i]])
-\end{minted}
-\end{center}
-
-\paragraph{Question 6:}
-
-\begin{center}
-\begin{minted}[frame=lines]{python}
-m=(a+b)/2.
-while np.abs(v(m)) >  p:
-    m=(b+a)/2.
-    if v(a)*v(m) > 0:
-        a=m
+\begin{solution}~\ \\
+\begin{minted}{python}
+for x in range(-10,11,1):
+    if f(x)==0:
+        print(x)
+    elif  f(x)<0:
+        print('-')
     else:
-        b=m
+        print('+')
 \end{minted}
-\end{center}
+\end{solution}
 
-\paragraph{Question 7:}
+\section*{Affichage du colloscope}
 
-
-\begin{center}
-\begin{minted}[frame=lines]{python}
-def dichotomie(f,a,b,p):
-    m=(a+b)/2.
-    while np.abs(f(m)) >  p:
-        m=(b+a)/2.
-        if f(a)*f(m) > 0:
-            a=m
-        else:
-            b=m
-    return m
-\end{minted}
-\end{center}
-
-Si pas de question 6
-
-\begin{center}
-\begin{minted}[frame=lines]{python}
-def dichotomie(f,a,b,p):
-    return f(a+b+p)
-\end{minted}
-\end{center}
-
-\paragraph{Question 8:}
-
-La fonction $g(t)=v(t)-1$ permet de rechercher la solution $v(t)=1$ et non pas $v(t)=0$.
-
-\paragraph{Question 9:}
-
-\verb?l1? et \verb?l2? sont des listes qui contiennent:
+On souhaite créer une fonction qui renvoie les matières que l'on a en colle en fonction de la semaine :
 \begin{itemize}
- \item \verb?l1?: la liste des instants $t$ où $v(t)=1$ (abscisses),
- \item \verb?l2?: la liste des $v(t)$ à ces instants là (ce sont des valeurs proches de 1) (ordonnées).
+\item Si le numéro de la semaine est impair afficher "Colles de Math et de Physique",
+\item Si le numéro de la semaine est pair afficher "Colles de SI et d'Anglais",
+\item Si le numéro de la semaine est un multiple de 8, afficher "Colles de SI, d'Anglais et de Français" et ne pas afficher les deux possibilités précédentes.
 \end{itemize}
 
-\paragraph{Question 10:}
+ \item Écrire l'algorithme correspondant en python et le tester pour la semaine 3. 
 
-Ce test permet de ne prendre en compte que les solutions dans l'intervalle $\left[0,\frac{1}{f_r}\right]$ comme demandé dans l'énoncé.
+\begin{solution}~\ \\
+\begin{minted}{python}
+semaine=3
 
-\paragraph{Question 11:}
+if semaine%8==0:
+    print("Colles de SI, d'Anglais et de Français")
+elif semaine%2==0:
+    print("Colles de SI et d'Anglais")
+else:
+    print("Colles de Math et de Physique")
+\end{minted}
+\end{solution}
 
-La courbe passe 2 fois par $1$ à chaque période, on a donc \verb?k=len(l1)/2.?
+ \item Transformer cet algorithme en une fonction \verb?colloscope(semaine)? et afficher le résultats pour les semaines $4,8$ et $9$.
 
-\paragraph{Question 12:}
+\begin{solution}~\ \\
+\begin{minted}{python}
+def colloscope(semaine):
+    if semaine%8==0:
+        return "Colles de SI, d'Anglais et de Français"
+    elif semaine%2==0:
+        return "Colles de SI et d'Anglais"
+    else:
+        return "Colles de Math et de Physique"
 
-Le nombre à traduire est $0,7_{10}$.
+print(colloscope(4))
+print(colloscope(8))
+print(colloscope(9))
+\end{minted}
+\end{solution}
 
-\begin{tabular}{c c c c c c c c c c}
-0,7 & x & 2 & = & 1,4 & = &  1 & + & 0,4 \\
-0,4 & x & 2 & = & 0,8 & = &  0 & + & 0,8 \\
-0,8 & x & 2 & = & 1,6 & = &  1 & + & 0,6 \\
-0,6 & x & 2 & = & 1,2 & = &  1 & + & 0,2 \\
-0,2 & x & 2 & = & 0,4 & = &  0 & + & 0,4 \\
-0,4 & x & 2 & = & 0,8 & = &  0 & + & 0,8 \\
-0,8 & x & 2 & = & 1,6 & = &  1 & + & 0,6 \\
-...
-\end{tabular}
+\section*{Fonction permutation}
 
-On remarque un récurrence dans l'écriture du $0,7_{10}$ en binaire: $0,7_{10}=0,1011001100.._2$
+On souhaite créer ici une fonction \verb?permuter(a,b)? qui retourne \verb?b,a?.
 
-Le nombre stocké est alors :
-$1,\underbrace{01100110011001100110011_2}_{23 bits}*2^{-1}$
+La solution suivante a été proposée, mais le résultat n'est pas celui attendu.
 
-\begin{itemize}
- \item Signe = $0$,
- \item Mantisse:$\underbrace{01100110011001100110011_2}_{23 bits}$,
- \item Exposant:$127-1=126_{10}=01111110_2$
-\end{itemize}
+\begin{minted}{python}
+def permuter(a,b):
+    a=b
+    b=a
+    return(a,b)
+\end{minted}
 
-\paragraph{Question 13:} ~\ \\
+\item Proposer une fonction \verb?permuter(a,b)?, qui retourne réellement \verb?b,a? et tester le résultat en affichant \verb?permuter(1,2)?
 
-$a=\underbrace{001100110011001100110011}_{24 bits}=\underbrace{111111111111111111111111}_{24 bits}-
-\underbrace{110011001100110011001100}_{24 bits}=
-(2^{24}-1)-4*a$, donc $a=\frac{2^{24}-1}{5}$.
+\begin{solution}~\ \\
+\begin{minted}{python}
+def permuter(a,b):
+    x=a
+    a=b
+    b=x
+    return(a,b)
+\end{minted}
+\end{solution}
 
-\paragraph{Question 14:}
+\section*{Compter sur Verlaine}
 
-Le nombre stocké est donc: $101100110011001100110011.2^{-24}=(2^{23}+\frac{2^{24}-1}{5}).2^{-24}=(\frac{1}{2}+\frac{1}{5}-\frac{2^{-24}}{5})$.
+On part de l'extrait suivant de \og Mon rêve familier \fg de Paul Verlaine:\\
+ \verb?texte="Je fais souvent ce rêve étrange et pénétrant."?
 
-L'erreur est donc de $-\frac{2^{-24}}{5}=-1.2*10^{-8}$
+Le code suivant permet d'afficher chaque lettre de ce texte.
+\begin{minted}{python}
+for lettre in texte:
+    print(lettre)
+\end{minted}
 
+\item Proposer un script qui permet de compter le nombre de 'e' présents dans l'extrait (on considérera comme 'e' tous ses dérivées 'é', 'è', 'ë' et 'ê'). Le comptage devra être automatique et le code utilisé devra pouvoir être utilisé quel que soit l'extrait en entrée.
+
+\begin{solution}~\ \\
+\begin{minted}{python}
+count=0
+for lettre in texte:
+    if lettre == 'e' or lettre == 'é' or lettre == 'ê':
+        count=count+1
+print(count)
+\end{minted}
+\end{solution}
+
+\end{enumerate}
 \end{document}

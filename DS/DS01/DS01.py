@@ -1,73 +1,64 @@
-import matplotlib.pyplot as plt
-import numpy as np
+# Question 1
 
-Vr=10.
-fr=0.6
-k=16
+def f(x):
+    return x**4-79*x**2-66*x+432
 
-def theta(t):
-    return 2*np.pi*fr*t
+print(f(0))
 
-def v(t):
-    return Vr*np.sin(k*theta(t))*np.cos(theta(t))
-    
-t=np.linspace(0,2,1000)
-plt.plot(t,v(t))
+for i in range(-10,11,1):
+    if f(i)==0:
+        print(i)
+    elif  f(i)<0:
+        print('-')
+    else:
+        print('+')
 
-print("Recherche du Vrmax")
-m=v(0)
-for ti in t:
-    if v(ti)>m:
-        m=v(ti)
-print(m)
+# Question 2:
 
-i=0
-m=v(t[i])-1
-while v(t[i])<=m :
-    if v(t[i])>m:
-        m=v(t[i])
-print(m)
+semaine=3
 
-yc=1
-print('Recherche des intervalles [t,t+dt], incluants un passage par v(t)=1')
-bornes=[]
-for i in range(1,len(t)):
-#    if v(t[i-1]) > 1 and v(t[i]) < 1 or v(t[i-1]) < 1 and v(t[i]) > 1:
-    if (v(t[i-1])-yc)*(v(t[i])-yc) < 0:
-        bornes.append([t[i-1],t[i]])
+if semaine%8==0:
+    print("Colles de SI, d'Anglais et de Français")
+elif semaine%2==0:
+    print("Colles de SI et d'Anglais")
+else:
+    print("Colles de Math et de Physique")
 
-print(bornes[0:4])
+def colloscope(semaine):
+    if semaine%8==0:
+        return "Colles de SI, d'Anglais et de Français"
+    elif semaine%2==0:
+        return "Colles de SI et d'Anglais"
+    else:
+        return "Colles de Math et de Physique"
 
-def dichotomie(f,a,b,p):
-    m=(a+b)/2.
-    while np.abs(f(m)) >  p:
-        m=(b+a)/2.
-        if f(a)*f(m) > 0:
-            a=m
-        else:
-            b=m
-    return m
+print(colloscope(4))
+print(colloscope(8))
+print(colloscope(9))
 
-def g(t):
-    return v(t)-yc
+# Question 3:
 
-print("Recherche par dichotomie")
-p=10**(-6)
-l1=[]
-l2=[]
-for borne in bornes:
-    x=dichotomie(g,borne[0],borne[1],p)
-    if x<1/fr:
-        l1.append(x)
-        l2.append(v(x))
+def permuter(a,b):
+    x=a
+    a=b
+    b=x
+    return(a,b)
 
-print(len(l1)/2)
-plt.scatter(l1, l2, c = 'red')
-plt.grid('on')
-plt.show()
+print(permuter(1,2))
 
-print((2**23+(2**24-1)/5)*2**(-24))
+# Question 4:
 
-print(2**(-24)/5)
+texte="Je fais souvent ce rêve étrange et pénétrant."
 
-print((2**23+(2**24-1)/5)*2**(-24)+2**(-24)/5)
+count=0
+for lettre in texte:
+    if lettre == 'e' or lettre == 'é' or lettre == 'ê':
+        count=count+1
+print(count)
+
+
+
+
+
+
+

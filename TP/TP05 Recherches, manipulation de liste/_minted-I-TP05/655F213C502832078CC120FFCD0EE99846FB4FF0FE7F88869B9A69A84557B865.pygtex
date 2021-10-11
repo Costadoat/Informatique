@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{L1}\PYG{o}{=}\PYG{p}{[}\PYG{l+m+mi}{4}\PYG{o}{*}\PYG{n}{n}\PYG{o}{**}\PYG{l+m+mi}{2}\PYG{o}{+}\PYG{l+m+mi}{7}\PYG{o}{*}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2} \PYG{k}{for} \PYG{n}{n} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{21}\PYG{p}{)} \PYG{k}{if} \PYG{p}{(}\PYG{l+m+mi}{4}\PYG{o}{*}\PYG{n}{n}\PYG{o}{**}\PYG{l+m+mi}{2}\PYG{o}{+}\PYG{l+m+mi}{7}\PYG{o}{*}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{\PYGZpc{}}\PYG{l+m+mi}{3}\PYG{o}{==}\PYG{l+m+mi}{0}\PYG{p}{]}
-\PYG{o}{\PYGZgt{}\PYGZgt{}\PYGZgt{}}\PYG{p}{[}\PYG{l+m+mi}{9}\PYG{p}{,} \PYG{l+m+mi}{90}\PYG{p}{,} \PYG{l+m+mi}{243}\PYG{p}{,} \PYG{l+m+mi}{468}\PYG{p}{,} \PYG{l+m+mi}{765}\PYG{p}{,} \PYG{l+m+mi}{1134}\PYG{p}{,} \PYG{l+m+mi}{1575}\PYG{p}{]}
-\end{Verbatim}

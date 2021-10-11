@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{a} \PYG{o}{=} \PYG{l+m+mi}{17}
-\PYG{n}{b} \PYG{o}{=} \PYG{l+m+mi}{7}
-\PYG{k}{while} \PYG{n}{a} \PYG{o}{\PYGZgt{}=} \PYG{n}{b}\PYG{p}{:}
-  \PYG{n}{a} \PYG{o}{=} \PYG{n}{a} \PYG{o}{\PYGZhy{}} \PYG{n}{b}
-\end{Verbatim}

@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k}{def} \PYG{n+nf}{som}\PYG{p}{(}\PYG{n}{X}\PYG{p}{):}
-    \PYG{n}{som}\PYG{o}{=}\PYG{l+m+mi}{0}
-    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n}{X}\PYG{p}{:}
-        \PYG{n}{som}\PYG{o}{=}\PYG{n}{som}\PYG{o}{+}\PYG{n}{i}
-    \PYG{k}{return}\PYG{p}{(}\PYG{n}{som}\PYG{p}{)}
-\end{Verbatim}

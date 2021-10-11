@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k}{while} \PYG{n}{n} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{10}\PYG{o}{**}\PYG{l+m+mi}{10}\PYG{p}{:}
-  \PYG{n}{n} \PYG{o}{=} \PYG{n}{n} \PYG{o}{*} \PYG{l+m+mi}{2}
-\end{Verbatim}

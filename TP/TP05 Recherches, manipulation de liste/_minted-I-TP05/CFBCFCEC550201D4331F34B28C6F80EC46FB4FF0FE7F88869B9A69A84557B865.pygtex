@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{L}\PYG{p}{)):}
-	\PYG{k}{print}\PYG{p}{(}\PYG{n}{L}\PYG{p}{[}\PYG{n}{i}\PYG{p}{])}
-\end{Verbatim}
