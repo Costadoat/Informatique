@@ -1,5 +1,5 @@
 \input{intro}
-\input{../../../Header_Willie}
+\input{../../Header_Willie}
 
 \usepackage{enumitem}
 
@@ -136,6 +136,9 @@ def permuter(a,b):
 \begin{solution}~\ \\
 \begin{minted}{python}
 def permuter(a,b):
+    return(b,a)
+    
+def permuter(a,b): # Deuxième solution
     x=a
     a=b
     b=x

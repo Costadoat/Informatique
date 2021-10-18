@@ -3,7 +3,11 @@
 def f(x):
     return x**4-79*x**2-66*x+432
 
+# Question 2
+
 print(f(0))
+
+# Question 3
 
 for i in range(-10,11,1):
     if f(i)==0:
@@ -13,7 +17,7 @@ for i in range(-10,11,1):
     else:
         print('+')
 
-# Question 2:
+# Question 4:
 
 semaine=3
 
@@ -23,6 +27,8 @@ elif semaine%2==0:
     print("Colles de SI et d'Anglais")
 else:
     print("Colles de Math et de Physique")
+
+# Question 5:
 
 def colloscope(semaine):
     if semaine%8==0:
@@ -36,17 +42,21 @@ print(colloscope(4))
 print(colloscope(8))
 print(colloscope(9))
 
-# Question 3:
+# Question 6:
 
 def permuter(a,b):
+    return(b,a)
+
+def permuter(a,b): # Deuxième solution
     x=a
     a=b
     b=x
     return(a,b)
 
+
 print(permuter(1,2))
 
-# Question 4:
+# Question 7:
 
 texte="Je fais souvent ce rêve étrange et pénétrant."
 

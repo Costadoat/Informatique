@@ -2,6 +2,8 @@
 \input{../../Header_Willie}
 %\input{macro}
 
+\ifdef{\public}{\excludecomment{solution}}
+
 \begin{document}
 
 \begin{center}
@@ -26,7 +28,7 @@ Les 128 caractères suivant permettre de décrire les différents caractères na
  \label{fig:tableASCII}
 \end{figure}
 
-L'encodage universel des caractères est réalisé soit par l'Unicode ou l'UFT-8 (Universal Transformation Format).
+L'encodage universel des caractères est réalisé soit par l'Unicode ou l'UTF-8 (Universal Transformation Format).
 
 Les fichiers de type binaire ne contiennent pas (exclusivement) du texte. Et ils ne peuvent être convenablement traités que par des logiciels spécialisés. Un fichier PDF, une image JPEG ou un mp3 sont quelques exemples de fichiers binaires.
 
@@ -37,10 +39,6 @@ Dans la suite, on n'utilisera que des fichiers de type texte.
 Le sigle CSV signifie Comma-Separated Values et désigne un fichier informatique de type tableur, dont les valeurs sont séparées par des virgules. 
 
 Le format CSV est un format de texte simple qui est utilisé dans de nombreux contextes lorsque de grandes quantités de données doivent être fusionnées sans être directement connectées les unes aux autres.
-
-L'extension de ce type de fichiers est .csv, et ils peuvent être utilisés entre différents outils informatiques et bases de données, lorsqu'on souhaite déployer le contenu d'une base de données sur une feuille de calcul.
-
-Des tableurs tels qu'Excel (Microsoft) ou Calc (LibreOffice) et des bases de données telles que MySQL et Oracle sont capables d'importer et exporter des fichiers CSV. Toutefois, en raison de sa structure basique, le format de fichier CSV ne convient que pour des données structurées simples.
 
 \begin{figure}[ht!]
 \begin{minipage}{0.45\linewidth}
@@ -56,11 +54,15 @@ Des tableurs tels qu'Excel (Microsoft) ou Calc (LibreOffice) et des bases de don
 \caption{Même fichier CSV vu dans un tableur et dans un éditeur de texte}
 \end{figure}
 
+L'extension de ce type de fichiers est .csv, et ils peuvent être utilisés entre différents outils informatiques et bases de données, lorsqu'on souhaite déployer le contenu d'une base de données sur une feuille de calcul.
+
+Des tableurs tels qu'Excel (Microsoft) ou Calc (LibreOffice) et des bases de données telles que MySQL et Oracle sont capables d'importer et exporter des fichiers CSV. Toutefois, en raison de sa structure basique, le format de fichier CSV ne convient que pour des données structurées simples.
+
 \subsection{Import des données du TP}
 
-Les données qui seront utilisées dans ce TP sont issues du site https://\url{www.data.gouv.fr} qui partage des données gouvernementales en accès libre.
+Les données qui seront utilisées dans ce TP sont issues du site \url{https://www.data.gouv.fr} qui partage des données gouvernementales en accès libre.
 
-Nous allons plus particulièrement utiliser celles de la page suivante, qui concerne la température quotidienne par départements en France.
+Nous allons plus particulièrement utiliser celles de la page suivante, qui concerne la température quotidienne par département en France.
 
 ~\
 
@@ -68,7 +70,7 @@ Nous allons plus particulièrement utiliser celles de la page suivante, qui conc
 
 ~\
 
-Le fichier \textit{/home/eleve/Ressources/PTSI/TP/TP04/temperature-quotidienne-departementale.csv} contient les données téléchargées sous la forme d'un fichier CSV. Copier-le dans votre répertoire personnel.
+Le fichier \textit{/home/eleve/Ressources/PTSI/TP/TP04/temperature-quotidienne-departementale.csv} contient les données téléchargées sous la forme d'un fichier CSV. Copiez-le dans votre répertoire personnel.
 
 \begin{exercice}~\\
 Taper les lignes suivantes dans un fichier script et vérifier le contenu de \verb?contenu? en ajoutant \verb?print(contenu)? à la fin du script (cette commande pourra être retirée par la suite).
@@ -80,16 +82,25 @@ contenu=file.read()
 file.close()
 \end{minted}
 
+\begin{solution}~\ \\
+\begin{minted}{python}
+file=open('temperature-quotidienne-departementale.csv','r')
+contenu=file.read()
+file.close()
+print(contenu)
+\end{minted}
+\end{solution}
+
 La fonction \verb?open? ouvre le fichier avec le paramètre:
 \begin{itemize}
 \item \verb?r?, pour \textit{reading}, en lecture seule,
-\item \verb?w?, pour \textit{wrtting}, en écriture (le contenu est alors totalement effacé à l'ouverture du fichier,
+\item \verb?w?, pour \textit{writting}, en écriture (le fichier est alors totalement écrasé à l'ouverture du fichier),
 \item \verb?a?, pour \textit{appending}, en modification, tout sera alors écrit à la suite du contenu déjà présent dans le fichier.
 \end{itemize}
 
-La fonction \verb?read()? lit le contenu du fichier et la fonction \verb?close? ferme le fichier pour qu'il puisse être utilisé par un autre logiciel.
+La fonction \verb?read()? lit le contenu du fichier et la fonction \verb?close()? ferme le fichier pour qu'il puisse être utilisé par un autre logiciel.
 
-Le contenu est alors une chaîne de caractères que nous allons transformer en liste.
+\verb?contenu? est alors une chaîne de caractères que nous allons transformer en liste.
 
 La commande \verb?split? découpe les chaînes de caractères selon un séparateur. La commande suivante permet de générer la liste \verb?lignes? qui contient toutes les lignes du fichier CSV.
 
@@ -106,13 +117,16 @@ Taper la ligne précédent dans le script et vérifier le contenu de \verb?ligne
 file=open('temperature-quotidienne-departementale.csv','r')
 contenu=file.read()
 file.close()
+
+lignes=contenu.split('\n')
+print(lignes)
 \end{minted}
 \end{solution}
 
 Nous allons maintenant pouvoir découper chacune des ces lignes en colonnes à l'aide de la même fonction.
 
 \begin{exercice}~\\
-Utiliser une boule \verb?for? pour parcourir toutes les lignes. Découper ensuite chaque ligne à l'aide du séparateur ';' et stocker le résultat dans une liste \verb?data?.
+Utiliser une boule \verb?for? pour parcourir toutes les lignes. Découper ensuite chaque ligne à l'aide du séparateur ';' et stocker le résultat dans une liste \verb?data? qui sera écrasée à chaque itération mais nous réglerons ce problème plus tard.
 \end{exercice}
 
 \begin{solution}~\ \\
@@ -126,8 +140,15 @@ for ligne in lignes[1:]:
 Au début du script créer deux variables \verb?dep='75'? et \verb?year='2018'? qui permettront de stocker le numéro du département et l'année pour lesquels nous allons effectuer l'étude.
 \end{exercice}
 
+\begin{solution}~\ \\
+\begin{minted}{python}
+dep='75'
+year='2018'
+\end{minted}
+\end{solution}
+
 \begin{exercice}~\\
-Créer une liste appelée \verb?temperatures? dans laquelle vous allez stocker les dates et les valeur des températures \textbf{moyennes} (converties en float) pour ce département et cette année.
+Créer une liste appelée \verb?temperatures? dans laquelle vous allez stocker les dates et les valeur des températures \textbf{moyennes} (converties en float) pour ce département et cette année. Faire attention au format des données, il faudra par exemple retirer les "". \verb?print(temperatures[0])? devra retourner \verb?['2018-01-01', 8.0]?.
 \end{exercice}
 
 \begin{solution}~\ \\
@@ -137,7 +158,8 @@ temperatures=[]
 for ligne in lignes[1:]:
     data=ligne.split(';')
     if data[0][1:5]==year and data[1]==dep:
-        temperatures.append([data[0],float(data[5][1:-1])])
+        temperatures.append([data[0][1:-1],float(data[5][1:-1])])
+print(temperatures[0])
 \end{minted}
 \end{solution}
 
@@ -152,14 +174,25 @@ for date,temp in temperatures:
 file2.close()
 \end{minted}
 
+\begin{solution}~\ \\
+\begin{minted}{python}
+file2=open('fichier_export.csv','w')
+for date,temp in temperatures:
+    file2.write(date+';'+str(temp)+'\n')
+file2.close()
+\end{minted}
+\end{solution}
+
 \begin{exercice}~\\
-Insérer le code suivant dans le script et double-cliquer sur le fichier \verb?fichier_export.csv? afin de valider son contenu.
+Insérer le code suivant dans le script et double-cliquer sur le fichier \verb?fichier_export.csv? ainsi créé afin de vérifier son contenu.
 \end{exercice}
 
 \section{Traitement des données}
 
+La suite du code peut s'écrire après le script précédent. Elle utilise la liste \verb?temperatures? précédemment créée.
+
 \begin{exercice}~\\
-Proposer une solution pour déterminer la moyenne arithmétique de ces températures.
+Proposer une solution pour déterminer la moyenne arithmétique des températures de Paris en 2018. Rappel: $\mu=\frac{\sum\limits_{i=1}^{n} x_i}{n}$ pour la moyenne d'une série $x_i$ de $n$ éléments. Vous devez trouver \verb?13.91?.
 \end{exercice}
 
 \begin{solution}~\ \\
@@ -173,7 +206,7 @@ print(t_moy)
 \end{solution}
 
 \begin{exercice}~\\
-Proposer une solution pour déterminer la médiane de ces températures.
+Proposer une solution pour déterminer la médiane des températures de Paris en 2018. Rappel: En théorie des probabilités et en statistiques, la médiane est la valeur qui sépare la moitié inférieure de la moitié supérieure d'un ensemble (échantillon, population, distribution de probabilités). Intuitivement, la médiane est ainsi le point milieu de l'ensemble. Vous devez trouver \verb?13.75?.
 \end{exercice}
 
 \begin{solution}~\ \\
@@ -183,10 +216,8 @@ print(temperatures_classe[len(temperatures)//2])
 \end{minted}
 \end{solution}
 
-On rappelle que la formule de l'écart type est $\sigma=\sqrt{\frac{\sum\limits_{i=1}^{n} |x_i-\mu|^2}{n}}$, avec $\mu$ la moyenne arithmétique de la série de données.
-
 \begin{exercice}~\\
-Proposer une solution pour déterminer l'écart type de ces températures.
+Proposer une solution pour déterminer l'écart type des températures de Paris en 2018. On rappelle que la formule de l'écart type est $\sigma=\sqrt{\frac{\sum\limits_{i=1}^{n} |x_i-\mu|^2}{n}}$, avec $\mu$ la moyenne arithmétique de la série de données. Vous devez trouver \verb?7.3?.
 \end{exercice}
 
 \begin{solution}~\ \\
@@ -199,13 +230,79 @@ print(sigma)
 \end{minted}
 \end{solution}
 
-\begin{exercice}~\\
-Utiliser le code suivant afin de tracer l'histogramme de ces valeurs.
-\end{exercice}
+On souhaite tracer l'histogramme de ces valeurs.
 
+\begin{exercice}~\\
+Importer la bibliothèque \verb?matplotlib.pyplot? sous l'alias \verb?plt? puis exécuter le code suivant :
 \begin{minted}{python}
 plt.hist([temp for date,temp in temperatures],range=(-4,30),bins=34)
 plt.show()
 \end{minted}
+\end{exercice}
+
+\begin{solution}~\ \\
+\begin{minted}{python}
+import matplotlib.pyplot as plt
+plt.hist([temp for date,temp in temperatures],range=(-4,30),bins=34)
+plt.show()
+\end{minted}
+\end{solution}
+
+
+\begin{exercice}~\\
+Proposer une solution pour effectuer le calcul de ces trois opération en boucle pour 2018, 2019 et 2020.
+\end{exercice}
+
+Pour compléter, vous pourrez placer un \verb?fig = plt.figure()? avant la boucle, puis à l'endroit où vous souhaiter tracer les histogrammes le code suivant:
+\begin{minted}{python}
+ax = fig.add_subplot(4,1,num+1)
+ax.hist([temp for date,temp in temperatures],range=(-4,30),bins=34)
+\end{minted}
+
+\begin{solution}~\ \\
+\begin{minted}{python}
+fig = plt.figure()
+for num,year in enumerate(['2018','2019','2020']):
+    temperatures=[]
+    for ligne in lignes[1:]:
+        data=ligne.split(';')
+        if data[0][1:5]==year and data[1]==dep:
+            temperatures.append([data[0][1:-1],float(data[5][1:-1])])
+
+    # Calcul de la moyenne
+    t_total=0
+    for date,temp in temperatures:
+        t_total+=temp
+    t_moy=t_total/len(temperatures)
+
+    
+    # Calculer la médiane
+    temperatures_classe=sorted([temp for date,temp in temperatures])
+    t_med=temperatures_classe[len(temperatures)//2]
+
+    # Calcul de l'écart type
+    sigma=0
+    for date,temp in temperatures:
+        sigma+=(temp-t_moy)**2
+    sigma=m.sqrt(sigma/len(temperatures))
+
+    print("Pour l'année {} dans le {} :\n - La moyenne est {:.2f}\n - La médiane est {:.2f}\n - L'écart type est {:.2f}".format(year,dep,t_moy,t_med,sigma))
+
+    # Tracer un histogramme
+    ax = fig.add_subplot(4,1,num+1)
+    ax.hist([temp for date,temp in temperatures],range=(-4,30),bins=34)
+\end{minted}
+\end{solution}
+
+\begin{exercice}~\\
+Effectuer le même travail en prenant dep='6', conclure quant à la douceur du climat de Nice.
+\end{exercice}
+
+\begin{solution}~\ \\
+\begin{minted}{python}
+dep='6'
+\end{minted}
+Les moyennes/médianes sont plus hautes et l'écart type est moins important.
+\end{solution}
 
 \end{document}
