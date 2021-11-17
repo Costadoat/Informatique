@@ -59,6 +59,7 @@ plt.show()
 # Faire pour 2018, 2019, 2020
 
 fig = plt.figure()
+fig.tight_layout()
 for num,year in enumerate(['2018','2019','2020']):
     temperatures=[]
     for ligne in lignes[1:]:
@@ -88,7 +89,7 @@ for num,year in enumerate(['2018','2019','2020']):
     # Tracer un histogramme
     ax = fig.add_subplot(3,1,num+1)
     ax.hist([temp for date,temp in temperatures],range=(-4,30),bins=34)
-
+    ax.set_title("Title for first plot")
 plt.show()
 
 
