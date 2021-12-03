@@ -1,0 +1,291 @@
+\input{intro}
+\input{../../Header_Willie}
+%\input{macro}
+
+
+\ifdef{\public}{\excludecomment{solution}}
+
+\begin{document}
+
+\begin{center}
+{\Large\bf TP \no {\numero} -- \descrip}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+\section{Tri par sélection}
+
+Le tri par sélection (ou tri par extraction) est un algorithme de tri par comparaison. Cet algorithme est simple, mais considéré comme inefficace car il s'exécute en temps quadratique en le nombre d'éléments à trier, et non en temps pseudo linéaire. 
+
+\subsection{Pseudo-code}
+
+Sur un tableau de $n$ éléments, le principe du tri par sélection est le suivant :
+\begin{enumerate}
+ \item rechercher le plus petit élément du tableau, et l'échanger avec l'élément d'indice $0$,
+ \item rechercher le second plus petit élément du tableau, et l'échanger avec l'élément d'indice $1$,
+ \item continuer de cette façon jusqu'à ce que le tableau soit entièrement trié.
+\end{enumerate}
+
+\begin{exercice}
+Proposer une fonction \verb?tri_selection(liste)? qui permet de trier \verb?liste?. Attention, la fonction sera utilisée comme suit:
+\begin{minted}{python}
+print(liste) # la liste n'est pas triée
+tri_selection(liste)
+print(liste) # la liste est triée
+\end{minted}
+
+Il n'y a donc pas besoin de mettre un \verb?return? dans la fonction.
+\end{exercice}
+
+\begin{solution}~\\
+\vspace{-0.7cm}
+\begin{minted}{python}
+def tri_selection(liste): 
+    # Parcours de 1 à la taille de la liste
+    for i in range(len(liste)-1):
+        # Initialiser le min
+        min=liste[i]
+        jmin=i
+        for j in range(i, len(liste)):
+            # Chercher le min
+            if liste[j]<min:
+                jmin=j
+                min=liste[j]
+        # Permuter le min et l'élément i
+        liste[i],liste[jmin]=liste[jmin],liste[i]	
+\end{minted}    
+\end{solution}
+
+\begin{exercice}
+Tester cette fonction sur la liste \verb?[6,3,4,2,7,1,5]?.
+\end{exercice}
+
+\begin{solution}~\\
+\vspace{-0.7cm}
+\begin{minted}{python}
+liste=[6,3,4,2,7,1,5]
+tri_selection(liste): 
+print(liste)
+\end{minted}    
+\end{solution}
+
+\section{Tri par insertion}
+
+En informatique, le tri par insertion est un algorithme de tri classique. La plupart des personnes l'utilisent naturellement pour trier des cartes à jouer.
+
+En général, le tri par insertion est lui aussi assez lent car sa complexité asymptotique est quadratique. 
+
+Le tri par insertion considère chaque élément du tableau et l'insère à la bonne place parmi les éléments déjà triés. Ainsi, au moment où on considère un élément, les éléments qui le précèdent sont déjà triés, tandis que les éléments qui le suivent ne sont pas encore triés. 
+
+\subsection{Pseudo-code}
+
+Sur un tableau de $n$ éléments, le principe du tri par insertion est le suivant :
+\begin{enumerate}
+ \item pour tout $i$ des $n$ éléments de la liste,
+ \item on décale l'élément $i$ vers la gauche tant que l'élément précédent est plus petit que lui.
+\end{enumerate}
+
+\begin{exercice}
+Proposer une fonction \verb?tri_insertion(liste)? qui permet de trier \verb?liste?. Attention, la fonction sera utilisée comme suit:
+\begin{minted}{python}
+print(liste) # la liste n'est pas triée
+tri_selection(liste)
+print(liste) # la liste est triée
+\end{minted}
+
+Il n'y a donc pas besoin de mettre un \verb?return? dans la fonction.
+\end{exercice}
+
+\begin{solution}~\\
+\vspace{-0.7cm}
+\begin{minted}{python}
+def tri_insertion(liste): 
+    # Parcours de 1 à la taille de la liste
+    for i in range(1, len(liste)):
+        # On mémorise la position initiale de l'élément
+        k = liste[i]
+        # On décale cet élément vers la gauche tant que
+        # l'élément précédent est plus grand que lui
+        j = i-1
+        while j >= 0 and k < liste[j] : 
+                liste[j + 1] = liste[j] 
+                j -= 1
+        liste[j + 1] = k
+\end{minted}    
+\end{solution}
+
+\begin{exercice}
+Tester cette fonction sur la liste \verb?[6,3,4,2,7,1,5]?.
+\end{exercice}
+
+\begin{solution}~\\
+\vspace{-0.7cm}
+\begin{minted}{python}
+liste=[6,3,4,2,7,1,5]
+tri_insertion(liste): 
+print(liste)
+\end{minted}    
+\end{solution}
+
+\section{Tri à bulles}
+
+Le tri à bulles ou tri par propagation consiste à comparer répétitivement les éléments consécutifs d'un tableau, et à les permuter lorsqu'ils sont mal triés. 
+
+Il doit son nom au fait qu'il déplace rapidement les plus grands éléments en fin de tableau, comme des bulles d'air qui remonteraient rapidement à la surface d'un liquide. 
+
+\subsection{Pseudo-code}
+
+L'algorithme parcourt le tableau et compare les éléments consécutifs. Lorsque deux éléments consécutifs ne sont pas dans l'ordre, ils sont échangés.
+
+Après un premier parcours complet du tableau, le plus grand élément est forcément en fin de tableau, à sa position définitive. En effet, aussitôt que le plus grand élément est rencontré durant le parcours, il est mal trié par rapport à tous les éléments suivants, donc échangé à chaque fois jusqu'à la fin du parcours.
+
+Après le premier parcours, le plus grand élément étant à sa position définitive, il n'a plus à être traité. Le reste du tableau est en revanche encore en désordre. Il faut donc le parcourir à nouveau, en s'arrêtant à l'avant-dernier élément. Après ce deuxième parcours, les deux plus grands éléments sont à leur position définitive. Il faut donc répéter les parcours du tableau, jusqu'à ce que les deux plus petits éléments soient placés à leur position définitive.
+
+Le pseudo-code est le suivant:
+\begin{itemize}
+ \item pour tout $i$ de $1$ ($0$ n'a pas de précédent) à $n$,
+ \item on parcours tous les $j$ de $0$ à $i$ (les précédents),
+ \item on permute l'élément $j$ et $j+1$ si $j>j+1$.
+\end{itemize}
+
+\begin{exercice}
+Proposer une fonction \verb?tri_bulle(liste)? qui permet de trier \verb?liste?. Attention, la fonction sera utilisée comme suit:
+\begin{minted}{python}
+print(liste) # la liste n'est pas triée
+tri_selection(liste)
+print(liste) # la liste est triée
+\end{minted}
+
+Il n'y a donc pas besoin de mettre un \verb?return? dans la fonction.
+\end{exercice}
+
+\begin{solution}~\\
+\vspace{-0.7cm}
+\begin{minted}{python}
+def tri_bulle(liste):
+    # Parcours de 1 à la taille de la liste
+    for i in range(1, len(liste)):
+        # Parcours des éléments précédents
+        for j in range(0, len(liste)-i-1):
+            # On permutte les deux éléments successifs
+            if liste[j] > liste[j+1] :
+                liste[j], liste[j+1] = liste[j+1], liste[j]
+\end{minted}    
+\end{solution}
+
+\begin{exercice}
+Tester cette fonction sur la liste \verb?[6,3,4,2,7,1,5]?.
+\end{exercice}
+
+\begin{solution}~\\
+\vspace{-0.7cm}
+\begin{minted}{python}
+liste=[6,3,4,2,7,1,5]
+tri_bulle(liste): 
+print(liste)
+\end{minted}    
+\end{solution}
+
+\section{Déterminer la fonction la plus efficace}
+
+Le code suivant permet de déterminer la durée d'exécution d'une instruction.
+
+\begin{minted}{python}
+import time
+
+start = time.process_time()
+# instruction
+end = time.process_time()
+print(end - start)
+\end{minted} 
+
+\begin{exercice}
+Utiliser cette fonction pour mesurer la durée du tri avec chaque fonction.
+\end{exercice}
+
+\begin{solution}~\\
+\vspace{-0.7cm}
+\begin{minted}{python}
+liste=[6,3,4,2,7,1,5]
+start = time.process_time()
+tri_selection(liste)
+end = time.process_time()
+print(end - start)
+
+liste=[6,3,4,2,7,1,5]
+start = time.process_time()
+tri_insertion(liste)
+end = time.process_time()
+print(end - start)
+
+liste=[6,3,4,2,7,1,5]
+start = time.process_time()
+tri_bulle(liste)
+end = time.process_time()
+print(end - start)
+\end{minted}    
+\end{solution}
+
+\begin{exercice}
+A quoi correspond la liste \verb?liste0=[randrange(size) for i in range(size)]?.
+\end{exercice}
+
+\begin{solution}~\\
+\vspace{-0.7cm}
+Cela remplit une liste de taille \verb?size? avec des entiers aléatoires.
+\newpage
+\end{solution}
+
+\begin{exercice}
+Utiliser ce résultat afin de tester les 3 fonctions précédentes dans plusieurs cas.
+\end{exercice}        
+
+\begin{solution}~\\
+\vspace{-0.7cm}
+\begin{minted}{python}
+t=[[],[],[]]
+fonction=[tri_selection,tri_insertion,tri_bulle]
+nom_fonction=["Tri par sélection","Tri par insertion","Tri à bulles"]
+for i in range(tirages):
+    print(i)
+    liste0=[randrange(size) for i in range(size)]
+    for j in range(3):
+        liste = liste0
+        #print(liste)
+        start = time.process_time()
+        fonction[j](liste) 
+        end = time.process_time()
+        #print(liste)
+        t[j].append(end - start)
+        
+def moyenne(l):
+    somme=0
+    for i in l:
+        somme+=i
+    return somme/len(l)
+
+for i in range(3):
+    print(min(t[i]),max(t[i]),moyenne(t[i]))
+\end{minted}    
+\end{solution}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
