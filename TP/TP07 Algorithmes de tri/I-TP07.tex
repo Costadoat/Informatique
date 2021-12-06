@@ -135,6 +135,29 @@ Il doit son nom au fait qu'il déplace rapidement les plus grands éléments en 
 
 \subsection{Pseudo-code}
 
+On donne les états successifs de la liste [6, 3, 4, 2, 7, 1, 5] traitée par l'algorithme de tri à bulles.
+
+\begin{minted}[linenos]{python}
+[6, 3, 4, 2, 7, 1, 5]
+[3, 6, 4, 2, 7, 1, 5]
+[3, 4, 6, 2, 7, 1, 5]
+[3, 4, 2, 6, 7, 1, 5]
+[3, 4, 2, 6, 1, 7, 5]
+[3, 4, 2, 6, 1, 5, 7]
+[3, 2, 4, 6, 1, 5, 7]
+[3, 2, 4, 1, 6, 5, 7]
+[3, 2, 4, 1, 5, 6, 7]
+[2, 3, 4, 1, 5, 6, 7]
+[2, 3, 1, 4, 5, 6, 7]
+[2, 1, 3, 4, 5, 6, 7]
+[1, 2, 3, 4, 5, 6, 7]
+\end{minted}  
+
+\begin{exercice}
+Expliquer l'algorithme et donner le pseudo code qui a été suivit pour réaliser ces étapes.
+\end{exercice}
+
+\begin{solution}~\\
 L'algorithme parcourt le tableau et compare les éléments consécutifs. Lorsque deux éléments consécutifs ne sont pas dans l'ordre, ils sont échangés.
 
 Après un premier parcours complet du tableau, le plus grand élément est forcément en fin de tableau, à sa position définitive. En effet, aussitôt que le plus grand élément est rencontré durant le parcours, il est mal trié par rapport à tous les éléments suivants, donc échangé à chaque fois jusqu'à la fin du parcours.
@@ -147,6 +170,7 @@ Le pseudo-code est le suivant:
  \item on parcours tous les $j$ de $0$ à $i$ (les précédents),
  \item on permute l'élément $j$ et $j+1$ si $j>j+1$.
 \end{itemize}
+\end{solution}
 
 \begin{exercice}
 Proposer une fonction \verb?tri_bulle(liste)? qui permet de trier \verb?liste?. Attention, la fonction sera utilisée comme suit:

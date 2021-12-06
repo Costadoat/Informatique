@@ -2,9 +2,6 @@
 import time
 from random import randrange
 
-size=3000
-tirages=10
-
 # Question 1
 def tri_selection(liste): 
     # Parcours de 1 à la taille de la liste
@@ -49,7 +46,7 @@ def tri_bulle(liste):
     # Parcours de 1 à la taille de la liste
     for i in range(1, len(liste)):
         # Parcours des éléments précédents
-        for j in range(0, len(liste)-i-1):
+        for j in range(0, len(liste)-i):
             # On permutte les deux éléments successifs
             if liste[j] > liste[j+1] :
                 liste[j], liste[j+1] = liste[j+1], liste[j]
@@ -79,6 +76,9 @@ end = time.process_time()
 print(end - start)
 
 # Question 9
+size=100
+tirages=2
+
 t=[[],[],[]]
 fonction=[tri_selection,tri_insertion,tri_bulle]
 nom_fonction=["Tri par sélection","Tri par insertion","Tri à bulles"]
