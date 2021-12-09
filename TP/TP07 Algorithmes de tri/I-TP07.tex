@@ -142,14 +142,24 @@ On donne les états successifs de la liste [6, 3, 4, 2, 7, 1, 5] traitée par l'
 [3, 6, 4, 2, 7, 1, 5]
 [3, 4, 6, 2, 7, 1, 5]
 [3, 4, 2, 6, 7, 1, 5]
+[3, 4, 2, 6, 7, 1, 5]
 [3, 4, 2, 6, 1, 7, 5]
 [3, 4, 2, 6, 1, 5, 7]
+[3, 4, 2, 6, 1, 5, 7]
+[3, 2, 4, 6, 1, 5, 7]
 [3, 2, 4, 6, 1, 5, 7]
 [3, 2, 4, 1, 6, 5, 7]
 [3, 2, 4, 1, 5, 6, 7]
 [2, 3, 4, 1, 5, 6, 7]
+[2, 3, 4, 1, 5, 6, 7]
+[2, 3, 1, 4, 5, 6, 7]
+[2, 3, 1, 4, 5, 6, 7]
 [2, 3, 1, 4, 5, 6, 7]
 [2, 1, 3, 4, 5, 6, 7]
+[2, 1, 3, 4, 5, 6, 7]
+[1, 2, 3, 4, 5, 6, 7]
+[1, 2, 3, 4, 5, 6, 7]
+[1, 2, 3, 4, 5, 6, 7]
 [1, 2, 3, 4, 5, 6, 7]
 \end{minted}  
 
@@ -190,7 +200,7 @@ def tri_bulle(liste):
     # Parcours de 1 à la taille de la liste
     for i in range(1, len(liste)):
         # Parcours des éléments précédents
-        for j in range(0, len(liste)-i-1):
+        for j in range(0, len(liste)-i):
             # On permutte les deux éléments successifs
             if liste[j] > liste[j+1] :
                 liste[j], liste[j+1] = liste[j+1], liste[j]

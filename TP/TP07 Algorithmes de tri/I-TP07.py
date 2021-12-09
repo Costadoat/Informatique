@@ -50,6 +50,7 @@ def tri_bulle(liste):
             # On permutte les deux éléments successifs
             if liste[j] > liste[j+1] :
                 liste[j], liste[j+1] = liste[j+1], liste[j]
+            print(liste)
 
 # Question 6
 liste=[6,3,4,2,7,1,5]
