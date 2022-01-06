@@ -50,7 +50,7 @@ def tri_bulle(liste):
             # On permutte les deux éléments successifs
             if liste[j] > liste[j+1] :
                 liste[j], liste[j+1] = liste[j+1], liste[j]
-            print(liste)
+            #print(liste)
 
 # Question 6
 liste=[6,3,4,2,7,1,5]
@@ -59,21 +59,21 @@ print(liste)
 
 # Question 7
 liste=[6,3,4,2,7,1,5]
-start = time.process_time()
+start = time.time()
 tri_selection(liste)
-end = time.process_time()
+end = time.time()
 print(end - start)
 
 liste=[6,3,4,2,7,1,5]
-start = time.process_time()
+start = time.time()
 tri_insertion(liste)
-end = time.process_time()
+end = time.time()
 print(end - start)
 
 liste=[6,3,4,2,7,1,5]
-start = time.process_time()
+start = time.time()
 tri_bulle(liste)
-end = time.process_time()
+end = time.time()
 print(end - start)
 
 # Question 9
@@ -89,9 +89,9 @@ for i in range(tirages):
     for j in range(3):
         liste = liste0
         #print(liste)
-        start = time.process_time()
+        start = time.time()
         fonction[j](liste) 
-        end = time.process_time()
+        end = time.time()
         #print(liste)
         t[j].append(end - start)
         

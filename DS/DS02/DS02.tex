@@ -1,0 +1,240 @@
+\input{intro}
+\input{../../../Header_Willie}
+
+\usepackage{enumitem}
+
+\setenumerate[1]{align=left,label=\arabic*}
+\setenumerate[2]{before=\stepcounter{enumi},label*=.\arabic*,leftmargin=1.2em,align=left}
+
+
+\ifdef{\public}{\excludecomment{solution}}
+
+
+\begin{document}
+
+\begin{center}
+{\Large\bf {\type} \no {\numero} -- \descrip}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+\begin{boxedminipage}{.9\textwidth} 
+\begin{itemize}
+ \item Faire tous les exercices dans un même fichier {NomPrenom.py} à sauvegarder,
+ \item mettre en commentaire l'exercice et la question traités (ex: \# Exercice 1),
+ \item ne pas oublier pas de commenter ce qui est fait dans votre code (ex: \# Je crée une fonction pour calculer la racine d'un nombre),
+\item il est possible de demander un déblocage pour une question avec une (*), mais celle-ci sera notée 0,
+ \item il faut vérifier avant de partir que le code peut s'exécuter et qu'il affiche les résultats que vous attendez.
+\end{itemize}
+\end{boxedminipage}
+
+
+
+
+
+\section*{Exercice 1 : import de fichier et recherche par dichotomie}
+\noindent Le fichier \verb?liste_nombres.csv? contient une liste de nombres réels, classés par ordre croissant. \\
+L'emplacement de ce fichier est le suivant : /home/eleve/Ressources/PTSI/
+\begin{enumerate}
+\item (*) Importer le fichier. Récupérer le contenu du fichier sous forme d'une liste de \textbf{flottants}.
+\begin{solution}~ \\\vspace{-0.7cm}
+\begin{minted}{python}
+fichier = open("liste_nombres.csv", "r")
+
+contenu=fichier.read()
+fichier.close()
+
+lignes=contenu.split('\n')
+
+L=[]
+for i in lignes:
+    L.append(float(i)) 
+\end{minted}
+\end{solution}
+\item Afficher les 30 premières valeurs de la liste.
+\begin{solution}
+\verb?L[0:30]?
+\end{solution}
+\item Ecrire une fonction \verb?dicho? qui prend comme entrée une liste \verb?L? et un nombre \verb?a? et renvoie la position de \verb?a? si $a$ est dans le tableau et \verb?False? sinon.
+\begin{solution}~ \\\vspace{-0.7cm}
+\begin{minted}{python}
+def dicho(L, a):
+    debut = 0
+    fin = len(L) - 1
+    while debut <= fin:
+        m = (debut+fin) // 2
+        if L[m] == a:
+            return m
+        elif L[m] < a:
+            debut = m + 1
+        else:
+            fin = m - 1
+    return False
+\end{minted}
+\end{solution}
+\item Afficher le résultat de la fonction \verb?dicho? pour la liste précédemment importée pour le nombre $a=1.56$ puis pour le nombre $a=2$.
+\begin{solution}
+\verb?print(dicho(L,1.56))? \verb?print(dicho(L,2)) ?
+\end{solution}
+\item Calculer et afficher la moyenne des nombres de la liste importée.
+\begin{solution}
+~ \\\vspace{-0.7cm}
+\begin{minted}{python}
+somme=0
+for i in L:
+	somme=somme+i
+print(somme/len(L))	
+\end{minted}
+\end{solution}
+\item Afficher la médiane des nombres de la liste importée.
+\begin{solution}
+print(L[len(L)//2])
+\end{solution}
+\end{enumerate}
+
+
+\section*{Exercice 2 : recherche du maximum}
+\noindent Dans cet exercice, vous n'avez pas le droit d'utiliser les fonctions Python suivantes : \verb?max? et \verb?index?.
+\begin{enumerate}
+\setcounter{enumi}{6}
+\item Ecrire une fonction \verb?maxi? qui prend comme entrée une liste de nombres \verb?L? et renvoie la valeur ainsi qu'une position du maximum.
+\begin{solution}~ \\\vspace{-0.7cm}
+\begin{minted}{python}
+def maxi(L):
+    maxi=L[0]
+    position=0
+    for i in range(1,len(L)):
+        if L[i]>maxi:
+            maxi=L[i]
+            position=i
+    return(maxi,position)
+\end{minted}
+\end{solution}
+\item Ecrire une fonction \verb?maxi_liste? qui prend comme entrée une liste \verb?L? et renvoie la valeur ainsi que la liste de toutes les positions de cette valeur maximale. 
+\begin{solution}~ \\\vspace{-0.7cm}
+\begin{minted}{python}
+def maxi2(L):
+    maxi=L[0]
+    position=[0]
+    for i in range(1,len(L)):
+        if L[i]>maxi:
+            maxi=L[i]
+            position=[i]
+        elif L[i]==maxi:
+            position.append(i)
+    return(maxi,position)
+\end{minted}
+\end{solution}
+\item Afficher le résultat de la fonction suivante pour la liste : $L=[9,1,3,9,2,9]$.
+\begin{solution}~ \\\vspace{-0.7cm}
+\verb? print(maxi2([9,8,9,0,9]))?
+\end{solution}
+\end{enumerate}
+
+\section*{Exercice 3 : algorithme Glouton}
+Vous avez un budget maximal $B=11$ euros et des bonbons à acheter. Pour chaque type de bonbon, vous avez deux informations : son prix et votre indice de satisfaction. L'objectif est de maximiser l'indice de satisfaction total.\\
+Pour cela deux stratégies gloutonnes :
+\begin{itemize}
+\item stratégie 1 : choisir toujours le bonbon le plus satisfaisant compatible avec le budget restant ;
+\item stratégie 2 : choisir toujours le bonbon au plus fort rapport $\dfrac{\text{satisfaction}}{\text{prix}}$, compatible avec le budget restant.
+\end{itemize}
+La donnée est la suivante : une liste qui contient des couples [prix,satisfaction]. 
+\begin{center}
+bonbons=[[3,2.5],[1.5,1.5],[1,0.9]]
+\end{center}
+Par exemple, le premier bonbon coûte 3 euros et son indice de satisfaction est $2,5$.\\
+La liste est triée par ordre décroissant de satisfaction.
+\begin{enumerate}
+\setcounter{enumi}{9}
+\item Recopier la ligne ci-dessus.
+\begin{solution}
+\verb?bonbons=[[3,2.5],[1.5,1.5],[1,0.9]]?
+\end{solution}
+\item Afficher \verb?bonbons[2][0]? et \verb?bonbons[2][0]?. A quoi correspondent ces deux nombres ? (réponse en commentaire).
+\begin{solution}
+Le premier nombre correspond au prix du 3ème bonbon et le second à son indice de satisfaction.
+\end{solution}
+\item Ecrire un programme qui donne la liste des couples [prix,satisfaction] pour maximiser la satisfaction en suivant la stratégie 1.
+\begin{solution}~ \\\vspace{-0.7cm}
+\begin{minted}{python}
+i=0
+achat=[]
+while i<len(bonbons) and B>0:
+    if bonbons[i][0]<B:
+        achat.append(bonbons[i])
+        B=B-bonbons[i][0]
+    else:
+        i=i+1
+\end{minted}
+\end{solution}
+\item Calculer (pas à la main) et afficher la satisfaction totale pour cette stratégie 1.
+\begin{solution}~ \\\vspace{-0.7cm}
+\begin{minted}{python}
+Satisfaction_totale=0
+for element in achat:
+    Satisfaction_totale=Satisfaction_totale+element[1]
+print(Satisfaction_totale)
+\end{minted}
+\end{solution}
+\item (*) On appelle ratio le quotient $\dfrac{\text{satisfaction}}{\text{prix}}$.
+Construire (pas à la main) une liste \verb?bonbons2? constituée de sous-listes : [ratio, prix, satisfaction].\\
+Ainsi, la liste \verb?bonbons2? devra commencer de cette façon : [[0.8333334, 3, 2.5], ...]
+\begin{solution}~ \\\vspace{-0.7cm}
+\begin{minted}{python}
+bonbons2=[]
+for element in bonbons:
+    bonbons2.append([element[1]/element[0],element[0],element[1]])
+\end{minted}
+\end{solution}
+\item Recopier la commande suivante : \verb?bonbons2.sort(reverse=True)?. \\
+La liste \verb?bonbons2? est alors triée par valeur de ratio décroissante.
+\item Ecrire un programme qui donne la liste des triplets [ratio,prix,satisfaction] pour maximiser la satisfaction en suivant la stratégie 2.
+\begin{solution}~ \\\vspace{-0.7cm}
+\begin{minted}{python}
+B=12
+i=0
+achat2=[]
+while i<len(bonbons2) and B>0:
+    if bonbons2[i][1]<B:
+        achat2.append(bonbons2[i])
+        B=B-bonbons2[i][1]
+    else:
+        i=i+1
+\end{minted}
+\end{solution}
+\item Afficher la satisfaction totale pour cette stratégie 2.
+\begin{solution}~ \\\vspace{-0.7cm}
+\begin{minted}{python}
+Satisfaction_totale2=0
+for element in achat2:
+    Satisfaction_totale2=Satisfaction_totale2+element[2]
+print(Satisfaction_totale2)
+\end{minted}
+\end{solution}
+\item Conclure quant à la meilleure stratégie. (réponse en commentaire)
+\begin{solution}
+La satisfaction dans la stratégie 2 est plus grande. Donc, c'est la meilleure sur cet exemple.
+\end{solution}
+\end{enumerate}
+\end{document}
+
+
+
+
+
+
+
+
+
+\end{enumerate}
+\noindent On cherche à sélectionner cinq nombres de la liste suivante en cherchant à avoir leur somme la plus grande possible et en s'interdisant de choisir deux nombres voisins :
+\[L=[15,4,20,17,11,8,16,7,14,2,7,5,17,19,18]\]
+La stratégie gloutonne consiste à choisir à chaque étape la valeur la plus grande possible dans les choix restants.
+\begin{enumerate}
+\setcounter{enumi}{10}
+\item Ecrire une fonction \verb?somme_glouton? qui prend comme entrée une liste de nombres \verb?L? et qui renvoie la liste des nombres choisis par la stratégie gloutonne. GNA : autorise fonction max ?
+\item Afficher le résultat \verb?somme_glouton? pour la liste $L$ ainsi que la somme des valeurs obtenues.
+\begin{solution}
+\verb?[0, 19, 16, 15, 14]?
+\end{solution}
+\item Que pensez-vous du résultat précédent ? (réponse en commentaire)

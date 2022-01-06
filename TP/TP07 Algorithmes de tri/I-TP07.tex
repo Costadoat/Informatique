@@ -64,7 +64,7 @@ Tester cette fonction sur la liste \verb?[6,3,4,2,7,1,5]?.
 \vspace{-0.7cm}
 \begin{minted}{python}
 liste=[6,3,4,2,7,1,5]
-tri_selection(liste): 
+tri_selection(liste)
 print(liste)
 \end{minted}    
 \end{solution}
@@ -227,9 +227,9 @@ Le code suivant permet de déterminer la durée d'exécution d'une instruction.
 \begin{minted}{python}
 import time
 
-start = time.process_time()
+start = time.time()
 # instruction
-end = time.process_time()
+end = time.time()
 print(end - start)
 \end{minted} 
 
@@ -241,27 +241,27 @@ Utiliser cette fonction pour mesurer la durée du tri avec chaque fonction.
 \vspace{-0.7cm}
 \begin{minted}{python}
 liste=[6,3,4,2,7,1,5]
-start = time.process_time()
+start = time.time()
 tri_selection(liste)
-end = time.process_time()
+end = time.time()
 print(end - start)
 
 liste=[6,3,4,2,7,1,5]
-start = time.process_time()
+start = time.time()
 tri_insertion(liste)
-end = time.process_time()
+end = time.time()
 print(end - start)
 
 liste=[6,3,4,2,7,1,5]
-start = time.process_time()
+start = time.time()
 tri_bulle(liste)
-end = time.process_time()
+end = time.time()
 print(end - start)
 \end{minted}    
 \end{solution}
 
 \begin{exercice}
-A quoi correspond la liste \verb?liste0=[randrange(size) for i in range(size)]?.
+De la bibliothèque \verb?random?, importez la fonction \verb?randrange?. A quoi correspond la liste \verb?liste0=[randrange(size) for i in range(size)]?.
 \end{exercice}
 
 \begin{solution}~\\
@@ -286,9 +286,9 @@ for i in range(tirages):
     for j in range(3):
         liste = liste0
         #print(liste)
-        start = time.process_time()
+        start = time.time()
         fonction[j](liste) 
-        end = time.process_time()
+        end = time.time()
         #print(liste)
         t[j].append(end - start)
         
