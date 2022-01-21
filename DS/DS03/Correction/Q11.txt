@@ -1,0 +1,13 @@
+# Question 11:
+
+classement_journees=[]
+
+for journee in range(len(tableau_points[0])-1):
+    liste_journee=[]
+    for equipe in tableau_points:
+        liste_journee.append(equipe[journee+1][0])
+    liste_equipes_journee=liste_equipes.copy()
+    tri_selection(liste_journee,liste_equipes_journee)
+    classement_journees.append(liste_equipes_journee)
+
+print(classement_journees[0])

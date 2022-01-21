@@ -1,0 +1,8 @@
+# Question 4:
+
+import matplotlib.pyplot as plt
+
+plt.plot([point for point,buts in tableau_points[0][1:]])
+plt.show()
+
+

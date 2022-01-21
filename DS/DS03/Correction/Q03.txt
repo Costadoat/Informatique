@@ -1,0 +1,16 @@
+# Question 3:
+
+tableau_points=[]
+
+for id,equipe in enumerate(resultats):
+    tableau_points.append([equipe[0]])
+    points_total=0
+    buts_total=0
+    for match in equipe[1:]:
+        points_match,buts_pour,buts_contre=match.split(':')
+        points_total+=int(points_match)
+        buts_total+=int(buts_pour)-int(buts_contre)
+        tableau_points[id].append([points_total,buts_total])
+
+print(tableau_points[0])
+

@@ -26,6 +26,7 @@ La matrice qui permet de définir l'image doit être mise sous la forme d'une \v
 Tester le code suivant:
 
 \begin{minted}{python}
+import numpy as np
 liste=[[1,2],[3,4]]
 array=np.array(liste)
 
@@ -43,7 +44,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Création d'une image avec 4 pixels
-imagebase = [1,1,1]*np.ones([2,2,3])
+imagebase = np.ones([2,2,3])
 imagebase[1,1] = [0.4,0.6,0.8]
 imagebase[0,0] = [0.8,0.4,0.2]
 plt.imshow(imagebase)
@@ -81,7 +82,7 @@ Par exemple, le code suivant génère une image avec 4 pixels noirs, mais 4 vale
 
 \begin{minted}{python}
 # Création d'une image avec 4 pixels
-imagebase = [0,0,0,0]*np.ones([2,2,4])
+imagebase = np.zeros([2,2,4])
 imagebase[0,0,3] = 1
 imagebase[0,1,3] = 0.75
 imagebase[1,0,3] = 0.5
@@ -98,7 +99,7 @@ Modifier le code précédent pour avoir des pixels à 10\% d'opacité à gauche 
 \vspace{-0.7cm}
 \begin{minted}{python}
 # Création d'une image avec 4 pixels
-imagebase = [0,0,0,0]*np.ones([2,2,4])
+imagebase = np.zeros([2,2,4])
 imagebase[0,0,3] = .1
 imagebase[0,1,3] = .9
 imagebase[1,0,3] = .1
@@ -110,7 +111,7 @@ plt.show()
 
 \section{Traitement d'une image plus complexe}
 
-Nous allons dans la suite ouvrir une image au format PNG. Sa structure sera strictement la même que celle de l'image précédente, il y aura évidemment beaucoup plus de pixels.
+Nous allons dans la suite ouvrir une image au format PNG. Sa structure sera strictement la même que celle de l'image précédente, il y aura évidemment beaucoup plus de pixels. L'image est disponible dans le dossier \og Ressources/PTSI/TP/TP08 \fg.
 
 L'image choisie est un tableau de \textbf{David Hockney} intitulé \textit{Portrait of an Artist}.
 

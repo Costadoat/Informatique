@@ -1,0 +1,9 @@
+# Question 7:
+
+points_derniere_journee=[]
+
+for equipe in tableau_points:
+        points_derniere_journee.append(equipe[-1][0])
+print(points_derniere_journee)
+
+

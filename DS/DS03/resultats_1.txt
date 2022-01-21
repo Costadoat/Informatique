@@ -1,0 +1,76 @@
+27/08/2021 : Lyon-Reims 3-0
+28/08/2021 : Dijon-Montpellier 1-2
+28/08/2021 : Paris_FC-Guingamp 4-1
+28/08/2021 : Saint_Étienne-Bordeaux 1-1
+28/08/2021 : Soyaux-Issy 2-0
+29/08/2021 : PSG-Fleury 5-0
+
+03/09/2021 : Fleury-Paris_FC 0-1
+03/09/2021 : Montpellier-PSG 0-1
+04/09/2021 : Bordeaux-Soyaux 6-0
+04/09/2021 : Issy-Dijon 0-2
+04/09/2021 : Reims-Guingamp 0-0
+05/09/2021 : Lyon-Saint_Étienne 6-0
+
+10/09/2021 : Guingamp-Montpellier 2-1
+11/09/2021 : Paris_FC-Reims 3-0
+11/09/2021 : Saint_Étienne-Issy 0-1
+12/09/2021 : Bordeaux-Fleury 1-2
+12/09/2021 : Lyon-Dijon 6-0
+12/09/2021 : Soyaux-PSG 0-2
+
+24/09/2021 : Lyon-Guingamp 4-0
+25/09/2021 : Dijon-Saint_Étienne 0-4
+25/09/2021 : Fleury-Soyaux 1-0
+25/09/2021 : Issy-Bordeaux 0-1
+25/09/2021 : Reims-Montpellier 1-4
+26/09/2021 : PSG-Paris_FC 4-0
+
+01/10/2021 : Bordeaux-Lyon 1-4
+01/10/2021 : Montpellier-Fleury 1-2
+02/10/2021 : Issy-Reims 1-3
+02/10/2021 : Saint_Étienne-Paris_FC 1-3
+02/10/2021 : Soyaux-Dijon 1-2
+10/10/2021 : PSG-Guingamp 6-0
+
+16/10/2021 : Fleury-Dijon 0-1
+16/10/2021 : Guingamp-Issy 1-1
+16/10/2021 : Paris_FC-Soyaux 4-0
+16/10/2021 : Reims-Bordeaux 5-2
+17/10/2021 : Lyon-Montpellier 5-0
+17/10/2021 : PSG-Saint_Étienne 2-0
+
+30/10/2021 : Bordeaux-Guingamp 3-0
+30/10/2021 : Fleury-Reims 1-0
+30/10/2021 : Issy-Paris_FC 0-5
+30/10/2021 : Saint_Étienne-Montpellier 1-2
+31/10/2021 : Dijon-PSG 0-3
+31/10/2021 : Soyaux-Lyon 1-6
+
+12/11/2021 : Paris_FC-Bordeaux 1-3
+13/11/2021 : Guingamp-Soyaux 2-2
+13/11/2021 : Montpellier-Issy 3-0
+13/11/2021 : Reims-Dijon 1-1
+13/11/2021 : Saint_Étienne-Fleury 0-4
+14/11/2021 : Lyon-PSG 6-1
+
+20/11/2021 : Bordeaux-Montpellier 0-1
+20/11/2021 : Dijon-Paris_FC 0-2
+20/11/2021 : Fleury-Guingamp 6-2
+20/11/2021 : Soyaux-Saint_Étienne 2-1
+21/11/2021 : Issy-Lyon 0-4
+21/11/2021 : PSG-Reims 7-0
+
+03/12/2021 : Montpellier-Paris_FC 0-0
+04/12/2021 : Bordeaux-Dijon 1-1
+04/12/2021 : Guingamp-Saint_Étienne 1-1
+04/12/2021 : Issy-PSG 0-3
+04/12/2021 : Reims-Soyaux 3-1
+05/12/2021 : Lyon-Fleury 4-0
+
+12/12/2021 : Dijon-Guingamp 1-1
+12/12/2021 : Fleury-Issy 1-0
+12/12/2021 : PSG-Bordeaux 1-0
+12/12/2021 : Paris_FC-Lyon 1-2
+12/12/2021 : Saint_Étienne-Reims 0-1
+12/12/2021 : Soyaux-Montpellier 0-1

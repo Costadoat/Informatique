@@ -1,0 +1,8 @@
+# Question 9:
+
+liste_equipes=[]
+
+for equipe in tableau_points:
+        liste_equipes.append(equipe[0])
+print(liste_equipes)
+

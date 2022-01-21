@@ -1,0 +1,22 @@
+# Question 10:
+
+def tri_selection(liste,liste2): 
+    # Parcours de 1 à la taille de la liste
+    for i in range(len(liste)-1):
+        # Initialiser le min
+        min=liste[i]
+        jmin=i
+        for j in range(i, len(liste)):
+            # Chercher le min
+            if liste[j]<min:
+                jmin=j
+                min=liste[j]
+        # Permuter le min et l'élément i
+        liste[i],liste[jmin]=liste[jmin],liste[i]
+        liste2[i],liste2[jmin]=liste2[jmin],liste2[i]
+
+points_derniere_journee_tri=points_derniere_journee.copy()
+liste_equipes_tri=liste_equipes.copy()
+tri_selection(points_derniere_journee_tri,liste_equipes_tri)
+print(liste_equipes_tri)
+

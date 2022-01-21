@@ -1,0 +1,9 @@
+# Question 1:
+
+file=open('resultats.csv','r')
+contenu=file.read()
+equipes=contenu.split('\n')
+
+print(equipes[0])
+
+

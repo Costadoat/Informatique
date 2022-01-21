@@ -1,0 +1,10 @@
+# Question 5:
+
+import matplotlib.pyplot as plt
+
+for equipe in tableau_points:
+    plt.plot([point for point,buts in equipe[1:]], label=equipe[0])
+plt.legend()
+plt.show()
+
+

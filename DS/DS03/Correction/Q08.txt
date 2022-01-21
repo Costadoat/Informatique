@@ -1,0 +1,5 @@
+# Question 8:
+points_derniere_journee_tri=points_derniere_journee.copy()
+tri_selection(points_derniere_journee_tri)
+print(points_derniere_journee_tri)
+
