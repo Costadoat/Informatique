@@ -1,0 +1,284 @@
+\input{intro}
+\input{../../Header_Willie}
+%\input{macro}
+
+\ifdef{\public}{\excludecomment{solution}}
+
+\begin{document}
+
+\begin{center}
+{\Large\bf TP \no {\numero} -- \descrip}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+
+%Version récursive d’algorithmes dichotomiques. Fonctions produisant à l’aide de print successifs des figures alphanumériques. Dessins de fractales. Énumération des sous-listes ou des permutations d’une liste.
+%On évite de se cantonner à des fonctions mathématiques (factorielle, suites récurrentes). On peut montrer le phénomène de dépassement de la taille de la pile.
+
+
+\begin{defn}
+Une fonction récursive est une fonction dont le calcul nécessite d'invoquer la fonction elle-même.
+\end{defn}
+
+\begin{exercice}\label{exponentiation naive}
+On considère le programme suivant :
+\begin{minted}[linenos,frame=lines]{python}
+def f(x,p):
+	if p==0 :
+		return(1)
+	else:
+		return(x*f(x,p-1))		
+\end{minted}
+\begin{enumerate}
+\item Recopiez le programme et exécutez-le. En général, que renvoie la fonction $f$ ?
+\begin{solution}
+$f(x,p)$ renvoie la valeur de $x^p$.
+\end{solution}
+\item Modifiez le programme pour qu'il affiche les valeurs successives de $x$ et de $p$.
+\begin{solution}~\\
+\vspace{-0.7cm}
+\begin{minted}{python}
+def f(x,p):
+	if p==0
+		return(1)
+	else:
+		print(x,p)
+		return(x*f(x,p-1))	
+\end{minted}
+\end{solution}
+\item Que se passe-t-il si on efface les lignes 2, 3 et 4 ? 
+\begin{solution}
+Le message d'erreur suivant s'affiche : "maximum recursion depth exceeded". On parle de dépassement de la pile. Le programme ne s'arrête jamais car $p$ décroit sans limite.
+\end{solution}
+\end{enumerate}
+\end{exercice}
+
+
+
+\begin{exercice}\label{exp rapide}Exponentiation rapide.\\
+Dans cet exercice, nous allons optimiser le programme précédent grâce au principe suivant :
+\[\text{pour }x\in\mathbb{R},\text{ et }p\in \mathbb{N},\qquad x^p=\left\lbrace
+\begin{array}{ll}
+1&\text{ si }p=0\\
+\left(x^2\right)^{\frac{p}{2}}&\text{ si }p\text{ est pair}\\
+x\times \left(x^2\right)^{\frac{p-1}{2}}&\text{ si }p\text{ est impair}\\
+\end{array}\right.\]
+La fonction \verb?expon? prend comme entrée deux valeurs $x$ et $p$.\\
+\verb?expon(x,n) : ?
+\begin{itemize}
+\item Si $p$ est nul, renvoyer 1.
+\item Si $p$ est pair, la fonction s'appelle elle-même, avec comme argument $x^2$ et $\dfrac{p}{2}$.
+\item Si $p$ est impair, renvoyer $x\times \texttt{expon}(x^2,\frac{p-1}{2})$.
+\end{itemize}
+\begin{enumerate}
+\item Ecrivez une fonction récursive \verb?expon? qui suit l'algorithme ci-dessus.
+\begin{solution}~\\
+\vspace{-0.7cm}
+\begin{minted}{python}
+def expon(x,p):
+    if p==0:
+        return(1)
+    else:
+        if p%2==0:
+            return(expon(x**2,p//2))
+        else:
+            return(x*expon(x**2,(p-1)//2))
+\end{minted}
+\end{solution}
+\item On a donc deux fonctions, $f$ de l'exercice \ref{exponentiation naive} et la fonction \verb?expon? qui renvoient le même résultat. Proposez une façon de comparer la complexité des deux fonctions. \\
+Deux méthodes :
+\begin{itemize}
+\item on utilise la fonction \verb?time? de la bibliothèque \verb?time?, présentée au TP n°7 ;
+\item (facultatif) on ajoute un compteur au programme à l'aide d'une variable globale.
+\end{itemize} 
+\begin{solution}
+\newpage
+Méthode 1 :\\
+\begin{minted}{python}
+start=time.time()
+(expon(x,p))
+end=time.time()
+print(end-start)
+        
+start=time.time()
+(f(x,p))
+end=time.time()
+print(end-start)  
+\end{minted}
+
+Méthode 2 :\\
+\begin{minted}{python}
+compteur=0
+
+def expon_compteur(x,p):
+    if p==0:
+        return(1)
+    else:
+        global compteur
+        compteur=compteur+1
+        if p%2==0:
+            return(expon_compteur(x**2,p//2))
+        else:
+            return(x*expon_compteur(x**2,(p-1)//2))
+
+print(expon_compteur(x,p),compteur)
+
+compteur=0
+
+def f_compteur(x,p):
+    if p==0 :
+        return(1)
+    else:
+        global compteur
+        compteur=compteur+1
+        return(x*f_compteur(x,p-1))
+\end{minted}
+\end{solution}
+\end{enumerate}
+\end{exercice}
+
+
+
+\begin{exercice}Dichotomie récursive.\\
+Soit $f$ une fonction qui s'annule sur l'intervalle $[a,b]$. L'objectif est de calculer une valeur approchée de $c$ tel que $f(c)=0$. On procède par dichotomie, en divisant à chaque étape l'intervalle de travail en deux. On note $n$ le nombre d'étapes effectuées (ce nombre $n$ décidera donc de la précision de la réponse).\\
+La fonction \verb?dicho? prend comme argument $f,a,b$ et $n$ et renvoie une valeur approchée de $c$.
+\begin{enumerate}
+\item Donnez un critère simple pour vérifier si deux nombres $x$ et $y$ sont de signes opposés.
+\begin{solution}
+$xy<0$.
+\end{solution}
+\item \label{Q1} Prenez une feuille et un stylo. A la manière de l'exercice \ref{exp rapide}, écrivez un algorithme qui décrit les étapes de la dichotomie en version récursive. Il démarre par : \verb? dicho(f,a,b,n)?.
+\begin{solution}
+\verb?dicho(f,a,b,n)?\\
+On pose : $c=\dfrac{a+b}{2}$.
+\begin{itemize}
+\item Si $n=0$, renvoyer $c$.
+\item Si $f(a)f(c)$ est négatif, renvoyer \verb?dicho(f,a,c,n-1)?.
+\item Sinon, renvoyer \verb?dicho(f,c,b,n-1)?.
+\end{itemize}
+\end{solution}
+\item Tant que le programme sur feuille n'est pas correct, revenez à l'étape \ref{Q1}.  \\
+Implémentez l'algorithme précédent en langage python.
+\end{enumerate}
+\end{exercice}
+\begin{solution}~\\
+\vspace{-0.7cm}
+\begin{minted}{python}
+def dicho(f,a,b,n):
+    c=(a+b)/2.
+    if n==0:
+        return(c)
+    else:
+        if f(a)*f(c)<0:
+            return(dicho(f,a,c,n-1))
+        else:
+            return(dicho(f,c,b,n-1))
+\end{minted}
+\end{solution}
+
+
+
+
+
+
+\begin{exercice}Enumeration des sous-listes.\\
+Soit $L$ une liste. L'objectif de l'exercice est d'écrire un programme qui renvoie toutes les sous-listes de $L$.\\
+Par exemple, pour $L=[1,2,3]$, ses sous-listes sont : 
+\[[1, 2, 3], [2, 3], [1, 3], [3], [1, 2], [2], [1], []\]
+\begin{enumerate}
+\item Ecrivez une fonction \verb?SousListe? qui prend comme argument une liste et renvoie la liste de ses sous-listes.
+\begin{solution}~\\
+\vspace{-0.7cm}
+\begin{minted}{python}        
+def SousListe(L):
+    if len(L)==0:
+        return([[]])
+    DernierTerme=L[len(L)-1]
+    AncienneSousListe=SousListe(L[0:len(L)-1])
+    NouvelleSousListe=[]
+    for i in AncienneSousListe:
+        NouvelleSousListe.append(i+[DernierTerme])      
+    return(NouvelleSousListe+AncienneSousListe) 
+\end{minted}
+\end{solution}
+\item En maths, la fonction construit l'ensemble $\mathcal{P}(L)$. Vous savez qu'il est de cardinal $2^\text{Card(L)}$. Vérifiez la longueur de \verb?SousListe(L)?.
+\begin{solution}
+\verb?len(SousListe(L))==2**len(L)?
+\end{solution}
+\end{enumerate}
+\end{exercice}
+      
+        
+
+
+
+
+
+
+%\begin{exercice}
+%Fonctions récursives : Enumeration des permutations
+%\end{exercice}
+%
+%\begin{solution}~\\
+%\vspace{-0.7cm}
+%\begin{minted}{python}
+%def Permute(string):
+%    if len(string) == 0:
+%        return ['']
+%    prevList = Permute(string[1:len(string)])
+%    nextList = []
+%    for i in range(0,len(prevList)):
+%        for j in range(0,len(string)):
+%            newString = prevList[i][0:j]+string[0]+prevList[i][j:len(string)-1]
+%            nextList.append(newString)
+%    return nextList
+%\end{minted}
+%\end{solution}
+
+
+
+\begin{exercice}Rendu de monnaie récursif.\\
+La liste \verb?monnaie_euro=[50,20,10,5,2,1]? contient l'ensemble des billets/pièces (dont le montant est un entier) du système monétaire européen dans l'ordre décroissant. Etant donné une valeur \verb?restant_du?, on veut déterminer la liste des pièces nécessaires pour atteindre ce montant, obtenue par un algorithme glouton.\\
+Proposez une fonction récursive \verb?rendu? qui prend comme argument \verb?restant_du? et \verb?monnaie_a_rendre? et renvoie la liste demandée.\\
+Par exemple : \verb?rendu(216,[0,0,0,0,0,0])? doit renvoyer $[4,0,1,1,0,1]$.
+\end{exercice}
+
+\begin{solution}~\\
+\vspace{-0.7cm}
+\begin{minted}{python}
+monnaie_euro=[50,20,10,5,2,1]
+
+def rendu(m,L):
+    if m==0:
+        return(L)
+    else:
+        i=0
+        while i<len(monnaie_euro) and m<monnaie_euro[i]:
+            i=i+1   
+        L[i]=L[i]+1
+        m=m-monnaie_euro[i]
+        return(rendu(m,L))
+\end{minted}
+\end{solution}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
