@@ -1,4 +1,0 @@
-\babel@toc {french}{}
-\beamer@sectionintoc {1}{Sch\IeC {\'e}ma d'Euler}{2}{0}{1}
-\beamer@sectionintoc {2}{D\IeC {\'e}marche}{4}{0}{2}
-\beamer@sectionintoc {3}{Application}{6}{0}{3}

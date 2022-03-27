@@ -1,3 +1,0 @@
-\babel@toc {french}{}
-\beamer@sectionintoc {1}{M\IeC {\'e}thode des rectangles}{2}{0}{1}
-\beamer@sectionintoc {2}{Cr\IeC {\'e}ation de courbes}{7}{0}{2}

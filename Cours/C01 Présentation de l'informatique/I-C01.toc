@@ -1,5 +1,5 @@
 \babel@toc {french}{}
-\beamer@sectionintoc {1}{Introduction \IeC {\`a} l'informatique}{2}{0}{1}
+\beamer@sectionintoc {1}{Introduction à l'informatique}{2}{0}{1}
 \beamer@sectionintoc {2}{Traitement de l'information}{4}{0}{2}
 \beamer@sectionintoc {3}{Architecture des ordinateurs}{9}{0}{3}
-\beamer@sectionintoc {4}{Les syst\IeC {\`e}mes d'exploitation}{13}{0}{4}
+\beamer@sectionintoc {4}{Les systèmes d'exploitation}{13}{0}{4}

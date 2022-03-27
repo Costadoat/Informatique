@@ -1,3 +1,0 @@
-\babel@toc {french}{}
-\beamer@sectionintoc {1}{Algorithme}{2}{0}{1}
-\beamer@sectionintoc {2}{D\IeC {\'e}finition de fonctions}{6}{0}{2}

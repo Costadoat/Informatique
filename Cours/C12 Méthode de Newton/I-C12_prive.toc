@@ -1,3 +1,0 @@
-\babel@toc {french}{}
-\beamer@sectionintoc {1}{D\IeC {\'e}veloppement de Taylor}{2}{0}{1}
-\beamer@sectionintoc {2}{D\IeC {\'e}marche}{3}{0}{2}

@@ -1,0 +1,154 @@
+\input{../../headers/beamercoursHeadings}
+
+\section{Les dictionnaires} 
+
+\begin{frame}[fragile]
+\frametitle{Présentation des dictionnaires}
+
+Comme les \textbf{listes} ou les \textbf{tuples}, les dictionnaures font partie des \textbf{types construits} à partir de types construits (\textit{int}, \textit{float}, \textit{str},...)
+
+Alors que les éléments d’une liste sont ordonnés et qu'on y accède grâce à un index, on accédera à un élément d'un dictionnaire grâce à une \textbf{clé}.
+
+C'est pour cela que cela porte le même nom qu'un dictionnaire (livre) où on accède à une définition avec un mot.
+
+Contrairement aux listes qui sont délimitées par des crochets, on utilise des accolades pour les dictionnaires.
+
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+dictionnaire = {"a": "mot1", "b": "mot2"}
+print(dictionnaire["a"])
+	"mot1"
+\end{verbatimtab}
+\end{GrayBox}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{La manipulation des dictionnaires}
+
+\begin{minipage}[t]{0.38\linewidth}
+Ajouter un élément à un dictionnaire (on peut mixer les types)
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+dictionnaire["c"]=3
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+
+\begin{minipage}[t]{0.38\linewidth}
+Modifier un élément d'un dictionnaire
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+dictionnaire["b"]='mot3'
+print(dictionnaire["b"])
+	"mot3"
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+
+\begin{minipage}[t]{0.38\linewidth}
+Parcourir tous les éléments d'un dictionnaire (peu d'intérêt)
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+for i in nombre_de_roues.items():
+    print(i)
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+
+\begin{minipage}[t]{0.38\linewidth}
+Créer un dictionnaire
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{-0.5cm}
+\begin{GrayBox}[0.85\textwidth]
+\begin{verbatimtab}[3]
+dictionnaire={}
+\end{verbatimtab}
+\end{GrayBox}
+\end{minipage}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Exemple de dictionnaire : le format JSON}
+
+Le JavaScript Object Notation (JSON) est un format standard utilisé pour représenter des données structurées de façon semblable aux objets Javascript.
+
+Il est usuellement mis sous la forme d'un dictionnaire.
+
+Des informations sur les lieux de tournage à Paris sont disponibles au format JSON à l'adresse
+
+\url{https://opendata.paris.fr/explore/dataset/lieux-de-tournage-a-paris/}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Exemple de dictionnaire : le format JSON}
+
+\small
+\hspace{-1cm}
+\begin{minipage}{0.45\linewidth}
+\begin{verbatimtab}[3]
+{
+    "datasetid":"lieux-de-tournage-a-paris",
+    "recordid":"2e04541164cf790cc4098...",
+    "fields":{
+        "coord_y":48.88533162,
+        "type_tournage":"Série Web",
+        "nom_producteur":"MY BOX FILMS",
+        "date_fin":"2021-03-22",
+        "geo_point_2d":[
+            48.88533162277764,
+            2.343681821668969
+        ]
+        ,
+        "nom_tournage":"PLAN COEUR - S3",
+        "ardt_lieu":"75018",
+        "geo_shape":{
+            "coordinates":[
+                2.343681821668969,
+                48.88533162277764
+            ]
+            ,
+            "type":"Point"
+\end{verbatimtab}
+\end{minipage}\hspace{0.cm}
+\begin{minipage}{0.45\linewidth}
+\begin{verbatimtab}[3]
+        }
+        ,
+        "id_lieu":"2021-295",
+        "nom_realisateur":"NOÉMIE SAGLIO",
+        "adresse_lieu":"square louise michel, 75018 paris",
+        "date_debut":"2021-03-22",
+        "annee_tournage":"2021",
+        "coord_x":2.34368182
+	    }
+    	,
+   		"geometry":{
+        "type":"Point",
+    	"coordinates":[
+        	2.343681821668969,
+        	48.88533162277764
+        	]
+	    }
+    	,
+    	"record_timestamp":"2022-02-21T11:01:17.756Z"
+		}
+
+\end{verbatimtab}
+\end{minipage}
+
+
+\end{frame}
+\end{document}

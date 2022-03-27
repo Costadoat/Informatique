@@ -1,0 +1,57 @@
+\frametitle{Exemple de dictionnaire : le format JSON}
+
+\small
+\hspace{-1cm}
+\begin{minipage}{0.45\linewidth}
+\begin{verbatimtab}[3]
+{
+    "datasetid":"lieux-de-tournage-a-paris",
+    "recordid":"2e04541164cf790cc4098...",
+    "fields":{
+        "coord_y":48.88533162,
+        "type_tournage":"Série Web",
+        "nom_producteur":"MY BOX FILMS",
+        "date_fin":"2021-03-22",
+        "geo_point_2d":[
+            48.88533162277764,
+            2.343681821668969
+        ]
+        ,
+        "nom_tournage":"PLAN COEUR - S3",
+        "ardt_lieu":"75018",
+        "geo_shape":{
+            "coordinates":[
+                2.343681821668969,
+                48.88533162277764
+            ]
+            ,
+            "type":"Point"
+\end{verbatimtab}
+\end{minipage}\hspace{0.cm}
+\begin{minipage}{0.45\linewidth}
+\begin{verbatimtab}[3]
+        }
+        ,
+        "id_lieu":"2021-295",
+        "nom_realisateur":"NOÉMIE SAGLIO",
+        "adresse_lieu":"square louise michel, 75018 paris",
+        "date_debut":"2021-03-22",
+        "annee_tournage":"2021",
+        "coord_x":2.34368182
+	    }
+    	,
+   		"geometry":{
+        "type":"Point",
+    	"coordinates":[
+        	2.343681821668969,
+        	48.88533162277764
+        	]
+	    }
+    	,
+    	"record_timestamp":"2022-02-21T11:01:17.756Z"
+		}
+
+\end{verbatimtab}
+\end{minipage}
+
+

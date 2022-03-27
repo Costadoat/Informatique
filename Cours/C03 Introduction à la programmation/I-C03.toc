@@ -1,3 +1,0 @@
-\babel@toc {french}{}
-\beamer@sectionintoc {1}{Les variables}{2}{0}{1}
-\beamer@sectionintoc {2}{Expressions et instructions}{10}{0}{2}

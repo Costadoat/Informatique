@@ -1,3 +1,0 @@
-\babel@toc {french}{}
-\beamer@sectionintoc {1}{Fonctions}{2}{0}{1}
-\beamer@sectionintoc {2}{Dichotomie}{5}{0}{2}

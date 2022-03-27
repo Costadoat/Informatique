@@ -1,4 +1,0 @@
-\babel@toc {french}{}
-\beamer@sectionintoc {1}{Cas triangulaire}{2}{0}{1}
-\beamer@sectionintoc {2}{Mise sous forme triangulaire}{9}{0}{2}
-\beamer@sectionintoc {3}{Codage sous Python}{14}{0}{3}

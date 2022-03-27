@@ -1,2 +1,0 @@
-\babel@toc {french}{}
-\beamer@sectionintoc {1}{Complexit\IeC {\'e}}{2}{0}{1}

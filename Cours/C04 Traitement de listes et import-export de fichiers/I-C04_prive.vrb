@@ -1,0 +1,14 @@
+\frametitle{Application: Comptes informatiques}
+
+Il nous ait demandé par le service informatique du lycée de créer à partir d'une liste de classe (au format csv) de générer un fichier (au format csv) intégrant les \textbf{login} et \textbf{mot de passe} des comptes informatiques.
+
+La liste est fournie au format suivant: \verb?NOM;Prenom\n?.
+
+Le résultat doit être mis sous la forme suivante: \verb?NOM;Prenom;login;passwd\n?, avec:
+\begin{itemize}
+ \item \verb?login?: première lettre du prénom et 7 premières lettres du nom en minuscule,
+ \item \verb?passwd?: trois premières lettres du prénom converties en chiffres ('a=0', 'b=1',...,'z=25')
+\end{itemize}
+
+\textbf{Question:} Proposer un script python permettant de répondre à ce cahier des charges.
+

@@ -1,4 +1,0 @@
-\babel@toc {french}{}
-\beamer@sectionintoc {1}{Représentation d'un nombre entier en mémoire}{2}{0}{1}
-\beamer@sectionintoc {2}{Représentation d'un nombre réel en mémoire}{10}{0}{2}
-\beamer@sectionintoc {3}{Conséquences}{19}{0}{3}

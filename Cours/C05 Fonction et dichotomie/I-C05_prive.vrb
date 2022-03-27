@@ -1,0 +1,13 @@
+\frametitle{Exemple dichotomie}
+
+\textbf{Question 1:} Coder la fonction \verb?f(x)? qui à la valeur $x$ revoie la valeur $f(x)=x^3+2.x^2+3.x-4$.
+
+\textbf{Question 2:} Coder la fonction \verb?g(x)? qui à la valeur $x$ revoie la valeur $g(x)=x^3+2.x^2+3.x-6$.
+
+\textbf{Question 3:} Coder la fonction \verb?dichotomie(f,p)? qui à la fonction $f$ revoie la valeur de la racine du polynôme avec une précision minimale $p$. La fonction devra retourner la valeur de $a_n$ ainsi que l'erreur finale $b_n-a_n$.
+
+Précision: \\
+\begin{itemize}
+ \item Il n'existe qu'une seule racine pour les fonctions $f(x)$ et $g(x)$ et elles sont comprises entre $-10$ et $10$.
+\end{itemize}
+

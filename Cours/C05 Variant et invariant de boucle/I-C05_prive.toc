@@ -1,3 +1,0 @@
-\babel@toc {french}{}
-\beamer@sectionintoc {1}{Variant de boucle}{2}{0}{1}
-\beamer@sectionintoc {2}{Invariant de boucle}{5}{0}{2}
