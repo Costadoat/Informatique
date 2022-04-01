@@ -17,7 +17,10 @@ print(tournage['fields']['nom_tournage'])
 coords=[]
 for tournage in data:
     if tournage['fields']['type_tournage']=='Série TV':
+#    if tournage['fields']['type_tournage']=='Série Web':
+#        if tournage['fields']['nom_tournage'][:4]=='SKAM' :
         if tournage['fields']['nom_tournage'][:10]=='ENGRENAGES' :
+#        if tournage['fields']['nom_tournage'][:6].replace('è','e').upper()=='ARSENE' :
             print(tournage['fields']['adresse_lieu'])
             coords.append(tournage['fields']['geo_point_2d'])
 

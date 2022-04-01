@@ -1,0 +1,493 @@
+\documentclass[10pt]{article}
+\usepackage[OT1]{fontenc}
+\usepackage{mickaelpechaud_cours}
+\usepackage{fancyvrb}
+\usepackage{caption}
+\usepackage{subfig}
+
+\usepackage[a4paper,pdftex,margin=.7in]{geometry}
+\usepackage[
+    type={CC},
+    modifier={by-nc},
+    version={4.0},
+    ]{doclicense}
+    \usepackage{fancyhdr}
+
+\makeatletter
+\fancypagestyle{logo}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[LE,RO]{%
+    \begin{minipage}{0.5\textwidth}%
+      \def\doclicense@imagewidth{2cm}%
+      \tiny
+      \doclicenseThis
+    \end{minipage}%
+  }%
+}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[LE,RO]{%
+    \begin{minipage}{0.5\textwidth}%
+      \def\doclicense@imagewidth{2cm}%
+      \tiny
+      \doclicenseThis
+    \end{minipage}%
+  }%
+}
+\makeatother
+\pagestyle{logo}
+
+\VerbatimFootnotes
+
+\title{\textbf{Autour des anagrammes}} \date{Mars 2021}
+\author{Mickaël Péchaud (\href{mailto:mickaelpechaud@protonmail.com}{mickaelpechaud@protonmail.com})}
+\begin{document}
+%\doclicenseThis
+\renewcommand{\labelitemi}{\textbullet}
+
+\maketitle
+
+
+
+\begin{itemize}
+\item Documentez vos fonctions.
+\item Testez au fur et à mesure les fonctions que vous écrivez!
+\end{itemize}
+
+Un fichier \verb+anagrammes.py+ à compléter est fourni.
+
+\section{Introduction}
+
+Une \emph{anagramme} d'un mot $m$ est un mot obtenu par permutation des
+lettres de $m$. Dans une anagramme, on ignore la casse
+(majuscule/minuscule), les symboles diactritiques (accents et
+cédilles), tirets et autres apostrophes. Ainsi, les mots suivants sont des anagrammes:
+
+\begin{itemize}
+\item «nectar» et «carnet»
+\item «sortie» et «rôties»
+\item «niche» et «Chine»
+\end{itemize}
+
+\smallskip
+
+L'objectif de ce TP est d'écrire différentes fonctions permettant de
+trouver rapidement des anagrammes de mots (ou de listes de mots à la
+fin du TP).
+
+\smallskip
+
+Le fichier \verb+listemotsfrancais.txt+ fourni est un fichier texte
+contenant 629\;569 mots français\footnote{Fichier engendré par à
+  partir du dictionnaire français d'\emph{aspell}
+  (\url{http://aspell.net/})}.
+
+\smallskip
+
+Vous trouverez en début du fichier \verb+anagrammes.py+
+
+\begin{itemize}
+\item une fonction \verb+enleve_diacritiques_majuscules+, qui renvoie la chaîne de caractères en minuscule et sans symboles diacritiques ni apostrophes ni tiret correspondant à la chaîne passée en argument,
+\item une fonction \verb+charger_liste_mots+, qui permet de charger le fichier \verb+listemotsfrancais.txt+ sous forme d'une liste de chaînes de caractères. 
+\end{itemize}
+
+Ces fonctions seront utiles à partir de la partie~\ref{tousanagrammes}.
+
+\medskip
+
+Dans la suite, sauf précision contraire, les mots seront considérés comme étant en minuscule et sans symbole diacritique.
+
+\section{Conversions}
+
+\begin{enumerate}
+\item Quelle est en pratique la principale différence entre une chaîne
+  de caractères (i.e. un objet de type \verb+str+) et une liste de
+  caractères? Compléter les fonctions de conversions entre ces deux
+  types.
+\end{enumerate}
+
+\begin{correction}
+  Les caractères d'une \verb+str+ ne sont pas modifiables
+  contrairement à ceux d'une liste de caractères. La liste de
+  caractères est donc plus souple d'utilisation, mais ne pourra par
+  contre pas être utilisée comme clé d'un dictionnaire.
+\end{correction}
+
+Dans la suite, prêter attention au type des paramètres et valeur de retour des fonctions! \textbf{Sauf mention contraire, «mot» désignera une chaîne de caratères.}
+
+\section{Tester si deux mots sont anagrammes l'un de l'autre}
+
+Dans toute cette partie, on supposera que les deux mots testés sont
+de même longueur.
+
+\subsection*{Une bien mauvaise méthode}
+
+On commence par étudier une très «mauvaise» méthode pour savoir si
+deux mots $m_1$ et $m_2$ sont anagrammes l'un de l'autre. On va
+engendrer toutes les permutations des lettres de $m_1$, et vérifier si
+l'une d'elle est égale à $m_2$.
+
+\begin{enumerate}[resume]
+\item Écrire une fonction \emph{récursive} \verb+permutation_aux+ qui
+  prend en argument une liste $l$ de longueur $n$ et un indice
+  $i\in\zen{n}$ et renvoie la liste des permutations de $l$ laissant
+  fixes les éléments d'indices strictement inférieurs à $i$. Par
+  exemple:
+\begin{verbatim}
+>>> permutations_aux(['a','b','c','d'], 1)
+
+[['a', 'b', 'c', 'd'],
+ ['a', 'b', 'd', 'c'],
+ ['a', 'c', 'b', 'd'],
+ ['a', 'c', 'd', 'b'],
+ ['a', 'd', 'c', 'b'],
+ ['a', 'd', 'b', 'c']]
+\end{verbatim}
+  On ne se souciera pas des éventuels doublons dans le résultat renvoyé. 
+\item En déduire une fonction \verb+permutation+ qui prend en argument une liste $l$ et renvoie la liste de ses permutations.
+\item En déduire une fonction \verb+sont_anagrammes1+, qui prend en argument deux mots et teste s'ils sont anagrammes l'un de l'autre. 
+\item En quoi cette fonction est-elle «mauvaise»?
+
+  \begin{correction}
+    Dans le pire des cas, toutes les permutations du premier mot vont
+    être engendrées. On effectuera donc au moins $n!$ comparaisons de
+    listes, ce qui va devenir prohibitif pour des mots de plus de
+    quelques lettres\dots
+  \end{correction}
+  
+\end{enumerate}
+
+Nous allons donc chercher d'autres façons de procéder.
+
+\begin{enumerate}[resume]
+\item On propose l'algorithme suivant pour tester si deux mots sont
+  anagrammes: étant donnés deux mots $m_1$ et $m_2$, on cherche si
+  chaque lettre de $m_1$ apparaît dans $m_2$, et si réciproquement
+  chaque lettre de $m_2$ apparaît dans $m_1$. Cet algorithme est-il correct?
+
+  \begin{correction}
+    Non. Il renvoie par exemple vrai pour \verb+'aba'+ et
+    \verb+'aab'+, qui ne sont pas anagrammes l'un de
+    l'autre. L'algorithme teste en fait si les deux mots ont le même
+    ensemble de lettres, alors qu'il faudrait tester s'ils ont le même
+    \emph{multiensemble} de lettres (un multiensemble étant un
+    ensemble dans lequel le nombre d'apparition des éléments compte).
+  \end{correction}
+  
+\item Avant de passer à la suite, réfléchir à une autre stratégie pour
+  résoudre le problème posé.
+\end{enumerate}
+
+
+\subsection*{Une seconde méthode}
+
+\begin{enumerate}[resume]
+\item Écrire une fonction \verb+mot_to_dico+, qui prend en argument un mot $m$ et renvoie un dictionnaire
+  \begin{itemize}
+  \item dont les clés sont les lettres de $m$
+  \item et la valeur correspondant à une clé $k$ est le nombre d'occurrences de $k$ dans $m$. 
+  \end{itemize}
+\item En déduire une fonction \verb+sont_anagrammes2+ (on pourra
+  utiliser \verb+==+ pour comparer l'égalité de deux dictionnaires,
+  avec une complexité temporelle $O(n)$ où $n$ est la taille commune
+  des dictionnaires, et $O(1)$ s'ils sont de tailles différentes). Quelle est sa complexité?
+
+  \begin{correction}
+    L'insertion ou la modification dans un dictionnaire s'effectuant
+    en temps constant, \verb+mot_to_dico+ est de complexité $O(n)$,
+    ainsi que \verb+sont_anagrammes2+.
+  \end{correction}
+  
+\end{enumerate}
+
+\subsection*{Une troisième méthode}
+
+\begin{enumerate}[resume]
+\item Écrire une fonction \verb+tri_liste+ qui trie la liste de
+  caractères $l$ passée en argument, en utilisant votre algorithme de
+  tri préféré. On indique que \verb+<+ permet de comparer des
+  caractères.
+\item En déduire la fonction \verb+tri_mot+, qui prend en argument un
+  mot, et renvoie la version triée de ce mot.
+\item En déduire une fonction \verb+sont_anagrammes3+. Quelle est sa complexité?
+
+  \begin{correction}
+    La comparaisons de chaînes et les conversions chaînes $\lra$ listes s'effectue en temps $O(n)$. Le facteur limitant est donc l'algorithme de tri -- qui doit être de complexité $O(n\log(n))$ ou $O(n^2)$ selon votre choix d'il y a deux questions. 
+  \end{correction}
+\item Effectuer une rapide comparaison empirique de temps d'exécution des trois versions de \verb+sont_anagrammes+. Vous pourrez utiliser la fonction \verb+process_time()+ du module \verb+time+.
+
+  \begin{correction}
+    Sur le corrigé du TP -- qui utilise traitreusement \verb+sort+ pour trier une liste -- les deux dernières méthodes donnent des temps d'exécution du même ordre de grandeur. 
+  \end{correction}
+  
+\end{enumerate}
+
+\section{Recherche de toutes les anagrammes d'un mot donné}\label{tousanagrammes}
+
+\emph{Dans cette partie, les mots peuvent tous avoir des majuscules et des symboles diacritiques}. La notion d'anagramme s'entend cependant toujours comme dans l'introduction. 
+
+\begin{enumerate}[resume]
+\item En vous appuyant sur l'une des fonctions \verb+sont_anagrammes+
+  ci-dessus, écrire une fonction \verb+liste_anagrammes1+, qui prend
+  en argument un mot et une liste de mots, et renvoie la liste des
+  anagrammes du mot dans la liste. Par exemple
+  \begin{verbatim}
+>>> liste_anagrammes1('préparation', liste_mots)
+['apparieront', 'préparation', 'appaireront']
+\end{verbatim}
+  Quelle est sa complexité? Constater empiriquement son temps d'exécution sur quelques exemples. 
+
+  \begin{correction}
+    Dans la version du corrigé, \verb+sont_anagramme2+, de complexité
+    $O(n)$ est utilisé.
+
+    Si l'on note $N$ la taille de la liste de mots, on obtient donc
+    une complexité $O(nN)$.
+  \end{correction}  
+\end{enumerate}
+
+On cherche maintenant à \emph{pré-traiter} la liste de mots pour
+obtenir un algorithme plus efficace.
+
+Pour cela, on va créer un dictionnaire à partir de la liste de mots
+\begin{itemize}
+\item dont les clés $k$ sont des chaînes de caractères triées (sans diacritiques ou majuscules)
+\item dont la valeur correspondant à $k$ est la liste des mots qui sont anagrammes de $k$.
+\end{itemize}
+
+Voici à titre d'exemple un extrait du dictionnaire que l'on souhaite obtenir:
+
+\begin{verbatim}
+{
+ ...
+ 'acehoppr': ['achopper', 'approche', 'approché', 'choppera'],
+ 'acehopps': ['achoppes', 'échoppas', 'achoppés'],
+ 'aacehinoppt': ['achoppaient'],
+ ...
+}
+\end{verbatim}
+
+\begin{enumerate}[resume]
+\item Écrire la fonction \verb+liste_mots_to_dict+ correspondante, et générer le dictionnaire, qui servira dans toute la fin du TP.
+\item En déduire une fonction \verb+liste_anagrammes2+, qui prend en
+  argument un mot et un dictionnaire, et renvoie \emph{en temps
+    constant en la taille du dictionnaire} la liste des anagrammes du mot.
+\item Trouver l'ensemble de mots tous anagrammes les uns des autres le plus grand possible. 
+\end{enumerate}
+
+\section{Anagrammes avec plusieurs mots}
+
+On veut maintenant faire des anagrammes de listes de mots: étant
+donnés un ou plusieurs mots, on cherche toutes les listes de deux,
+trois, quatre\dots mots tels que la concaténation de ces mots forme une
+anagramme de la concaténation des mots de départ.
+
+Par exemple, parmi les ensemble de deux ou trois mots possibles pour
+«informatique», on trouve «quota+infirme», «if+romantique»,
+«requin+à+motif» ou encore «tif+maroquiné» (et bien d'autres).
+
+\subsection*{Fonctions préliminaires}
+
+On dit que $m$ est un \emph{sous-mot} de $m'$ si toute lettre de $m$
+apparait également dans $m'$ avec un nombre d'occurrences au moins
+égal (indépendamment de l'ordre des lettres).
+
+\begin{enumerate}[resume]
+\item En utilisant \verb+mot_to_dico+, écrire une fonction
+  \verb+sous_mot1+ qui prend en argument deux mots \verb+str1+ et
+  \verb+str2+, et teste si le premier est un sous-mot du second.
+\item On considère maintenant le cas où \verb+str1+ et \verb+str2+
+  sont des mots \emph{triés}. Notons $a$ la première lettre de
+  \verb+str1+, et $p(a)$ la position de $a$ dans \verb+str2+ si elle y
+  apparaît. En remarquant que \verb+str1+ est un sous-mot de
+  \verb+str2+ si et seulement si la $a$ apparaît dans \verb+str2+ et que
+  \verb+str1[1:]+ est un sous-mot de \verb-str2[p(a)+1:]-, écrire une
+  fonction \verb+sous_mot2+ utilisant une fonction auxiliaire
+  \emph{récursive} pour répondre à cette question.
+\item Écrire une fonction \verb+soustrait+ qui prend en argument deux
+  mots triés \verb+str1+ et \verb+str2+ tels que le premier soit un
+  sous-mot du second, et renvoie le mot trié correspondant à
+  \verb+str2+ auquel on a enlevé les lettres de \verb+str1+ (autant de
+  fois que leur nombre d'occurrence dans \verb+str1+). On pourra
+  utiliser au choix une stratégie itérative ou récursive.
+\item Écrire une fonction \verb+tous_anagrammes_liste+ qui prend en
+  argument un dictionnaire et une liste de mots triés
+  $[m_1,\dots m_n]$, et renvoie la liste de toutes les listes de la forme
+  $[m'_1,\dots m'_n]$, où pour tout $i\in\unn{n}$, $m'_i$ est une
+  anagramme de $m_1$ appartenant à la liste de mots de départ. Par exemple
+  \begin{verbatim}
+>>> tous_anagrammes_liste(dictionnaire, ['aeiimnqstuu', 'fou', 'er'])
+[['musiquaient', 'fou', 'Re'], ['musiquaient', 'fou', 'ré'], 
+ ['musiquaient', 'ouf', 'Re'], ['musiquaient', 'ouf', 'ré']]
+  \end{verbatim}
+\end{enumerate}
+
+\subsection*{Anagrammes avec plusieurs mots}
+
+Nous pouvons maintenant écrire une fonction \emph{récursive}
+\verb+anagramme_liste+ qui prend en argument:
+
+\begin{itemize}
+\item un dictionnaire \verb+dictionnaire+
+\item une liste \verb+accumulateur+ de mots triés
+\item un mot trié \verb+reste+
+\item un entier \verb+n+ strictement positif
+\end{itemize}
+
+et qui \emph{affiche} (au format de votre choix) toutes les listes constituées de
+\verb-len(accumulateur)+n- mots français telles que
+
+\begin{itemize}
+\item les \verb+len(accumulateur)+ premiers éléments soient chacun une anagramme du mot trié correspondant d'\verb+accumulateur+
+\item la concaténation des \verb+n+ derniers mots soit une anagramme de \verb+reste+.
+\end{itemize}
+
+Par exemple:
+
+\begin{verbatim}
+>>> anagramme_liste(dictionnaire, [], tri_mot('informatiquepourtous'), 2)
+['mouftai', 'pronostiqueur']
+['pronostiqueur', 'mouftai']
+
+>>> anagramme_liste(dictionnaire, [], tri_mot('anagramme'), 3)
+['an', 'agréa', 'mm']
+['an', 'égara', 'mm']
+['an', 'ragea', 'mm']
+['na', 'agréa', 'mm']
+['na', 'égara', 'mm']
+['na', 'ragea', 'mm']
+...
+
+>>> anagramme_liste(dictionnaire, ['aaegr'], 'anmm', 2)
+['agréa', 'an', 'mm']
+['agréa', 'na', 'mm']
+['égara', 'an', 'mm']
+['égara', 'na', 'mm']
+['ragea', 'an', 'mm']
+...
+\end{verbatim}
+
+\begin{enumerate}[resume]
+\item Écrire la fonction \verb+anagramme_liste+. Indications:
+  \begin{itemize}
+  \item Que faire dans le cas de base $n=1$?
+  \item Dans le cas $n\geq 2$, on parcourra les clés du dictionnaire à
+    la recherche de sous-mots de \verb+reste+. Pour chaque sous-mot
+    ainsi trouvé, on fera un appel récursif de la fonction avec un
+    dernier paramètre \verb+n-1+, et d'autres paramètres bien choisis.
+  \end{itemize}
+\end{enumerate}
+
+\medskip
+
+L'exécution de cette fonction peut-être vue comme une exploration des
+listes de mots par une méthode de \emph{backtracking} (ou \emph{retour
+  sur trace}). Voir par exemple
+\url{http://mpechaud.fr/scripts/parcours/index.html}.
+
+\medskip
+
+\subsubsection*{Pour aller plus loin}
+
+\begin{itemize}
+\item L'exécution de \verb+anagramme_liste+ affiche les $n!$
+  permutations de chaque liste solution. Pour y remédier, modifier la
+  fonction de façon à ce qu'elle n'affiche que les listes classées par
+  ordre lexicographique croissant des mots triés (ce qui va au passage
+  réduire la taille de l'espace exploré\dots).
+\item Afin d'accélérer les calculs on pourrait commencer par enlever
+  du dictionnaire tous les mots qui ne sont pas sous-mots du mot dont
+  on cherche une anagramme au départ. Coder et expérimenter!
+\end{itemize}
+
+\appendix
+
+\section*{Annexe}
+
+
+Voici les fonctions et méthodes sur les listes, dictionnaires et deque
+dont l'usage est autorisé -- ainsi que les complexités que vous
+utiliserez pour les calculs de complexité (en fonction de la longueur
+de la liste $n$). Tout autre fonction dont vous auriez besoin doit
+être implémentée!
+
+\subsection*{Fonctions et méthodes sur les listes}
+
+
+\begin{tabular}{|c|c|c|}
+  \hline
+  Opération & Exemple & Complexité \\
+  \hline 
+  \hline 
+  Création d'une liste vide & \verb+l=[]+ & $O(1)$\\
+  \hline 
+  Accès direct & \verb+l[0]+ & $O(1)$\\
+  \hline
+  Longueur & \verb+len(l)+ & $O(1)$\\
+  \hline
+  Concaténation & \verb-l1+l2- & $O(n1+n2)$\\
+  \hline
+  Ajout en fin de liste & \verb+l.append(1)+ & $O(1)$\\
+  \hline
+  Suppression en fin de liste & \verb+l.pop()+ & $O(1)$\\
+  \hline
+  Extraction de tranche & \verb+l[1:10]+ & $O(n)$, où $n$ est la longueur de la tranche.\\
+  \hline
+  Répétition & \verb+[0]*k+ & $O(n)$, où $n$ est la longueur de la liste créée. \\
+  \hline
+  Création par compréhension & \verb+[k**2 for k in range(n)]+ & $O(n)$ si l'expression est évaluée en temps constant\\
+  \hline
+  Copie & \verb+copy(l)+ & $O(n)$\\
+  \hline
+  Test d'égalité & \verb+l1 == l2+ & $O(1)$ si les longueurs sont différentes, $O(n)$ sinon\\
+  \hline
+\end{tabular}
+
+\subsection*{Fonctions et méthodes sur les chaînes de caractères}
+
+
+\begin{tabular}{|c|c|c|}
+  \hline
+  Opération & Exemple & Complexité \\
+  \hline 
+  \hline
+  Création & \verb+s = 'Ma chaîne'+ & $O(n)$\\
+  \hline
+  Accès direct & \verb+s[0]+ & $O(1)$\\
+  \hline
+  Longueur & \verb+len(s)+ & $O(1)$\\
+  \hline
+  Concaténation & \verb-s1+s2- & $O(n1+n2)$\\
+  \hline
+  Extraction de tranche & \verb+s[1:10]+ & $O(n)$, où $n$ est la longueur de la tranche.\\
+  \hline
+\end{tabular}
+
+
+
+\subsection*{Fonctions et méthodes sur les dictionnaires}
+
+
+\begin{tabular}{|c|c|c|}
+  \hline
+  Opération & Exemple & Complexité \\
+  \hline 
+  \hline 
+  Création & \verb+d = {cle : valeur}+ & $O(1)$\\
+  \hline
+  Test d'appartenance d'une clé & \verb+cle in d+ & $O(1)$\\
+  \hline
+  Ajout d'un couple clé/valeur & \verb+d[cle] = valeur+ & $O(1)$\\
+  \hline
+  Valeur correspondant à une clé & \verb+d[cle]+ & $O(1)$\\
+  \hline
+  Égalité de deux dictionnaires &  \verb+d1 == d2+ & $O(n)/O(1)$ si de tailles différentes\\
+  \hline
+  Ensemble des clés & \verb+d.keys()+ & $O(n)$\\
+  \hline
+\end{tabular}
+
+
+\end{document}
