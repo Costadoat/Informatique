@@ -4,7 +4,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sys
 import time
+from pynput import keyboard
 
+skip=False
+def on_press(key):
+    global skip
+    try:
+        if key.char == 's':
+            print('Skipping')
+            skip=True
+    except AttributeError:
+        print('Press s to skip')
+    
 np.set_printoptions(threshold=sys.maxsize)
 np.set_printoptions(precision=4)
 
@@ -78,6 +89,10 @@ plt.grid()
 
 plt.show()
 
+listener = keyboard.Listener(
+    on_press=on_press)
+listener.start()
+
 for i in range(10):
     total_reward = 0
     state=env.reset()
@@ -98,8 +113,10 @@ for i in range(10):
         
         time.sleep(0.5)
         
-        if done:
+    
+        if done or skip:
             print('Episode done')
             time.sleep(2)
+            skip=False
             break
 
