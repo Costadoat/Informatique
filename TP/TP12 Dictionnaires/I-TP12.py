@@ -67,9 +67,9 @@ def tri_occurrences(dictionnaire):
         # l'élément précédent est plus grand que lui
         j = i-1
         while j >= 0 and k[1] > liste[j][1] : 
-                liste[j + 1] = liste[j] 
+                liste[j+1] = liste[j] 
                 j -= 1
-        liste[j + 1] = k
+        liste[j+1] = k
     return liste
 
 def tri_occurrences2(dictionnaire):
@@ -103,9 +103,9 @@ print(tri_occurrences(statistiques(perec)))
 ##############
 
 import unidecode
-def enleve_diacritiques_majuscules_tirets(s):
+def enleve_diacritiques_majuscules_tirets(mot):
     '''renvoie le mot s en minuscule, et sans les accents et cedilles'''
-    return unidecode.unidecode(s).lower().replace('-','')
+    return unidecode.unidecode(mot).lower().replace('-','')
 
 def sont_anagrammes(mot1, mot2):
     '''teste si deux mots sont anagrammes l'un de l'autre après

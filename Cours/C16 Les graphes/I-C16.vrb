@@ -1,0 +1,37 @@
+\frametitle{Application au Q-Learning (Reinforcement)}
+\begin{wrapfigure}{r}{0.3\textwidth}
+\vspace{-0.5cm}
+  \begin{center}
+    \includegraphics[width=0.9\linewidth]{img/qlearning}
+  \end{center}
+\end{wrapfigure}
+
+
+\hline
+\end{tabular}
+\begin{tabular}{|c|c|}
+\hline
+
+
+\begin{tabular}{|c|c|}
+\hline
+\multicolumn{2}{|c|}{Actions}\\
+\hline
+0 & move south \\
+\hline
+1 & move north \\
+\hline
+2 & move east \\
+\hline
+3 & move west \\
+\hline
+4 & pickup passenger \\
+\hline
+5 & drop off passenger\\
+\hline
+\end{tabular}
+
+Un état est définit par \verb?(taxi_row, taxi_col, passenger_location, destination)?. Soit sur l'image (3,1,0,2).
+
+
+Nous utiliserons un environnement d'OpenAI Gym, appelé le Taxi-v3 environnement.

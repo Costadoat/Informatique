@@ -178,7 +178,7 @@ import unidecode
 def enleve_diacritiques_majuscules_tirets(mot):
     '''renvoie le mot en minuscules, sans les diacritiques,
     tirets, apostrophes, etc.'''
-    return unidecode.unidecode(s).lower().replace('-','')
+    return unidecode.unidecode(mot).lower().replace('-','')
 \end{minted}
 \end{exercice}
 
@@ -187,9 +187,9 @@ def enleve_diacritiques_majuscules_tirets(mot):
 \begin{solution}~\
 \begin{minted}[linenos,frame=lines]{python}
 import unidecode
-def enleve_diacritiques_majuscules_tirets(s):
+def enleve_diacritiques_majuscules_tirets(mot):
     '''renvoie le mot s en minuscule, et sans les accents et cedilles'''
-    return unidecode.unidecode(s).lower().replace('-','')
+    return unidecode.unidecode(mot).lower().replace('-','')
 
 def sont_anagrammes(mot1, mot2):
     '''teste si deux mots sont anagrammes l'un de l'autre après
