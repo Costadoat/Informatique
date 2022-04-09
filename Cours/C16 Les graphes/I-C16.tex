@@ -398,7 +398,7 @@ $$\mathbb{A}_G=
 0 & 1 & 1 & 0 & 1 \\
 1 & 0 & 1 & 0 & 0 \\
 1 & 1 & 0 & 1 & 1 \\
-0 & 0 & 1 & 2 & 1 \\
+0 & 0 & 1 & 1 & 1 \\
 1 & 0 & 1 & 0 & 0  
 \end{pmatrix}$$
 
@@ -1658,7 +1658,7 @@ Le plus court chemin de 0 à 4 est 0--2--4.
 \begin{frame}[fragile]
 \frametitle{Application au Q-Learning (Reinforcement)}
 
-\begin{wrapfigure}[15]{r}{0.3\textwidth}
+\begin{wrapfigure}[5]{r}{0.3\textwidth}
 \vspace{-0.5cm}
   \begin{center}
     \includegraphics[width=0.9\linewidth]{img/qlearning}
@@ -1674,62 +1674,54 @@ L'objectif de cette étude est d'apprendre à une intelligence articifielle à  
 
 Nous utiliserons un environnement d'OpenAI Gym (Taxi-v3).
 
-\begin{wrapfigure}[15]{r}{0.3\textwidth}
-\vspace{-0.5cm}
-  \begin{center}
-    \includegraphics[width=0.9\linewidth]{img/qlearning}
-  \end{center}
-\end{wrapfigure}
-\begin{itemize}
- \item \verb?Passenger locations={0:'R(ed)',1:'G(reen)',2:'Y(ellow)',3:'B(lue)',4:'in taxi'?
- \item \verb?Destinations={0:'R(ed)',1:'G(reen)',2:'Y(ellow)',3:'B(lue)'}?
-\end{itemize}
+Un état est définit par \verb?(taxi_row, taxi_col, passenger_location, destination)?. Il y en a 25x5x4=500 et celui de l'image est (3,1,0,2), avec :
+\verb?Passenger locations={0:'R(ed)',1:'G(reen)',2:'Y(ellow)',3:'B(lue)',4:'in taxi'}?
+\verb?Destinations={0:'R(ed)',1:'G(reen)',2:'Y(ellow)',3:'B(lue)'}?
+\verb?Actions={0:'move south',1:'move north',2:'move east',3:'move west',?
+\verb?            4:'pickup passenger',5:'drop off passenger'}?
 
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Application au Q-Learning (Reinforcement)}
+
 \begin{wrapfigure}{r}{0.3\textwidth}
-\vspace{-0.5cm}
+\vspace{-1cm}
   \begin{center}
     \includegraphics[width=0.9\linewidth]{img/qlearning}
   \end{center}
 \end{wrapfigure}
 
+Un état peut alors être représenté par un sommet d'un graphe, dont les arêtes sont pondérées, et les états accessibles par des états voisins. Les coefficients de pondération sont déterminés durant la phase d'apprentissage et sont utilisés dans la phase d'utilisation afin de guider les choix du taxi.
 
-\begin{tabular}{|c|c|}
-\hline
-\multicolumn{2}{|c|}{Actions}\\
-\hline
-0 & move south \\
-\hline
-1 & move north \\
-\hline
-2 & move east \\
-\hline
-3 & move west \\
-\hline
-4 & pickup passenger \\
-\hline
-5 & drop off passenger\\
-\hline
-\end{tabular}
+\begin{minipage}{0.35\linewidth}
+\begin{tikzpicture}[scale=0.6]
+\tikzstyle{sommetdec}=[]
+\tikzstyle{arete}=[midway,fill=white]
+\tikzstyle{sommet}=[circle,draw,fill=white,scale=0.6]
+\node[sommet] (A) at (-0.5,0.5) {(3,1,0,2)};
+\node[sommet] (B) at (-2,-1.5) {(2,1,0,2)};
+\node[sommetdec] (C) at (-2,2.5) {};
+\node[sommet] (D) at (1.5,2.5) {(4,1,0,2)};
+\node[sommet] (E) at (1.5,-1.5) {(3,2,0,2)};
+\node[sommetdec] (F) at (1.5,-4) {};
+\node[sommetdec] (G) at (3,-1.5) {};
+\node[sommetdec] (H) at (-4,-2.5) {};
+\node[sommetdec] (I) at (-2,1.5) {};
+\draw (A) -- (B) node[arete] {$0.6$};
+\draw (A) -- (D) node[arete] {$0.3$};
+\draw (A) -- (E) node[arete] {$0.1$};
+\draw[dashed] (E) -- (F);
+\draw[dashed] (C) -- (D) -- (G);
+\draw[dashed] (I) -- (B) -- (H);
+\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}{0.6\linewidth}
+Un extrait de ce graphe montre que le meilleur choix dans cette configuration est d'aller à l'état (2,1,0,2) c'est à dire que la voiture doit monter.
+\end{minipage}
 
-Un état est définit par \verb?(taxi_row, taxi_col, passenger_location, destination)?. Soit sur l'image (3,1,0,2).
-
-
-Nous utiliserons un environnement d'OpenAI Gym, appelé le Taxi-v3 environnement.
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Bibliographie}
-\begin{wrapfigure}[15]{l}{0.3\textwidth}
-\vspace{-0.5cm}
-  \begin{center}
-    \includegraphics[width=0.9\linewidth]{img/qlearning2}
-  \end{center}
-\end{wrapfigure}
-
+\vspace{-0.2cm}
+La simulation peut alors être effectuée grâce à un programme python.
 \end{frame}
 
 \begin{frame}[fragile]
