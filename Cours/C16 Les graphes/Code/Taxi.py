@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 import sys
 import time
 from pynput import keyboard
-
+import json
+    
 skip=False
 def on_press(key):
     global skip
@@ -22,6 +23,55 @@ np.set_printoptions(precision=4)
 from IPython.display import clear_output
 
 env = gym.make('Taxi-v3')
+
+#################################################################################################################
+
+print('row', 'col', 'pass_idx', 'dest_idx')
+dico_actions={0: 'move south', 1: 'move north', 2: 'move east', 3: 'move west', 4: 'pickup passenger', 5: 'drop off passenger'}
+dico_passenger={0: 'R(ed)', 1: 'G(reen)', 2: 'Y(ellow)', 3: 'B(lue)', 4: 'in taxi'}
+dico_destinations={0: 'R(ed)', 1: 'G(reen)', 2: 'Y(ellow)', 3: 'B(lue)'}
+
+print('Actions',dico_actions)
+print('Passenger_loc',dico_passenger)
+print('Destinations',dico_destinations)
+
+dict_states={}
+i=0
+num_rows = 5
+num_columns = 5
+locs = [(0, 0), (0, 4), (4, 0), (4, 3)]
+for row in range(num_rows):
+    for col in range(num_columns):
+        for pass_idx in range(len(locs) + 1):  # +1 for being inside taxi
+            for dest_idx in range(len(locs)):
+                dict_states[str(i)]={'0':row, '1':col, '2':pass_idx, '3':dest_idx}
+                i+=1
+
+dict_states_evol={}
+for i in env.P.keys():
+    dico={}
+    for j in env.P[i].keys():
+        dico[j]=env.P[i][j][0][1]
+    dict_states_evol[i]=dico
+
+for dic_name, dic_file in [[dict_states,'dico_states.json'],[dict_states_evol,'dico_states_evol.json'],[dico_actions,'dico_actions.json'],[dico_passenger,'dico_passenger.json'],[dico_destinations,'dico_destinations.json']]:
+    with open(dic_file, 'w') as jsonfile:
+        json.dump(dic_name, jsonfile)
+
+
+def decode_state(i):
+    out = []
+    out.append(i % 4)
+    i = i // 4
+    out.append(i % 5)
+    i = i // 5
+    out.append(i % 5)
+    i = i // 5
+    out.append(i)
+    assert 0 <= i < 5
+    return reversed(out)
+
+#################################################################################################################
 
 action_space_size = env.action_space.n
 obs_space_size = env.observation_space.n
@@ -53,7 +103,8 @@ for episode in range(games_to_play):
             action = np.argmax(q_table[state, :])
         else:
             action = env.action_space.sample()
-        
+
+#        print(state,env.P[state])        
         new_state, reward, done, info = env.step(action)
         q_table[state, action] = q_table[state, action] * (1 - learning_rate) + learning_rate * (reward + discount_rate * np.max(q_table[new_state, :]))
         
@@ -66,7 +117,19 @@ for episode in range(games_to_play):
     exploration_rate = min_exploration_rate + (max_exploration_rate - min_exploration_rate) * np.exp(- exploration_rate_decay * episode)
     
     rewards.append(temp_reward)
-    
+
+dico_q_table={}
+leni,lenj=np.shape(q_table)
+for i in range(leni):
+    dico_q_table[str(i)]={}
+    for j in range(lenj):
+        dico_q_table[str(i)][str(j)]=q_table[i, j]
+        
+
+for dic_name, dic_file in [[dico_q_table,'dico_q_table.json']]:
+    with open(dic_file, 'w') as jsonfile:
+        json.dump(dic_name, jsonfile)
+
 rewards_per_thousand_episodes = np.split(np.array(rewards), games_to_play / 1000)
 count = 1000
 

@@ -235,16 +235,11 @@ Le cycle 4--3--2--1--0--3--4 n'est pas élémentaire car le n\oe{}ud 3 est prés
 \subsection{Cycle dans un graphe}
 Dans un graphe non orienté, la détection de cycles est relativement simple. Il faut tout d'abord effectuer un parcours du graphe et en découvrant au fur et à mesure les sommets, il suffit de vérifier si on découvre un nouveau sommet ou si c'est un sommet déjà visité et qui n'est pas le parent du sommet courant. Dans ce dernier cas, c'est donc qu'il existe un cycle.
 
-\textbf{Exemple}
-
-\`A partir du graphe utilisé pour illustrer les algorithmes de parcours en largeur et profondeur. Déterminer le nombre de cycles présent dans le graphe proposé.
-
-Dans le graphe précédent, on détecte 3 cycles élémentaires. \begin{itemize}
-\item A--B--E--A;
-\item A--B--C--D--A;
-\item A--E--F--G--D--A.
+Dans le graphe avec cycles précédent, on détecte 3 cycles élémentaires. \begin{itemize}
+\item 0--1--2--0;
+\item 0--2--3--0;
+\item 2--3--4--2.
 \end{itemize}
-
 
 On constate, que ce nombre de cycles correspond aux nombres d'arêtes qui ont été considérés comme \og Arête (ou lien) découvert mais inutile  \fg{} lors des illustrations des parcours de graphe effectués précédemment.
 
@@ -388,7 +383,8 @@ Ce graphe $G=(S,A)$ est défini par :
 \end{itemize}
 \end{minipage}
 
-La liste \verb?G=[[1,2,4],[0,2],[0,1,3,4],[2,3,4],[0,2,3]]? est une liste d'adjacence.\\
+La liste \verb?G=[[1,2,4],[0,2],[0,1,3,4],[2,3,4],[0,2,3]]? \hspace{0cm} est une liste d'adjacence.
+
 \verb?G[0]? renvoie la liste des voisins du sommet 0.\\
 Le dictionnaire \verb?graphe={0:[1,2,4],1:[0,2],2:[0,3,4],3:[2,3,4],4:[0,2,3]}? a la même fonction.
 
