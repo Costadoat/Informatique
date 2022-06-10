@@ -1,0 +1,48 @@
+\input{intro}
+\input{../../Header_Willie}
+%\input{macro}
+
+\begin{document}
+
+\begin{center}
+{\Large\bf TP \no {\numero} -- \descrip}
+\end{center}
+ 
+\section{Principe général}
+
+On a réalisé l'analyse de soixante sons musicaux obtenus par quatre instruments différents. Pour chacun des sons, vingt caractéristiques ont été obtenues. Ces vingt caractéristiques permettent en théorie de discriminer le timbre de l'instrument utilisé, supposé différent pour chaque instrument.
+
+L'ensemble des données est réuni dans le fichier \verb|instrument_features.csv| situé dans le sous-répertoire « PTSI/TP15 » du répertoire « Ressources ». Le fichier comprend une ligne pour chaque son. Chaque ligne contient vingt colonnes de valeurs correspondants aux caractéristiques spectrales de chaque son et, en vingt-et-unième colonne, une clé désignant la catégorie en deux lettres de l'instrument utilisé pour produire le son et le numéro en deux chiffres de l'instrument. Il y a quatre catégories (\texttt{CL}, « clarinette », \texttt{TR} pour « trompette »,\texttt{VI} pour « violon » et \texttt{PI} pour « piano ») et 15 instruments par catégorie. \texttt{CL 07} désigne donc la clarinette numéro 7.
+
+Copier ce fichier dans votre répertoire personnel.
+
+L'objectif de ce TP est de mettre un oeuvre un algorithme permettant de classer un son dans une catégorie. Les catégories étant connues à l'avance, on parle de classification « surpervisée ».
+
+\section{Méthode}
+
+Pour réaliser la classification supervisée automatique, on part du principe suivant :
+\begin{enumerate}
+\item pour un son donné joué par un instrument supposé inconnu (« son-candidat{\fg}), on calcule la racine carrée de la somme des carrés des écarts de ses caractéristiques avec les caractéristiques d'un son déjà catégorisé (« son-référence » dont on suppose connue la catégorie) ; on appelle ce résultat « distance candidat-référence » ;
+\item on fait ce calcul pour chacun des sons-références (le plus simple est de supposer que pour un son-candidat donné, les cinquante-neuf autres sons sont des sons-références) ;
+\item on considère que le son-candidat doit être classé dans la catégorie du son-référence qui a la distance la plus petite.                                                                                                                                                                                                                                                                                                                                                               \end{enumerate}
+
+\section{Principales étapes du projet}
+
+\begin{enumerate}
+ \item ouvrir le fichier de données ;
+ \item lire les données du fichier et les stocker dans un dictionnaire : une clé étant le nom d'un instrument (\texttt{CL 01}, \texttt{TR 09}, etc.) et les valeurs associées à une clé étant une listes de 20 flottants correspondant aux 20 valeurs des caractéristiques du son ;
+ \item choisir un son-candidat (les autres sons seront les sons-références) ;
+ \item réaliser le calcul des distances pour le son-candidat et construire, pour ce candidat, un dictionnaire des distances candidat-référence, où chaque clé est un son référence et la valeur associée à la clé est la distance ;
+ \item déterminer le son-référence le plus proche et en déduire la catégorie à laquelle appartient le son-candidat ;
+ \item afficher le nom de l'instrument le plus proche et sa catégorie à l'écran ;
+ \item vérifier que la réponse trouvée est correcte.
+\end{enumerate}
+
+\section{Pour aller plus loin}
+
+\begin{enumerate}
+ \item À l'aide d'une boucle réaliser de façon automatisée le projet précédent pour tous les sons-candidats possibles avec un affichage automatique de la vérification de la catégorie trouvée.
+ \item Avec la méthode du projet tel que présenté au-dessus, la catégorie attribuée au son-candidat est dite du « premier voisin ». On peut aussi déterminer les catégories du second voisin, du troisième voisin etc. en identifiant les distances candidat-référence par ordre décroissant. Réaliser cette modification du script et écrire les réponses dans un fichier réponse qui indiquera sur une même ligne le numéro du son-candidat, la catégorie vraie telle qu'indiquée dans le fichier de données et les différentes catégories correspondant aux différents voisins successifs.
+\end{enumerate}
+
+\end{document}

@@ -77,13 +77,13 @@ print("Les noeuds entrent par la fin et sortent par la fin, il s'agit donc d'une
 #==============================================================================
 
 def EstConnexe(gr):
-    sommet=gr.keys()[0]
+    sommet=list(gr.keys())[0]
     liste=PL(gr,sommet)
     return(len(liste)==len(gr.keys()))
 
 
 def NbCompConnexe(gr):
-    liste_sommets=gr.keys()
+    liste_sommets=list(gr.keys())
     Nb=0
     while len(liste_sommets)!=0:
         Nb=Nb+1
@@ -92,8 +92,9 @@ def NbCompConnexe(gr):
             liste_sommets.remove(voisin)
     return(Nb)       
             
-#print(EstConnexe({1:[2],2:[1],3:[4],4:[3]})) 
+print(EstConnexe({1:[2],2:[1],3:[4],4:[3]})) 
 
+print(NbCompConnexe({1:[2],2:[1],3:[4],4:[3]})) 
 
 #==============================================================================
 # Dijkstra  
