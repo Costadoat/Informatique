@@ -1,5 +1,5 @@
 \input{intro}
-\input{../../Header_Willie}
+\input{../../../Header_Willie}
 
 \usepackage{enumitem}
 
@@ -24,150 +24,239 @@
  \item mettre en commentaire l'exercice et la question traités (ex: \# Exercice 1),
  \item ne pas oublier pas de commenter ce qui est fait dans votre code (ex: \# Je crée une fonction pour calculer la racine d'un nombre),
 % \item il est possible de demander un déblocage pour une question, mais celle-ci sera notée 0,
- \item il faut vérifier avant de partir que le code peut s'exécuter et qu'il affiche les résultats que vous attendez.
+ \item il faut vérifier avant de partir que le code peut s'exécuter et qu'il affiche les résultats que vous attendez. Les lignes de code qui doivent s'exécuter sont décommentées.
 \end{itemize}
 \end{boxedminipage}
 
-\section*{Recherche des racines d'un polynôme}
+\section*{Introduction}
 
-Soit le polynôme suivant $f(x)=x^4-79.x^2-66.x+432$, on cherche à déterminer ses racines (qui sont toutes entières et comprises dans l'intervalle $\left[-10,10\right]$.
+Le but de ce travail va consister à déterminer les besoins et les solutions pour l'arrosage automatique d'un balcon parisien sur la période juillet/août.
 
-\begin{enumerate}
-\item Créer la fonction \verb?f(x)? qui reçoit en entrée la valeur $x$ et retourne en sortie la valeur de $f(x)$.
-
-On donne l'exemple suivant pour l'écriture d'une fonction:
-
-\begin{minted}{python}
-def f(x):
-    return x
-\end{minted}
-
-\begin{solution}~\ \\
-\begin{minted}{python}
-def f(x):
-    return x**4-79*x**2-66*x+432
-\end{minted}
-\end{solution}
-
-\item Afficher le résultat de $f(0)$, cette valeur attendue doit vous permettre de valider votre fonction.
-
-\begin{solution}~\ \\
-\begin{minted}{python}
-print(f(0))
-\end{minted}
-\end{solution}
-
-\item A l'aide d'une fonction \verb?range? et d'une boucle \verb?for?, tester pour $x$ toutes les valeurs de $-10$ à $10$ (incluses) la valeur de $f(x)$:
 \begin{itemize}
- \item si $f(x)==0$, afficher la valeur de x,
- \item si $f(x)>0$, afficher '+',
- \item si $f(x)<0$, afficher '-'.
+ \item Dans un premier temps, nous allons déterminer les besoins en arrosage en analysant les données des précipitations sur ces deux mois,
+ \item Dans un second temps, nous allons proposer une solution d'arrosage automatique.
 \end{itemize}
 
+\section{Analyse des données météorologiques pour la région parisienne}
+
+\subsection{Déterminer le poste de mesure météorologique le plus proche de Paris}
+
+Le fichier 'postesSynop.csv' présent dans le dossier de travail recense les principaux postes d'observation météorologiques en France. Le premier objectif de cette partie consiste à déterminer celui qui se trouve le plus proche de Paris.
+
+Pour cela nous allons dans un premier temps lire ce fichier en utilisant le code suivant.
+
+\begin{minted}{python}
+fichier_postes=open('/home/eleve/Ressources/PTSI/postesSynop.csv','r')
+contenu_postes=fichier_postes.read()
+fichier_postes.close()
+lignes_postes=contenu_postes.split('\n')
+entetes_postes=lignes_postes[0].split(';')
+postes=lignes_postes[1:]
+print(entetes_postes)
+\end{minted}
+
+\question{\textbf{Recopier} et \textbf{exécuter} le code précédent dans votre script python. Il doit afficher la ligne suivante dans la console : \texttt{['ID', 'Nom', 'Latitude', 'Longitude', 'Altitude']
+}.}
+
+\begin{solution}~\ \\
+Recopier le code
+\end{solution}
+
+Comme l'indique le résultat du \verb?print(entetes_postes)?, le fichier contient pour chaque poste, son \textbf{identifiant} ('ID'), son \textbf{nom}, sa \textbf{latitude}, sa \textbf{longitude} et son \textbf{altitude}.
+
+\paragraph{Remarque:}
+La compréhension du code suivant est nécessaire pour répondre à la Question \ref{q2}.
+\begin{minted}{python}
+l=[1,2,3,4] # création d'une liste l
+print(l[2]) # affichage de l'élément d'index 2 de la liste
+\end{minted}
+
+
+\question{En s'inspirant du code précédent, \textbf{afficher} l'élément d'index 3 de la liste \texttt{postes}.}
+
 \begin{solution}~\ \\
 \begin{minted}{python}
-for x in range(-10,11,1):
-    if f(x)==0:
-        print(x)
-    elif  f(x)<0:
-        print('-')
-    else:
-        print('+')
+print(postes[3])
 \end{minted}
 \end{solution}
 
-\section*{Affichage du colloscope}
+On donne la latitude et la longitude de la ville de Paris sous la forme d'une liste: \verb?paris=[48.85,2.34]?.
 
-On souhaite créer une fonction qui renvoie les matières que l'on a en colle en fonction de la semaine :
+Une façon de comparer les distances entre les villes consiste à évaluer une image de la distance grâce à la fonction suivante:
+
+\begin{eqnarray}
+\text{image distance}=\sqrt{(\text{latitude ville 1}-\text{latitude ville 2})^2+(\text{longitude ville 1}-\text{longitude ville 2})^2}\label{eq_dist}
+\end{eqnarray}
+
+On souhaite effectuer ce calcul sous python à l'aide d'une fonction \texttt{distance\_ville}. Dans cette fonction, chaque ville (\verb?ville1? et \verb?ville2?) est définie comme une liste contenant 2 valeurs, sa latitude (ex \verb?ville1[0]?) et sa longitude (ex \verb?ville1[1]?). On rappelle que \verb?**? est le symbole de la puissance en python. Ainsi, \verb?3**2? renvoie \verb?9?. L'exemple ci-dessous ne renvoie pas le résultat escompté.
+
+\begin{minted}{python}
+def distance_ville(ville1,ville2):
+    return ville1[0]**(1/2)+ville2[0]+ville1[1]+ville2[1]**2
+\end{minted}
+
+\question{\textbf{Modifier} la fonction \texttt{distance\_ville} ci-dessus afin qu'elle renvoie l'image de la distance définie par l'équation \ref{eq_dist}.}
+
+\begin{solution}~\ \\
+\begin{minted}{python}
+def distance_ville(ville1,ville2):
+    return ((ville1[0]-ville2[0])**2+(ville1[1]-ville2[1])**2)**(1/2)
+\end{minted}
+\end{solution}
+
+Le code suivant va permettre de déterminer le poste de mesure le plus proche de Paris.
+
+\begin{minted}{python}
+min=distance_ville(paris,[0,0])
+for poste in postes[:-1]:
+    poste=poste.split(';')
+    coord_ville=[float(poste[2]),float(poste[3])]
+    if distance_ville(paris,coord_ville)<min:
+        ville_plus_proche=poste[:2]
+        min=distance_ville(paris,coord_ville)
+\end{minted}
+
+
+\question{\textbf{Recopier} et \textbf{analyser} le code suivant, puis \textbf{ajouter} une ligne afin d'afficher le poste le plus près de paris.}
+
+\begin{solution}~\ \\
+\begin{minted}{python}
+min=distance_ville(paris,[0,0])
+for poste in postes[:-1]:
+    poste=poste.split(';')
+    coord_ville=[float(poste[2]),float(poste[3])]
+    if distance_ville(paris,coord_ville)<min:
+        ville_plus_proche=poste[:2]
+        min=distance_ville(paris,coord_ville)
+print(ville_plus_proche)
+\end{minted}
+\end{solution}
+
+
+\question{S'inspirer du code précédent afin d'\textbf{écrire} le code permettant de déterminer le poste le plus loin. Pour information, la Base Dumont D'Urville se trouve sur l'Île des Pétrels en Antarctique.}
+
+\begin{solution}~\ \\
+\begin{minted}{python}
+max=0
+for poste in postes[:-1]:
+    poste=poste.split(';')
+    coord_ville=[float(poste[2]),float(poste[3])]
+    if distance_ville(paris,coord_ville)>min:
+        ville_plus_loin=poste[:2]
+        max=distance_ville(paris,coord_ville)
+print(ville_plus_loin)
+\end{minted}
+\end{solution}
+
+Pour la suite, on considérera que l'index du poste le plus proche de Paris est \verb?07149?.
+
+\subsection{Précipitations sur juillet/août au poste 07149.}
+
+Les fichiers 'synop.20220701.csv' et 'synop.20220801.csv' contiennent les relevés météorologiques des postes du fichier 'postesSynop.csv' pour les mois de juillet et août 2022.
+
+Le script suivant permet de lire les entêtes du fichier 'synop.20220701.csv'.
+
+\begin{minted}{python}
+fichier=open('/home/eleve/Ressources/PTSI/synop.20220701.csv','r')
+contenu=fichier.read()
+lignes=contenu.split('\n')
+entetes=lignes[0].split(';')
+data=lignes[1:]
+print(entetes)
+print(entetes.index('rr24'))
+fichier.close()
+\end{minted}
+
+La commande \verb?print(entetes)? affiche l'ensemble des titres des colonnes du tableau, elle commence comme suit: \\
+\verb?['numer_sta', 'date', 'pmer', 'tend', 'cod_tend', 'dd', 'ff', 't', 'td', 'u', 'vv',...?
+
+La colonne qui nous intéresse est la colonne \verb?'rr24'?, elle indique les précipitations pour les dernières 24h. La commande \verb?print(entetes.index('rr24'))? nous indique que l'index de cette colonne est \verb?42?.
+
+Ainsi, \verb?print(entetes[42])? affiche \verb?'rr24'?.
+
+Le code suivant lit les deux fichiers \verb?'synop.20220701.csv'? et \verb?'synop.20220801.csv'? et stocke les valeurs des précipitations dans une liste \verb?precip?.
+
+\begin{minted}{python}
+precip=[]
+for mois in ['07','08']:    
+    fichier=open('/home/eleve/Ressources/PTSI/synop.2022'+mois+'01.csv','r')
+    contenu=fichier.read()
+    fichier.close()
+    lignes=contenu.split('\n')
+    data=lignes[1:]
+    for idx,donnees_jour in enumerate(data):
+        donnees_jour=donnees_jour.split(';')
+        if donnees_jour[0]==07149:
+            precip.append([donnees_jour[1][:8],donnees_jour[42]])
+\end{minted}
+
+Ainsi, la liste \verb?precip? commence comme suit:\\
+\verb?[['20220701', '12.900000'], ['20220702', '0.000000'], ['20220703', '0.200000'],...?
+
+Ce qui s'interprète par le fait, qu'il a plu 12.9mm le 1er juillet, qu'il n'a pas plu le 2 et qu'il a plu 0.2mm le 3, etc...
+
+On souhaite maintenant connaître les jours pendant lesquels il a plu ($rr24>0$) sur ces deux mois. Pour cela on va stocker dans une liste \verb?precip2?, seulement les jours où il a plu.
+
+Ainsi, la liste \verb?precip2? commencerait comme suit:\\
+\verb?[['20220701', '12.900000'], ['20220703', '0.200000'], ['20220721', '10.000000'],...?
+
+\question{\textbf{Écrire} le code qui permet à partir de la liste \verb?precip? de générer la liste \verb?precip2?.}
+
+\begin{solution}~\ \\
+\begin{minted}{python}
+precip2=[]
+for prec in precip:
+    if prec[1]!='mq':
+        if float(prec[1])>0:
+            precip2.append(prec)
+\end{minted}
+\end{solution}
+
+\question{\textbf{Écrire} le code qui permet de compter le nombre de jours de pluie sur ces deux mois à partir de la liste \verb?precip2? (vous pourrez travailler à partir de \verb?precip? si vous n'avez pas répondu à la question précédente).}
+
+\begin{solution}~\ \\
+\begin{minted}{python}
+# Solution 1
+print(len(precip2))
+
+# Solution 2
+jours_pluie=0
+for prec in precip:
+    if prec[1]!='mq':
+        if float(prec[1])>0:
+            jours_pluie+=1
+print(jours_pluie)
+\end{minted}
+\end{solution}
+
+\section{Mise en place d'un arrosage automatique.}
+
+On souhaite utiliser une carte électronique programmable en python.
+
+Cette carte permet de :
 \begin{itemize}
-\item Si le numéro de la semaine est impair afficher "Colles de Math et de Physique",
-\item Si le numéro de la semaine est pair afficher "Colles de SI et d'Anglais",
-\item Si le numéro de la semaine est un multiple de 8, afficher "Colles de SI, d'Anglais et de Français" et ne pas afficher les deux possibilités précédentes.
+ \item lire les relevés d'un capteur d'hydrométrie (ex: \verb?hydro=40? signifie que le degré d'humidité dans l'air est de 40\%),
+ \item lire une horloge (ex: \verb?clock=083554? à 8h35min54s),
+ \item commander une pompe qui arrose le jardin (\verb?pompe=T? (allume la pompe pendant $T$ min)).
 \end{itemize}
 
- \item Écrire l'algorithme correspondant en python et le tester pour la semaine 3. 
+\question{\textbf{Créer} un script qui permet de suivre l'algorithme suivant:
+\begin{itemize}
+ \item si l'hydrométrie est inférieure à \verb?50? entre 18h et 18h01, on allume la pompe pendant 2 minutes,
+ \item si l'hydrométrie est supérieure ou égale \verb?50? entre 18h et 18h01, on allume la pompe pendant 1 minute,
+ \item si l'hydrométrie est inférieure à \verb?30? quelle que soit l'heure, on allume la pompe pendant 3 minutes.
+\end{itemize}}
 
 \begin{solution}~\ \\
 \begin{minted}{python}
-semaine=3
-
-if semaine%8==0:
-    print("Colles de SI, d'Anglais et de Français")
-elif semaine%2==0:
-    print("Colles de SI et d'Anglais")
-else:
-    print("Colles de Math et de Physique")
-\end{minted}
-\end{solution}
-
- \item Transformer cet algorithme en une fonction \verb?colloscope(semaine)? et afficher le résultats pour les semaines $4,8$ et $9$.
-
-\begin{solution}~\ \\
-\begin{minted}{python}
-def colloscope(semaine):
-    if semaine%8==0:
-        return "Colles de SI, d'Anglais et de Français"
-    elif semaine%2==0:
-        return "Colles de SI et d'Anglais"
+if (clock>180000 and clock<180100):
+    if hydro<50:
+        pompe=2
     else:
-        return "Colles de Math et de Physique"
-
-print(colloscope(4))
-print(colloscope(8))
-print(colloscope(9))
+        pompe=1
+elif hydro<30:
+    pompe=3
 \end{minted}
 \end{solution}
 
-\section*{Fonction permutation}
-
-On souhaite créer ici une fonction \verb?permuter(a,b)? qui retourne \verb?b,a?.
-
-La solution suivante a été proposée, mais le résultat n'est pas celui attendu.
-
-\begin{minted}{python}
-def permuter(a,b):
-    a=b
-    b=a
-    return(a,b)
-\end{minted}
-
-\item Proposer une fonction \verb?permuter(a,b)?, qui retourne réellement \verb?b,a? et tester le résultat en affichant \verb?permuter(1,2)?
-
-\begin{solution}~\ \\
-\begin{minted}{python}
-def permuter(a,b):
-    return(b,a)
-    
-def permuter(a,b): # Deuxième solution
-    x=a
-    a=b
-    b=x
-    return(a,b)
-\end{minted}
-\end{solution}
-
-\section*{Compter sur Verlaine}
-
-On part de l'extrait suivant de \og Mon rêve familier \fg de Paul Verlaine:\\
- \verb?texte="Je fais souvent ce rêve étrange et pénétrant."?
-
-Le code suivant permet d'afficher chaque lettre de ce texte.
-\begin{minted}{python}
-for lettre in texte:
-    print(lettre)
-\end{minted}
-
-\item Proposer un script qui permet de compter le nombre de 'e' présents dans l'extrait (on considérera comme 'e' tous ses dérivées 'é', 'è', 'ë' et 'ê'). Le comptage devra être automatique et le code utilisé devra pouvoir être utilisé quel que soit l'extrait en entrée.
-
-\begin{solution}~\ \\
-\begin{minted}{python}
-count=0
-for lettre in texte:
-    if lettre == 'e' or lettre == 'é' or lettre == 'ê':
-        count=count+1
-print(count)
-\end{minted}
-\end{solution}
-
-\end{enumerate}
 \end{document}

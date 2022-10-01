@@ -46,7 +46,7 @@
   \fancyhead[C]{\bfseries{{\type} \no \numero}}
   \fancyhead[R]{\bfseries{\large Informatique}}
   \fancyfoot[C]{\thepage}
-  \fancyfoot[L]{\footnotesize R. Costadoat, J. Genzmer, W. Robert}
+  \fancyfoot[L]{\footnotesize R. Costadoat, C. Darreye}
   \fancyfoot[R]{\small \today}
   
   \definecolor{bg}{rgb}{0.9,0.9,0.9}
@@ -63,3 +63,26 @@
 \newtheorem*{defn}{Définition}
 \newtheorem*{ppe}{Propriété}
 \newtheorem{solution}{Solution}
+
+\newcounter{num_quest} \setcounter{num_quest}{0}
+\newcounter{num_rep} \setcounter{num_rep}{0}
+\newcounter{num_cor} \setcounter{num_cor}{0}
+
+\newcommand{\question}[1]{\refstepcounter{num_quest}\par
+~\ \\ \parbox[t][][t]{0.15\linewidth}{\textbf{Question \arabic{num_quest}}}\parbox[t][][t]{0.85\linewidth}{#1\label{q\the\value{num_quest}}}\par
+~\ \\}
+
+\newcommand{\reponse}[4][1]
+{\noindent
+\rule{\linewidth}{.5pt}\\
+\textbf{Question\ifthenelse{#1>1}{s}{} \multido{}{#1}{%
+\refstepcounter{num_rep}\ref{q\the\value{num_rep}} }:} ~\ \\
+\ifdef{\public}{#3 ~\ \\ \feuilleDR{#2}}{#4}
+}
+
+\newcommand{\cor}
+{\refstepcounter{num_cor}
+\noindent
+\rule{\linewidth}{.5pt}
+\textbf{Question \arabic{num_cor}:} \\
+}
