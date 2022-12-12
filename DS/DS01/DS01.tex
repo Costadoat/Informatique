@@ -186,7 +186,7 @@ for mois in ['07','08']:
     data=lignes[1:]
     for idx,donnees_jour in enumerate(data):
         donnees_jour=donnees_jour.split(';')
-        if donnees_jour[0]==07149:
+        if donnees_jour[0]=='07149':
             precip.append([donnees_jour[1][:8],donnees_jour[42]])
 \end{minted}
 
