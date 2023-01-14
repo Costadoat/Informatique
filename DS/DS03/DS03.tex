@@ -1,0 +1,321 @@
+\input{intro}
+\input{../../../Header_Willie}
+
+\usepackage{enumitem}
+
+\setenumerate[1]{align=left,label=\arabic*}
+\setenumerate[2]{before=\stepcounter{enumi},label*=.\arabic*,leftmargin=1.2em,align=left}
+
+
+\ifdef{\public}{\excludecomment{solution}}
+
+
+\begin{document}
+
+\begin{center}
+{\Large\bf {\type} \no {\numero} -- \descrip}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+\begin{boxedminipage}{.9\textwidth} 
+\begin{itemize}
+ \item Faire tous les exercices dans un même fichier \textbf{NomPrenom.py} à sauvegarder,
+ \item Mettre en commentaire l'exercice et la question traités (ex: \# Exercice 1),
+ \item Ne pas oublier pas de commenter ce qui est fait dans votre code (ex: \# Je crée une fonction pour calculer la racine d'un nombre),
+ \item Il est possible de demander un déblocage pour certaines questions, mais celle-ci seront notées 0,
+ \item Il faut vérifier avant de partir que le code peut s'exécuter et qu'il affiche les résultats que vous attendez. Les lignes de code qui doivent s'exécuter sont décommentées.
+\end{itemize}
+\end{boxedminipage}
+
+\section*{Introduction}
+
+Les jeux Olympiques de 1992 étaient organisés à Albertville en France. Ils ont été l'occasion de l'introduction du ski de bosses, nouvelle discipline de ski acrobatique (présente en démonstration à Calgary en 1988). Le premier champion olympique de cette discipline est Edgar Grospiron. Malgré ces souvenirs, nous n'avons pas la réponse à la question suivante :
+
+\begin{center}
+\Large{\textbf{Quelle équipe a gagné les jeux olympiques d'Albertville en 1992 ?}}
+\end{center}
+
+Le but de cet exercice sera d'y répondre.
+
+Pour cela, le fichier \verb?athletes_events.csv? dont chaque ligne correspond à la participation d'un athlète à une compétition olympique de la décennie 90 devra être consulté.
+
+\begin{figure}[!ht]
+\begin{minipage}{0.45\linewidth}
+Il est structuré comme suit :
+\begin{itemize}
+ \item Identifiant de l'athlète,
+ \item Sexe de l'athlète,
+ \item Age de l'athlète,
+ \item Taille de l'athlète,
+ \item Poids de l'athlète,
+ \item Équipe,
+ \item NOC (National Olympic Committee),
+ \item Jeux,
+ \item Année,
+ \item Saison,
+ \item Ville Hôte,
+ \item Sport,
+ \item Épreuve,
+ \item Médaille (Gold, Silver, Bronze, NA (pas de médaille)).
+\end{itemize}  
+\end{minipage}\hfill
+\begin{minipage}{0.45\linewidth}
+\begin{center}
+	\includegraphics[width=0.6\linewidth]{img/Logo_Albertville.png}
+	\caption{Logo de la compétition}
+	\label{img01}
+\end{center}
+\end{minipage}
+\end{figure}
+
+Ainsi, on retrouve la ligne :
+43174;"Edgar Alain Grospiron";"M";22;175;80;"France";"FRA";"1992 Winter";1992;"Winter";"Albertville";"Freestyle Skiing";"Freestyle Skiing Men's Moguls";"Gold".
+
+~\
+
+Il est possible qu'un athlète apparaisse sur plusieurs lignes du tableau s'il a participé à plusieurs épreuves.
+
+\section{Analyse des données}
+
+\subsection{Lecture du fichier de données}
+
+Le fichier \verb?athletes_events.csv? est présent dans le dossier \og /home/eleves/Ressources/PTSI/ \fg. 	
+
+\question{\textbf{Écrire} et \textbf{exécuter} un script permettant de lire le fichier de données et de découper son contenu sous la forme d'une liste \verb?lignes? dont chaque élément correspondra à une ligne du contenu sous la forme d'une chaîne de caractères (string). Afficher \verb?lignes[5135]?.}
+
+Ainsi, \verb?lignes[0]? renvoi:\\
+\verb?"ID";"Name";"Sex";"Age";"Height";"Weight";"Team";"NOC";"Games";"Year";"Season";"City";?
+\\
+\verb?"Sport";"Event";"Medal"?.
+
+~\
+
+\begin{solution}~\ \\
+\begin{minted}{python}
+file=open('athlete_events.csv','r')
+contenu=file.read()
+lignes=contenu.split('\n')
+file.close()
+print(lignes[5135])
+\end{minted}
+\end{solution}
+
+\question{\textbf{Recopier}, \textbf{compléter} les trois champs "\_" et \textbf{exécuter} le script suivant permettant de créer une liste \verb?countries? contenant l'ensemble des équipes participant à ces jeux olympiques.  \textbf{Afficher} \verb?countries[:6]?.}
+
+\begin{minted}{python}
+countries=[]
+for ligne in lignes[:-1]:
+    data=ligne.split("_")
+    if data[_]== '"1992 Winter"':
+        if data[_] not in countries:
+            countries.append(data[6])
+\end{minted}
+
+Ainsi \verb?print(countries[:2])? donne \verb?['"Netherlands"', '"United States"']?.
+
+~\
+
+\begin{solution}~\ \\
+\begin{minted}{python}
+countries=[]
+for ligne in lignes[:-1]:
+    data=ligne.split(";")
+    if data[8]=='"1992 Winter"':
+        if data[6] not in countries:
+            countries.append(data[6])
+print(countries[:6])
+\end{minted}
+\end{solution}
+
+Afin de comptabiliser les points de chaque pays, la suite va consister à associer un compteur à chaque équipe.
+
+\question{\textbf{Modifier} et \textbf{exécuter}, le script de la question précédente afin de créer une liste \verb?points? contenant une sous-liste constituée du nom de l'équipe et de la valeur \verb?0? (initialisation du compteur). \textbf{Afficher} \verb?points[:6]?.}
+
+Ainsi \verb?print(points[:2])? donne \verb?[['"Netherlands"', 0], ['"United States"', 0]]?.
+
+\begin{solution}~\ \\
+\begin{minted}{python}
+countries=[]
+points=[]
+for ligne in lignes[:-1]:
+    data=ligne.split(";")
+    if data[8]=='"1992 Winter"':
+        if data[6] not in countries:
+            countries.append(data[6])
+            points.append([data[6],0])
+print(points[:6])
+\end{minted}
+\end{solution}
+
+\subsection{Compter les points}
+
+Afin de classer les équipes, une première méthode consiste à classer les pays en comptant:
+\begin{itemize}
+ \item 3 points pour une médaille d'or,
+ \item 2 points pour une médaille d'argent,
+ \item 1 point pour une médaille de bronze.
+\end{itemize}
+
+\question{\textbf{Proposer} et \textbf{exécuter}, un script permettant de modifier le compteur de la liste \verb?points? afin de comptabiliser les points des équipes. \textbf{Afficher} \verb?points[:6]?.}
+
+Ainsi \verb?print(points[:2])? donne \verb?[['"Netherlands"', 7], ['"United States"', 31]]?.
+
+\begin{solution}~\ \\
+\begin{minted}{python}
+for ligne in lignes[:-1]:
+    data=ligne.split(";")
+    if data[8]=='"1992 Winter"':
+        index_pays=countries.index(data[6])
+        if data[14]=='"Gold"':
+            points[index_pays][1]+=3
+        elif data[14]=='"Silver"':
+            points[index_pays][1]+=2
+        elif data[14]=='"Bronze"':
+            points[index_pays][1]+=1
+print(points[:6])
+\end{minted}
+\end{solution}
+
+\question{\textbf{Proposer} et \textbf{exécuter}, un script permettant de générer la liste \verb?listepoints? contenant toutes les valeurs des points des équipes. \textbf{Afficher} \verb?listepoints?.}
+
+\begin{solution}~\ \\
+\begin{minted}{python}
+listepoints=[]
+for point in points:
+   if point[1]!=0:
+       listepoints.append(point[1])
+print(listepoints)
+\end{minted}
+\end{solution}
+
+Pour la suite, on prendra:\\
+ \verb?listepoints=[7, 31, 52, 20, 9, 11, 27, 83, 18, 38, 139, 28, 74, 57, 26, 1, 1, 6, 2, 4]?.
+
+\question{\textbf{Proposer} et \textbf{exécuter}, une fonction \verb?tri? utilisant une méthode de tri vue en TP (il ne faudra pas utiliser une fonction python existante) permettant de classer la liste  \verb?listepoints? dans l'ordre croissant. Afficher la liste triée.}
+
+\begin{solution}~\ \\
+\begin{minted}{python}
+def tri(liste): # tri sélection
+    # Parcours de 1 à la taille de la liste
+    for i in range(len(liste)-1):
+        # Initialiser le min
+        min=liste[i]
+        jmin=i
+        for j in range(i, len(liste)):
+        # Chercher le min
+            if liste[j]<min:
+                jmin=j
+                min=liste[j]
+        # Permuter le min et l'élément i
+        liste[i],liste[jmin]=liste[jmin],liste[i]
+
+tri(listepoints)
+print(listepoints)
+\end{minted}
+\end{solution}
+
+\question{\textbf{Proposer} et \textbf{exécuter}, une fonction \verb?inversion? permettant de permuter les éléments d'une liste afin de classer \verb?listepoints? dans l'ordre décroissant. Afficher la liste triée dans l'ordre décroissant.}
+
+Le premier devient alors le dernier, le second devient l'avant dernier,...
+
+\begin{solution}~\ \\
+\begin{minted}{python}
+def inversion(liste):
+    # Parcours de 1 à la taille de la liste
+    for i in range(len(liste)//2):
+        # Initialiser le min
+        liste[i],liste[-i-1]=liste[-i-1],liste[i]
+
+inversion(listepoints)
+print(listepoints)
+\end{minted}
+\end{solution}
+
+\question{\textbf{Proposer} et \textbf{exécuter}, un script permettant de générer la liste \verb?classement? contenant tous les éléments de la liste \verb?points?, ayant un nombre de points non nul, classées dans l'ordre décroissant du nombre de points. \textbf{Afficher} le classement.}
+
+Ainsi \verb?print(classement[:2])? donne \verb?[['"Unified Team"', 139], ['"Germany"', 83]]?.
+
+\begin{solution}~\ \\
+\begin{minted}{python}
+classement=[]
+for lpoint in listepoints:
+    i=0
+    while lpoint!=points[i][1] or points[i] in classement:
+        i+=1
+    classement.append(points[i])
+print(classement)
+\end{minted}
+\end{solution}
+
+\subsection{Modification des critères de tri}
+
+Dans la partie précédente, deux erreurs ont été commises qui ne permettent pas d'établir le classement réel des jeux olympiques.
+
+La \textbf{première erreur} vient du fait qu'une médaille collective n'est comptée en réalité qu'une fois dans le total. Ainsi, chaque membre de l'équipe de Hockey est compté dans la liste mais une seule médaille est comptée pour l'équipe. Il faut donc vérifier que l'épreuve n'a pas déjà été comptabilisée afin d'ajouter une médaille au crédit d'une équipe.
+
+La \textbf{deuxième erreur} vient de la méthode de classement. Il faut en réalité classer les équipes selon le nombre de médailles d'or, en cas d'égalité, selon le nombre de médailles d'argent et en cas d'égalité selon le nombre de médailles de bronze.
+
+\question{\textbf{Proposer} et \textbf{exécuter}, un script permettant de générer un nouveau classement prenant en compte ces nouveaux paramètres. \textbf{Afficher} le classement.}
+
+
+\begin{solution}~\ \\
+\begin{minted}{python}
+countries=[]
+points=[]
+for ligne in lignes[:-1]:
+    data=ligne.split(";")
+    if data[8]=='"1992 Winter"':
+        if data[6] not in countries:
+            countries.append(data[6])
+            points.append([data[6],[0,0,0]])
+
+event=[[],[],[]]            
+for ligne in lignes[:-1]:
+    data=ligne.split(";")
+    if data[8]=='"1992 Winter"':
+        index_pays=countries.index(data[6])
+        if data[14]=='"Gold"' and data[13] not in event[0]:
+            points[index_pays][1][0]+=1
+            event[0].append(data[13])
+        elif data[14]=='"Silver"' and data[13] not in event[1]:
+            points[index_pays][1][1]+=1
+            event[1].append(data[13])
+        elif data[14]=='"Bronze"' and data[13] not in event[2]:
+            points[index_pays][1][2]+=1
+            event[2].append(data[13])
+
+def tri2(liste): # tri sélection
+    # Parcours de 1 à la taille de la liste
+    for i in range(len(liste)-1):
+        # Initialiser le min
+        min=liste[i][1]
+        jmin=i
+        for j in range(i, len(liste)):
+        # Chercher le min
+            if liste[j][1][0]<min[0] or liste[j][1][0]==min[0] and liste[j][1][1]<min[1] \
+            or liste[j][1][0]==min[0] and liste[j][1][1]==min[1] and liste[j][1][2]<min[2]:
+                jmin=j
+                min=liste[j][1]
+        # Permuter le min et l'élément i
+        liste[i],liste[jmin]=liste[jmin],liste[i]
+    
+tri2(points)
+inversion(points)
+for idx,point in enumerate(points):
+    if point[1]!=[0,0,0]:
+        print(idx+1,point)
+\end{minted}
+\end{solution}
+
+\question{Quelle équipe a gagné les JO d'Albertville en 1992 ?}
+
+\begin{solution}~\ \\
+Il s'agit de l'Allemagne.
+\end{solution}
+
+\end{document}
+
+
+
+
