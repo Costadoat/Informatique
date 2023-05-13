@@ -141,7 +141,7 @@ Par exemple, pour le graphe suivant, la fonction doit renvoyer 3.
 \begin{solution}~\
 \begin{minted}[linenos,frame=lines]{python}
 def EstConnexe(gr):
-    sommet=gr.keys()[0]
+    sommet=list(gr.keys())[0]
     liste=PL(gr,sommet)
     return(len(liste)==len(gr.keys()))
 
