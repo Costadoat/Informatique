@@ -30,7 +30,7 @@ Pour réaliser la classification supervisée automatique, on part du principe su
 
 \begin{enumerate}
  \item ouvrir le fichier de données ;
- \item lire les données du fichier et les stocker dans un dictionnaire : une clé étant le nom d'un instrument (\texttt{CL 01}, \texttt{TR 09}, etc.) et les valeurs associées à une clé étant une listes de 20 flottants correspondant aux 20 valeurs des caractéristiques du son ;
+ \item lire les données du fichier et les stocker dans un dictionnaire : une clé étant le nom d'un instrument (\texttt{CL 01}, \texttt{TR 09}, etc.) et les valeurs associées à une clé étant une liste de 20 flottants correspondant aux 20 valeurs des caractéristiques du son ;
  \item choisir un son-candidat (les autres sons seront les sons-références) ;
  \item réaliser le calcul des distances pour le son-candidat et construire, pour ce candidat, un dictionnaire des distances candidat-référence, où chaque clé est un son référence et la valeur associée à la clé est la distance ;
  \item déterminer le son-référence le plus proche et en déduire la catégorie à laquelle appartient le son-candidat ;
