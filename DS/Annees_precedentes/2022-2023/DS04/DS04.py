@@ -73,7 +73,7 @@ print(calculDistance(imageToGpsPoint(myimage),lycee_dorian))
 distances=[]
 
 for photo in listePhotos:
-    my_image = openImage(photo)
+    myimage = openImage(photo)
     distances.append([photo,calculDistance(imageToGpsPoint(myimage),lycee_dorian)])
 
 print(distances[0])   
@@ -118,8 +118,6 @@ print(listeApresGouter(listePhotos))
 def listAbsolutePath(directory):
     for dirpath,dirs,filenames in os.walk(directory):
         return sorted([os.path.abspath(os.path.join(dirpath, d)) for d in dirs])
-
-os.chdir('Arboresence')
 
 s=listAbsolutePath('Arboresence')[0]
 print(s)
