@@ -1,5 +1,5 @@
 \input{intro}
-\input{../../Header_Willie}
+\input{../../headers/Header_Willie}
 %\input{macro}
 
 \begin{document}
@@ -209,7 +209,7 @@ X = np.asarray(X1)
 Y = np.asarray(Y1)   
 Z = np.asarray(Z1)   
 fig = plt.figure()   
-ax = fig.gca(projection='3d')   
+ax = fig.subplot(projection='3d')   
 surf = ax.scatter(X, Y, Z)   
 plt.show()
 \end{minted}
