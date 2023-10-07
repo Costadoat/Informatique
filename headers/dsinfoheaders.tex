@@ -14,12 +14,19 @@
 \usepackage{verbatim}
 \usepackage{moreverb}
 \usepackage{listings}
-\usepackage[cache=false]{minted}
+\usepackage{minted}
+\usepackage{eso-pic}
+\usepackage{enumitem}
+\usepackage{boxedminipage}
+\usepackage[french,onelanguage, boxruled,linesnumbered]{algorithm2e}
+
 
 \newcommand{\auteurun}{Juliette Genzmer}
 \newcommand{\auteurdeux}{Willie Robert}
 \newcommand{\auteurtrois}{Renaud Costadoat}
 \newcommand{\institute}{Lycée Dorian}
+\newtheorem{solution}{Solution}
+
 
 \input{intro.tex}
 
@@ -40,8 +47,6 @@
 \usepackage{tikz}
 \usepackage{wrapfig}
 \usepackage{gensymb}
-\usepackage[european]{circuitikz}
-\usetikzlibrary{babel}
 \usepackage{ifthen}
 \usepackage{cancel}
 \usepackage{etoolbox}
@@ -116,17 +121,13 @@
 \newcounter{num_cor} \setcounter{num_cor}{0}
 
 \newcommand{\question}[1]{\refstepcounter{num_quest}\par
-~\ \\ \parbox[t][][t]{0.15\linewidth}{\textbf{Question \arabic{num_quest}}}\parbox[t][][t]{0.85\linewidth}{#1}\par
+~\ \\ \parbox[t][][t]{0.15\linewidth}{\textbf{Question \arabic{num_quest}}}\parbox[t][][t]{0.85\linewidth}{#1}\par\par
 }
 
 
-\newcommand{\reponse}[3]
-{\refstepcounter{num_rep}
-\noindent
-\rule{\linewidth}{.5pt}
-\textbf{Question \arabic{num_rep}:}~\ \\
-\ifdef{\public}{\multido{\i=1+1}{#1}{~\ \\}#2}{#3}
-}
+
+\newcommand{\reponse}[0]{\refstepcounter{num_rep}\par
+~\ \\ \parbox[t][][t]{0.15\linewidth}{\textbf{Question \arabic{num_rep}}}}
 
 \newcommand{\cor}
 {\refstepcounter{num_cor}
@@ -139,8 +140,8 @@
 
 % En tête et pied de page
 \lhead{\nom}
-\rhead{\includegraphics[width=2cm]{../../img/logo}}
-\lfoot{Juliette Genzmer, Willie Robert, Renaud Costadoat}
+\rhead{\includegraphics[width=2cm]{../../../img/logo}}
+\lfoot{David Aubert, Renaud Costadoat}
 \rfoot{Page \thepage}
 \cfoot{}
 
@@ -163,13 +164,13 @@
 \fancypagestyle{correction}{%
   \fancyhf{}
   \lhead{\colorbox{danger}{\begin{minipage}{0.65\paperwidth} \textcolor{white}{\textbf{Correction}} \end{minipage}} }
-  \rhead{\includegraphics[width=2cm]{../../img/logo}}
+  \rhead{\includegraphics[width=2cm]{../../../img/logo}}
   \lfoot{Juliette Genzmer, Willie Robert, Renaud Costadoat}
   \rfoot{\colorbox{danger}{\begin{minipage}{0.3\paperwidth} \begin{flushright}\textcolor{white}{\textbf{Correction}}\end{flushright} \end{minipage}} }}
 
 \renewcommand{\footrulewidth}{0.4pt}
 
-\usepackage{eso-pic}
+
 \newcommand{\BackgroundPic}{%
 \put(0,0){%
 \parbox[b][\paperheight]{\paperwidth}{%
@@ -177,7 +178,7 @@
 \begin{center}
 \hspace{0.5cm}\vspace{0.5cm}
 \includegraphics[width=\paperwidth,height=\paperheight,%
-keepaspectratio]{../../img/fond5}%
+keepaspectratio]{../../../img/fond5}%
 \end{center}
 \vfill
 }}}
@@ -188,48 +189,17 @@ keepaspectratio]{../../img/fond5}%
 \vfill
 \begin{center}
 \includegraphics[width=\paperwidth,height=\paperheight,%
-keepaspectratio]{../../img/fond6}%
+keepaspectratio]{../../../img/fond6}%
 \end{center}
 \vfill
 }}}
 
+\setenumerate[1]{align=left,label=\arabic*}
+\setenumerate[2]{before=\stepcounter{enumi},label*=.\arabic*,leftmargin=1.2em,align=left}
+
 \begin{document}
 
-\pagestyle{empty}
-
-\vspace*{-3\baselineskip}
-
-\AddToShipoutPicture*{\BackgroundPic}
-
-\begin{tabular}{>{\columncolor{gray!00}}m{.3\linewidth} m{.3\linewidth} >{\columncolor{gray!00}}m{.3\linewidth}}
-Séquence : \sequence &  \multirow{3}{*}{\hspace{1cm}\includegraphics[height=1.5cm]{../../img/logo}} &   \auteurun \\
-Document : \type\num  & &  \auteurdeux \\
- \institute & &  \auteurtrois\\
-\end{tabular}
-
-
-
-\vspace{2cm}
-
-\ifdef{\prive}{\begin{center}\colorbox{danger}{\Huge{Avec Correction}}\end{center}}{\vspace{2cm}}
-
-\vspace{2cm}
-
-\begin{center}\huge{\nom}\end{center}
-
-\vspace{7cm}
-
-
-\begin{tabular}{m{.2\linewidth} >{\columncolor{white}}m{.74\linewidth}}
-    \rowcolor{gray!20}
-    Référence & S\sequence - \type\num \\
-    \multirow{1}{*}{Compétences} & \competences \\
- 	\rowcolor{gray!20}
-    Description & \descrip
-  \end{tabular}
-
-\newpage
-
-\AddToShipoutPicture{\BackgroundPicdeux}
 
 \pagestyle{fancy}
+
+\AddToShipoutPicture{\BackgroundPicdeux}
