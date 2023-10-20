@@ -17,6 +17,7 @@
 \usepackage{minted}
 \usepackage{eso-pic}
 \usepackage{enumitem}
+\usepackage{comment}
 \usepackage{boxedminipage}
 \usepackage[french,onelanguage, boxruled,linesnumbered]{algorithm2e}
 
@@ -121,7 +122,7 @@
 \newcounter{num_cor} \setcounter{num_cor}{0}
 
 \newcommand{\question}[1]{\refstepcounter{num_quest}\par
-~\ \\ \parbox[t][][t]{0.15\linewidth}{\textbf{Question \arabic{num_quest}}}\parbox[t][][t]{0.85\linewidth}{#1}\par\par
+~\ \\ \parbox[t][][t]{0.15\linewidth}{\textbf{Question \arabic{num_quest}}}\parbox[t][][t]{0.85\linewidth}{#1\label{q\the\value{num_quest}}}\par\par
 }
 
 
@@ -182,6 +183,15 @@ keepaspectratio]{../../../img/fond5}%
 \end{center}
 \vfill
 }}}
+
+\newcommand{\goforum}{
+\begin{figure}[ht!]
+\begin{center}
+ \includegraphics[width=0.7\linewidth]{../../../img/go_forum}
+\end{center}
+\label{go_forum}
+\caption{J'pète les plombs}
+\end{figure}}
 
 \newcommand{\BackgroundPicdeux}{%
 \put(25,-30){%

@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{p} \PYG{o}{=} \PYG{l+m+mi}{1}
-\PYG{n}{c} \PYG{o}{=} \PYG{n}{n}
-\PYG{k}{while} \PYG{n}{c} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{0}\PYG{p}{:}
-  \PYG{n}{p} \PYG{o}{=} \PYG{n}{p} \PYG{o}{*} \PYG{n}{k}
-  \PYG{n}{c} \PYG{o}{=} \PYG{n}{c} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}
-\end{Verbatim}
