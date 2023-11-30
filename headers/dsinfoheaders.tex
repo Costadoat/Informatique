@@ -137,7 +137,11 @@
 \textbf{Question \arabic{num_cor}:} \\
 }
 
-
+\newcommand{\feuilleDR}[1]{
+	\begin{tikzpicture}
+		\draw[gray!30](0,0)grid[step=0.5cm](\linewidth,#1);
+	\end{tikzpicture}
+}
 
 % En tête et pied de page
 \lhead{\nom}
