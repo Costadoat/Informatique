@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.2)  15 SEP 2023 14:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.2)  1 DEC 2023 13:15
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -609,21 +609,6 @@ File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
 ))
 Package: l3keys2e 2022-01-12 LaTeX2e option processing using LaTeX3 keys
 )
-
-! LaTeX cmd Error: Command '\num' already defined.
-
-For immediate help type H <return>.
- ...                                              
-                                                  
-l.7452   }
-          
-
-You have used \NewDocumentCommand with a command that already has a
-definition.
-
-The existing definition of '\num' will not be altered.
-
-
 (/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
 Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
 \col@sep=\dimen266
@@ -1079,19 +1064,9 @@ lations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
 or `french'. on input line 5.
-
-! Undefined control sequence.
-l.8 {\Large\bf TP \no {\numero
-                              } -- \descrip}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 LaTeX Font Info:    Trying to load font information for U+msa on input line 20.
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 20.
@@ -1107,17 +1082,6 @@ LaTeX Font Info:    Trying to load font information for U+stmry on input line 2
 
 LaTeX Font Warning: Font shape `T1/cmr/bx/n' in size <6.49994> not available
 (Font)              size <6> substituted on input line 44.
-
-! Undefined control sequence.
-\f@nch@och ->\bfseries {{\type } \no \numero 
-                                             }\strut 
-l.44 \newpage
-             
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
 \f@nch@orf ->\small \dateds 
@@ -1145,17 +1109,6 @@ LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 5
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 ! Undefined control sequence.
-\f@nch@och ->\bfseries {{\type } \no \numero 
-                                             }\strut 
-l.90 \newpage
-             
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
 \f@nch@orf ->\small \dateds 
                             \strut 
 l.90 \newpage
@@ -1181,17 +1134,6 @@ LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 2.
 )
 ! Undefined control sequence.
-\f@nch@och ->\bfseries {{\type } \no \numero 
-                                             }\strut 
-l.167 \item T
-             oujours v\' erifier \textbf{l'emplacement} de votre sauvegarde....
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
 \f@nch@orf ->\small \dateds 
                             \strut 
 l.167 \item T
@@ -1213,17 +1155,6 @@ LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 ))
-! Undefined control sequence.
-\f@nch@och ->\bfseries {{\type } \no \numero 
-                                             }\strut 
-l.222 \item e
-             n cliquant sur « Run module » dans le menu « Run »,
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 ! Undefined control sequence.
 \f@nch@orf ->\small \dateds 
                             \strut 
@@ -1248,17 +1179,6 @@ Package pdftex.def Info: img/Organigramme.pdf  used on input line 290.
 (pdftex.def)             Requested size: 178.60611pt x 83.18956pt.
 
 ! Undefined control sequence.
-\f@nch@och ->\bfseries {{\type } \no \numero 
-                                             }\strut 
-l.301 \end{document}
-                    
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
 \f@nch@orf ->\small \dateds 
                             \strut 
 l.301 \end{document}
@@ -1280,32 +1200,29 @@ runsystem(rm I-TP01_prive.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 31034 strings out of 480104
- 616071 string characters out of 5892286
- 916703 words of memory out of 5000000
- 48423 multiletter control sequences out of 15000+600000
+ 31036 strings out of 480104
+ 616083 string characters out of 5892286
+ 916547 words of memory out of 5000000
+ 48425 multiletter control sequences out of 15000+600000
  483096 words of font info for 56 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
  93i,12n,86p,985b,1079s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/renaud/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecit1000.60
-0pk> </home/renaud/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tctt1000.
-600pk> </home/renaud/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm050
-0.600pk> </home/renaud/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1
-000.600pk> </home/renaud/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecc
-c1000.600pk> </home/renaud/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/e
-crm0800.600pk> </home/renaud/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec
-/ecrm0700.600pk> </home/renaud/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/
-ec/ecti1000.600pk> </home/renaud/.texlive2021/texmf-var/fonts/pk/ljfour/jknappe
-n/ec/ecrm1000.600pk> </home/renaud/.texlive2021/texmf-var/fonts/pk/ljfour/jknap
-pen/ec/ecbx0900.600pk> </home/renaud/.texlive2021/texmf-var/fonts/pk/ljfour/jkn
-appen/ec/ecbx1440.600pk> </home/renaud/.texlive2021/texmf-var/fonts/pk/ljfour/j
-knappen/ec/ecbx0600.600pk> </home/renaud/.texlive2021/texmf-var/fonts/pk/ljfour
-/jknappen/ec/ecbx1000.600pk> </home/renaud/.texlive2021/texmf-var/fonts/pk/ljfo
-ur/jknappen/ec/ecbx1200.600pk>
-Output written on I-TP01_prive.pdf (5 pages, 155097 bytes).
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/
+fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf/fonts/type1/public/
+cm-super/sfbx0600.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx0900.pf
+b></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/
+fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/c
+m-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1000.pfb
+></usr/share/texmf/fonts/type1/public/cm-super/sfit1000.pfb></usr/share/texmf/f
+onts/type1/public/cm-super/sfrm0500.pfb></usr/share/texmf/fonts/type1/public/cm
+-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb>
+</usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fo
+nts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-
+super/sftt1000.pfb>
+Output written on I-TP01_prive.pdf (5 pages, 296469 bytes).
 PDF statistics:
- 608 PDF objects out of 1000 (max. 8388607)
- 203 compressed objects within 3 object streams
+ 239 PDF objects out of 1000 (max. 8388607)
+ 190 compressed objects within 2 object streams
  48 named destinations out of 1000 (max. 500000)
  135 words of extra memory for PDF output out of 10000 (max. 10000000)
 
