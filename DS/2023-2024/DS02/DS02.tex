@@ -1,0 +1,319 @@
+\input{../../../headers/dsinfoheaders}
+
+\begin{center}
+{\Large\bf {\type} \no {\numero} -- \descrip}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+\begin{boxedminipage}{.9\textwidth} 
+\begin{itemize}
+ \item Faire tous les exercices dans un fichier {NomPrenom.py} à sauvegarder,
+ \item mettre en commentaire l'exercice et la question traités (ex: \# Exercice 1),
+ \item ne pas oublier pas de commenter ce qui est fait dans votre code (ex: \# Je crée une fonction pour calculer la racine d'un nombre),
+ \item il est possible de demander un déblocage pour une question, mais celle-ci sera notée 0,
+ \item il faut vérifier avant de partir que le code peut s'exécuter et qu'il affiche les résultats que vous attendez. Les lignes de code qui doivent s'exécuter sont décommentées.
+\end{itemize}
+\end{boxedminipage}
+
+\section{Introduction}
+
+\begin{wrapfigure}{r}{0.3\textwidth}
+\centering
+\vspace{-\baselineskip}
+    \includegraphics[width=0.25\textwidth]{img/cre}
+    \label{fig:img1}
+\end{wrapfigure}
+
+Depuis sa création, le 24 mars 2000, la Commission de régulation de l'énergie (CRE) veille au bon fonctionnement des marchés de l'électricité et du gaz en France, au bénéfice des consommateurs finaux et en cohérence avec les objectifs de la politique énergétique.
+
+~\
+
+\begin{wrapfigure}{l}{0.2\textwidth}
+\centering
+\vspace{-\baselineskip}
+    \includegraphics[width=0.14\textwidth]{img/ltecv}
+    \label{fig:img2}
+\end{wrapfigure}
+
+Une de ses attributions est de calculer le complément de rémunération. C'est un dispositif, introduit par la LTECV (Loi de Transition Énergétique pour la Croissance Verte), de soutien des producteurs d’énergie éolienne et solaire prévu aux articles L. 314-18 à L. 314-27 du code de l’énergie.
+
+~\
+
+Dans ce mécanisme où les producteurs d’électricité à partir d’énergie renouvelable commercialisent leur énergie directement sur les marchés, une prime vient compenser l’écart entre les revenus tirés de cette vente et un niveau de rémunération de référence, fixé selon le type d’installations par la puissance publique dans le cadre d’un arrêté tarifaire ou par le producteur dans le cadre d’une procédure de mise en concurrence.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.45\linewidth]{img/eolienne}\hfill
+\includegraphics[width=0.45\linewidth]{img/solaire}
+\end{figure}
+Ce complément de rémunération peut généralement être qualifié de prime variable, ou ex post, dans la mesure où son montant s’ajuste pour compenser la différence entre la rémunération de référence et un revenu marché de référence.
+
+Ce dispositif vise à exposer les producteurs aux signaux des prix de marché de court terme, tout en leur garantissant une rémunération raisonnable.
+
+Afin de calculer les prix de référence utilisés dans le calcul du complément de rémunération pour les filières éoliennes et solaires, le jeu de données suivant peut être utilisé. Il est constitué des chroniques de production mensuelle éolienne et solaire au pas horaire, à la maille France depuis 2020.
+
+~\
+
+Il est disponible en suivant le lien suivant:\\
+\href{https://www.data.gouv.fr/fr/datasets/courbes-de-production-mensuelles-eolien-solaire-complement-de-remuneration/}{https://www.data.gouv.fr/fr/datasets/courbes-de-production-mensuelles-eolien-solaire\\-complement-de-remuneration/}
+
+~\
+
+Pour les besoin de cet exercice, les données sont disponibles sous la forme du fichier \verb?production-solaire-eolienne.csv? dont les colonnes sont séparées par des points-virgules. Il est disponible dans le dossier \og/home/eleve/Ressources/PTSI/\fg. Afin d'éviter des modifications intempestives du fichier, celui-ci ne devra pas être copié dans le dossier de travail mais consulté directement depuis le dossier d'origine.
+
+\section{Étude quotidienne}
+
+\question{\textbf{Écrire} un code permettant de générer une \textit{liste} \texttt{lignes} contenant l'ensemble des lignes du fichier \verb?production-solaire-eolienne.csv?. \textbf{Afficher} les deux premiers éléments de la liste \verb?lignes?.}
+
+\question{\textbf{Écrire} un code permettant d'afficher une \textit{liste} contenant les données de la ligne d'index \verb?1?, découpées selon le séparateur de colonnes. \textbf{Afficher} cette liste.}
+
+\question{\textbf{Écrire} un code permettant de générer une liste \verb?journee? contenant l'ensemble des \textit{listes}, contenant les données des lignes découpées selon le séparateur de colonnes, correspondantes à la journée du \textit{01 décembre 2022}. \textbf{Afficher} la liste \verb?journee?.}
+
+~\ \\
+
+Les trois premiers éléments de la liste \verb?journee? sont :
+\begin{enumerate}
+\item \verb?['2022-12-01', '07:00', '4270', '1']?,
+\item \verb?['2022-12-01', '09:00', '4071', '694']?,
+\item \verb?['2022-12-01', '10:00', '3751', '1483']?.
+\end{enumerate}
+
+On constate que les informations \textbf{n’apparaissent pas dans l'ordre chronologique,} ni pour la date ni pour l'heure.
+
+\question{\textbf{Créer} une fonction \texttt{get\_journee(date)} qui à partir d'une journée \verb?date? (codée sous la forme d'une chaîne de caractères) retourne la liste \verb?journee? correspondante à la journée \verb?date?.}
+
+~\ \\
+
+La commande \verb?print(get_journee('2022-12-01'))? affiche le résultat de la question \ref{q3}.
+
+\question{\textbf{Générer} deux listes \texttt{jour\_eolien} et \texttt{jour\_solaire} qui contiennent respectivement les valeurs de la production éolienne et solaire pour la journée du \textit{01 décembre 2022} triées par ordre croissant d'heure (00,01,02,03,...,23).}
+
+\newpage
+
+Les trois premiers éléments de:
+\begin{itemize}
+ \item \texttt{jour\_eolien} sont: 3153, 3219, 3187
+ \item \texttt{jour\_solaire} sont: 2, 1, 1
+\end{itemize}
+
+Cela signifie que la production éolienne en France a été de 3153MWh le \textit{01 décembre 2022} entre 0h et 1h, puis de 3219MWh  entre 1h et 2h, tandis que la production solaire a été de 2MWh entre 0h et 1h, puis de 1MWh  entre 1h et 2h.
+
+~\
+
+\begin{figure}[ht!]
+\begin{minipage}{0.5\linewidth}
+Le code suivant permet de tracer la figure \ref{fig:img3}:
+\begin{minted}{python}
+import matplotlib.pyplot as plt
+
+liste1=[0,0,0.1,.4,.5,.7,.8,.5,.5,.4,.5,.2\
+		,.3,0,.1,.1,0,.1,0,0,0,0,0]
+liste2=[0,0,3,4,5,7,8,10,10.5,11,11.5,12,13\
+		,10,11,9,8,5,4,3,0,0,0]
+
+plt.plot(liste1,label="Lac d'Ayous")
+plt.plot(liste2,label="Pic du Midi d'Ossau")
+plt.xticks(range(len(liste1)))
+plt.legend()
+plt.show()
+\end{minted}
+\end{minipage}\hfill
+\begin{minipage}{0.45\linewidth}
+\centering\resizebox{0.9\textwidth}{!}{\input{img/Ossau.pgf}}
+\caption{\label{fig:img3} Tracé Matplotlib}
+\end{minipage}
+\end{figure}
+
+\question{A partir de cet exemple, \textbf{tracer} pour la journée du \textit{01 décembre 2022} les courbes de la production éolienne et solaire.} ~\ \\
+
+La courbe du \textit{01 \textbf{novembre} 2022} est donnée à titre d'exemple sur la figure \ref{fig:img4}.
+
+\begin{figure}[ht!]
+\centering\resizebox{0.6\textwidth}{!}{\input{img/courbe_jour.pgf}}
+\caption{\label{fig:img4} Courbe pour le \textit{01 \textbf{novembre} 2022}}
+\end{figure}
+
+\question{Tracer une nouvelle figure qui superpose les tracés des journées du \textit{15 août 2022} et du \textit{01 décembre 2022}. Il est imposé pour cela utiliser une boucle \verb?for?. Le départ du script est donné dans la suite.} ~\ \\
+
+Départ du script à utiliser pour la question \ref{q7} :
+\begin{minted}{python}
+jours_eolien=[[],[]]
+jours_solaire=[[],[]]
+dates=['2022-08-15','2022-01-01']
+for id_jour in range(2):
+	journee=get_journee(dates[id_jour])
+\end{minted}
+
+La courbe pour les \textit{01 \textbf{novembre} 2022} et \textit{15 \textbf{juillet} 2022} est donnée à titre d'exemple sur la figure \ref{fig:img5}.
+
+\begin{figure}[ht!]
+\centering\resizebox{0.6\textwidth}{!}{\input{img/2jours.pgf}}
+\caption{\label{fig:img5} Courbe pour les \textit{01 \textbf{novembre} 2022} et \textit{15 \textbf{juillet} 2022}}
+\end{figure}
+
+\section{Étude mensuelle}
+
+On cherche maintenant à déterminer les productions mensuelles pour l'année 2022.
+
+\question{Déterminer les listes \texttt{mois\_eolien} et \texttt{mois\_solaire} qui contiennent les cumuls des consommations mensuelles (somme de chaque jour du mois). Les listes devront être classées par mois croissant. Ainsi, \texttt{mois\_eolien[0]} contiendra la production éolienne en France pour le mois de janvier (3140824MWh dans notre cas).}
+
+\newpage
+
+\begin{figure}[ht!]
+\begin{minipage}{0.5\linewidth}
+Le code suivant permet de tracer la figure \ref{fig:img6}:
+\begin{minted}{python}
+import matplotlib.pyplot as plt
+
+liste1=[0,0,0.1,.4,.5,.7,.8,.5,.5,.4,.5,.2\
+		,.3,0,.1,.1,0,.1,0,0,0,0,0]
+liste2=[0,0,3,4,5,7,8,10,10.5,11,11.5,12,13\
+		,10,11,9,8,5,4,3,0,0,0,]
+
+labels=[i+1 for i in range(len(liste1))]
+plt.bar(labels,liste2, label="Ossau")
+plt.bar(labels,liste1, label="Lac d'Ayous")
+
+plt.xticks(range(len(liste1)),labels=labels)
+plt.legend()
+plt.show()
+\end{minted}
+\end{minipage}\hfill
+\begin{minipage}{0.45\linewidth}
+\centering\resizebox{0.9\textwidth}{!}{\input{img/Ossau_2.pgf}}
+\caption{\label{fig:img6} Tracé Matplotlib}
+\end{minipage}
+\end{figure}
+
+\question{A partir de cet exemple, \textbf{tracer} pour l'année 2022 les barres mensuelles de la production éolienne et solaire.} ~\ \\
+
+\begin{center}
+\Large{FIN}
+\end{center}
+
+
+\ifdef{\public}{Remarque : La suite du document peut et \textbf{doit} servir de brouillon.
+
+~\
+
+\feuilleDR{10}
+
+\feuilleDR{24}
+\end{document}}{\cleardoublepage\pagestyle{correction}}
+
+
+\begin{center}
+\Large{Correction}
+\end{center}
+
+\reponse{}
+
+\begin{minted}{python}
+file=open('production-solaire-eolienne.csv','r')
+contenu=file.read()
+file.close()
+lignes=contenu.split('\n')
+print(lignes[:2])
+\end{minted}
+
+\reponse{}
+
+\begin{minted}{python}
+print(lignes[1].split(';'))
+\end{minted}
+
+\reponse{}
+
+\begin{minted}{python}
+journee=[]
+for ligne in lignes:
+    data=ligne.split(';')
+    if data[0]=='2022-12-01':
+        journee.append(data)
+\end{minted}
+
+\reponse{}
+
+\begin{minted}{python}
+def get_journee(date):
+    journee=[]
+    for ligne in lignes:
+        data=ligne.split(';')
+        if data[0]==date:
+            journee.append(data)
+    return journee
+\end{minted}
+
+\reponse{}
+
+\begin{minted}{python}
+jour_eolien=[]
+jour_solaire=[]
+journee=get_journee('2022-08-15')
+for i in range(24):
+    for heure in journee:
+        if i==int(heure[1][:2]):
+            jour_eolien.append(int(heure[2]))
+            jour_solaire.append(int(heure[3]))
+\end{minted}
+
+\reponse{}
+     
+\begin{minted}{python}    
+import matplotlib.pyplot as plt
+ 
+plt.plot(jour_eolien, label='Eolien')
+plt.plot(jour_solaire, label='Solaire')
+plt.xticks(range(24))
+plt.legend()
+plt.show()
+\end{minted}
+
+\reponse{}
+
+\begin{minted}{python}
+jours_eolien=[[],[]]
+jours_solaire=[[],[]]
+dates=['2022-08-15','2022-01-01']
+for id_jour in range(2):
+    journee=get_journee(dates[id_jour])
+    for id_heure in range(24):
+        for heure in journee:
+            if id_heure==int(heure[1][:2]):
+                jours_eolien[id_jour].append(int(heure[2]))
+                jours_solaire[id_jour].append(int(heure[3]))
+
+    plt.plot(jours_eolien[id_jour], label='Eolien '+dates[id_jour])
+    plt.plot(jours_solaire[id_jour], label='Solaire '+dates[id_jour])
+
+plt.xticks(range(24))
+plt.legend()
+plt.show()
+\end{minted}
+
+\reponse{}
+
+\begin{minted}{python}
+mois_eolien=[0]*12
+mois_solaire=[0]*12
+for ligne in lignes:
+    data=ligne.split(';')
+    if data[0][:4]=='2022':
+        if data[2]:
+            mois_eolien[int(data[0][5:7])-1]+=int(data[2])
+        if data[3]:
+            mois_solaire[int(data[0][5:7])-1]+=int(data[3])
+\end{minted}
+
+\reponse{}
+
+\begin{minted}{python}
+plt.bar([i+1 for i in range(12)],mois_eolien, label='Eolien')
+plt.bar([i+1 for i in range(12)],mois_solaire, label='Solaire')
+plt.xticks(range(12),labels=[i+1 for i in range(12)])
+plt.legend()
+plt.show()
+\end{minted}    
+
+\end{document}
