@@ -25,7 +25,7 @@ def get_journee(date):
         if data[0]==date:
             journee.append(data)
     return journee
-#print(get_journee('2022-12-01'))
+print(get_journee('2022-12-01'))
 
 # Question 5:
 jour_eolien=[]
@@ -37,7 +37,7 @@ for i in range(24):
             jour_eolien.append(int(heure[2]))
             jour_solaire.append(int(heure[3]))
 
-#print(jour_eolien, jour_solaire)
+print(jour_eolien, jour_solaire)
 
 # Question 6:            
 plt.plot(jour_eolien, label='Eolien')
@@ -76,7 +76,8 @@ for ligne in lignes:
         if data[3]:
             mois_solaire[int(data[0][5:7])-1]+=int(data[3])
 
-print(mois_e
+#print(mois_eolien)
+
 # Question 9: 
 plt.bar([i+1 for i in range(12)],mois_eolien, label='Eolien')
 plt.bar([i+1 for i in range(12)],mois_solaire, label='Solaire')
