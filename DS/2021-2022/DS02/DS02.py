@@ -54,6 +54,8 @@ somme=0
 for i in L:
     somme=somme+i
 #print(somme/len(L))    
+
+#6
 #print(L[len(L)//2])
 
 
@@ -61,7 +63,7 @@ for i in L:
 # Exercice 2
 #==============================================================================
 
-#6
+#7
 def maxi(L):
     maxi=L[0]
     position=0
@@ -71,8 +73,8 @@ def maxi(L):
             position=i
     return(maxi,position)
 
-#7
-def maxi2(L):
+#8
+def maxi_liste(L):
     maxi=L[0]
     position=[0]
     for i in range(1,len(L)):
@@ -83,20 +85,25 @@ def maxi2(L):
             position.append(i)
     return(maxi,position)    
 
-#8
-#print(maxi2([9,8,9,0,9]))        
+#9
+#print(maxi_liste([9,1,3,9,2,9]))        
 
 
 #==============================================================================
 # Exercice 3
 #==============================================================================
 
-#9
+#10
 bonbons=[[3,2.5],[1.5,1.5],[1.,0.9]]
 
+#11
+
+print(bonbons[2][0])
+print(bonbons[2][1])
+
+#12
 B=11
 
-#11
 i=0
 achat=[]
 while i<len(bonbons) and B>0:
@@ -106,22 +113,22 @@ while i<len(bonbons) and B>0:
     else:
         i=i+1
                
-#12
+#13
 Satisfaction_totale=0
 for element in achat:
     Satisfaction_totale=Satisfaction_totale+element[1]
 print(Satisfaction_totale)
 
 
-#13
+#14
 bonbons2=[]
 for element in bonbons:
     bonbons2.append([element[1]/element[0],element[0],element[1]])
 
-#14  
+#15
 bonbons2.sort(reverse=True)
 
-#15
+#16
 B=11
 i=0
 achat2=[]
@@ -133,8 +140,10 @@ while i<len(bonbons2) and B>0:
         i=i+1
 print(achat2)        
    
-#16
+#17
 Satisfaction_totale2=0
 for element in achat2:
     Satisfaction_totale2=Satisfaction_totale2+element[2]
 print(Satisfaction_totale2)
+
+#18
