@@ -1,0 +1,270 @@
+\input{../../../headers/dsinfoheaders}
+
+\begin{center}
+{\Large\bf {\type} \no {\numero} -- \descrip}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+\begin{boxedminipage}{.9\textwidth} 
+\begin{itemize}
+ \item Faire tous les exercices dans un fichier {NomPrenom.py} à sauvegarder,
+ \item mettre en commentaire l'exercice et la question traités (ex: \# Exercice 1),
+ \item ne pas oublier pas de commenter ce qui est fait dans votre code (ex: \# Je crée une fonction pour calculer la racine d'un nombre),
+ \item il est pas possible de demander un déblocage pour une question, vous auriez alors 0 à cette question.
+\end{itemize}
+\end{boxedminipage}
+
+\section{Récupération des données}
+
+L'objectif de cette épreuve est de traiter des données concernant l'expérimentation de la décharge d'un condensateur.
+
+Les données de l'expérience sont contenues dans le fichier \verb?donnees.json?.
+Il est disponible dans le répertoire \og/home/eleve/Ressources/PTSI/\fg, ne doit pas être déplacé mais ouvert directement depuis son emplacement initial.
+
+Les lignes de code suivantes permettent de récupérer ces données.
+\begin{minted}[linenos]{python}
+import json
+
+with open('donnees.json', 'r') as openfile:
+    dictionnaire = json.load(openfile)
+\end{minted}
+
+Elles créent un dictionnaire \verb?dictionnaire? dont les clefs sont les suivantes:
+\begin{itemize}
+ \item \verb?'titre'?: titre du tracé,
+ \item \verb?'temps'?: instants \verb?t? des mesures,
+ \item \verb?'U'?: tensions \verb?U? aux bornes du condensateur à ces instants,
+ \item \verb?'log(U)'?: \verb?log(U)? à ces instants,
+ \item \verb?'datalog'?: la liste des couples \verb?[t,log(U)]?.
+\end{itemize}
+
+\question{Recopier ces lignes et afficher la valeur associée à la clef \verb?'titre'?.}
+
+\question{Créer \verb?lt?, \verb?lu?, \verb?loglu? et \verb?datalog? contenants les données affectées respectivement aux clefs \verb?'temps'?,  \verb?'U'?, \verb?'log(U)'? et \verb?'datalog'? converties au format \verb?array numpy?. Afficher le contenu de \verb?datalog?.}
+
+\question{Tracer à l'aide de la fonction \verb?scatter? de la bibliothèque \verb?matplotlib.pyplot?:
+\begin{itemize}
+ \item \verb?lu? en fonction de \verb?lt?,
+ \item \verb?loglu? en fonction de \verb?lt?.
+\end{itemize}}
+
+\question{Coder une fonction \verb?tri?, vous pourrez utiliser la méthode de votre choix. Utiliser cette fonction sur la liste \verb?[2,4,3,1,5]?. Afficher le résultat obtenu.}
+
+\question{A partir de la réponse précédente, proposer une solution afin de trier \verb?datalog? dans le sens des \verb?t? croissants.}
+
+\section{Régression linéaire}
+
+On sait que la tension aux bornes d'un condensateur en phase de décharge peut s'écrire $u(t)=U_0\cdot e^{-\frac{t}{\tau}}$, ce qui mène à $ln(u(t))=ln(U_0)-\frac{t}{\tau}$.
+
+Ainsi, le nuage de points \verb?datalog? peut être assimilé à un modèle de droite affine dont l'ordonnée à l'origine est $ln(U_0)$ et la pente est $-\frac{1}{\tau}$.
+
+\question{Déterminer et afficher la valeur de $ln(U_0)$, en regardant la première valeur classée dans \verb?datalog?.}
+
+~\
+
+Afin de déterminer la pente de la courbe, la suite va consister à soustraire cette valeur à l'ensemble des ordonnées de \verb?datalog? afin de créer \verb?datalog0? qui pourra être modélisée par un modèle linéaire.
+
+\question{Déterminer \verb?datalog0? et tracer l'ensemble des points qu'elle contient.}
+
+~\
+
+La suite va consister à rechercher la droite la plus \og proche \fg du nuage de points \verb?datalog0?. Pour cela nous allons utiliser la fonction \verb?ecart(liste,pente)? à compléter:
+
+\begin{minted}[linenos]{python}
+def ecart(liste,pente):
+    ........
+    for i in range(len(liste)):
+        .......(liste[i][0]*pente-liste[i][1])**2
+    return ......
+\end{minted}
+
+\question{Recopier et compléter ce code et déterminer l'écart entre les données \verb?datalog0? et les courbes de pente \verb?-5? et \verb?-10?.}
+
+\question{Tracer la courbe qui donne le résultat de la fonction \verb?ecart? (en ordonnée) en fonction de la \verb?pente? (en abscisse), avec \verb?pente? $\in[-20,0]$.}
+
+\question{Chercher à l'aide d'un code python la valeur de la \verb?pente? pour l'\verb?ecart? minimal. En déduire la valeur de $\tau$.}
+
+\question{Afin de vérifier vos résultat, les comparer avec ceux obtenus par la fonction \verb?polyfit? de la bibliothèque \verb?numpy?. Vous pourrez utiliser le code suivant à titre d'exemple pour des points répartis autour de la droite d'équation $y=2\cdot x+1$.}
+
+\begin{minted}[linenos]{python}
+datalog=np.array(datalog)
+x=[0,1,2,3]
+y=[0.86,3.3,4.8,6.9]
+result=np.polyfit(x,y,1)
+print("Résultat polyfit : pente de {:.2f},\
+		ordonnée à l'origine {:.2f}".format(result[0],result[1]))
+\end{minted}
+
+\question{Afin de visualiser le résultat, superposer le modèle affine ainsi obtenu (par votre script ou avec \verb?polyfot? avec le nuage de points de \verb?datalog?.}
+
+\begin{center}
+\Large{FIN}
+\end{center}
+
+\ifdef{\public}{\end{document}}{\cleardoublepage\pagestyle{correction}}
+
+\begin{center}
+\Large{Correction}
+\end{center}
+
+\reponse{}
+
+\begin{minted}[linenos]{python}
+import json
+
+with open('donnees.json', 'r') as openfile:
+    dictionnaire = json.load(openfile)
+
+print(dictionnaire['titre'])
+\end{minted}
+
+\reponse{}
+
+\begin{minted}[linenos]{python}
+import numpy as np
+
+lt=np.array(dictionnaire['temps'])
+lu=np.array(dictionnaire['U'])
+loglu=np.array(dictionnaire['log(U)'])
+datalog=dictionnaire['datalog']
+
+print(datalog)
+\end{minted}
+
+\reponse{}
+
+\begin{minted}[linenos]{python}
+import matplotlib.pyplot as plt
+
+plt.scatter(lt,lu)
+plt.show()
+
+plt.scatter(lt,loglu)
+plt.show()
+\end{minted}
+
+\reponse{}
+
+\begin{minted}[linenos]{python}
+def tri(liste):
+    # Parcours de 1 à la taille de la liste
+    for i in range(len(liste)-1):
+        # Initialiser le min
+        min=liste[i]
+        jmin=i
+        for j in range(i, len(liste)):
+            # Chercher le min
+            if liste[j]<min:
+                jmin=j
+                min=liste[j]
+        # Permuter le min et l'élément i
+        liste[i],liste[jmin]=liste[jmin],liste[i]
+
+
+liste=[2,4,3,1,5]
+tri(liste)
+print(liste)
+\end{minted}
+
+\reponse{}
+
+On peut directement utiliser la fonction précédente car python compare les listes en suivant l'ordre lexicographique. Ainsi, les premiers éléments de chaque liste sont d'abord comparés entre eux, c'est donc \verb?t? qui sera le critère de tri par défaut.
+
+On peut aussi forcer l'utilisation du premier élément de \verb?liste? pour faire le classement en modifiant la fonction comme suit.
+
+\begin{minted}[linenos]{python}
+def tri2(liste):
+    # Parcours de 1 à la taille de la liste
+    for i in range(len(liste)-1):
+        # Initialiser le min
+        min=liste[i][0]
+        jmin=i
+        for j in range(i, len(liste)):
+            # Chercher le min
+            if liste[j][0]<min:
+                jmin=j
+                min=liste[j][0]
+        # Permuter le min et l'élément i
+        liste[i],liste[jmin]=liste[jmin],liste[i]
+
+print(datalog)
+tri2(datalog)
+print(datalog)
+\end{minted}
+
+\reponse{}
+
+\begin{minted}[linenos]{python}
+print("L'ordonnée à l'origine est {:.2f}".format(datalog[0][1]))
+\end{minted}
+
+\reponse{}
+
+\begin{minted}[linenos]{python}
+datalog0=[]
+for t,data in datalog:
+    datalog0.append([t,data-datalog[0][1]])
+
+for t,data in datalog0:
+    plt.scatter(t,data)
+plt.show()
+\end{minted}
+
+\reponse{}
+
+\begin{minted}[linenos]{python}
+def ecart(liste,pente):
+    somme=0
+    for i in range(len(liste)):
+        somme+=(liste[i][0]*pente-liste[i][1])**2
+    return somme
+
+print(ecart(datalog0,-5),ecart(datalog0,-10))
+\end{minted}
+
+\reponse{}
+
+\begin{minted}[linenos]{python}
+pentes=np.linspace(-20,0,1000)
+ecarts=[ecart(datalog0,pente) for pente in pentes]
+\end{minted}
+
+\reponse{}
+
+\begin{minted}[linenos]{python}
+imin=0
+min=ecarts[imin]
+for i in range(1,len(ecarts)):
+    if ecarts[i]<min:
+        imin=i
+        min=ecarts[i]
+pente=pentes[imin]
+print('On trouve une pente de {:.2f}'.format(pente))
+print('La valeur de tau est {:.2f}'.format(-1/pente))
+\end{minted}
+
+\reponse{}
+
+\begin{minted}[linenos]{python}
+datalog=np.array(datalog)
+x=datalog[:,0]
+y=datalog[:,1]
+result=np.polyfit(x,y,1)
+print("Résultat script : pente de {:.2f},\
+		une ordonnée à l'origine {:.2f}.".format(pente,datalog[0][1]))
+print("Résultat polyfit : pente de {:.2f},\
+		ordonnée à l'origine {:.2f} => OK.".format(result[0],result[1]))
+\end{minted}
+
+\reponse{}
+
+\begin{minted}[linenos]{python}
+for x1,y1 in datalog:
+    plt.scatter(x1,y1)
+plt.plot(x,pente*x+datalog[0][1])
+#plt.plot(x,result[0]*x+result[1])
+plt.show()
+\end{minted}
+
+\end{document}
