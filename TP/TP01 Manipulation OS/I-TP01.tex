@@ -191,26 +191,32 @@ Enregistrer votre fichier avec un nom pertinent.
 \item Dans l'éditeur de script ouvert précédemment, recopier le script suivant. On sera attentif \` a la ponctuation et \` a l'indentation.
 
 \begin{minted}[linenos]{python}
-from mpl_toolkits.mplot3d import Axes3D
-from matplotlib import cm
-from array import array   
-import matplotlib.pyplot as plt   
-import numpy as np   
-import csv   
-X1 = []   
-Y1 = []   
-Z1 = []   
-cr = csv.reader(open("FICHIER"))   
-for row in cr:   
-   X1.append(float(row[0]))
-   Y1.append(float(row[1]))  
-   Z1.append(float(row[2]))
-X = np.asarray(X1)   
-Y = np.asarray(Y1)   
-Z = np.asarray(Z1)   
-fig = plt.figure()   
-ax = fig.subplot(projection='3d')   
-surf = ax.scatter(X, Y, Z)   
+import matplotlib.pyplot as plt
+import numpy as np
+
+X1 = []
+Y1 = []
+Z1 = []
+
+file = open("FICHIER","r")
+content=file.read()
+file.close()
+
+lignes=content.split("\n")
+
+for ligne in lignes[:-1]:
+    row=ligne.split(',')
+    X1.append(float(row[0]))
+    Y1.append(float(row[1]))
+    Z1.append(float(row[2]))
+
+X = np.asarray(X1)
+Y = np.asarray(Y1)
+Z = np.asarray(Z1)
+
+fig = plt.figure()
+ax = fig.add_subplot(projection = '3d')
+surf = ax.scatter(X, Y, Z)
 plt.show()
 \end{minted}
 
@@ -293,9 +299,22 @@ else do 3
 \item Dans le cas où le résultat est \texttt{'Vous etes Batman !'} quelle est la valeur de la variable \texttt{answer} ?
 \item Compléter le questionnaire en ajoutant une question. On commencera par déterminer le nombre de nouveaux super-héros que cela fait apparaitre. \\
 Compléter ensuite le questionnaire en ajoutant une proposition \og c \fg pour chaque question afin de faire apparaître de nouveaux super-héros (féminins si possible !).
+
+
+\section{Faire son propre algorithme}
+
+Ellsworth Kelly a toujours été un grand observateur du monde qui l'entoure. Passionné par l'ornithologie dès son enfance, il continue de chercher de nouvelles sources d'inspiration tout au long de sa carrière. Lors d'un séjour parisien, il s'émerveille des scintillements de la lumière sur la Seine et des ombres sur le fleuve en fin de journée. Il cherche à capturer ces effets dans de nombreux dessins d'étude, et à trouver un équilibre entre ombre et lumière.
+
+C'est grâce à une rencontre avec le couple d'artistes Jean Arp et Sophie Taeuber que Kelly trouve la solution à ses recherches. Lors d'une visite dans leur atelier à Meudon, il découvre leurs duo-collages. Ces \oe uvres, créées en collaboration, laissent une place importante au hasard. Kelly commence alors à utiliser le hasard dans son travail de création, dans le but d'éviter toute subjectivité et de retirer ainsi toute trace de sa personnalité.
+
+Pour la réalisation de cette \oe uvre, intitulée Seine, Kelly dessine une grille de 41 carrés en hauteur, sur 82 en largeur. Dans une boîte, il place des papiers numérotés de 1 à 41. Pour la première colonne, Kelly pioche un papier, puis noircit le rectangle qui correspond au numéro sélectionné. Pour la seconde colonne, il pioche 2 papiers, puis 3 pour la troisième colonne et ainsi de suite. La colonne centrale est entièrement noircie. Il inverse ensuite le procédé pour la partie droite de l'\oe uvre. Le résultat obtenu en ensuite été peint sur un panneau en bois.
+
+\begin{center}
+\includegraphics[width=0.7\linewidth]{img/seine}
+\end{center}
+
+\item Proposer un code python permettant de générer cette image.
 \end{enumerate}
 \end{exercice}
-
-%rajouter question : modifier pour tester le genre et d'autres super heroines
 
 \end{document}
