@@ -129,7 +129,8 @@ Le code suivant permet de tracer la première configuration du blinker et de cal
 \begin{minted}[linenos]{python}
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation
+from matplotlib.animation import FuncAnimation
+
 
 M,N=6,5
 Z=[[0 for i in range(M)] for i in range(N)]
@@ -183,7 +184,7 @@ def update(frameNum, img, Z):
 
 fig, ax = plt.subplots()
 img = ax.imshow(Z, interpolation='nearest')
-ani = animation.FuncAnimation(fig, update, fargs=(img, Z), frames=1000,\
+ani = FuncAnimation(fig, update, fargs=(img, Z), frames=1000,\
 			 interval=1, save_count=1)
 plt.show()
 \end{minted}
@@ -256,6 +257,7 @@ def decomposition_fibo(n):
         if n>=valeurs[i]:
             resultat.append(valeurs[i])
             n = n-valeurs[i]
+            i-=1
         i-=1
     return resultat
 
