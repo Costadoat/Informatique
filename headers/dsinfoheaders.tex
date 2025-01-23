@@ -175,6 +175,30 @@
 
 \renewcommand{\footrulewidth}{0.4pt}
 
+\makeatletter
+\newcommand\modulo[2]{
+    \newcounter{lastpagesujet}
+	\setcounter{lastpagesujet}{#1}
+    \divide\value{lastpagesujet} by #2
+    \multiply\value{lastpagesujet} by #2
+    \advance\value{lastpagesujet} by #2
+    \advance\value{lastpagesujet} by 1\relax
+    }
+\makeatother
+
+
+\newcommand{\finsujet}[1]
+{
+    \begin{center}
+    \Large{FIN}
+    \end{center}
+    	
+    \ifdef{\public}{
+    	\modulo{\value{page}}{#1}
+		\whiledo{\value{page}<\value{lastpagesujet}}{~\ \newpage}
+		\end{document}
+	}{\newpage\pagestyle{correction}}
+}
 
 \newcommand{\BackgroundPic}{%
 \put(0,0){%
