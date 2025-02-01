@@ -1,0 +1,223 @@
+\input{../../../headers/dsinfoheaders}
+
+\begin{center}
+{\Large\bf {\type} \no {\numero} -- \descrip}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+\hspace{-1cm}
+\begin{boxedminipage}{\textwidth} 
+\begin{itemize}
+ \item Faire tous les exercices dans un fichier {NomPrenom.py} à sauvegarder,
+ \item mettre en commentaire l'exercice et la question traités (ex: \# Exercice 1),
+ \item ne pas oublier pas de commenter ce qui est fait dans votre code (ex: \# Je crée une fonction pour calculer la racine d'un nombre),
+ \item les deux parties sont indépendantes et peuvent être traitées dans l'ordre que vous voulez,
+ \item il faut vérifier avant de partir que le code peut s'exécuter et qu'il affiche les résultats que vous attendez. Les lignes de code qui doivent s'exécuter sont décommentées.
+\end{itemize}
+\end{boxedminipage}
+
+~\
+
+\section*{Introduction}
+
+Vous avez reçu en cadeau un puzzle numérique, il s'agit d'un ensemble de \verb?pieces? (sous la forme de photos) disponibles dans le dossier \verb?/home/eleve/Ressources/PTSI/boite?.
+
+L'objectif est de recomposer le puzzle à partir de toutes ces \verb?pieces?.
+
+Après avoir codé un algorithme de tri dans la \textbf{première partie}, il faudra dans une \textbf{seconde} classer la liste des noms des pièces dans l'ordre de leur placement sur le puzzle. Ensuite, dans une \textbf{troisième} partie, nous assemblerons ce puzzle. Dans la \textbf{quatrième} et dernière partie, nous mettrons le résultat sous la forme d'une image en niveaux de gris.
+
+\section{Tri d'une liste}
+
+On donne pour commencer ce début de script qui génère une liste \verb?listeint? qui contient les entiers de 0 à 99 dans le désordre.
+
+\begin{minted}[linenos]{python}
+# -*- coding: utf-8 -*-
+
+import random
+listeint=list(range(100))
+random.shuffle(listeint)
+print(listeint)
+
+def tri(liste): 
+	....
+
+tri(listeint)
+print(listeint)
+\end{minted}
+
+\question{Compléter le code précédent en codant la fonction \verb?tri? qui permet de classer les entiers de la liste \verb?listeint? dans l'ordre croissant. N'importe quel algorithme de tri pourra être utilisé.}
+
+\section{Liste des pièces}
+
+Le code suivant permet d'afficher, dans l'ordre alphabétique, la liste des pièces du puzzle contenues dans le dossier \og /home/eleve/Ressources/PTSI/boite \fg. Le nom de chaque pièce est constitué de deux lettres puis d'un nombre à 4 chiffre qui permet de classer la position de la pièce dans le tableau.
+
+Ainsi, la pièce dont le nombre est le plus petit se trouve en haut à gauche, la suivante en dessous,... Lorsque la première colonne du puzzle est complète, la pièce suivante se trouve à la première ligne de la deuxième colonne, etc... Le puzzle est constitué de 12 lignes et 12 colonnes.
+
+\begin{minted}[linenos]{python}
+from os import listdir
+
+liste_pieces = listdir('/home/eleve/Ressources/PTSI/boite')
+liste_pieces.sort()
+print(liste_pieces)
+\end{minted}
+
+Le premiers éléments de la liste, avant le tri, sont :
+
+\texttt{['AO0728.jpg', 'AS0350.jpg', 'BB0287.jpg', 'BE0129.jpg', 'BH0832.jpg',...}
+
+~\
+
+L'information pour le placement de la pièce se trouvant dans le chiffre inclus dans le nom du fichier, on se propose d'extraire cette information.
+
+\question{Proposer un code permettant d'afficher les 4 caractères du nom, du premier élément de la liste \texttt{liste\_pieces}, contenant ce chiffre. Le code doit afficher \texttt{0728}.}
+
+\question{A partir du résultat de cette question, proposer une fonction \texttt{tri\_pieces}, dérivée de la fonction \texttt{tri} de la question 1, qui permet de trier les fichiers à partir de ces 4 caractères. Une fois triée, la liste \texttt{liste\_pieces} commence alors par : 
+
+\texttt{['TM0010.jpg', 'XU0018.jpg', 'PB0025.jpg', 'TH0030.jpg',...}}
+
+\section{Résolution du puzzle}
+
+Si vous n'avez pas réussi la partie précédente, vous pouvez utiliser les pièces du dossier \og /home/eleve/Ressources/PTSI/boite2 \fg. Dans celui-ci le nom des fichiers est directement trié correctement. Vous pouvez directement utiliser le code au dessus de la question 2. Attention de modifier le code donné dans le sujet en conséquence \texttt{boite} devient \texttt{boite2}. 
+
+~\
+
+Le code suivant permet d'assembler les pièces du puzzle. Malheureusement, il contient des erreurs. En effet, vous pouvez constater que les pièces sont tout d'abord disposées en ligne (la première ligne doit être complétée avant de passer à la seconde) et non en colonnes.
+
+\newpage
+
+\begin{minted}[linenos]{python}
+from PIL import Image
+piece0 = Image.open('/home/eleve/Ressources/PTSI/boite/{}'.format(liste_pieces[0]))
+lx,ly=piece0.size
+dx,dy=12,12
+image = Image.new('RGB', (lx*dx, ly*dy))
+i=0
+py=0
+for y in range(dy):
+    px=0
+    for x in range(dx):
+        nom_piece='/home/eleve/Ressources/PTSI/boite/{}'.format(liste_pieces[i])
+        piece = Image.open(nom_piece)
+        image.paste(piece, (px, py))
+        i+=1
+        px+=lx
+    py+=ly
+
+image.show()
+\end{minted}
+
+\question{Recopier et modifier le code précédent afin d'afficher le puzzle en colonnes afin que l'image qui apparaisse soit correcte.}
+
+\section{Traitement de l'image}
+
+Quelque soit le résultat obtenu, sauvegarder l'image en remplaçant \verb?image.show()? par \verb?image.save('puzzle.png')?. Cela permet de générer le fichier \verb?puzzle.png? à côté de votre script python. Vous utiliserez ce fichier pour la suite de l'exercice.
+
+~\
+
+Si vous n'avez pas réussi à reconstituer le puzzle, vous pouvez pour la suite utiliser un puzzle déjà complet présent dans le fichier \verb?puzzle_annee_derniere.png?.
+
+\question{Convertir et afficher cette image en niveaux de gris grâce à la bibliothèque \texttt{matplotlib} comme vu en TP. On rappelle les coefficients à utiliser pour le niveau de gris en RGB : \texttt{[0.2125,0.7154,0.0721]}.}
+
+\paragraph{Remarque : } Le dernière page du sujet doit servir de brouillon.
+
+\finsujet{4}
+
+\reponse{}{
+\begin{minted}[linenos]{python}
+# -*- coding: utf-8 -*-
+import random
+listeint=list(range(100))
+random.shuffle(listeint)
+#print(listeint)
+
+#ici on utilise un tri par sélection
+def tri(liste): 
+    for i in range(len(liste)-1):
+        min=liste[i]
+        jmin=i
+        for j in range(i, len(liste)):
+            if liste[j]<min:
+                jmin=j
+                min=liste[j]
+        liste[i],liste[jmin]=liste[jmin],liste[i]
+
+tri(listeint)
+print(listeint)
+\end{minted}
+}
+
+\reponse{}{
+\begin{minted}[linenos]{python}
+print(liste_pieces[0][2:6])
+\end{minted}
+}
+
+\reponse{}{
+\begin{minted}[linenos]{python}
+from os import listdir
+liste_pieces = listdir('/home/eleve/Ressources/PTSI/boite')
+print(liste_pieces)
+
+def tri_pieces(liste): 
+    for i in range(len(liste)-1):
+        min=liste[i][2:-4]
+        jmin=i
+        for j in range(i, len(liste)):
+            if liste[j][2:-4]<min:
+                jmin=j
+                min=liste[j][2:-4]
+        liste[i],liste[jmin]=liste[jmin],liste[i]
+
+tri_pieces(liste_pieces)
+print(liste_pieces)
+\end{minted}
+}
+
+\reponse{}{
+\begin{minted}[linenos]{python}
+piece0 = Image.open('/home/eleve/Ressources/PTSI/boite/{}'.format(liste_pieces[0]))
+lx,ly=piece0.size
+dx,dy=12,12
+image = Image.new('RGB', (lx*dx, ly*dy))
+i=0
+px=0
+for x in range(dx):
+    py=0
+    for y in range(dy):
+        nom_piece='/home/eleve/Ressources/PTSI/boite/{}'.format(liste_pieces[i])
+        piece = Image.open(nom_piece)
+        image.paste(piece, (px, py))
+        i+=1
+        py+=ly
+    px+=lx
+    
+image.show()
+\end{minted}
+}
+
+\reponse{}{
+\begin{minted}[linenos]{python}
+import matplotlib.image as img
+import matplotlib.pyplot as plt
+import numpy as np
+
+image = img.imread('puzzle.png')
+image = img.imread('puzzle_annee_derniere.png')
+plt.imshow(image)
+plt.show()
+
+def convert_nb_evol(image):
+    image_out=np.zeros(np.shape(image))
+    coefficients=[0.2125,0.7154,0.0721]
+    for j in range(3):
+        for i in range(3):
+            image_out[:,:,j]+=image[:,:,i]*coefficients[i]
+    return image_out
+
+plt.imshow(convert_nb_evol(image))
+plt.show()
+\end{minted}
+}
+
+\end{document}
