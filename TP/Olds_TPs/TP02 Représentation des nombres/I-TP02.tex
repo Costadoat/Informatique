@@ -1,0 +1,209 @@
+\input{../../Header_Willie}
+%\input{../../macro_Juliette}
+\input{intro}
+
+\fancyhead[C]{\bfseries{TP \no \num}}
+
+\begin{document}
+
+\begin{center}
+{\Large\bf TP \no {\numero} -- \descrip}
+\end{center}
+\section{Dépassement de capacité}
+
+\paragraph{Question 1:} Écrire dans le tableau suivant le float (simple précision) le plus grand exprimable.
+
+\setlength{\tabcolsep}{0.1cm}
+\begin{center}
+\begin{scriptsize}
+\begin{tabular}{|*{32}{l|}}
+\hline
+S & \multicolumn{8}{c|}{Exposant} & \multicolumn{23}{c|}{Mantisse} \\
+\hline
+  &   &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\hline
+\multicolumn{4}{|c|}{} & \multicolumn{4}{c|}{} & \multicolumn{4}{c|}{} & \multicolumn{4}{c|}{} & \multicolumn{4}{c|}{} & \multicolumn{4}{c|}{} & 
+\multicolumn{4}{c|}{} & \multicolumn{4}{c|}{} \\
+\hline
+\end{tabular}
+\end{scriptsize}
+\end{center}
+
+\paragraph{Question 2:} Calculer sa valeur dans la base décimale.
+
+\paragraph{Question 3:} Calculer la valeur dans la base décimale du float (double précision) le plus grand exprimable.
+
+\paragraph{Question 4:} Entrer dans une console python les commandes suivantes et en déduire si le type de float utilisé est de précision simple ou double.
+
+
+\begin{verbatim}
+>>> 2.0**(1023)
+>>> 2.0**(1024)
+>>> import sys
+>>> sys.float_info.max
+\end{verbatim}
+
+\paragraph{Question 5:} Calculer la valeur minimale ($>0$) pour le type de variable utilisé par votre système.
+
+\paragraph{Question 6:} Vérifier votre calcul grâce à la commande suivante.
+
+\begin{verbatim}
+>>> import sys
+>>> sys.float_info.min
+\end{verbatim}
+
+\section{Approximation de calcul}
+
+Lors de la première séance, nous avons remarqué que certains calculs étaient approximés. L'exemple suivant avait été utilisé.
+
+\begin{verbatim}
+>>> 1-1/3.-1/3.-1/3.
+\end{verbatim}
+
+\paragraph{Question 7:} Calculer le nombre binaire permettant de définir le réel le plus proche de 1/3.
+
+\paragraph{Question 8:} Écrire ce nombre sous la forme suivante $A*2^{exp}$, où $A$ est un entier, et $exp$, l'exposant le plus petit qui permet à $A$ d'être un entier. Vous ferez ce calcul pour un float simple et un float double. (Le calcul sera plus simple si une similitude entre les deux calculs est trouvée)
+
+\paragraph{Question 9:} Déterminer dans ces deux cas la valeur du décimal le plus proche de 1/3, dans le cas des deux types de float.
+
+\paragraph{Question 10:} Calculer alors la valeur de l'opération $1-1/3.-1/3.-1/3.$ en prenant ce nombre approché et comparer cette valeur à celle trouvée en faisant le calcul directement dans la console python.
+
+\ifdef{\public}{\end{document}}{}
+
+\newpage
+
+\pagestyle{correction}
+
+\section{Correction}
+
+\subsection{Dépassement de capacité}
+
+\paragraph{Question 1:}
+
+\setlength{\tabcolsep}{0.1cm}
+\begin{center}
+\begin{scriptsize}
+\begin{tabular}{|*{32}{l|}}
+\hline
+S & \multicolumn{8}{c|}{Exposant} & \multicolumn{23}{c|}{Mantisse} \\
+\hline
+0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+\hline
+\multicolumn{4}{|c|}{7} & \multicolumn{4}{c|}{F} & \multicolumn{4}{c|}{7} & \multicolumn{4}{c|}{F} & \multicolumn{4}{c|}{F} & \multicolumn{4}{c|}{F} & 
+\multicolumn{4}{c|}{F} & \multicolumn{4}{c|}{F} \\
+\hline
+\end{tabular}
+\end{scriptsize}
+\end{center}
+
+\paragraph{Question 2:}
+
+\begin{center}
+	\begin{tabular}{|c c c|}
+	\hline
+	Signe & Exposant & Mantisse \\
+	\hline
+	0 & $\underbrace{111...110}_{8 bits}$ & $\underbrace{111...111}_{23 bits}$ \\
+	\hline
+	\end{tabular}
+\end{center}
+
+\begin{itemize}
+ \item Exposant: $2^8-2=254$, exposant simple $254-127=127$,
+ \item Le chiffre à calculer est donc $\underbrace{111...111}_{24 bits}\underbrace{000...000}_{104 bits}$,
+ \item Ce qui donne en décimal $(2^{24}-1)*2^{104}=3.4028234663852886.10^{38}$
+\end{itemize}
+
+\paragraph{Question 3:}
+
+\begin{center}
+	\begin{tabular}{|c c c|}
+	\hline
+	Signe & Exposant & Mantisse \\
+	\hline
+	0 & $\underbrace{111...110}_{11 bits}$ & $\underbrace{111...111}_{52 bits}$ \\
+	\hline
+	\end{tabular}
+\end{center}
+
+\begin{itemize}
+ \item Exposant: $2^{11}-2=2046$, exposant simple $2046-1023=1023$,
+ \item Le chiffre à calculer est donc $\underbrace{111...111}_{53 bits}\underbrace{000...000}_{971 bits}$,
+ \item Ce qui donne en décimal $(2^{53}-1)*2^{971}=1.7976931348623157.10^{308}$
+\end{itemize}
+
+\paragraph{Question 5:}
+
+\begin{center}
+	\begin{tabular}{|c c c|}
+	\hline
+	Signe & Exposant & Mantisse \\
+	\hline
+	0 & $\underbrace{000...001}_{11 bits}$ & $\underbrace{000...000}_{52 bits}$ \\
+	\hline
+	\end{tabular}
+\end{center}
+
+\begin{itemize}
+ \item Exposant: $1$, exposant simple $1-1023=-1022$,
+ \item Le chiffre à calculer est donc $1,\underbrace{000...000}_{-1022 bits}$,
+ \item Ce qui donne en décimal $1*2^{-1022}=2.2250738585072014.10^{-308}$
+\end{itemize}
+
+\paragraph{Question 7:}
+
+\begin{tabular}{c c c c c c c c c c}
+0,33.. & x & 2 & = & 0,66.. & = &  0 & + & 0,66.. \\
+0,66.. & x & 2 & = & 1,33.. & = &  1 & + & 0,33.. \\
+0,33.. & x & 2 & = & 0,66.. & = &  0 & + & 0,66.. \\
+0,66.. & x & 2 & = & 1,33.. & = &  1 & + & 0,33.. \\
+0,33.. & x & 2 & = & 0,66.. & = &  0 & + & 0,66.. \\
+...
+\end{tabular}
+
+On remarque un récurrence dans l'écriture du $0,33_{10}$ en binaire: $0,33.._{10}=0,01010.._2$
+
+\paragraph{Question 8:}
+\begin{itemize}
+ \item 32 bits: $1,\underbrace{0101..}_{23 bits}*2^{-2}$ $=\underbrace{10101010....}_{24 bits}*2^{-25}$
+ \item 64 bits:$1,\underbrace{0101..}_{52 bits}*2^{-2}=\underbrace{10101010....}_{53 bits}*2^{-54}$
+\end{itemize}
+
+Le passage de $\underbrace{10101010...0}_{24 bits}$ à $\underbrace{10101010...1}_{23 bits}$ se fait par un décalage des bits vers la droite ce qui revient à diviser par deux.
+
+Le passage de $\underbrace{10101010...1}_{53 bits}$ à $\underbrace{10101010...0}_{54 bits}$ se fait par un décalage des bits vers la gauche ce qui revient à multiplier par deux.
+
+\paragraph{Question 9:}
+\begin{itemize}
+ \item 32 bits: $\underbrace{10101010...0}_{24 bits}=\underbrace{11111111....}_{24 bits}-\underbrace{10101010...1}_{23 bits}$
+ \item 64 bits: $\underbrace{10101010...1}_{53 bits}=\underbrace{11111111....}_{54 bits}-\underbrace{10101010...0}_{54 bits}$
+\end{itemize}
+
+Le calcul de $\underbrace{11111111....}_{24 bits}$ se fait en ajoutant 1.
+
+\begin{itemize}
+ \item 32 bits: $\underbrace{10101010...0}_{24 bits}=(2^{24}-1)-\dfrac{\underbrace{10101010...0}_{24 bits}}{2}$
+ \item 64 bits: $\underbrace{10101010...1}_{53 bits}=(2^{54}-1)-2*\underbrace{10101010...1}_{53 bits}$
+\end{itemize}
+
+Regroupement des $\underbrace{10101010...0}_{24 bits}$ et $\underbrace{10101010...1}_{53 bits}$.
+
+\begin{itemize}
+ \item 32 bits: $\underbrace{10101010...0}_{24 bits}=\dfrac{2}{3}.(2^{24}-1)$
+ \item 64 bits: $\underbrace{10101010...1}_{53 bits}=\dfrac{1}{3}.(2^{54}-1)$
+\end{itemize}
+
+Le résultat est alors.
+
+\begin{itemize}
+ \item 32 bits: $\underbrace{10101010...0}_{24 bits}*2^{-25}=\dfrac{2}{3}.(2^{24}-1)*2^{-25}=$
+ \item 64 bits: $\underbrace{10101010...1}_{53 bits}*2^{-54}=\dfrac{1}{3}.(2^{54}-1)*2^{-54}=$
+\end{itemize}
+
+\paragraph{Question 10:}
+\begin{itemize}
+ \item 32 bits: $1-1/3.-1/3.-1/3.=1-2.(2^{24}-1)*2^{-25}=1-(2^{24}-1)*2^{-24}=2^{-24}=5.960464477539063.10^{-8}$
+ \item 64 bits: $1-1/3.-1/3.-1/3.=1-1.(2^{54}-1)*2^{-54}=1-(2^{54}-1)*2^{-54}=2^{-54}=5,55111512312578.10^{-17}$
+\end{itemize}
+
+\end{document}

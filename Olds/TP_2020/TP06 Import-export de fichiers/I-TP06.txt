@@ -1,3 +1,0 @@
-mot1,mot2,mot3
-mot4,mot5,mot6
-mot7,mot8,mot9
