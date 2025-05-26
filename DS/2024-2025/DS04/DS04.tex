@@ -1,0 +1,339 @@
+\input{../../../headers/dsinfoheaders}
+
+\begin{center}
+{\Large\bf {\type} \no {\numero} -- \descrip}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+\hspace{-1cm}
+\begin{boxedminipage}{\textwidth} 
+\begin{itemize}
+ \item Faire tous les exercices dans un fichier {NomPrenom.py} à sauvegarder,
+ \item mettre en commentaire l'exercice et la question traités (ex: \# Exercice 1),
+ \item ne pas oublier pas de commenter ce qui est fait dans votre code (ex: \# Je crée une fonction pour calculer la racine d'un nombre),
+ \item les deux parties sont indépendantes et peuvent être traitées dans l'ordre que vous voulez,
+ \item il faut vérifier avant de partir que le code peut s'exécuter et qu'il affiche les résultats que vous attendez. Les lignes de code qui doivent s'exécuter sont décommentées.
+\end{itemize}
+\end{boxedminipage}
+
+~\
+
+\section*{Introduction}
+
+Un supermarché met en place un système de passage automatique en caisse.
+Un client scanne les articles à l’aide d’un scanner de code-barres au fur et à mesure qu’il les ajoute dans son panier.
+
+Les articles s’enregistrent alors dans une structure de données.
+
+Le panier d’un client sera représenté par une file contenant les articles scannés.
+
+Les articles sont représentés par des dictionnaires \texttt{(code\_barre, designation, prix, horaire\_scan)} où :
+\begin{itemize}
+ \item \texttt{code\_barre} est un nombre entier identifiant l’article,
+ \item \texttt{designation} est une chaîne de caractères qui pourra être affichée sur le ticket de caisse,
+ \item \texttt{prix} est un nombre décimal donnant le prix d’une unité de cet article,
+ \item \texttt{horaire\_scan} est un nombre entier de secondes permettant de connaître l’heure où l’article a été scanné
+\end{itemize}
+
+\section{Conversion décimal-binaire}
+
+\question{\textbf{Coder} une fonction \texttt{inverse\_liste(liste)} qui prend en entrée une liste, et retourne la liste dans l'ordre inverse. L'utilisation de la fonction \texttt{reverse()} n'est pas autorisée. \textbf{Afficher} le résultat de la commande \texttt{inverse\_liste(['A','B','C'])}}
+
+~\
+
+La fonction \texttt{convert\_bin(decimal)} convertit un nombre décimal en nombre binaire. Le résultat est affiché sous la forme d'une \textbf{liste} de 0 et de 1.
+
+\newpage
+
+\begin{minted}[linenos]{python}
+def convert_bin(decimal):
+    binaire=[]
+    r=decimal
+    while r>1:
+        .....
+        .....
+        binaire.append(r)
+        r=q
+    binaire.append(r)
+    return ........
+\end{minted}
+
+\question{\textbf{Compléter} la fonction \texttt{convert\_bin(decimal)}. La commande \texttt{convert\_bin(19)} renvoie \texttt{[1,0,0,1,1]}.}
+
+~\
+
+Si la question précédente n'est pas traitée, le code suivant pourra être utilisé, il renvoie le résultat attendu.
+
+\begin{minted}[linenos]{python}
+def convert_bin(decimal):
+    a=str(bin(decimal))[2:]
+    s=[*a]
+    s=[int(i) for i in s]
+    return s
+\end{minted}
+
+On rappelle que sous forme polynomiale, un nombre binaire quelconque est exprimé par: $N=\sum\limits_{0}^n \alpha_i.2^i$, avec $\alpha_i=0$ ou $1$.
+
+\question{\textbf{Coder} une fonction \texttt{convert\_decimal(binaire)} qui convertit un nombre binaire sous la forme d'une liste en décimal. \textbf{Afficher} le résultat de \texttt{convert\_decimal(convert\_bin(19)))} qui doit renvoyer 19.}
+
+\section{Manipulation du panier}
+
+Le premier \texttt{produit} scanné possède les caractéristiques suivantes:
+\begin{itemize}
+ \item 'code barre' : 31002,
+ \item 'designation':"café noir",
+ \item 'prix':1.50,
+ \item 'horaire\_scan':50525.
+\end{itemize}
+
+\question{\textbf{Stocker} dans un dictionnaire \texttt{produit} les informations précédentes. \textbf{Afficher} \texttt{produit}.}
+
+~\
+
+La liste \texttt{panier} contiendra l'ensemble des produits scannés, afin d'être achetés, par la personne dans le magasin.
+
+\question{\textbf{Coder} une fonction \texttt{enfiler(panier,produit)} qui enfile un nouveau \texttt{produit} dans le \texttt{panier}. Après avoir exécuté la commande \texttt{enfiler(panier,produit)}, \textbf{afficher} le \texttt{panier}, il doit contenir le \texttt{produit} précédemment créé.}
+
+On considère maintenant que les clients peuvent faire les courses à plusieurs et qu'il est possible d'ajouter un autre panier dans notre panier à tout moment.
+
+Soit le panier 2 suivant:
+\begin{itemize}
+ \item \texttt{panier[0]}:
+ \begin{itemize}
+  \item 'code barre':20333,
+  \item 'designation':"madeleines",
+  \item 'prix':4.30,
+  \item 'horaire\_scan':40520.
+ \end{itemize}
+ \item \texttt{panier[1]}:
+ \begin{itemize}
+  \item 'code barre':1204,
+  \item 'designation':"sucre",
+  \item 'prix':3.40,
+  \item 'horaire\_scan':40550.
+ \end{itemize}
+ \item \texttt{panier[2]}:
+ \begin{itemize}
+  \item 'code barre':2046,
+  \item 'designation':"chocolat",
+  \item 'prix':2.50,
+  \item 'horaire\_scan':40612.
+ \end{itemize}
+\end{itemize}
+
+\question{\textbf{Stocker} dans une liste l'ensemble des dictionnaires correspondant au panier 2 précédent. \textbf{Afficher} \texttt{panier2}.}
+  
+\question{\textbf{Coder} une fonction \texttt{remplir(panier,panier2)} qui enfile tout le contenu de \texttt{panier 2} dans \texttt{panier}. Après avoir exécuté la commande \texttt{remplir(panier,panier2)}, \textbf{afficher} le contenu de \texttt{panier}.}
+
+~\
+
+Au fur et à mesure, il est nécessaire de connaître le coût total du panier. 
+
+\question{\textbf{Coder} la fonction \texttt{prix\_total(panier)} qui renvoie le coût total du panier. \textbf{Afficher} le résultat de la commande \texttt{prix\_total(panier)}.}
+ 
+~\
+
+A des fins de statistiques le magasin a besoin de connaître la durée de la présence des clients dans le magasin. Une méthode de mesure consiste à mesure la durée écoulée entre la mise dans le panier du premier achat et du dernier.
+
+\question{\textbf{Coder} une fonction \texttt{duree\_achats(panier)} qui renvoie la durée écoulée entre le premier achat effectué et le dernier. Attention, à cause de l'import d'autres paniers, les produits ne sont pas forcément stocké dans la liste dans leur ordre d'achat. \textbf{Afficher} le résultat de la commande \texttt{duree\_achats(panier)}.}
+
+\question{Le résultat, en secondes, étant peu lisible, \textbf{coder} une fonction \texttt{convertion\_duree(duree)} qui prend en entrée une \texttt{duree} en seconde et qui retourne le résultats sous le format suivant:
+
+\texttt{return "\{\} heures, \{\} minutes et \{\} secondes".format(heures, minutes, secondes)}
+
+où \texttt{heures}, \texttt{minutes}, \texttt{secondes} correspondent à la conversion de \texttt{duree}. \textbf{Afficher} la durée des achats du panier en cours sous une forme lisible.}
+
+\newpage
+
+A la caisse il est possible de transformer ses courses en commande internet. Cette fonction est réalisée par le code suivant:
+\begin{minted}[linenos]{python}
+produits_commandes=[]
+def commander(produit):
+    produits_commandes.append(produit)
+
+def defiler(panier):
+    .....
+    .....
+
+def commander_panier(panier):
+    while len(panier)>0:
+        defiler(panier)
+\end{minted}
+
+\question{\textbf{Recopier} ce code et \textbf{compléter} la fonction \texttt{defiler(panier)}. A l'issue de l'exécution de ce code, le contenu de \texttt{panier} doit être vidé et intégralement transféré dans \texttt{produits\_commandes}. Afin de vérifier ce résultat, \textbf{afficher} \texttt{panier} avant l'exécution de \texttt{commander\_panier(panier)}, puis afficher de nouveau \texttt{panier} et \texttt{produits\_commandes}.}
+ 
+\finsujet{4}
+
+\reponse{}{
+\begin{minted}[linenos]{python}
+# -*- coding: utf-8 -*-
+# Question 1
+def inverse_liste(liste):
+    return [liste[i] for i in range(len(liste)-1,-1,-1)]
+
+print('Question 1')
+print(inverse_liste(['A','B','C']))
+\end{minted}
+}
+
+\reponse{}{
+\begin{minted}[linenos]{python}
+# Question 2
+def convert_bin(decimal):
+    binaire=[]
+    r=decimal
+    while r>1:
+        q=r//2
+        r=r%2
+        binaire.append(r)
+        r=q
+    binaire.append(r)
+    return inverse_liste(binaire)
+
+def convert_bin_default(decimal):
+    a=str(bin(decimal))[2:]
+    s=[*a]
+    s=[int(i) for i in s]
+    return s
+
+print('\nQuestion 2')
+print(convert_bin(19))    
+print(convert_bin_default(19))    
+\end{minted}
+}
+
+\reponse{}{
+\begin{minted}[linenos]{python}
+# Question 3
+def convert_decimal(binaire):
+    decimal=0
+    for i in range(len(binaire)):
+        decimal+=binaire[len(binaire)-1-i]*2**i
+    return decimal
+
+print('\nQuestion 3')
+print(convert_decimal(convert_bin(19)))
+\end{minted}
+}
+
+\reponse{}{
+\begin{minted}[linenos]{python}
+#Question 4
+produit={'code barre':31002,'designation':"café noir",'prix':1.50,'horaire_scan':50525}
+\end{minted}
+print(produit)
+}
+\reponse{}{
+\begin{minted}[linenos]{python}
+#Question 5
+panier=[]
+def enfiler(panier,produit):
+    # Méthode qui enfile le produit au panier
+    panier.append(produit)
+
+enfiler(panier,produit)
+print('\nQuestion 5')
+print(panier)
+\end{minted}
+}
+
+\reponse{}{
+\begin{minted}[linenos]{python}
+#Question 6
+panier2=[{'code barre':20333,'designation':"madeleines",'prix':4.30,'horaire_scan':40520},
+                   {'code barre':1204,'designation':"sucre",'prix':3.40,'horaire_scan':40550},
+                   {'code barre':2046,'designation':"chocolat",'prix':2.50,'horaire_scan':40612}]
+\end{minted}
+print(panier2)
+}
+
+\reponse{}{
+\begin{minted}[linenos]{python}
+#Question 7
+def remplir(panier,panier2):
+    # Méthode qui enfile un panier 2 dans un panier
+    for element in panier2:
+        panier.append(element)
+
+remplir(panier,panier2)
+print('\nQuestion 7')
+print(panier)
+\end{minted}
+}
+
+\reponse{}{
+\begin{minted}[linenos]{python}
+#Question 8
+def prix_total(panier):
+    prix=0
+    for element in panier:
+        prix+=element['prix']
+    return prix
+
+print('\nQuestion 8')
+print(prix_total(panier))
+\end{minted}
+}
+
+\reponse{}{
+\begin{minted}[linenos]{python}
+#Question 9
+def duree_achats(panier):
+    min=panier[0]['horaire_scan']
+    max=panier[0]['horaire_scan']
+    for element in panier[1:]:
+        if element['horaire_scan']<min:
+            min=element['horaire_scan']
+        if element['horaire_scan']>max:
+            max=element['horaire_scan']
+    return max-min
+
+print('\nQuestion 9')
+print(duree_achats(panier))
+\end{minted}
+}
+
+\reponse{}{
+\begin{minted}[linenos]{python}
+#Question 10
+def convertion_duree(duree):
+    heures=duree//3600
+    secondes=duree%3600
+    minutes=secondes//60
+    secondes=secondes%60
+    return "{} heures, {} minutes et {} secondes".format(heures, minutes, secondes)
+
+print('\nQuestion 10')
+print(convertion_duree(duree_achats(panier)))
+\end{minted}
+}
+
+\reponse{}{
+\begin{minted}[linenos]{python}
+#Question 11
+produits_commandes=[]
+def commander(produit):
+    produits_commandes.append(produit)
+
+def defiler(panier):
+    commander(panier[0])
+    panier.pop(0)
+
+def commander_panier(panier):
+    while len(panier)>0:
+        defiler(panier)
+
+print('\nQuestion 11')
+print('Panier avant commande')
+print(panier)
+commander_panier(panier)
+print('Panier après commande')
+print(panier)
+print('Produits commandés')
+print(produits_commandes) 
+\end{minted}
+}
+
+
+\end{document}
