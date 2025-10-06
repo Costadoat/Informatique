@@ -1,0 +1,450 @@
+\input{../../../headers/dsinfoheaders}
+
+\begin{center}
+{\Large\bf {\type} \no {\numero} -- \descrip}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+\begin{boxedminipage}{.9\textwidth} 
+\begin{itemize}
+ \item Faire tous les exercices dans un fichier {NomPrenom.py} à sauvegarder,
+ \item mettre en commentaire l'exercice et la question traités (ex: \# Exercice 1),
+ \item ne pas oublier pas de commenter ce qui est fait dans votre code (ex: \# Je crée une fonction pour calculer la racine d'un nombre),
+ \item il est possible de demander un déblocage pour une question, mais celle-ci sera notée 0,
+ \item il faut vérifier avant de partir que le code peut s'exécuter et qu'il affiche les résultats que vous attendez. Les lignes de code qui doivent s'exécuter sont décommentées.
+\end{itemize}
+\end{boxedminipage}
+
+%\title{Devoir d'informatique en Python \\ \large Simulation d’un distributeur automatique}
+
+\section*{Contexte}
+On souhaite programmer le fonctionnement simplifié d’un distributeur automatique de boissons.  
+Le distributeur propose au départ~:
+\begin{itemize}
+    \item Soda : 2 € (stock initial : 5),
+    \item Café : 1 € (stock initial : 5),
+    \item Jus : 3 € (stock initial : 5).
+\end{itemize}
+
+\bigskip
+L’objectif est de réaliser un programme en Python qui simule les achats d’un utilisateur.  
+
+\section{Choix de la boisson}
+
+\begin{minted}[linenos]{python}
+import random
+
+# Stocks de départ
+soda = 5
+cafe = 5
+jus = 5
+
+0 = achats
+
+print("Bienvenue dans le distributeur automatique !)
+
+# Boucle tant qu’il reste des boissons
+while soda > 0 or cafe > 0 or jus > 0
+    print("\n=== Menu ===")
+    print("1 - Soda (2 euros) [stock :", soda, "]")
+    print("2 - Café (1 euros) [stock :", cafe, "]")
+    print("3 - Jus  (3 euros) [stock :", jus, "]")
+    print("0 - Quitter")
+
+    choix = int(input("Sélection ? "))
+
+    if choix == 0:
+        print("Merci, à bientôt !")
+        break
+    else:
+        # Cas Soda
+        if choix == 1:
+            print("Soda demandé")
+
+print("\n=== Fin du programme ===")
+print("Nombre total d’achats :", achats)
+\end{minted}
+
+Ce programme permet de choisir la boisson en entrant un entier au clavier. La suite du programme n'étant pas codée, il faut entrer 0 pour quitter et retrouver la console.
+
+\question{\textbf{Recopier} le code, \textbf{corriger} les 3 erreurs qui se sont glissées à l'intérieur (penser à lire les erreurs sur la console) et l'\textbf{exécuter} afin de vérifier que la saisie du choix est possible.}
+
+\section{Paiement et service}
+
+Nous nous intéressons maintenant au cas de figure où l'utilisateur a entré 1 avec son clavier afin de sélectionner un soda.
+
+Le programme doit maintenant:
+\begin{enumerate}
+    \item Vérifier que le stock est suffisant. Si le produit est épuisé, afficher un message d’erreur.
+    \item Demander combien d’argent l’utilisateur insère.
+    \item Vérifier que la somme est suffisante :
+    \begin{itemize}
+        \item si oui, calculer la monnaie à rendre,
+        \item si non, refuser la vente et rendre l’argent.
+    \end{itemize}
+    \item Modifier la quantité de soda en stock,
+    \item Modifier le nombre total d'achat de la personne.
+\end{enumerate}
+
+\begin{minted}[linenos]{python}
+if choix == 1:
+    print("Soda demandé")
+    if .........:
+        print("Plus de soda en stock.")
+    else:
+        # Argent inséré
+        argent = int(input("Insérez votre argent : "))
+        if argent ......:
+            print("Pas assez d’argent.")
+        else:
+            print("Vous avez acheté un soda.")
+            monnaie = ..........
+            if monnaie > 0:
+                print("Monnaie rendue :", monnaie, "euros")
+            soda .....
+            achats .....
+\end{minted}
+
+\question{\textbf{Recopier} le code à sa bonne place dans le script (attention à l'indentation), le \textbf{compléter} et l'\textbf{exécuter} afin de vérifier que le fonctionnement lors du choix de boisson.}
+
+\question{A partir de cet extrait, \textbf{coder} la suite du script permettant de la gestion l'achat d'un café ou d'un jus. Il faudra aussi prévoir un message d'erreur si l'utilisateur effectue une sélection erronée.}
+
+
+\section{Organisation en fonctions}
+
+Afin d'améliorer la lisibilité du code, il est préférable d'utiliser les deux fonctions :
+\begin{itemize}
+    \item \texttt{affichage\_menu(soda, cafe, jus)},
+    \item \texttt{servir\_boisson(nom, stock, prix, achats)}.
+\end{itemize}
+
+La suite du code pourrait alors s'écrire comme suit.
+\begin{minted}[linenos]{python}
+    if choix == 0:
+        print("Merci, à bientôt !")
+        break
+    else:
+        # Cas Soda
+        if choix == 1:
+            soda,achats=servir_boisson('soda',soda,2,achats)
+        # Cas Café
+        elif choix == 2:
+            cafe,achats=servir_boisson('cafe',cafe,1,achats)
+        # Cas Jus
+        elif choix == 3:
+            jus,achats=servir_boisson('jus',jus,3,achats)
+        else:
+            print("Choix invalide.")
+\end{minted}
+
+\question{Écrire les deux fonctions \texttt{affichage\_menu} et \texttt{servir\_boisson} et les tester à l'aide du code fourni.}
+
+\section{Bonus}
+
+\question{\textbf{Ajouter} une option \og produit gratuit\fg, à la fonction \texttt{servir\_boisson}, qui une fois sur 10 offre une boisson au client (utiliser l'opération \texttt{random.randrange(10) == 0}).}
+
+\begin{center}
+\Large{FIN}
+\end{center}
+
+\cleardoublepage
+
+\ifdef{\public}{\end{document}}{\pagestyle{correction}}
+
+\begin{center}
+\Large{Correction}
+\end{center}
+
+\reponse{}
+
+\begin{minted}{python}
+import random
+
+# Stocks de départ
+soda = 5
+cafe = 5
+jus = 5
+
+achats = 0
+
+print("Bienvenue dans le distributeur automatique !")
+
+# Boucle tant qu’il reste des boissons
+while soda > 0 or cafe > 0 or jus > 0:
+    print("\n=== Menu ===")
+    print("1 - Soda (2 euros) [stock :", soda, "]")
+    print("2 - Café (1 euros) [stock :", cafe, "]")
+    print("3 - Jus  (3 euros) [stock :", jus, "]")
+    print("0 - Quitter")
+
+    choix = int(input("Sélection ? "))
+
+    if choix == 0:
+        print("Merci, à bientôt !")
+        break
+    else:
+        # Cas Soda
+        if choix == 1:
+            print("Soda demandé")
+
+print("\n=== Fin du programme ===")
+print("Nombre total d’achats :", achats)
+\end{minted}
+
+\reponse{}
+
+\begin{minted}{python}
+import random
+
+# Stocks de départ
+soda = 5
+cafe = 5
+jus = 5
+
+achats = 0
+
+print("Bienvenue dans le distributeur automatique !")
+
+# Boucle tant qu’il reste des boissons
+while soda > 0 or cafe > 0 or jus > 0:
+    print("\n=== Menu ===")
+    print("1 - Soda (2 euros) [stock :", soda, "]")
+    print("2 - Café (1 euros) [stock :", cafe, "]")
+    print("3 - Jus  (3 euros) [stock :", jus, "]")
+    print("0 - Quitter")
+
+    choix = int(input("Sélection ? "))
+
+    if choix == 0:
+        print("Merci, à bientôt !")
+        break
+    else:
+        # Cas Soda
+        if choix == 1:
+            if soda == 0:
+                print("Plus de soda en stock.")
+            else:
+                argent = int(input("Insérez votre argent : "))
+                if argent < 2:
+                    print("Pas assez d’argent.")
+                else:
+                    print("Vous avez acheté un soda.")
+                    monnaie = argent - 2
+                    if monnaie > 0:
+                        print("Monnaie rendue :", monnaie, "euros")
+                    soda -= 1
+                    achats += 1
+
+print("\n=== Fin du programme ===")
+print("Nombre total d’achats :", achats)
+\end{minted}
+
+\reponse{}
+
+\begin{minted}{python}
+import random
+
+# Stocks de départ
+soda = 5
+cafe = 5
+jus = 5
+
+achats = 0
+
+print("Bienvenue dans le distributeur automatique !")
+
+# Boucle tant qu’il reste des boissons
+while soda > 0 or cafe > 0 or jus > 0:
+    print("\n=== Menu ===")
+    print("1 - Soda (2 euros) [stock :", soda, "]")
+    print("2 - Café (1 euros) [stock :", cafe, "]")
+    print("3 - Jus  (3 euros) [stock :", jus, "]")
+    print("0 - Quitter")
+
+    choix = int(input("Sélection ? "))
+
+    if choix == 0:
+        print("Merci, à bientôt !")
+        break
+    else:
+        # Cas Soda
+        if choix == 1:
+            if soda == 0:
+                print("Plus de soda en stock.")
+            else:
+                argent = int(input("Insérez votre argent : "))
+                if argent < 2:
+                    print("Pas assez d’argent.")
+                else:
+                    print("Vous avez acheté un soda.")
+                    monnaie = argent - 2
+                    if monnaie > 0:
+                        print("Monnaie rendue :", monnaie, "euros")
+                    soda -= 1
+                    achats += 1
+
+        # Cas Café
+        elif choix == 2:
+            if cafe == 0:
+                print("Plus de café en stock.")
+            else:
+                argent = int(input("Insérez votre argent : "))
+                if argent < 1:
+                    print("Pas assez d’argent.")
+                else:
+                    print("Vous avez acheté un café.")
+                    monnaie = argent - 1
+                    if monnaie > 0:
+                        print("Monnaie rendue :", monnaie, "euros")
+                    cafe -= 1
+                    achats += 1
+
+        # Cas Jus
+        elif choix == 3:
+            if jus == 0:
+                print("Plus de jus en stock.")
+            else:
+                argent = int(input("Insérez votre argent : "))
+                if argent < 3:
+                    print("Pas assez d’argent.")
+                else:
+                    print("Vous avez acheté un jus.")
+                    monnaie = argent - 3
+                    if monnaie > 0:
+                        print("Monnaie rendue :", monnaie, "euros")
+                    jus -= 1
+                    achats += 1
+        else:
+            print("Choix invalide.")
+
+print("\n=== Fin du programme ===")
+print("Nombre total d’achats :", achats)
+\end{minted}
+
+\reponse{}
+
+\begin{minted}{python}
+import random
+
+def affichage_menu(soda, cafe, jus):
+    print("\n=== Menu ===")
+    print("1 - Soda (2 euros) [stock :", soda, "]")
+    print("2 - Café (1 euros) [stock :", cafe, "]")
+    print("3 - Jus  (3 euros) [stock :", jus, "]")
+    print("0 - Quitter")
+
+def servir_boisson(nom,stock,prix,achats):
+
+    if stock == 0:
+        print("Plus de "+nom+" en stock.")
+    else:
+        argent = int(input("Insérez votre argent : "))
+        if argent < prix:
+            print("Pas assez d’argent.")
+        else:
+            print("Vous avez acheté un "+nom+".")
+            monnaie = argent - prix
+            if monnaie > 0:
+                print("Monnaie rendue :", monnaie, "euros")
+            stock -= 1
+            achats += 1
+    return stock,achats
+
+# Stocks de départ
+soda = 5
+cafe = 5
+jus = 5
+
+achats = 0
+
+print("Bienvenue dans le distributeur automatique !")
+
+# Boucle tant qu’il reste des boissons
+while soda > 0 or cafe > 0 or jus > 0:
+    affichage_menu(soda, cafe, jus)
+    
+    choix = int(input("Sélection ? "))
+
+    if choix == 0:
+        print("Merci, à bientôt !")
+        break
+    else:
+        # Cas Soda
+        if choix == 1:
+            soda,achats=servir_boisson('soda',soda,2,achats)
+        # Cas Café
+        elif choix == 2:
+            cafe,achats=servir_boisson('cafe',cafe,1,achats)
+        # Cas Jus
+        elif choix == 3:
+            jus,achats=servir_boisson('jus',jus,3,achats)
+        else:
+            print("Choix invalide.")
+
+print("\n=== Fin du programme ===")
+print("Nombre total d’achats :", achats)
+\end{minted}
+
+\reponse{}
+
+\begin{minted}{python}
+import random
+
+def servir_boisson(nom,stock,prix,achats):
+
+    if stock == 0:
+        print("Plus de "+nom+" en stock.")
+    elif random.randrange(10) == 0:
+        print("On vous offre un "+nom+" !")
+        stock -= 1
+        achats += 1
+    else:
+        argent = int(input("Insérez votre argent : "))
+        if argent < prix:
+            print("Pas assez d’argent.")
+        else:
+            print("Vous avez acheté un "+nom+".")
+            monnaie = argent - prix
+            if monnaie > 0:
+                print("Monnaie rendue :", monnaie, "euros")
+            stock -= 1
+            achats += 1
+    return stock,achats
+
+# Stocks de départ
+soda = 5
+cafe = 5
+jus = 5
+
+achats = 0
+
+print("Bienvenue dans le distributeur automatique !")
+
+# Boucle tant qu’il reste des boissons
+while soda > 0 or cafe > 0 or jus > 0:
+    affichage_menu(soda, cafe, jus)
+    
+    choix = int(input("Sélection ? "))
+
+    if choix == 0:
+        print("Merci, à bientôt !")
+        break
+    else:
+        # Cas Soda
+        if choix == 1:
+            soda,achats=servir_boisson('soda',soda,2,achats)
+        # Cas Café
+        elif choix == 2:
+            cafe,achats=servir_boisson('cafe',cafe,1,achats)
+        # Cas Jus
+        elif choix == 3:
+            jus,achats=servir_boisson('jus',jus,3,achats)
+        else:
+            print("Choix invalide.")
+
+print("\n=== Fin du programme ===")
+print("Nombre total d’achats :", achats)
+\end{minted}
+
+\end{document}
