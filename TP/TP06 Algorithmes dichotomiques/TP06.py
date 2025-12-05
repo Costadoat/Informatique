@@ -14,12 +14,12 @@ a=7
 
 def recherche_naive(L,a):
     i=0
-    while L[i]<a:
+    while L[i]!=a and i<len(L)-1:
         i=i+1
-	if L[i]==a:
-		return(i)
-	else:
-		return(False)   
+    if L[i]==a:
+	return(i)
+    else:
+	return(False)   
 
 
 #print(recherche_naive(L,a))
