@@ -2,8 +2,6 @@
 
 \input{../../headers/infoheaders.tex}
 
-\begin{document}
-
 \excludecomment{solution}
 
 \begin{document}
@@ -41,16 +39,19 @@ Soit $(i,j)$ les coordonnées d'un point M du champ dans le repère $O(\overrigh
 
 Pour simuler numériquement le problème, le champ va être découpé en petits carrés de $10cm$ de côté. Chaque carré a pour centre le point $M(i,j)$ et on considère que le carré est entièrement mangé si son centre $M(i,j)$ est accessible à l'âne.
 
+\begin{minipage}{0.48\linewidth}
 La matrice \verb? pre ? va servir de $map$ pour déterminer si une zone a été broutée ou pas. En effet, la composante \verb? pre[i,j] ? sera égale à :
 \begin{itemize}
  \item $0$, si la zone n'a pas été parcourue par l'âne,
  \item $1$, si la zone a été parcourue par l'âne une fois,
  \item $2$, si la zone a été parcourue par l'âne plus d'une fois.
 \end{itemize}
-
+\end{minipage}\hfill
+\begin{minipage}{0.5\linewidth}
 \begin{center}
- \includegraphics[width=0.5\linewidth]{img/Figure1}
+ \includegraphics[width=0.8\linewidth]{img/Figure1}
 \end{center}
+\end{minipage}
 
 \paragraph{Question 2:} Définir une fonction \verb? manger(x,y)? qui parcourt chacun des carrés de coordonnées $(i,j)$, teste si il est accessible à l'âne et si il a déjà été mangé, et qui modifie la matrice \verb? pre ?. Les entrées de cette fonction sont les coordonnées $(x,y)$ du poteau. 
 
@@ -106,13 +107,16 @@ Sur cette figure, on trouve en vert l'herbe broutée une seule fois, en rouge, c
 
 \section{Nouvelle solution (facultatif)}
 
+\begin{minipage}{0.68\linewidth}
 Dans cette solution proposer une disposition en quinconce de la position du poteau et tenter d'améliorer les performances précédentes.
 
-\begin{center}
- \includegraphics[width=0.2\linewidth]{img/quinconce}
-\end{center}
-
 \paragraph{Question 9:} Donner les nouvelles valeurs trouvées pour les questions 6 et 8. Que concluez-vous quant à cette simulation.
+\end{minipage}\hfill
+\begin{minipage}{0.38\linewidth}
+\begin{center}
+ \includegraphics[width=0.5\linewidth]{img/quinconce}
+\end{center}
+\end{minipage}
 
 \begin{solution}
 
