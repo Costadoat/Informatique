@@ -209,26 +209,30 @@ for case_libre in cases_libres:
 \reponse{}
 
 \begin{minted}{python}
-def tous_les_chemins(graphe, depart, arrivee, chemin=None, visites=None, resultats=None):
-    if chemin is None:
-        chemin = [depart]
-    if visites is None:
-        visites = {depart}
-    if resultats is None:
-        resultats = []
+def tous_les_chemins(graph, depart, arrivee):
 
-    if depart == arrivee:
-        resultats.append(list(chemin))
-        return resultats
+    chemins_a_explorer = [[depart]]
+    resultats = []
 
-    for voisin in graphe[depart]:
-        if voisin not in visites:
-            chemin.append(voisin)
-            visites.add(voisin)
-            tous_les_chemins(graphe, voisin, arrivee, chemin, visites, resultats)
-            chemin.pop()
-            visites.remove(voisin)
-
+    while len(chemins_a_explorer)>0:
+        # Récupérer le premier chemin des chemins a explorer
+        # Le supprimer des chemins a explorer
+        chemin = chemins_a_explorer.pop(0)
+        # Partir du dernier sommet de ce chemin
+        sommet = chemin[-1]
+        # Si on atteint l'arrivée
+        if sommet == arrivee:
+            # Stocker le chemin dans la liste resultats
+            resultats.append(chemin)
+        else:
+            # Pour chaque voisin de ce sommet
+            for voisin in graph[sommet]:
+                # On regarde si on est pas déjà passé par ce sommer
+                if voisin not in chemin:
+                    # On ajoute ce voisin à ce chemin
+                    nouveau_chemin = chemin + [voisin]
+                    # On intègre ce chemin à la liste des chemins à explorer
+                    chemins_a_explorer.append(nouveau_chemin)
     return resultats
 
 chemins = list(tous_les_chemins(graphe, nom_case(DEPART), nom_case(ARRIVEE)))
