@@ -1,0 +1,250 @@
+\input{../../../headers/dsinfoheaders}
+
+\begin{center}
+{\Large\bf {\type} \no {\numero} -- \descrip}
+\end{center}
+
+\SetKw{KwFrom}{de} 
+
+\begin{boxedminipage}{.9\textwidth} 
+\begin{itemize}
+ \item Faire tous les exercices dans un fichier {NomPrenom.py} à sauvegarder,
+ \item mettre en commentaire l'exercice et la question traités (ex: \# Exercice 1),
+ \item ne pas oublier pas de commenter ce qui est fait dans votre code (ex: \# Je crée une fonction pour calculer la racine d'un nombre),
+ \item il est possible de demander un déblocage pour une question, mais celle-ci sera notée 0,
+ \item il faut vérifier avant de partir que le code peut s'exécuter et qu'il affiche les résultats que vous attendez. Les lignes de code qui doivent s'exécuter sont décommentées.
+\end{itemize}
+\end{boxedminipage}
+
+\section*{Contexte et cadre général}
+
+On cherche à résoudre un labyrinthe, figure \ref{fig01}, représenté sous forme d'une \textbf{grille de $14 \times 20$ cases}.
+
+Chaque case est soit un \textbf{mur} (en noir, valeur~\texttt{1}), soit une \textbf{case libre} (en blanc, valeur~\texttt{0}).
+
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=0.9\linewidth]{img/labyrinthe_vide}
+	\end{center}
+	\caption{\label{fig01}Labyrinthe à résoudre}
+\end{figure}
+
+\begin{itemize}[leftmargin=1.5cm]
+  \item Le \textbf{départ} $D$ est situé en \texttt{(ligne=1, col=0)}.
+  \item L'\textbf{arrivée} $A$ est en \texttt{(ligne=12, col=19)}.
+\end{itemize}
+
+La grille est stockée dans un fichier CSV (\texttt{grille.csv}) où les cellules sont séparées par des \texttt{;} et chaque ligne correspond à une rangée du labyrinthe.
+
+\medskip
+
+Le squelette du programme (imports, constantes, fonction d'affichage \texttt{afficher}) vous est fourni dans un fichier \texttt{script\_candidat.py}. Vous devez le copier/coller à l'intérieur de votre fichier \texttt{NomPrenom.py}.
+
+\section{Analyse du labyrinthe}
+
+\subsection{Lecture du fichier CSV}
+
+\question{\textbf{Écrire} le code permettant de lire le fichier \texttt{grille.csv} et de construire la variable \texttt{grille}, une liste de listes d'entiers (0 ou 1) représentant le labyrinthe. \textbf{Afficher} la première ligne (index=0) de \texttt{grille}.}
+
+\subsection{Affichage initial du labyrinthe}
+
+Pour faire la question suivante copier/coller le contenu du fichier \texttt{script\_candidat.py} dans votre script.
+
+\question{\textbf{Appeler} la fonction \texttt{afficher()} pour afficher le labyrinthe.}
+
+\subsection{Recherche des cases libres}
+
+\question{\textbf{Écrire} le code qui construit la liste \texttt{cases\_libres} contenant toutes les cases de coordonnées $[i, j]$ telles que \texttt{grille[i][j] == 0}. \textbf{Afficher} la deuxième case (index=1) de \texttt{cases\_libres}.}
+
+\subsection{Nommage des cases}
+
+\question{\textbf{Écrire} la fonction \texttt{nom\_case(case)} qui, pour une case donnée sous forme de liste \texttt{[i, j]}, renvoie la chaîne de caractères \texttt{'[i,j]'}. \textbf{Afficher} \texttt{nom\_case([1, 2])} qui doit retourner \texttt{'[1,2]'}.}
+
+\section{Parcours de graphe}
+
+\subsection{Case suivante dans une direction}
+
+On définit les quatre directions de déplacement :
+
+\begin{minted}{python}
+directions = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+\end{minted}
+
+\question{\textbf{Écrire} la fonction \texttt{prochaine\_case(case, direction)} qui renvoie la case obtenue en appliquant le déplacement \texttt{direction} depuis \texttt{case}. \textbf{Afficher} \texttt{prochaine\_case([0, 1], directions[2])} qui doit retourner \texttt{[1, 1]}.}
+
+\subsection{Construction du graphe}
+
+\question{\textbf{Construire} le dictionnaire \texttt{graphe} tel que :
+\begin{itemize}
+  \item Chaque \textbf{clé} est le nom (chaîne de caractère) d'une case libre,
+  \item La \textbf{valeur} associée est la liste des noms des cases libres adjacentes (haut, bas, gauche, droite) qui sont dans les limites de la grille.
+\end{itemize}
+
+\textit{Attention aux bords de la grille !}
+
+\textbf{Afficher} \verb?graphe['[1,1]']? qui doit renvoyer \verb?['[1,2]', '[1,0]']?.}
+
+\section{Résolution du labyrinthe}
+
+\subsection{Recherche de tous les chemins}
+
+La fonction \verb?tous_les_chemins(graphe, depart, arrivee)? permet de parcourir tous les chemins possible d'une case \verb?depart? à une case \verb?arrivee?.
+
+\question{\textbf{Recopier} et compléter le code afin que la fonction renvoie les chemins attendus. Il n'est pas nécessaire de recopier les commentaires \texttt{\#}.}
+
+\begin{minted}{python}
+def tous_les_chemins(graph, depart, arrivee):
+
+    chemins_a_explorer = [[depart]]
+    resultats = []
+
+    while len(chemins_a_explorer)>0:
+        # Récupérer le premier chemin des chemins a explorer
+        # Le supprimer des chemins a explorer
+        chemin = chemins_a_explorer.pop(0)
+        # Partir du dernier sommet de ce chemin
+        ...................
+        # Si on atteint l'arrivée
+        if sommet == arrivee:
+            # Stocker le chemin dans la liste resultats
+            .......................
+        else:
+            # Pour chaque voisin de ce sommet
+            for voisin in graph[sommet]:
+                # On regarde si on est pas déjà passé par ce sommer
+                if voisin not in chemin:
+                    # On ajoute ce voisin à ce chemin
+                    .................................
+                    # On intègre ce chemin à la liste des chemins à explorer
+                    .................................
+    return resultats
+\end{minted}
+
+\subsection{Chemin le plus court}
+
+\question{En utilisant le résultat de la fonction \texttt{tous\_les\_chemins}, \textbf{écrire} le code qui trouve le chemin de longueur minimale. \textbf{Appeler} la fonction \texttt{afficher(grille,chemin\_plus\_court)} qui affiche alors l'image du graphe avec le chemin le plus court en jaune.}
+
+%  1 & Lecture CSV                         & 3 pts & E/S fichiers, listes \\
+%  2 & Affichage initial                   & 1 pt  & Appel de fonction \\
+%  3 & Recherche des cases libres          & 2 pts & Boucles imbriquées \\
+%  4 & Fonction \texttt{nom\_case}         & 2 pts & Chaînes, fonctions \\
+%  5 & Fonction \texttt{prochaine\_case}   & 2 pts & Fonctions, listes \\
+%  6 & Construction du graphe             & 4 pts & Dictionnaires, structures \\
+%  7 & Analyse \texttt{tous\_les\_chemins} & 4 pts & DFS, backtracking, analyse \\
+%  8 & Chemin le plus court               & 3 pts & Algorithmes, min \\
+
+\begin{center}
+FIN
+\end{center}
+ 
+\cleardoublepage
+
+\ifdef{\public}{\end{document}}{\pagestyle{correction}}
+
+\begin{center}
+\Large{Correction}
+\end{center}
+
+\reponse{}
+
+\begin{minted}{python}
+file = open('grille.csv', 'r')
+contenu = file.read()
+file.close()
+
+lignes = contenu.split('\n')
+
+grille = []
+for ligne in lignes[:-1]:           # [:-1] ignore la derniere ligne vide
+    data = [int(i) for i in ligne.split(';')]
+    grille.append(data)
+\end{minted}
+
+\reponse{}
+
+\begin{minted}{python}
+afficher(grille, [])   # liste vide = aucun chemin a afficher
+\end{minted}
+
+\reponse{}
+
+\begin{minted}{python}
+cases_libres = []
+for i in range(LIGNES):
+    for j in range(COLS):
+        if grille[i][j] == 0:
+            cases_libres.append([i, j])
+\end{minted}
+
+\reponse{}
+
+\begin{minted}{python}
+def nom_case(case):
+    return '[' + str(case[0]) + ',' + str(case[1]) + ']'
+\end{minted}
+
+\reponse{}
+
+\begin{minted}{python}
+directions = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+
+def prochaine_case(case, direction):
+    return [case[0] + direction[0], case[1] + direction[1]]
+\end{minted}
+
+\reponse{}
+
+\begin{minted}{python}
+graphe = {}
+for case_libre in cases_libres:
+    graphe[nom_case(case_libre)] = []
+    for direction in directions:
+        prochaine = prochaine_case(case_libre, direction)
+        # Verifier que la prochaine case est dans la grille
+        if 0 <= prochaine[0] < LIGNES and 0 <= prochaine[1] < COLS:
+            if grille[prochaine[0]][prochaine[1]] == 0:
+                graphe[nom_case(case_libre)].append(nom_case(prochaine))
+\end{minted}
+
+\reponse{}
+
+\begin{minted}{python}
+def tous_les_chemins(graphe, depart, arrivee, chemin=None, visites=None, resultats=None):
+    if chemin is None:
+        chemin = [depart]
+    if visites is None:
+        visites = {depart}
+    if resultats is None:
+        resultats = []
+
+    if depart == arrivee:
+        resultats.append(list(chemin))
+        return resultats
+
+    for voisin in graphe[depart]:
+        if voisin not in visites:
+            chemin.append(voisin)
+            visites.add(voisin)
+            tous_les_chemins(graphe, voisin, arrivee, chemin, visites, resultats)
+            chemin.pop()
+            visites.remove(voisin)
+
+    return resultats
+
+chemins = list(tous_les_chemins(graphe, nom_case(DEPART), nom_case(ARRIVEE)))
+\end{minted}
+
+\reponse{}
+
+\begin{minted}{python}
+chemin_plus_court = chemins[0]
+for c in chemins:
+    if len(c) < len(chemin_plus_court):
+        chemin_plus_court = c
+
+print(' -> '.join(chemin_plus_court))
+
+afficher(grille, chemin_plus_court)
+\end{minted}
+
+\end{document}
