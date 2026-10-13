@@ -1,0 +1,152 @@
+\input{intro.tex}
+\input{../../headers/infoheaders.tex}
+ 
+\begin{document}
+
+\section{Position du problème}
+
+On dispose d'un nuage de $n$ points $(x_i, y_i, z_i)$ pour $i = 1, \dots, n$.
+On souhaite trouver le plan d'équation
+\[
+z = a x + b y + c
+\]
+qui s'ajuste « au mieux » à ces points, au sens des moindres carrés.
+
+\section{Fonction d'erreur}
+
+Pour un point $(x_i, y_i, z_i)$, l'écart vertical entre la valeur observée $z_i$
+et la valeur prédite par le plan $a x_i + b y_i + c$ est
+\[
+\varepsilon_i = z_i - (a x_i + b y_i + c).
+\]
+
+On cherche $(a, b, c)$ qui minimise la somme des carrés de ces écarts :
+\[
+E(a,b,c) = \sum_{i=1}^{n} \left( z_i - a x_i - b y_i - c \right)^2.
+\]
+
+\section{Conditions de minimum}
+
+Le minimum de $E$ est atteint lorsque les dérivées partielles par rapport à
+$a$, $b$ et $c$ sont nulles.
+
+\subsection*{Dérivée par rapport à $a$}
+
+\question{Déterminer \frac{\partial E}{\partial a}. Mettre les éléments dépendent de a, b et c à droite du signal égal, les autres à gauche.}
+
+\question{Déterminer \frac{\partial E}{\partial b}. Mettre les éléments dépendent de a, b et c à droite du signal égal, les autres à gauche.}
+
+\question{Déterminer \frac{\partial E}{\partial c}. Mettre les éléments dépendent de a, b et c à droite du signal égal, les autres à gauche.}
+
+\section{Système linéaire (équations normales)}
+
+Les variables suivantes permettent de simplifier l'écriture:
+\[
+S_x = \sum x_i, \quad
+S_y = \sum y_i, \quad
+S_{xx} = \sum x_i^2, \quad
+S_{yy} = \sum y_i^2, \quad
+S_{xy} = \sum x_i y_i,
+\]
+\[
+S_{xz} = \sum x_i z_i, \quad
+S_{yz} = \sum y_i z_i, \quad
+S_z = \sum z_i,
+\]
+
+\question{A partir des trois équations précédentes, déterminer le système linéaire d'inconnues $a, b, c$. Le mettre sous forme matricielle.}
+
+\section{Résolution par pivot de Gauss}
+
+Ce système sera résolu par la méthode du pivot de Gauss, présentée dans le cours d'informatique C15.
+
+\question{Déterminer les valeurs de $a$, $b$ et $c$ grâce à une résolution python par pivot de Gauss.}
+
+\section{Décalage du plan}
+
+Dans le but d'obtenir le plan tangent extérieur matière, la suite va consister à déterminer les points les plus éloignés du plan dans les deux directions afin de décaler le plan.
+
+\question{Déterminer la distance $d_i$ entre un point de coordonnées $(x_i,y_i)$ et le plan ($a$, $b$, $c$).}
+
+\question{Écrire la fonction \verb?distance(point,plan)? qui permet de déterminer $d_i$..}
+
+\question{Trouver l'index $i_{max}$ du point dont la distance positive est la plus éloignée du plan.}
+
+\question{Trouver l'index $i_{min}$ du point dont la distance négative est la plus éloignée du plan.}
+
+\section{Distance d'un point au plan}
+
+
+\end{document} 
+
+\[
+\frac{\partial E}{\partial a}
+= \sum_{i=1}^n 2\left( z_i - a x_i - b y_i - c \right)(-x_i) = 0
+\]
+
+En développant et en divisant par $-2$ :
+\[
+\sum_{i=1}^n x_i z_i = a \sum_{i=1}^n x_i^2 + b \sum_{i=1}^n x_i y_i + c \sum_{i=1}^n x_i.
+\]
+
+\subsection*{Dérivée par rapport à $b$}
+
+\[
+\frac{\partial E}{\partial b}
+= \sum_{i=1}^n 2\left( z_i - a x_i - b y_i - c \right)(-y_i) = 0
+\]
+
+soit
+\[
+\sum_{i=1}^n y_i z_i = a \sum_{i=1}^n x_i y_i + b \sum_{i=1}^n y_i^2 + c \sum_{i=1}^n y_i.
+\]
+
+\subsection*{Dérivée par rapport à $c$}
+
+\[
+\frac{\partial E}{\partial c}
+= \sum_{i=1}^n 2\left( z_i - a x_i - b y_i - c \right)(-1) = 0
+\]
+
+soit
+\[
+\sum_{i=1}^n z_i = a \sum_{i=1}^n x_i + b \sum_{i=1}^n y_i + c\, n.
+\]
+
+\[
+\begin{cases}
+S_{xx}\, a + S_{xy}\, b + S_x\, c = S_{xz} \\
+S_{xy}\, a + S_{yy}\, b + S_y\, c = S_{yz} \\
+S_x\, a    + S_y\, b    + n\, c   = S_z
+\end{cases}
+\]
+
+ou sous forme matricielle :
+\[
+\begin{pmatrix}
+S_{xx} & S_{xy} & S_x \\
+S_{xy} & S_{yy} & S_y \\
+S_x    & S_y    & n
+\end{pmatrix}
+\begin{pmatrix} a \\ b \\ c \end{pmatrix}
+=
+\begin{pmatrix} S_{xz} \\ S_{yz} \\ S_z \end{pmatrix}.
+\]
+
+Ce système $3 \times 3$ est appelé \textbf{système des équations normales}.
+Sa matrice est symétrique et, sauf cas dégénéré (points alignés ou tous
+identiques en $x$ et $y$), elle est inversible : le système admet une solution
+unique $(a, b, c)$.
+
+Le plan $z = ax + by + c$ peut s'écrire sous forme implicite
+\[
+ax + by - z + c = 0,
+\]
+de vecteur normal $\vec{n} = (a, b, -1)$.
+
+La distance d'un point $(x_i, y_i, z_i)$ à ce plan est donnée par
+\[
+d_i = \frac{|a x_i + b y_i - z_i + c|}{\sqrt{a^2 + b^2 + 1}}.
+\]
+
+ 

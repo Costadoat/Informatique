@@ -1,0 +1,464 @@
+\input{../../../headers/dsinfoheaders}
+
+\begin{center}
+{\Large\bf {\type} \no {\numero} -- \descrip}
+\end{center}
+
+\SetKw{KwFrom}{de}
+
+\begin{boxedminipage}{.9\textwidth}
+\begin{itemize}
+ \item Faire tous les exercices dans un fichier {NomPrenom.py} à sauvegarder,
+ \item mettre en commentaire l'exercice et la question traités (ex: \# Exercice 1),
+ \item ne pas oublier pas de commenter ce qui est fait dans votre code (ex: \# Je crée une fonction pour calculer la racine d'un nombre),
+ \item il faut vérifier avant de partir que le code peut s'exécuter et qu'il affiche les résultats que vous attendez. Les lignes de code qui doivent s'exécuter sont décommentées.
+\end{itemize}
+\end{boxedminipage}
+
+%\title{Devoir d'informatique en Python \\ \large Simulation d'une billetterie de concert}
+
+\section*{Contexte}
+La mise en vente des billets pour un concert très attendu approche. Les années précédentes, pour des tournées similaires, le site de billetterie officiel s'est effondré en quelques minutes à cause du nombre de connexions simultanées. Pour éviter cela, on souhaite programmer une version simplifiée d'un système de vente de billets en ligne.
+
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=0.4\linewidth]{img/concert.jpg}
+	\end{center}
+\end{figure}
+
+La billetterie propose au départ~:
+\begin{itemize}
+    \item Fosse : 133.50 € (stock initial : 5),
+    \item Gradin : 232.5 € (stock initial : 5),
+    \item Carré Or : 298.5 € (stock initial : 5).
+\end{itemize}
+
+\bigskip
+L'objectif est de réaliser un programme en Python qui simule les achats d'un spectateur.
+
+\section{Choix de la catégorie}
+
+\begin{minted}[linenos]{python}
+import random
+
+# Stocks de départ
+fosse = 5
+gradin = 5
+carre_or = 5
+
+0 = achats
+
+print("Bienvenue à la billetterie en ligne !)
+
+# Boucle tant qu'il reste des places
+while fosse > 0 or gradin > 0 or carre_or > 0
+    print("\n=== Catégories disponibles ===")
+    print("1 - Fosse (133.50 euros) [stock :", fosse, "]")
+    print("2 - Gradin (232.5 euros) [stock :", gradin, "]")
+    print("3 - Carré Or (298.5 euros) [stock :", carre_or, "]")
+    print("0 - Quitter")
+
+    choix = int(input("Sélection ? "))
+
+    if choix = 0:
+        print("Merci, à bientôt !")
+        break
+    else:
+        if choix == 1:  # Cas Fosse
+            print("Place en fosse demandée")
+
+print("\n=== Fin du programme ===")
+print("Nombre total de billets vendus :", achats)
+\end{minted}
+
+Ce programme permet de choisir la catégorie de place en entrant un entier au clavier. La suite du programme n'étant pas codée, il faut entrer 0 pour quitter et retrouver la console.
+
+\question{\textbf{Recopier} le code, \textbf{corriger} les 4 erreurs qui se sont glissées à l'intérieur (penser à lire les erreurs sur la console) et l'\textbf{exécuter} afin de vérifier que la saisie du choix est possible.}
+
+\newpage
+
+\section{Paiement et confirmation}
+
+Nous nous intéressons maintenant au cas de figure où le spectateur a entré 1 avec son clavier afin de sélectionner une place en fosse.
+
+Le programme doit maintenant :
+\begin{enumerate}
+    \item Vérifier que le stock est suffisant. Si la catégorie est épuisée, afficher un message d'erreur.
+    \item Demander combien d'argent le spectateur insère.
+    \item Vérifier que la somme est suffisante :
+    \begin{itemize}
+        \item si oui, calculer la monnaie à rendre,
+        \item si non, refuser la vente et rendre l'argent.
+    \end{itemize}
+    \item Modifier la quantité de places en fosse en stock,
+    \item Modifier le nombre total de billets vendus.
+\end{enumerate}
+
+\begin{minted}[linenos]{python}
+if choix == 1:
+    print("Place en fosse demandée")
+    if .........:
+        print("Plus de places en fosse.")
+    else:
+        # Argent inséré
+        argent = int(input("Montant inséré : "))
+        if argent ......:
+            print("Montant insuffisant.")
+        else:
+            print("Vous avez acheté une place en fosse.")
+            monnaie = ..........
+            if monnaie > 0:
+                print("Monnaie rendue :", monnaie, "euros")
+            fosse .....
+            achats .....
+\end{minted}
+
+\question{\textbf{Recopier} le code à sa bonne place dans le script (attention à l'indentation), le \textbf{compléter} et l'\textbf{exécuter} afin de vérifier le fonctionnement lors du choix d'une place en fosse.}
+
+\question{A partir de cet extrait, \textbf{coder} la suite du script permettant la gestion de l'achat d'une place en gradin ou en carré or. Il faudra aussi prévoir un message d'erreur si le spectateur effectue une sélection erronée.}
+
+\newpage
+
+\section{Organisation en fonctions}
+
+Afin d'améliorer la lisibilité du code, il est préférable d'utiliser les deux fonctions :
+\begin{itemize}
+    \item \texttt{affichage\_menu(fosse, gradin, carre\_or)},
+    \item \texttt{vendre\_billet(nom, stock, prix, achats)}.
+\end{itemize}
+
+La suite du code pourrait alors s'écrire comme suit.
+\begin{minted}[linenos]{python}
+    if choix == 0:
+        print("Merci, à bientôt !")
+        break
+    else:
+        if choix == 1:  # Cas Fosse
+            fosse,achats=vendre_billet('fosse',fosse,133.50,achats)
+        elif choix == 2:  # Cas Gradin
+            gradin,achats=vendre_billet('gradin',gradin,232.5,achats)
+        elif choix == 3:  # Cas Carré Or
+            carre_or,achats=vendre_billet('carre or',carre_or,298.5,achats)
+        else:
+            print("Choix invalide.")
+\end{minted}
+
+\question{Écrire les deux fonctions \texttt{affichage\_menu} et \texttt{vendre\_billet} et les tester à l'aide du code fourni.}
+
+\section{Offre commerciale}
+
+\question{\textbf{Ajouter} une option \og surclassement offert\fg, à la fonction \texttt{vendre\_billet}, qui une fois sur 20 surclasse gratuitement le spectateur en Carré Or (utiliser l'opération \texttt{random.randrange(20) == 0}).}
+
+\begin{center}
+\Large{FIN}
+\end{center}
+
+\cleardoublepage
+
+\ifdef{\public}{\end{document}}{\pagestyle{correction}}
+
+\begin{center}
+\Large{Correction}
+\end{center}
+
+\reponse{}
+
+\begin{minted}{python}
+import random
+
+# Stocks de départ
+fosse = 5
+gradin = 5
+carre_or = 5
+
+achats = 0
+
+print("Bienvenue à la billetterie en ligne !")
+
+# Boucle tant qu'il reste des places
+while fosse > 0 or gradin > 0 or carre_or > 0:
+    print("\n=== Catégories disponibles ===")
+    print("1 - Fosse (133.50 euros) [stock :", fosse, "]")
+    print("2 - Gradin (232.5 euros) [stock :", gradin, "]")
+    print("3 - Carré Or (298.5 euros) [stock :", carre_or, "]")
+    print("0 - Quitter")
+
+    choix = int(input("Sélection ? "))
+
+    if choix == 0:
+        print("Merci, à bientôt !")
+        break
+    else:
+        # Cas Fosse
+        if choix == 1:
+            print("Place en fosse demandée")
+
+print("\n=== Fin du programme ===")
+print("Nombre total de billets vendus :", achats)
+\end{minted}
+
+\reponse{}
+
+\begin{minted}{python}
+import random
+
+# Stocks de départ
+fosse = 5
+gradin = 5
+carre_or = 5
+
+achats = 0
+
+print("Bienvenue à la billetterie en ligne !")
+
+# Boucle tant qu'il reste des places
+while fosse > 0 or gradin > 0 or carre_or > 0:
+    print("\n=== Catégories disponibles ===")
+    print("1 - Fosse (133.50 euros) [stock :", fosse, "]")
+    print("2 - Gradin (232.5 euros) [stock :", gradin, "]")
+    print("3 - Carré Or (298.5 euros) [stock :", carre_or, "]")
+    print("0 - Quitter")
+
+    choix = int(input("Sélection ? "))
+
+    if choix == 0:
+        print("Merci, à bientôt !")
+        break
+    else:
+        # Cas Fosse
+        if choix == 1:
+            print("Place en fosse demandée")
+            if fosse == 0:
+                print("Plus de places en fosse.")
+            else:
+                argent = int(input("Montant inséré : "))
+                if argent < 133.50:
+                    print("Montant insuffisant.")
+                else:
+                    print("Vous avez acheté une place en fosse.")
+                    monnaie = argent - 133.50
+                    if monnaie > 0:
+                        print("Monnaie rendue :", monnaie, "euros")
+                    fosse -= 1
+                    achats += 1
+
+print("\n=== Fin du programme ===")
+print("Nombre total de billets vendus :", achats)
+\end{minted}
+
+\reponse{}
+
+\begin{minted}{python}
+import random
+
+# Stocks de départ
+fosse = 5
+gradin = 5
+carre_or = 5
+
+achats = 0
+
+print("Bienvenue à la billetterie en ligne !")
+
+# Boucle tant qu'il reste des places
+while fosse > 0 or gradin > 0 or carre_or > 0:
+    print("\n=== Catégories disponibles ===")
+    print("1 - Fosse (133.50 euros) [stock :", fosse, "]")
+    print("2 - Gradin (232.5 euros) [stock :", gradin, "]")
+    print("3 - Carré Or (298.5 euros) [stock :", carre_or, "]")
+    print("0 - Quitter")
+
+    choix = int(input("Sélection ? "))
+
+    if choix == 0:
+        print("Merci, à bientôt !")
+        break
+    else:
+        # Cas Fosse
+        if choix == 1:
+            print("Place en fosse demandée")
+            if fosse == 0:
+                print("Plus de places en fosse.")
+            else:
+                argent = int(input("Montant inséré : "))
+                if argent < 133.50:
+                    print("Montant insuffisant.")
+                else:
+                    print("Vous avez acheté une place en fosse.")
+                    monnaie = argent - 133.50
+                    if monnaie > 0:
+                        print("Monnaie rendue :", monnaie, "euros")
+                    fosse -= 1
+                    achats += 1
+
+        # Cas Gradin
+        elif choix == 2:
+            if gradin == 0:
+                print("Plus de places en gradin.")
+            else:
+                argent = int(input("Montant inséré : "))
+                if argent < 232.5:
+                    print("Montant insuffisant.")
+                else:
+                    print("Vous avez acheté une place en gradin.")
+                    monnaie = argent - 232.5
+                    if monnaie > 0:
+                        print("Monnaie rendue :", monnaie, "euros")
+                    gradin -= 1
+                    achats += 1
+
+        # Cas Carré Or
+        elif choix == 3:
+            if carre_or == 0:
+                print("Plus de places en carré or.")
+            else:
+                argent = int(input("Montant inséré : "))
+                if argent < 298.5:
+                    print("Montant insuffisant.")
+                else:
+                    print("Vous avez acheté une place en carré or.")
+                    monnaie = argent - 298.5
+                    if monnaie > 0:
+                        print("Monnaie rendue :", monnaie, "euros")
+                    carre_or -= 1
+                    achats += 1
+        else:
+            print("Choix invalide.")
+
+print("\n=== Fin du programme ===")
+print("Nombre total de billets vendus :", achats)
+\end{minted}
+
+\reponse{}
+
+\begin{minted}{python}
+import random
+
+def affichage_menu(fosse, gradin, carre_or):
+    print("\n=== Catégories disponibles ===")
+    print("1 - Fosse (133.50 euros) [stock :", fosse, "]")
+    print("2 - Gradin (232.5 euros) [stock :", gradin, "]")
+    print("3 - Carré Or (298.5 euros) [stock :", carre_or, "]")
+    print("0 - Quitter")
+
+def vendre_billet(nom, stock, prix, achats):
+
+    if stock == 0:
+        print("Plus de places en "+nom+".")
+    else:
+        argent = int(input("Montant inséré : "))
+        if argent < prix:
+            print("Montant insuffisant.")
+        else:
+            print("Vous avez acheté une place en "+nom+".")
+            monnaie = argent - prix
+            if monnaie > 0:
+                print("Monnaie rendue :", monnaie, "euros")
+            stock -= 1
+            achats += 1
+    return stock, achats
+
+# Stocks de départ
+fosse = 5
+gradin = 5
+carre_or = 5
+
+achats = 0
+
+print("Bienvenue à la billetterie en ligne !")
+
+# Boucle tant qu'il reste des places
+while fosse > 0 or gradin > 0 or carre_or > 0:
+    affichage_menu(fosse, gradin, carre_or)
+
+    choix = int(input("Sélection ? "))
+
+    if choix == 0:
+        print("Merci, à bientôt !")
+        break
+    else:
+        # Cas Fosse
+        if choix == 1:
+            fosse,achats=vendre_billet('fosse',fosse,133.50,achats)
+        # Cas Gradin
+        elif choix == 2:
+            gradin,achats=vendre_billet('gradin',gradin,232.5,achats)
+        # Cas Carré Or
+        elif choix == 3:
+            carre_or,achats=vendre_billet('carre or',carre_or,298.5,achats)
+        else:
+            print("Choix invalide.")
+
+print("\n=== Fin du programme ===")
+print("Nombre total de billets vendus :", achats)
+\end{minted}
+
+\reponse{}
+
+\begin{minted}{python}
+import random
+
+def affichage_menu(fosse, gradin, carre_or):
+    print("\n=== Catégories disponibles ===")
+    print("1 - Fosse (133.50 euros) [stock :", fosse, "]")
+    print("2 - Gradin (232.5 euros) [stock :", gradin, "]")
+    print("3 - Carré Or (298.5 euros) [stock :", carre_or, "]")
+    print("0 - Quitter")
+
+def vendre_billet(nom, stock, prix, achats):
+
+    if stock == 0:
+        print("Plus de places en "+nom+".")
+    elif random.randrange(20) == 0:
+        print("Coup de chance ! Vous êtes surclassé(e) en Carré Or, offert !")
+        stock -= 1
+        achats += 1
+    else:
+        argent = int(input("Montant inséré : "))
+        if argent < prix:
+            print("Montant insuffisant.")
+        else:
+            print("Vous avez acheté une place en "+nom+".")
+            monnaie = argent - prix
+            if monnaie > 0:
+                print("Monnaie rendue :", monnaie, "euros")
+            stock -= 1
+            achats += 1
+    return stock, achats
+
+# Stocks de départ
+fosse = 5
+gradin = 5
+carre_or = 5
+
+achats = 0
+
+print("Bienvenue à la billetterie en ligne !")
+
+# Boucle tant qu'il reste des places
+while fosse > 0 or gradin > 0 or carre_or > 0:
+    affichage_menu(fosse, gradin, carre_or)
+
+    choix = int(input("Sélection ? "))
+
+    if choix == 0:
+        print("Merci, à bientôt !")
+        break
+    else:
+        # Cas Fosse
+        if choix == 1:
+            fosse,achats=vendre_billet('fosse',fosse,133.50,achats)
+        # Cas Gradin
+        elif choix == 2:
+            gradin,achats=vendre_billet('gradin',gradin,232.5,achats)
+        # Cas Carré Or
+        elif choix == 3:
+            carre_or,achats=vendre_billet('carre or',carre_or,298.5,achats)
+        else:
+            print("Choix invalide.")
+
+print("\n=== Fin du programme ===")
+print("Nombre total de billets vendus :", achats)
+\end{minted}
+
+\end{document}
